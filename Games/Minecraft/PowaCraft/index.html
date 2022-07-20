@@ -30,15 +30,15 @@ document.write( '<link rel=\"shortcut icon\" href=\"data:/png;base64,iVBORw0KGgo
 
 function change_favicon(img) {
     var favicon = document.querySelector('link[rel="shortcut icon"]');
-    
+
     if (!favicon) {
         favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
         var head = document.querySelector('head');
         head.appendChild(favicon);
     }
-    
-    
+
+
     favicon.setAttribute('type', 'image/png');
     favicon.setAttribute('href', img);
 }
@@ -55,11 +55,6 @@ change_favicon('data:/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAA
 </noscript>
 
 
-<meta charset="UTF-8">
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<META http-equiv="Pragma" content="no-cache">
-
-
 <noscript>
 <meta http-equiv="refresh" content="0; url=https://www.enable-javascript.com/it">
 <a target="_blank" href="https://www.enable-javascript.com/it"></a>
@@ -72,15 +67,15 @@ change_favicon('data:/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAA
 document.write( '<link rel=\"shortcut icon\" href=\"data:/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAYAAADQ4S5JAAAAB3RJTUUH4wcTCjgSRTmviAAAAAlwSFlzAAAewQAAHsEBw2lUUwAAAARnQU1BAACxjwv8YQUAAADQSURBVHjaY2T8/4EBF/hvbP+f8exBRmQxJnyKsYnj1AAC6KaDxdCdBDeZCWjWv38MOJ0EUgjCbmePMjBoazAwaKoxMOzZCBdHWAGywUj/v9v/LyiY4d0DOA3GQDUgtSh+2MnADcYg4CYogkLDLQCbDnQGTKE7w1cMz+96/waoEOgqZ3/8oYQNsMAY2EwmOR5gzoEEzn9EPICDDRiE6B6EKQYDF39wnLDgVIASMkDToTaA4wEWF/AwtzKHYCCb8d19eByAMXLSgMUoLDmg80EAAP/hg1SUsYrhAAAAAElFTkSuQmCC\" />\n' );
 function change_favicon(img) {
     var favicon = document.querySelector('link[rel="shortcut icon"]');
-    
+
     if (!favicon) {
         favicon = document.createElement('link');
         favicon.setAttribute('rel', 'shortcut icon');
         var head = document.querySelector('head');
         head.appendChild(favicon);
     }
-    
-    
+
+
     favicon.setAttribute('type', 'image/png');
     favicon.setAttribute('href', img);
 }
@@ -126,10 +121,10 @@ window.onload = function() {
   };
 //<![CDATA[
 function clickIE()  {if (document.all) {alert(mes);return false;}}
-function clickNS(e) {if 
+function clickNS(e) {if
 (document.layers||(document.getElementById&&!document.all)) {
 if (e.which==2||e.which==3) {alert(mes);return false;}}}
-if (document.layers) 
+if (document.layers)
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
@@ -154,10 +149,10 @@ document.onclick = dOClick;
 
 //<![CDATA[
 function clickIE()  {if (document.all) {alert(mes);return false;}}
-function clickNS(e) {if 
+function clickNS(e) {if
 (document.layers||(document.getElementById&&!document.all)) {
 if (e.which==2||e.which==3) {alert(mes);return false;}}}
-if (document.layers) 
+if (document.layers)
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
@@ -212,17 +207,17 @@ document.write( '<BODY background=\"data:/png;base64,iVBORw0KGgoAAAANSUhEUgAAADg
 </script>
 
 <style>
-<!-- 
+<!--
 a:link {text-decoration: none;}
 -->
 
-body, html{     
+body, html{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;  
+    user-select: none;
 }
 
 * { cursor: url(data:file/x-icon;base64,AAABAAEAHiAAAAEAIACoDwAAFgAAACgAAAAeAAAAQAAAAAEAIAAAAAAAAA8AAMEeAADBHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8/P/8/Pz//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8/P/8/Pz//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/Pz//Pz8//+Dg4P/g4OD/Pz8//z8/P/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/Pz//Pz8//+Dg4P/g4OD/Pz8//z8/P/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/Pz//Pz8//z8/P//g4OD/4ODg/8bGxv/Gxsb/4ODg/+Dg4P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/Pz//Pz8//z8/P//g4OD/4ODg/8bGxv/Gxsb/4ODg/+Dg4P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/Pz//Pz8//z8/P//g4OD/4ODg/8bGxv/Gxsb/4ODg/+Dg4P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALHij/Cx4o/wseKP/Gxsb/xsbG/+Dg4P/g4OD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALHij/Cx4o/wseKP/Gxsb/xsbG/+Dg4P/g4OD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAseKP8LHij/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAseKP8LHij/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAseKP8LHij/Cx4o/ydnif8nZ4n/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAseKP8LHij/Cx4o/ydnif8nZ4n/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAseKP8LHij/Cx4o/ydnif8nZ4n/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALHij/Cx4o/ydnif8nZ4n/J2eJ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALHij/Cx4o/ydnif8nZ4n/J2eJ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERP9ERET/AAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERP9ERET/AAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERP9ERET/AAAAAAAAAAAAAAAACx4o/wseKP8nZ4n/J2eJ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/5aWlv+Wlpb/Cx4o/wseKP8LHij/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/5aWlv+Wlpb/Cx4o/wseKP8LHij/J2eJ/ydnif8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/9jY2P/Y2Nj/J2eJ/ydnif8nZ4n/RERE/0RERP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/9jY2P/Y2Nj/J2eJ/ydnif8nZ4n/RERE/0RERP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/9jY2P/Y2Nj/J2eJ/ydnif8nZ4n/RERE/0RERP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/0RERP+Wlpb/lpaW/9jY2P/Y2Nj/2NjY/9jY2P/Y2Nj/lpaW/5aWlv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/0RERP+Wlpb/lpaW/9jY2P/Y2Nj/2NjY/9jY2P/Y2Nj/lpaW/5aWlv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/0RERP///////////5aWlv+Wlpb/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/0RERP///////////5aWlv+Wlpb/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABERET/RERE/0RERP///////////5aWlv+Wlpb/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////M////zP///wD///8A///4AP//+AD///gA///4DP//+Az//+D8///g/P//4Pz//4f8//+H/P/8H/z//B/8//wf/P/wf/z/8H/8+cP//PnD//z5w//84A///OAP//zgD//84A///OAP//wAD//8AA///AH///wB///8Af///A==), default; }
@@ -370,15 +365,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI Black" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('Benvenuto su Spigot section',35);
 </script>
 <center><p>&#10240;</p></center>
@@ -418,15 +413,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('[Guida] Come creare un server.',35);
 document.write( '<center><p>&#10240;</p></center>' );
 </script>
@@ -478,15 +473,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI Black" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('Minigiochi disponibili',35);
 </script>
 <script type="text/javascript">
@@ -511,15 +506,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI Black" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('Informazioni su PowaCraft e lo scopo finale',35);
 document.write( '<center><p>&#10240;</p></center><br>' );
 document.write( '<font size=\"4\" color=\"#F4FA58\" face=\"Verdana\">Powacraft &egrave; un server molto particolare non bungecoord/waterfall o altri fork di questo software, ma bens&igrave; &egrave; Spigot 1.8| Il server nasce da un idea di uno sviluppatore con alias zera-mykerd e f&ugrave; inizialmente creato nel lontano 2015 con lo scopo di far divertire gli utenti normali, poi dopo la chiusura 4 anni dopo f&ugrave; ideato dallo stesso creatore del server ad avere alcune idee su come creare un server praticamente immune dalla maggior parte del cheating su minecraft, quindi f&ugrave; trasformato in un server cheat testing e subito dopo un vero e proprio server funzionante con AntiCheat che blocca tutti i bypass conosciuti di qualsiasi tipo di Speed/Fly/Jesus e moltissime altre hacks conosciute, il server poi &egrave; stato riaggiornato e rivisto e ad oggi &egrave; uno dei pochissimi server ad introdurre cos&igrave; tante modalit&agrave; con il solo software Spigot, inoltre gode di un anticheat avanzatissimo con anche probabilit&agrave; di falsi positivi e una antikillaura che ha adottato il machine learning e entity spoofing per bloccare tutti i moduli combat di qualsiasi probabile cheat. Il server fino ad oggi &egrave; pensato per i giocatori onesti che non sopportano i cheater e vogliono giocare onestamente senza give, con assenza di VIP sul server e con pochi vantaggi offerti dal server stesso, per cui le modalit&agrave; del server sono difficili e permette anche agli utenti appena entrati di riuscire a competere con meno problemi con full diamond shopponi nelle modalit&agrave;, una pecca &egrave; che se si vuole fare un server perfetto senza nessun utente che bari si &egrave; dovuto bloccare Forge e tutti gli altri client del modding di minecraft. Per quanto riguarda i controlli hacks invece siccome lo staff li fa su tutti i sistemi operativi supportati da minecraft, per esempio anche Mac e Linux allora si pu&ograve; ottenere qualcosa in pi&ugrave;, inoltre un utente gli &egrave; concesso anche di rifiutare il controllo, tuttavia facendo cos&igrave; non potra togliere a pieno i sospetti che gli altri utenti avranno su di lui e se si ricevono troppe segnalazioni lo staff non pu&ograve; fare a meno di prendere provvedimenti. Questa norma sui controlli hacks &egrave; stata studiata a fondo data la comprensione di qualsiasi eventuale problema, ad esempio utenti che tengono alla loro privacy o crash improvvisi del client di minecraft e della propria connessione, e tutta una serie di infinit&agrave; di eventuali problemi che vanno a crearsi durande un controllo. Ed &egrave; per questo che lo staff ha deciso di essere pi&ugrave; comprensivo.</font>\n' );
@@ -544,15 +539,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI Black" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('Sezione dedicata al server principale',35);
 </script>
 
@@ -570,7 +565,7 @@ rainbow('Sezione dedicata al server principale',35);
 </noscript>
 
 
-<!-- 
+<!--
 
 
 Code to fix redirects on buttons
@@ -686,15 +681,15 @@ function rainbow(str){
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
     document.write( '<font size="256" face="Segoe UI Black" color="' + '#' +
-      String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
+      String(hexaStr.substr((red >> 4) & 0x0F,1)) +
       hexaStr.substr(red & 0x0F,1) +
-      String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
-      hexaStr.substr(green & 0x0F,1) + 
-      String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
-      hexaStr.substr(blue & 0x0F,1) + '">' + 
+      String(hexaStr.substr((green >> 4) & 0x0F,1)) +
+      hexaStr.substr(green & 0x0F,1) +
+      String(hexaStr.substr((blue >> 4) & 0x0F,1)) +
+      hexaStr.substr(blue & 0x0F,1) + '">' +
       str.substr(i,1) + '</font>');
   }
-} 
+}
 rainbow('Sezione dedicata a servers secondari',35);
 </script>
 
