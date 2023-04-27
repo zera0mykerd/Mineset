@@ -135,6 +135,22 @@ ChangeFontSize = function(element, shouldIncreaseFontsize)
     }
 
 }
+
+//Separator
+
+ChangeFontSizeRel = function(element, shouldDecreaseFontsize)
+{
+    let smaller=34;
+    let largeer = smaller * 1.25;
+    if(shouldDecreaseFontsize) {
+         element.style.fontSize = smaller + "px";
+    }
+    else {
+         element.style.fontSize = largeer + "px";
+		 element.style.fontSize = smaller - 5 + "px";
+    }
+
+}
 </script>
 
 <script type="text/javascript">
@@ -182,7 +198,7 @@ ChangeFontFilm = function(element, shouldIncreaseFontsize)
 }
 </script>
 
-<a onclick="location.href = '..';" title="Clicca per visionare." title="Clicca qui per tornare indietro.">
+<a onclick="location.href = '..';" href=".." title="Clicca qui per tornare indietro.">
 <svg onmouseover="bigImg(this)" onmouseout="normalImg(this)" width="100pt" height="100pt" viewBox="0 0 170 170" version="1.1">
 <g id="#d600f7ff">
 <path fill="#d600f7" opacity="1.00" d=" M 54.04 3.33 C 54.51 3.07 55.45 2.55 55.92 2.29 C 55.87 2.95 55.78 4.27 55.74 4.93 C 55.12 4.45 54.55 3.92 54.04 3.33 Z" />
@@ -871,9 +887,35 @@ body, html{
 </style>
 
 <style type="text/css">
+
 <!-- 
 a:link {text-decoration: none;}
 -->
+
+a:link {
+  color: Yellow;
+  text-decoration-line: overline underline;
+  font-size: 100%;
+}
+
+a:visited {
+  color: LightGoldenRodYellow;
+  text-decoration-line: overline underline;
+  font-size: 100%;
+}
+
+a:hover {
+  color: YellowGreen;
+  text-decoration-line: overline underline;
+  font-size: 100%;
+}
+
+a:active {
+  color: MistyRose;
+  text-decoration-line: overline underline;
+  font-size: 100%;
+}
+
 </style>
 </HEAD>
 
@@ -910,79 +952,79 @@ a:link {text-decoration: none;}
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!RNdDSIbL!oqu_wIIf2fbp_pN4z-NEgHtunzeM2LOnemu7AJH0G4&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!RNdDSIbL!oqu_wIIf2fbp_pN4z-NEgHtunzeM2LOnemu7AJH0G4U"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(1) - Rinascita</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!RNdDSIbL!oqu_wIIf2fbp_pN4z-NEgHtunzeM2LOnemu7AJH0G4&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!RNdDSIbL!oqu_wIIf2fbp_pN4z-NEgHtunzeM2LOnemu7AJH0G4U"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(1) - Rinascita</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!BBElkSyR!IT7RlqRejHpjjpX99Uj0_Chg95Q0y8F6qbyT6Nq7vI0';" title="Clicca per visionare." href="https://mega.nz/#!BBElkSyR!IT7RlqRejHpjjpX99Uj0_Chg95Q0y8F6qbyT6Nq7vI0"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(2) - Confronto</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!BBElkSyR!IT7RlqRejHpjjpX99Uj0_Chg95Q0y8F6qbyT6Nq7vI0';" title="Clicca per visionare." href="https://mega.nz/#!BBElkSyR!IT7RlqRejHpjjpX99Uj0_Chg95Q0y8F6qbyT6Nq7vI0"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(2) - Confronto</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!hFNRVKBT!CwMdJsqD0bQBRnr2tiHjVT75d218UPkBdHvF5zPHds0';" title="Clicca per visionare." href="https://mega.nz/#!hFNRVKBT!CwMdJsqD0bQBRnr2tiHjVT75d218UPkBdHvF5zPHds0"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(3) - Scambio</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!hFNRVKBT!CwMdJsqD0bQBRnr2tiHjVT75d218UPkBdHvF5zPHds0';" title="Clicca per visionare." href="https://mega.nz/#!hFNRVKBT!CwMdJsqD0bQBRnr2tiHjVT75d218UPkBdHvF5zPHds0"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(3) - Scambio</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!5MUD0CLZ!S73tGavS5P17a7171NZCUhjuCthCETv0pYRijA3xPj&egrave;" title="Clicca per visionare." href="https://mega.nz/#!5MUD0CLZ!S73tGavS5P17a7171NZCUhjuCthCETv0pYRijA3xPjE"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(4) - Inseguimento</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!5MUD0CLZ!S73tGavS5P17a7171NZCUhjuCthCETv0pYRijA3xPj&egrave;" title="Clicca per visionare." href="https://mega.nz/#!5MUD0CLZ!S73tGavS5P17a7171NZCUhjuCthCETv0pYRijA3xPjE"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(4) - Inseguimento</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!RNUxkKYJ!PScRX5jCi132sH7Cj5L9Eo11YaRy3Gx_99LdrsddKWs';" title="Clicca per visionare." href="https://mega.nz/#!RNUxkKYJ!PScRX5jCi132sH7Cj5L9Eo11YaRy3Gx_99LdrsddKWs"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(5) - Strategia</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!RNUxkKYJ!PScRX5jCi132sH7Cj5L9Eo11YaRy3Gx_99LdrsddKWs';" title="Clicca per visionare." href="https://mega.nz/#!RNUxkKYJ!PScRX5jCi132sH7Cj5L9Eo11YaRy3Gx_99LdrsddKWs"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(5) - Strategia</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!0dM1XSpJ!Rnr1m53JuXPzVQ97cUJ_gM0Vm6dk4YfrVXtCQ-UUCKY';" title="Clicca per visionare." href="https://mega.nz/#!0dM1XSpJ!Rnr1m53JuXPzVQ97cUJ_gM0Vm6dk4YfrVXtCQ-UUCKY"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(6) - Strappo</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!0dM1XSpJ!Rnr1m53JuXPzVQ97cUJ_gM0Vm6dk4YfrVXtCQ-UUCKY';" title="Clicca per visionare." href="https://mega.nz/#!0dM1XSpJ!Rnr1m53JuXPzVQ97cUJ_gM0Vm6dk4YfrVXtCQ-UUCKY"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(6) - Strappo</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!EAV31aiT!Sbd0O9IWjeQAKVgdfyqFvWYVCzYRhXP0FOzGPo0-hVw';" title="Clicca per visionare." href="https://mega.nz/#!EAV31aiT!Sbd0O9IWjeQAKVgdfyqFvWYVCzYRhXP0FOzGPo0-hVw"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(7) - CieloCoperto</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!EAV31aiT!Sbd0O9IWjeQAKVgdfyqFvWYVCzYRhXP0FOzGPo0-hVw';" title="Clicca per visionare." href="https://mega.nz/#!EAV31aiT!Sbd0O9IWjeQAKVgdfyqFvWYVCzYRhXP0FOzGPo0-hVw"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(7) - CieloCoperto</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!lEdx2Iab!cAoHTptqnUnhqARMPBPnyxZFhai0pUgc3UMySTDNfL0';" title="Clicca per visionare." href="https://mega.nz/#!lEdx2Iab!cAoHTptqnUnhqARMPBPnyxZFhai0pUgc3UMySTDNfL0"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(8) - Sguardo</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!lEdx2Iab!cAoHTptqnUnhqARMPBPnyxZFhai0pUgc3UMySTDNfL0';" title="Clicca per visionare." href="https://mega.nz/#!lEdx2Iab!cAoHTptqnUnhqARMPBPnyxZFhai0pUgc3UMySTDNfL0"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(8) - Sguardo</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!MMFlmYwA!nKqcTlZAvyP00s4i5yxPL2Gg-zYyVmID_grFFCHpb7c';" title="Clicca per visionare." href="https://mega.nz/#!MMFlmYwA!nKqcTlZAvyP00s4i5yxPL2Gg-zYyVmID_grFFCHpb7c"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(9) - Contatto</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!MMFlmYwA!nKqcTlZAvyP00s4i5yxPL2Gg-zYyVmID_grFFCHpb7c';" title="Clicca per visionare." href="https://mega.nz/#!MMFlmYwA!nKqcTlZAvyP00s4i5yxPL2Gg-zYyVmID_grFFCHpb7c"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(9) - Contatto</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!BNFTUCKT!w49fQR4vJISL1nuAcs-BbQ3QfRhmMFyZPs4HIJgz1Gw';" title="Clicca per visionare." href="https://mega.nz/#!BNFTUCKT!w49fQR4vJISL1nuAcs-BbQ3QfRhmMFyZPs4HIJgz1Gw"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(10) - Sospetto</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!BNFTUCKT!w49fQR4vJISL1nuAcs-BbQ3QfRhmMFyZPs4HIJgz1Gw';" title="Clicca per visionare." href="https://mega.nz/#!BNFTUCKT!w49fQR4vJISL1nuAcs-BbQ3QfRhmMFyZPs4HIJgz1Gw"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(10) - Sospetto</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!5JNBXAKQ!es6cXR82scQmkWvCoxBgZwPKg6XzlFYEWMMUbb90Be&igrave;" title="Clicca per visionare." href="https://mega.nz/#!5JNBXAKQ!es6cXR82scQmkWvCoxBgZwPKg6XzlFYEWMMUbb90BeI"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(11) - Irruzione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!5JNBXAKQ!es6cXR82scQmkWvCoxBgZwPKg6XzlFYEWMMUbb90Be&igrave;" title="Clicca per visionare." href="https://mega.nz/#!5JNBXAKQ!es6cXR82scQmkWvCoxBgZwPKg6XzlFYEWMMUbb90BeI"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(11) - Irruzione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!EVNz1SZQ!tRsqGI0LnQFXI5xlk7kyhm9yAa9HpVL87vyy8IzPSx0';" title="Clicca per visionare." href="https://mega.nz/#!EVNz1SZQ!tRsqGI0LnQFXI5xlk7kyhm9yAa9HpVL87vyy8IzPSx0"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(12) - Amore</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!EVNz1SZQ!tRsqGI0LnQFXI5xlk7kyhm9yAa9HpVL87vyy8IzPSx0';" title="Clicca per visionare." href="https://mega.nz/#!EVNz1SZQ!tRsqGI0LnQFXI5xlk7kyhm9yAa9HpVL87vyy8IzPSx0"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(12) - Amore</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!8YU1zABC!I8HfIP9xYHLpW4K4ncOwfgZmzxe86VRQ5rGnUPHfj2g';" title="Clicca per visionare." href="https://mega.nz/#!8YU1zABC!I8HfIP9xYHLpW4K4ncOwfgZmzxe86VRQ5rGnUPHfj2g"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(13) - Dichiarazione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!8YU1zABC!I8HfIP9xYHLpW4K4ncOwfgZmzxe86VRQ5rGnUPHfj2g';" title="Clicca per visionare." href="https://mega.nz/#!8YU1zABC!I8HfIP9xYHLpW4K4ncOwfgZmzxe86VRQ5rGnUPHfj2g"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(13) - Dichiarazione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!UBcXFSRJ!jxS1yK4YkZYawBgJWoqTBeO65OvQFLq4-L3x7U0FVO&egrave;" title="Clicca per visionare." href="https://mega.nz/#!UBcXFSRJ!jxS1yK4YkZYawBgJWoqTBeO65OvQFLq4-L3x7U0FVOE"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(14) - Amico</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!UBcXFSRJ!jxS1yK4YkZYawBgJWoqTBeO65OvQFLq4-L3x7U0FVO&egrave;" title="Clicca per visionare." href="https://mega.nz/#!UBcXFSRJ!jxS1yK4YkZYawBgJWoqTBeO65OvQFLq4-L3x7U0FVOE"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(14) - Amico</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!RRFXiAJL!Q-XRnlyGTCla3oFjKRCAG4mW-r1NhBjlleukY557nFs';" title="Clicca per visionare." href="https://mega.nz/#!RRFXiAJL!Q-XRnlyGTCla3oFjKRCAG4mW-r1NhBjlleukY557nFs"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(15) - Scommessa</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!RRFXiAJL!Q-XRnlyGTCla3oFjKRCAG4mW-r1NhBjlleukY557nFs';" title="Clicca per visionare." href="https://mega.nz/#!RRFXiAJL!Q-XRnlyGTCla3oFjKRCAG4mW-r1NhBjlleukY557nFs"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(15) - Scommessa</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!8dUx2YBa!elku_rorEW6uZraWkLt85KeJtKw9zSLjbjeeAKrwzNc';" title="Clicca per visionare." href="https://mega.nz/#!8dUx2YBa!elku_rorEW6uZraWkLt85KeJtKw9zSLjbjeeAKrwzNc"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(16) - Decisione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!8dUx2YBa!elku_rorEW6uZraWkLt85KeJtKw9zSLjbjeeAKrwzNc';" title="Clicca per visionare." href="https://mega.nz/#!8dUx2YBa!elku_rorEW6uZraWkLt85KeJtKw9zSLjbjeeAKrwzNc"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(16) - Decisione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!9YcFTA5T!mjyAOLxGlJUYuwRFM_QixKsLb3GA48UtHHWwDgtgQ60';" title="Clicca per visionare." href="https://mega.nz/#!9YcFTA5T!mjyAOLxGlJUYuwRFM_QixKsLb3GA48UtHHWwDgtgQ60"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(17) - Esecuzione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!9YcFTA5T!mjyAOLxGlJUYuwRFM_QixKsLb3GA48UtHHWwDgtgQ60';" title="Clicca per visionare." href="https://mega.nz/#!9YcFTA5T!mjyAOLxGlJUYuwRFM_QixKsLb3GA48UtHHWwDgtgQ60"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(17) - Esecuzione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!cEUTUYaS!b2A1q333azhnI2QfqCmuFiTOt4APsgHwWJGfO2IPKYs';" title="Clicca per visionare." href="https://mega.nz/#!cEUTUYaS!b2A1q333azhnI2QfqCmuFiTOt4APsgHwWJGfO2IPKYs"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(18) - Compagni</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!cEUTUYaS!b2A1q333azhnI2QfqCmuFiTOt4APsgHwWJGfO2IPKYs';" title="Clicca per visionare." href="https://mega.nz/#!cEUTUYaS!b2A1q333azhnI2QfqCmuFiTOt4APsgHwWJGfO2IPKYs"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(18) - Compagni</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!NFdnSAYI!gIVrUYwDuUlRmVzpT5iFScJfTs7J6lUaK9UlTyxJwHY';" title="Clicca per visionare." href="https://mega.nz/#!NFdnSAYI!gIVrUYwDuUlRmVzpT5iFScJfTs7J6lUaK9UlTyxJwHY"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(19) - Matsuda</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!NFdnSAYI!gIVrUYwDuUlRmVzpT5iFScJfTs7J6lUaK9UlTyxJwHY';" title="Clicca per visionare." href="https://mega.nz/#!NFdnSAYI!gIVrUYwDuUlRmVzpT5iFScJfTs7J6lUaK9UlTyxJwHY"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(19) - Matsuda</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
@@ -994,75 +1036,75 @@ a:link {text-decoration: none;}
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!ZR8HwILI!C1_byzE4eIpqwc7955M88Htt4a4fTsfGnVBaJCowB1c';" title="Clicca per visionare." href="https://mega.nz/#!ZR8HwILI!C1_byzE4eIpqwc7955M88Htt4a4fTsfGnVBaJCowB1c"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(20) - Espediente</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!ZR8HwILI!C1_byzE4eIpqwc7955M88Htt4a4fTsfGnVBaJCowB1c';" title="Clicca per visionare." href="https://mega.nz/#!ZR8HwILI!C1_byzE4eIpqwc7955M88Htt4a4fTsfGnVBaJCowB1c"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(20) - Espediente</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!EV9RECDS!b21kxRZl1Yjit6tlBfAkjLHGfuKdpJo0EKvyHDA4QLk';" title="Clicca per visionare." href="https://mega.nz/#!EV9RECDS!b21kxRZl1Yjit6tlBfAkjLHGfuKdpJo0EKvyHDA4QLk"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(21) - Recita</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!EV9RECDS!b21kxRZl1Yjit6tlBfAkjLHGfuKdpJo0EKvyHDA4QLk';" title="Clicca per visionare." href="https://mega.nz/#!EV9RECDS!b21kxRZl1Yjit6tlBfAkjLHGfuKdpJo0EKvyHDA4QLk"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(21) - Recita</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!0csx3KyS!3m1SLTkwLBFw1H0vv5NQ5iuuDJNpuTjRa-VCBh09SKM';" title="Clicca per visionare." href="https://mega.nz/#!0csx3KyS!3m1SLTkwLBFw1H0vv5NQ5iuuDJNpuTjRa-VCBh09SKM"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(22) - Guida</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!0csx3KyS!3m1SLTkwLBFw1H0vv5NQ5iuuDJNpuTjRa-VCBh09SKM';" title="Clicca per visionare." href="https://mega.nz/#!0csx3KyS!3m1SLTkwLBFw1H0vv5NQ5iuuDJNpuTjRa-VCBh09SKM"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(22) - Guida</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!sUEhWIgK!qWXUH989NeHdYvZ4WKfjgLDefUSYdwUl2wUhQ2DgtYw';" title="Clicca per visionare." href="https://mega.nz/#!sUEhWIgK!qWXUH989NeHdYvZ4WKfjgLDefUSYdwUl2wUhQ2DgtYw"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(23) - Frenesia</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!sUEhWIgK!qWXUH989NeHdYvZ4WKfjgLDefUSYdwUl2wUhQ2DgtYw';" title="Clicca per visionare." href="https://mega.nz/#!sUEhWIgK!qWXUH989NeHdYvZ4WKfjgLDefUSYdwUl2wUhQ2DgtYw"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(23) - Frenesia</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!sZMDTALY!yM33Xzfy9FKi5gZ5LsEF3j5pTMjfTGYFKVGfOx4-y98';" title="Clicca per visionare." href="https://mega.nz/#!sZMDTALY!yM33Xzfy9FKi5gZ5LsEF3j5pTMjfTGYFKVGfOx4-y98"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(24) - Resurrezione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!sZMDTALY!yM33Xzfy9FKi5gZ5LsEF3j5pTMjfTGYFKVGfOx4-y98';" title="Clicca per visionare." href="https://mega.nz/#!sZMDTALY!yM33Xzfy9FKi5gZ5LsEF3j5pTMjfTGYFKVGfOx4-y98"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(24) - Resurrezione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!NRN3SQpa!zIFEnK8xq07LjN_R9kPUO8Spokr2PpSj_PX20X4Mdd&ograve;" title="Clicca per visionare." href="https://mega.nz/#!NRN3SQpa!zIFEnK8xq07LjN_R9kPUO8Spokr2PpSj_PX20X4Mddo"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(25) - Silenzio</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!NRN3SQpa!zIFEnK8xq07LjN_R9kPUO8Spokr2PpSj_PX20X4Mdd&ograve;" title="Clicca per visionare." href="https://mega.nz/#!NRN3SQpa!zIFEnK8xq07LjN_R9kPUO8Spokr2PpSj_PX20X4Mddo"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(25) - Silenzio</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!RVtn1SID!BXGw9kYaI9HcqX9FD_roj6PqQtb4_QjQzUEHS_Ff2Tc';" title="Clicca per visionare." href="https://mega.nz/#!RVtn1SID!BXGw9kYaI9HcqX9FD_roj6PqQtb4_QjQzUEHS_Ff2Tc"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(26) - Rigenerazione</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!RVtn1SID!BXGw9kYaI9HcqX9FD_roj6PqQtb4_QjQzUEHS_Ff2Tc';" title="Clicca per visionare." href="https://mega.nz/#!RVtn1SID!BXGw9kYaI9HcqX9FD_roj6PqQtb4_QjQzUEHS_Ff2Tc"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(26) - Rigenerazione</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!cA8R0KQS!Qdf2oILyrDt0Gsa2sejscXi3Z9EJujvceZnf5yIg6ZQ';" title="Clicca per visionare." href="https://mega.nz/#!cA8R0KQS!Qdf2oILyrDt0Gsa2sejscXi3Z9EJujvceZnf5yIg6ZQ"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(27) - Rapimento</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!cA8R0KQS!Qdf2oILyrDt0Gsa2sejscXi3Z9EJujvceZnf5yIg6ZQ';" title="Clicca per visionare." href="https://mega.nz/#!cA8R0KQS!Qdf2oILyrDt0Gsa2sejscXi3Z9EJujvceZnf5yIg6ZQ"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(27) - Rapimento</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!xJF1wKia!j8a4G0ju5b692NnfSMTlsjFt_5azDTVHY9zxExPtZv&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!xJF1wKia!j8a4G0ju5b692NnfSMTlsjFt_5azDTVHY9zxExPtZvU"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(28) - Impazienza</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!xJF1wKia!j8a4G0ju5b692NnfSMTlsjFt_5azDTVHY9zxExPtZv&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!xJF1wKia!j8a4G0ju5b692NnfSMTlsjFt_5azDTVHY9zxExPtZvU"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(28) - Impazienza</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!FccVmSTD!-t0RybU3PYZJWQtuBOPeqYtDeyS9DKTvS_U6zOqGtR&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!FccVmSTD!-t0RybU3PYZJWQtuBOPeqYtDeyS9DKTvS_U6zOqGtRU"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(29) - Padre</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!FccVmSTD!-t0RybU3PYZJWQtuBOPeqYtDeyS9DKTvS_U6zOqGtR&ugrave;" title="Clicca per visionare." href="https://mega.nz/#!FccVmSTD!-t0RybU3PYZJWQtuBOPeqYtDeyS9DKTvS_U6zOqGtRU"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(29) - Padre</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!0BFxBQRQ!yuAlvNnMzA9GVFTgW6aX5xpxNeSUBpZLDBnyBzHcML&agrave;" title="Clicca per visionare." href="https://mega.nz/#!0BFxBQRQ!yuAlvNnMzA9GVFTgW6aX5xpxNeSUBpZLDBnyBzHcMLA"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(30) - Giustizia</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!0BFxBQRQ!yuAlvNnMzA9GVFTgW6aX5xpxNeSUBpZLDBnyBzHcML&agrave;" title="Clicca per visionare." href="https://mega.nz/#!0BFxBQRQ!yuAlvNnMzA9GVFTgW6aX5xpxNeSUBpZLDBnyBzHcMLA"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(30) - Giustizia</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!JUF33CiY!USBD2QCIWHrevI5ikpes7e9gaBGfLSTT9cnInliVM6w';" title="Clicca per visionare." href="https://mega.nz/#!JUF33CiY!USBD2QCIWHrevI5ikpes7e9gaBGfLSTT9cnInliVM6w"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(31) - PassaggioDiConsegne</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!JUF33CiY!USBD2QCIWHrevI5ikpes7e9gaBGfLSTT9cnInliVM6w';" title="Clicca per visionare." href="https://mega.nz/#!JUF33CiY!USBD2QCIWHrevI5ikpes7e9gaBGfLSTT9cnInliVM6w"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(31) - PassaggioDiConsegne</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!xA8THCwb!7dE56arPOoy-pdNGtGnOoKvej4IF06iaOnklOAMdKW0';" title="Clicca per visionare." href="https://mega.nz/#!xA8THCwb!7dE56arPOoy-pdNGtGnOoKvej4IF06iaOnklOAMdKW0"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(32) - Scelta</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!xA8THCwb!7dE56arPOoy-pdNGtGnOoKvej4IF06iaOnklOAMdKW0';" title="Clicca per visionare." href="https://mega.nz/#!xA8THCwb!7dE56arPOoy-pdNGtGnOoKvej4IF06iaOnklOAMdKW0"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(32) - Scelta</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!tc0TzS7Q!zJpxItq1zNU6WH_OirDKckExqqYoXJxvmBzGJ6xlX6&egrave;" title="Clicca per visionare." href="https://mega.nz/#!tc0TzS7Q!zJpxItq1zNU6WH_OirDKckExqqYoXJxvmBzGJ6xlX6E"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(33) - Beffa</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!tc0TzS7Q!zJpxItq1zNU6WH_OirDKckExqqYoXJxvmBzGJ6xlX6&egrave;" title="Clicca per visionare." href="https://mega.nz/#!tc0TzS7Q!zJpxItq1zNU6WH_OirDKckExqqYoXJxvmBzGJ6xlX6E"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(33) - Beffa</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!xF9BwYbD!NKBCYLp7xNFw08NcHa5aS4TAgUESA0dM0-mHgBERj3w';" title="Clicca per visionare." href="https://mega.nz/#!xF9BwYbD!NKBCYLp7xNFw08NcHa5aS4TAgUESA0dM0-mHgBERj3w"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(34) - Sorveglianza</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!xF9BwYbD!NKBCYLp7xNFw08NcHa5aS4TAgUESA0dM0-mHgBERj3w';" title="Clicca per visionare." href="https://mega.nz/#!xF9BwYbD!NKBCYLp7xNFw08NcHa5aS4TAgUESA0dM0-mHgBERj3w"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(34) - Sorveglianza</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!xdFjxSRK!zMW8kbVZr7qRDZSd26C_O3Uj3Mc7GNE0-GelfKknb2&igrave;" title="Clicca per visionare." href="https://mega.nz/#!xdFjxSRK!zMW8kbVZr7qRDZSd26C_O3Uj3Mc7GNE0-GelfKknb2I"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(35) - IntendoOmicida</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!xdFjxSRK!zMW8kbVZr7qRDZSd26C_O3Uj3Mc7GNE0-GelfKknb2&igrave;" title="Clicca per visionare." href="https://mega.nz/#!xdFjxSRK!zMW8kbVZr7qRDZSd26C_O3Uj3Mc7GNE0-GelfKknb2I"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(35) - IntendoOmicida</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!BIEBRISa!SvA8Dms_TtWOeku9kCSzHxOxKjYMpgTIrrYH7VWpQr&igrave;" title="Clicca per visionare." href="https://mega.nz/#!BIEBRISa!SvA8Dms_TtWOeku9kCSzHxOxKjYMpgTIrrYH7VWpQrI"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(36) - 28Gennaio</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!BIEBRISa!SvA8Dms_TtWOeku9kCSzHxOxKjYMpgTIrrYH7VWpQr&igrave;" title="Clicca per visionare." href="https://mega.nz/#!BIEBRISa!SvA8Dms_TtWOeku9kCSzHxOxKjYMpgTIrrYH7VWpQrI"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(36) - 28Gennaio</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
-<a onclick="location.href = 'https://mega.nz/#!oNVhXKIJ!xYn8FDMtsOrddQ-dCC-LAruG6OvzNbDCq3XBCNoie1&egrave;" title="Clicca per visionare." href="https://mega.nz/#!oNVhXKIJ!xYn8FDMtsOrddQ-dCC-LAruG6OvzNbDCq3XBCNoie1E"><font face="arial" size="4" color="#FFFF00"><div onmouseout="javascript:ChangeFontSize(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(37) - NuovoMondo</div></font></a>
+<a onclick="location.href = 'https://mega.nz/#!oNVhXKIJ!xYn8FDMtsOrddQ-dCC-LAruG6OvzNbDCq3XBCNoie1&egrave;" title="Clicca per visionare." href="https://mega.nz/#!oNVhXKIJ!xYn8FDMtsOrddQ-dCC-LAruG6OvzNbDCq3XBCNoie1E"><font face="arial" size="4"> <!-- color="#FFFF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(37) - NuovoMondo</div></font></a>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color=â€blueâ€ noshade>
 
@@ -1102,9 +1144,11 @@ a:link {text-decoration: none;}
 <canvas oncontextmenu="return false;"></canvas>
 
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color="642EFE" noshade>
-<a onclick="location.href = 'https://deathnotefilm.altervista.org/';" href="https://deathnotefilm.altervista.org/" title="Clicca qui per il film della serie."><br><strong><font face="Segoe UI" size="6" color="#FE2E9A" ><div onmouseout="javascript:ChangeFontFilm(this, false);" onmouseover="javascript:ChangeFontFilm(this, true);">DeathNote Film</div></font></strong></a><br>
+<a onclick="location.href = 'https://www.netflix.com/it/title/80122759';" href="https://www.netflix.com/it/title/80122759" title="Clicca qui per il film della serie."><br><strong><font face="Segoe UI Black" size="6" color="#FE2E9A" ><div onmouseout="javascript:ChangeFontFilm(this, false);" onmouseover="javascript:ChangeFontFilm(this, true);">DeathNote Film</div></font></strong></a><br>
+<svg id="pirategloo" viewBox="0 0 437.5 437.5" version="1.0" y="0" x="0" width="128px" height="128px"> <defs id="defs34"> <linearGradient id="linearGradient129"> <stop id="stop130" style="stop-color:#0017a2;stop-opacity:.1647" offset="0" /> <stop id="stop131" style="stop-color:#ffffff" offset="1" /> </linearGradient> <linearGradient id="linearGradient132" y2="-.039062" xlink:href="#linearGradient129" y1=".91406" x2=".32540" x1=".41167" /> <linearGradient id="linearGradient142" y2="-.5" xlink:href="#linearGradient129" y1=".96875" x2=".42341" x1="-.11726" /> <linearGradient id="linearGradient71" y2="1.1474" xlink:href="#linearGradient129" y1=".1565" x2=".051118" x1=".47604" /> </defs> <path id="path19" style="fill-rule:evenodd;fill:#42aaff" d="m40.535 223.39c2.686 27.73-13.807 31.58-15.911 43.15 14.868 19.62-23.743 49.52-16.547 58.31 5.109 8.19 81.072 64.29 93.553 66.48 76.45 27.02 235.1 7.7 264.13-17.5 34.78-35.88 52.38-39.77 57.91-57.14-3.28-14.41-34.02-41.29-27.36-52.49-5.55-12.71-29.48-11.39-24.19-38.48-16.77-8.78-3.27-0.06-15.27-16.33-4.49-2.05-5.65-19.83-10.19-19.83-40.88-50.28-240.35-33.82-282.58 8.17-6.02 21.95-16.507 21.36-23.545 25.66z" /> <path id="path70" style="fill-rule:evenodd;fill:url(#linearGradient71)" d="m37.561 275.82c-7.234 0-19.88 41.65-12.085 46.03-0.931 13.27 145.06 76.01 234.56 37.7 15.95 16.38 40.21 15.26 51.36 15.44 15.92 9.26 20.63 5.26 39.83 4.02 27.08-44.89 70.2-44.49 55.21-44.49-69.61-52.74-42.71 29.97-63.72 36.15-7.85-8.83-71.44-28.87-85.43-35.84-96.67 59.32-191.42-14.21-219.73-59.01z" /> <path id="path133" style="fill-rule:evenodd;fill:#3069bf" d="m354.95 314.21c1.72-3.87 8.98-60.06 13.81-60.06 36.66-8.47 31.3 69.51 31.3 75.6-18.86-12.95-50.57-15.54-45.11-15.54z" /> <path id="path57" style="stroke:#000000;fill:none" d="m561.55 310.1h2.64" /> <path id="path58" style="fill-rule:evenodd;stroke:#00ffff;stroke-width:.99341;fill:#0094de" d="m37.357 271.07c6.672-88.01 40.434-209.27 136.66-212.06 17.01-1.337 22.93 0.821 44.25 3.387 135.7 16.262 154.04 157.4 147.86 217.01-14.83 15.77-14.83 16.61-29.66 25.03-4.94-38.05-22.25-115.73-59.33-102.89-42.02 11.12-24.72 123.36-24.72 136.25-91.46 58.39-193.76-22.24-215.06-66.73z" /> <path id="path128" style="fill-rule:evenodd;fill:url(#linearGradient132)" d="m90.776 103.33c-16.273 23.17-30.183 41.69-52.767 166.81 58.857 71.97 134.22 142.09 313.31 16.49 44.28-46.25-15.72-164.74-42.96-186.4-16.59-18.48-63.53-40.046-120.92-42.806-29.42-2.747-67.04 8.96-96.664 45.906z" /> <path id="path62" style="fill-rule:evenodd;fill:#7fb8ff" d="m364.58 355.2c-2.15-58.4 10.23-85.28 18.13-92.69 11.52-11.11 13.24 43.25 16.48 67.97 6.99-4.95 7.96-12.68 13.73-16.07-3.29-99.79-21.68-84.97-35.15-79.71-25.85 11.46-43.68 79.73-31.32 136.25 0 1.86 15.66-12.05 18.13-15.75z" /> <path id="path61" style="fill-rule:evenodd;fill:#0093df" d="m251.42 334.5c20.93 8.34 56.31 21.03 95.86 37.38-13.7-113.76 22.5-132.54 44.77-139.34-34.11-11.12-94.5-41.4-118.93-33.06-36.21 36.15-26.64 87.75-21.7 135.02z" /> <path id="path80" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m45.694 224.51c25.723 60.69 138.98 104.56 199.96 76.95 10.02-5.53 79.01 12.82 96.2 20.78 4.43 4.31 18.61-5.11 22.91-9.92" /> <path id="path81" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m53.126 187.22c18.678 43.49 129.63 92.78 185.38 76.22 4.23 0 6.43-5.75 9.89-1.86 4.57 0 87.44 24.1 98.69 24.1 8.14 0 15.86-0.89 20.77 8.11" /> <path id="path82" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m67.117 152.21c49.713 68.78 149.13 79.2 186.84 72.99 5.53-6.56 100.79 21.1 108.15 25.26 3.62 6.14 12.15 17.45 12.15 21.52" /> <path id="path83" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m81.949 124.41c58.701 53.6 127.32 88.65 236.57 36.78 2.63-2.96 23.78-12.45 17.64-24.2" /> <path id="path84" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m316.55 202.91c24.55-7.59 39.58-24.07 32.22-38.81" /> <path id="path86" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m103.6 94.312c5.45 7.598 4.8 8.108 10.15 15.698 36.39 36.04 112.5 53.93 183.7 21.12 8.15-5.71 21.99-15.74 17.48-21.95" /> <path id="path87" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m132.23 69.741c0.57 4.143 2.73 12.938 6.63 16.39 23.05 19.179 82.63 28.939 132.96 13.374 10.13-3.111 15.15-9.231 10.47-16.825" /> <path id="path88" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m54.968 294c-0.614-19.28 6.242-30.21 9.115-41.03" /> <path id="path89" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m91.712 227.74c-5.676 11.05-8.853 26.36-10.08 39.58" /> <path id="path90" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m113.14 287.5c-4.3 11.73-6.98 21.92-6.37 46.2" /> <path id="path91" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m186.19 309.52c-1.84 14.09 1.21 33.45-1 45.87" /> <path id="path98" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m214.24 187.14c-1.84 9.39-0.03 23.08-1.87 36.86" /> <path id="path99" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m155.37 174.85c-6.77 6.22-7.27 16.68-9.11 34.46" /> <path id="path100" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m100.76 142.04c-5.099 6.21-7.888 17.15-12.798 33.03" /> <path id="path101" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m117.43 197.53c-7.56 11.97-13.99 16.75-11.53 37.08" /> <path id="path102" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m79.881 168.86c-10.434 8.06-15.411 30.36-15.411 34.96" /> <path id="path103" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m184.74 221.2c-3.35 6.21-0.26 26.06-5.79 40.74" /> <path id="path104" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m148.78 255.98c-1.84 5.95-10.89 23.89-9.05 41.44" /> <path id="path105" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m210.3 266.2c0 8.68 0.39 31-2.07 41.47" /> <path id="path108" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m309.6 124.19c8.89 0.69 19.94 22.52 19.94 26.17" /> <path id="path109" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m282.2 137.38c1.84 8.48 11.69 22 10.47 33.37" /> <path id="path110" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m269.33 100.74c7.11 4.84 21.11 23.18 21.11 31.01" /> <path id="path111" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m207.2 61.201c9.41 2.761 20.26 15.379 30.08 22.642-16.06-0.809-45.58-4.934-52.94-6.61" /> <path id="path112" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m206.78 61.891c-8.33 0-28.78 1.675-32.89 1.675-0.46 3.968 7.1 5.669 10.78 12.938" /> <path id="path113" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m171.73 63.49c-13.77 0.69-27.16 4.18-38.01 9.703" /> <path id="path114" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m205.52 107.65c1.68 9.49 1.06 29.44 0.45 37.98" /> <path id="path115" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m233.99 147.74c3.07 7.15 5.99 28.04 5.52 36.17" /> <path id="path116" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m180.64 143.78c0 9.27-3.07 24.46-4.3 34.53" /> <path id="path117" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m140.96 130.84c-12.61 8.97-13.03 16-16.09 25.48" /> <path id="path118" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m136.98 85.697c-9.12 6.213-14.41 17.843-19.93 26.603" /> <path id="path119" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m107.09 100.78c-7.463 0-15.025 22.55-16.253 30.57" /> <path id="path120" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m386.83 259.73c0-7.83 6.03-27.12 8.47-27.12" /> <path id="path121" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m393.84 278.27c3.69-5.35 10.28-10.91 14.42-12.98" /> <path id="path122" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m397.53 304.69c8.42-3.45 13.79-10.9 13.79-14.14" /> <path id="path124" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m185.85 77.068c-12.27 7.875-13.33 19.33-15.95 24.162" /> <path id="path125" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m236.18 83.281c4.03 5.523 11.05 4.816 15.35 19.329" /> <path id="path126" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m217.77 66.711c4.91 0 18.62-1.38 46.65 7.594" /> <path id="path127" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m195.06 61.879c-4.3-3.769-4.1-1.38-8.59-3.451" /> <path id="path134" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m396.38 303.86c-4.41-2.48-21.72-1.04-27.62-6.21" /> <path id="path135" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m391.77 279c-11.04 0.87-9.27 1.04-17.49 0" /> <path id="path141" style="fill-rule:evenodd;fill:url(#linearGradient142)" d="m253.06 333.2c-21.17-98.78 16.21-134.21 26.39-133.94 15.04-3.45 81.33 20.17 112.63 32.11-39.89 11.56-55.24 67.89-45.72 137.38-2.59 2.91-88.98-32.44-93.3-35.55z" /> <path id="path85" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m350.12 214.98c5.17 0 13.73-6.39 9.15-17.11" /> <path id="path92" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m266.53 302.11c-3.69 12.9-2.69 27.59-2.69 34.67" /> <path id="path93" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m315.77 313.23c-5.52 11.43-3.1 36.71-3.1 44.75" /> <path id="path94" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m294.35 272.92c-6.75 6.51-7.01 24.52-7.01 32.42" /> <path id="path95" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m340.69 243.04c-6.08 0-18.52 23.97-17.29 36.57" /> <path id="path96" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m275.96 226.18c-6.75 8.89-10.05 30.24-10.05 38.82" /> <path id="path97" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m331.8 209.93c-15.35-2.11-24.77 23.41-25.53 23.41" /> <path id="path106" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m263.23 178.42c0 9.33 1.65 20.52 1.65 29.84" /> <path id="path107" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m309.37 166.35c6.76 6.43 18.06 27.25 18.06 33.55" /> <path id="path123" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m346.81 182.92c6.76 6.43 11.31 22.42 11.31 28.72" /> <path id="path136" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m249.07 300.75v-40.39" /> <path id="path140" style="stroke:#00ffff;stroke-width:2.5;fill:none" d="m257.36 221.01c7.36-16.43 13.65-24.85 35.91-23.82" /></svg> 
+<br><font face="Segoe UI" size="3" color="#C71585"><strong><b><big><sup>In conseguenza delle leggi a protezione del diritto d'autore e contro ogni forma di pirateria informatica non &egrave; possibile visionare il film senza abbonamento ai portali ufficiali!</sup></big></b></strong> <br><br> <small><sub>Il termine pirateria informatica, diventato d'uso comune nell'ultimo decennio, raccoglie al suo interno molte sfaccettature. Nel senso pi&ugrave; ampio del suo significato indica per&ograve; l'illegalit&agrave; del software: non importa si tratti di utilizzo, di cracking o di semplice download. Ecco allora che sotto il termine pirateria informatica rientra, molto spesso e nella stragrande maggioranza dei casi, ogni tipo di azione illecita che vada a coinvolgere la tecnologia informatica, dai semplici DVD masterizzati ai sistemi operativi craccati.</sub></small> </font>
 <hr align=â€rightâ€ size=â€4â€³ width=â€300â€³ color="642EFE" noshade>
-<a onclick="location.href = 'https://www.animesaturn.it/anime/Death-Note-ITA-a';" href="https://www.animesaturn.it/anime/Death-Note-ITA-a" title="Clicca qui per la pagina alternativa.">
+<a onclick="location.href = 'https://www.animesaturn.tv/anime/Death-Note-ITA-aszbc';" href="https://www.animesaturn.tv/anime/Death-Note-ITA-aszbc" title="Clicca qui per la pagina alternativa.">
 <svg onmouseover="bigExternal(this)" onmouseout="normalExternal(this)" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve" width="256px" height="256px" class=""><g transform="matrix(0.515137, 0, 0, 0.515137, 124.125, 124.125)"><g>
 </g><path style="fill:#B27214;" d="M503.692,477.602H8.304c29.341-18.923,60.993-34.578,94.426-46.449  c47.923-17.03,99.509-26.305,153.274-26.305s105.351,9.274,153.263,26.305C442.7,443.035,474.351,458.679,503.692,477.602z" data-original="#B27214"/><path style="fill:#CCCCCC;" d="M409.266,187.678v243.475c-47.912-17.03-99.498-26.305-153.263-26.305s-105.351,9.274-153.274,26.305  V187.678c0-84.646,68.617-153.274,153.263-153.274C340.649,34.404,409.266,103.032,409.266,187.678z" data-original="#CCCCCC" class=""/><path style="fill:#B3B3B3;" d="M130.234,187.678c0-69.349,56.415-125.77,125.759-125.77c69.349,0,125.769,56.42,125.769,125.77  v206.135c-40.827-10.939-82.977-16.468-125.759-16.468c-42.781,0-84.933,5.529-125.77,16.469V187.678H130.234z" data-original="#B3B3B3" class=""/><g>
 <path style="fill:#333333" d="M163.353,264.456c4.557,0,8.251-3.694,8.251-8.251v-35.753h18.151   c10.008,0,18.151,8.142,18.151,18.151v17.601c0,4.557,3.694,8.251,8.251,8.251s8.251-3.694,8.251-8.251v-17.601   c0-10.568-4.761-20.042-12.245-26.403c7.483-6.361,12.245-15.833,12.245-26.403c0-19.109-15.545-34.654-34.654-34.654h-26.403   c-4.557,0-8.251,3.694-8.251,8.251v96.808C155.102,260.762,158.796,264.456,163.353,264.456z M171.604,167.648h18.151   c10.008,0,18.151,8.142,18.151,18.151c0,10.008-8.142,18.151-18.151,18.151h-18.151V167.648z" data-original="#333333" class="active-path"/>
