@@ -311,6 +311,41 @@ body, html{
 }
 </style>
 
+<!-- Top Arrow -->
+<style type="text/css">
+#TopBN {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 99;
+  font-size: 50px;
+  border: none;
+  outline: none;
+  background-color: Magenta;
+  color: DarkMagenta;
+  padding: 10px;
+  border-radius: 40px;
+}
+</style>
+
+<script type="text/javascript">
+document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&#8607;</button>' );
+var mybutton = document.getElementById("TopBN");
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
 <!--
 <style type="text/css">
 @keyframes spin {from {} to {transform:rotate(360deg);}}
@@ -887,20 +922,30 @@ li { cursor: pointer; }
 <hr align=Ã¢â‚¬ÂrightÃ¢â‚¬Â size="4" width=Ã¢â‚¬Â300Ã¢â‚¬Â³ color="#DF01D7" noshade>
 
 <script type="text/javascript">
+//SeparatorLine
+document.write( '<p></p>\n' );
+//SeparatorLine
+
 document.write( '<strong>\n' );
 document.write( '<div class=\"Magik\" style=\"float:left; display:block;\">\n' );
 document.write( '<a onclick=\"location.href = \'/Games\';\" href=\"/Games\" title=\"Sezione Giochi\"><center><button class=\"Button\"><h1 class=\"Magik\"><font class=\"Magik\" size=\"7\" color=\"#2E62FE\" face=\"Segoe UI\">&#127918; <u class=\"Magik\">Diversi Giochi</u> &#127918;</font></h1></button></center></a>\n' );
 document.write( '</div>\n' );
 
+
 //SeparatorLine
 document.write( '<p></p>\n' );
 //SeparatorLine
+
 
 document.write( '<div class=\"NegaMagik\" style=\"float:right; display:block;\">\n' );
 document.write( '<a onclick=\"location.href = \'/Anime\';\" href=\"/Anime\" title=\"Libreria Anime\"><center><button class=\"NegaButton\"><h1 class=\"NegaMagik\"><font class=\"NegaMagik\" size=\"7\" color=\"#8A4B08\" face=\"Segoe UI\">&#128121; <u class=\"NegaMagik\">Vari Anime</u> &#128122;</font></button></h1></center></a>\n' );
 document.write( '</div>\n' );
 document.write( '<div style=\"clear:both;\"></div>\n' );
 document.write( '</strong>' );
+
+//SeparatorLine
+document.write( '<p></p>\n' );
+//SeparatorLine
 </script>
 
 <hr align=Ã¢â‚¬ÂrightÃ¢â‚¬Â size="4" width=Ã¢â‚¬Â300Ã¢â‚¬Â³ color="#DF01D7" noshade>
