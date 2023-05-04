@@ -248,6 +248,87 @@ document.write( '<BODY background=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 </script>
 
 <style type="text/css">
+#wrap {
+  display: flex;
+  width: 25%;
+  height: 25%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  opacity: .65;
+}
+#wrap > div {
+  position: fixed;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .5s;
+  filter: blur(20px);
+  transform: scale(.5);
+  opacity: .65;
+}
+
+#wrap > div.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+  filter: blur(0);
+  transform: scale(1);
+  opacity: .65;
+}
+
+#wrap > #gameplay {
+  opacity: 1;
+  z-index: 0;
+  transform: scale(1);
+  filter: blur(0);
+  opacity: .65;
+}
+
+#wrap > div.active ~ #gameplay {
+  opacity: .75;
+  filter: blur(10px);
+  transform: scale(.95);
+  opacity: .65;
+}
+
+
+canvas {
+  pointer-events: none;
+}
+
+
+button {
+  background-color: white;
+  border: 0;
+  border-radius: 200px;
+  padding: 16px 24px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.25px;
+  font-size: 16px;
+  margin: 16px;
+  min-width: 160px;
+  outline: none;
+  transition: .25s;
+  opacity: .75;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+h1 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 48px;
+  margin-top: 0;
+  opacity: .45;
+}
+</style>
+
+<style type="text/css">
 <!-- 
 a:link {text-decoration: none;}
 -->
@@ -1050,6 +1131,25 @@ function normalPrint(x) {
 <CENTER>
 <BODY oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 <br>
+
+<div id="wrap">
+  <div id="startMenu">
+    <h1>Pong</h1>
+    <button id="startBtn">Avvia</button>
+  </div>
+  <div id="pauseMenu">
+    <h1>Pausa</h1>
+    <button id="continueBtn">Continua</button>
+    <button id="restartBtn">Riavvia</button>
+  </div>
+  <div id="gameOverMenu">
+    <h1 id="gameMessage"></h1>
+    <button id="againBtn">Riprova</button>
+  </div>
+  <div id="gameplay">
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+  </div>
+</div>
 
 <script type="text/javascript">
 function bigWiki(x) {
@@ -2377,6 +2477,290 @@ document.write( '</a>' );
 </script>
 <br>
 <p></p>
+
+
+<script type="text/javascript">
+	var canvas = document.getElementById('gameCanvas'),
+    canvasContext = canvas.getContext('2d'),
+    ballPositionX = canvas.width/2,
+    ballPositionY = canvas.height/2,
+    ballSize = 20,
+    ballVelocityX = 8,
+    ballVelocityY = 0,
+    fps = 60,
+    paddleWidth = 10,
+    paddleHeight = 100,
+    paddleOneY = 250,
+    paddleOneDirectionY = null,
+    paddleOneVelocityY = 15,
+    paddleTwoY = 250,
+    paddleTwoDirectionY = null,
+    paddleTwoVelocityY = 10,
+    playerOneScore = 0,
+    playerTwoScore = 0,
+    startMenu = document.getElementById('startMenu'),
+    pauseMenu = document.getElementById('pauseMenu'),
+    gameOverMenu = document.getElementById('gameOverMenu'),
+    gameplay = document.getElementById('gameplay'),
+    startBtn = document.getElementById('startBtn'),
+    continueBtn = document.getElementById('continueBtn'),
+    restartBtn = document.getElementById('restartBtn'),
+    againBtn = document.getElementById('againBtn'),
+    gameMessage = document.getElementById('gameMessage'),
+    gamePaused = false,
+    gameInProgress = false,
+    scoreToWin = 10,
+    difficultyLevel = 1,
+    gameInterval = window.setInterval(function() {});
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ballPositionY = canvas.height/2 - ballSize/2 
+paddleOneY = canvas.height/2 - paddleHeight/2;
+paddleTwoY = canvas.height/2 - paddleHeight/2;
+ballVelocityY = getRandomNumber(-5,5) * (.25 * difficultyLevel),
+
+window.addEventListener('resize', windowResize);
+startBtn.addEventListener('click', startGame);
+continueBtn.addEventListener('click', resumeGame);
+restartBtn.addEventListener('click', resetGame);
+againBtn.addEventListener('click', resetGame);
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);
+
+startMenu.className = 'active';
+pauseMenu.className = '';
+gameplay.className = '';
+gameOverMenu.className = '';
+
+window.onblur = function() {
+  if(gameInProgress) pauseGame();  
+}
+
+function startGame() {
+  gameInProgress = true;
+  gameplay.className = '';
+  startMenu.className = '';
+  gameOverMenu.className = '';
+  pauseMenu.className = '';
+  gamePaused = false;
+  gameInterval = window.setInterval(function() {
+    moveEverything();
+    drawEverything();
+  }, 1000/fps);
+}
+
+function resetGame() {
+  playerOneScore = 0;
+  playerTwoScore = 0;
+  difficultyLevel = 1,
+  ballPositionX = canvas.width/2 - ballSize/2;
+  ballPositionY = canvas.height/2 - ballSize/2;
+  paddleOneY = canvas.height/2 - paddleHeight/2;
+  paddleTwoY = canvas.height/2 - paddleHeight/2;
+  ballVelocityY = getRandomNumber(-5,5) * (.25 * difficultyLevel),
+  startGame();
+}
+
+function togglePause() {
+  if(gamePaused) {
+    resumeGame();
+  } else {
+    pauseGame();
+  }
+} 
+
+function pauseGame() {
+  if(!gamePaused) {
+    gamePaused = true;
+    gameplay.className = '';
+    pauseMenu.className = 'active';
+    clearInterval(gameInterval);
+  }
+}
+
+function resumeGame() {
+  if(gamePaused) {
+    gamePaused = false;
+    gameplay.className = '';
+    pauseMenu.className = ''; 
+    startGame();
+  }
+}
+
+function windowResize() {
+  resetBall();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  drawEverything();
+}
+
+function keyDown(e) {
+  e.preventDefault();
+  switch(e.keyCode) {
+    case 13:
+      if(gameInProgress) togglePause();
+      break;
+    case 38:
+      if(!gamePaused) paddleOneDirectionY = 'up';
+      break;
+    case 40:
+      if(!gamePaused) paddleOneDirectionY = 'down';
+      break;
+  }
+}
+
+function keyUp(e) {
+  paddleOneDirectionY = null;
+}
+
+function resetBall() {
+  ballVelocityX = -ballVelocityX;
+  ballVelocityY = getRandomNumber(-5,5) * (.25 * difficultyLevel);
+  ballPositionX = canvas.width/2;
+  ballPositionY = canvas.height/2;
+}
+
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function randomizeGame() {
+  paddleTwoVelocityY = getRandomNumber(10,20) * (.25 * difficultyLevel);
+}
+
+function gameOver(playerWon) {
+  gameInProgress = false;
+  clearInterval(gameInterval);
+  gameMessage.textContent = '';
+  againBtn.textContent = '';
+  if(playerWon) {
+    gameMessage.textContent = 'Hai vinto!';
+    againBtn.textContent = 'Gioca di nuovo';
+  } else {
+    gameMessage.textContent = 'Peccato, hai perso!';
+    againBtn.textContent = 'Riprova';
+  }
+  gameplay.className = '';
+  gameOverMenu.className = 'active'; 
+}
+
+function moveEverything() {
+  ballPositionX = ballPositionX + ballVelocityX;
+  if(ballPositionX > canvas.width - paddleWidth*2 - ballSize/2) {
+    if(ballPositionY >= paddleTwoY && ballPositionY <= paddleTwoY + paddleHeight && ballPositionX < canvas.width - paddleWidth) {
+      ballVelocityX = -ballVelocityX;
+      if(ballPositionY >= paddleTwoY && 
+         ballPositionY < paddleTwoY + paddleHeight*.2) {
+        ballVelocityY = -15 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleTwoY + paddleHeight*.2 && 
+                ballPositionY < paddleTwoY + paddleHeight*.4) {
+        ballVelocityY = -10 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleTwoY + paddleHeight*.4 && 
+                ballPositionY < paddleTwoY + paddleHeight*.6) {
+        ballVelocityY = getRandomNumber(-5,5);;
+      } else if(ballPositionY >= paddleTwoY  + paddleHeight*.6 && 
+                ballPositionY < paddleTwoY + paddleHeight*.8) {
+        ballVelocityY = 10 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleTwoY + paddleHeight*.8 && 
+                ballPositionY < paddleTwoY + paddleHeight) {
+        ballVelocityY = 15 * (.25 * difficultyLevel);
+      }
+    } else if(ballPositionX > canvas.width) {
+      resetBall();
+      playerOneScore++;
+      difficultyLevel = playerOneScore*.5;
+      if(playerOneScore === scoreToWin) gameOver(true);
+    }
+    randomizeGame();
+  } else if(ballPositionX < paddleWidth*2 + ballSize/2) {
+    if(ballPositionY >= paddleOneY && 
+       ballPositionY <= paddleOneY + paddleHeight && 
+       ballPositionX > paddleWidth + ballSize/2) {
+      ballVelocityX = -ballVelocityX;
+      if(ballPositionY >= paddleOneY && 
+         ballPositionY < paddleOneY + paddleHeight*.2) {
+        ballVelocityY = -20 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleOneY + paddleHeight*.2 && 
+                ballPositionY < paddleOneY + paddleHeight*.4) {
+        ballVelocityY = -10 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleOneY + paddleHeight*.4 && 
+                ballPositionY < paddleOneY + paddleHeight*.6) {
+        ballVelocityY = 0 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleOneY  + paddleHeight*.6 && 
+                ballPositionY < paddleOneY + paddleHeight*.8) {
+        ballVelocityY = 10 * (.25 * difficultyLevel);
+      } else if(ballPositionY >= paddleOneY + paddleHeight*.8 && 
+                ballPositionY < paddleOneY + paddleHeight) {
+        ballVelocityY = 20 * (.25 * difficultyLevel);
+      }
+    } else if(ballPositionX <= -ballSize) {
+      resetBall();
+      playerTwoScore++;
+      if(playerTwoScore === scoreToWin) gameOver(false);
+    }
+    randomizeGame();
+  }
+  
+  ballPositionY = ballPositionY + ballVelocityY; 
+  if(ballPositionY > canvas.height - ballSize/2) {
+    ballVelocityY = -ballVelocityY;
+    ballPositionY = canvas.height - ballSize/2;
+  } else if(ballPositionY < ballSize/2) {
+    ballVelocityY = -ballVelocityY;
+    ballPositionY = ballSize/2;
+  }
+  
+  if(paddleOneDirectionY === 'up' && paddleOneY >= 0) {
+    paddleOneY = paddleOneY - paddleOneVelocityY;
+  } else if(paddleOneDirectionY === 'down' && 
+            paddleOneY < (canvas.height - paddleHeight) ) {
+    paddleOneY += paddleOneVelocityY; 
+  }
+  
+  if(ballPositionY < paddleTwoY) {
+    paddleTwoY -= paddleTwoVelocityY;
+  } else if(ballPositionY > paddleTwoY + paddleHeight) {
+    paddleTwoY += paddleTwoVelocityY;    
+  }
+  
+}
+
+function drawEverything() {
+  // canvasContext.fillStyle = 'black';
+  // canvasContext.fillRect(0,0,canvas.width,canvas.height); 
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+  canvasContext.fillStyle = 'Beige';
+  canvasContext.beginPath();
+  canvasContext.arc(ballPositionX, ballPositionY, ballSize/2, 0, Math.PI*2, true);
+  canvasContext.fill();
+  
+  canvasContext.fillStyle = 'AliceBlue';
+  canvasContext.fillRect(paddleWidth,paddleOneY,paddleWidth,paddleHeight); // x, y, w, h
+  
+  canvasContext.fillStyle = 'AliceBlue';
+  canvasContext.fillRect(canvas.width - paddleWidth - paddleWidth,paddleTwoY,paddleWidth,paddleHeight); // x, y, w, h
+  
+	
+	
+	
+  canvasContext.fillStyle = 'BlanchedAlmond';
+  canvasContext.font = "200px 'Roboto', Arial";
+  canvasContext.textAlign = "center";
+  canvasContext.fillText(playerOneScore,canvas.width*.25,canvas.height/2 + 75);
+  
+  canvasContext.fillStyle = 'Cornsilk';
+  canvasContext.font = "200px 'Roboto', Arial";
+  canvasContext.textAlign = "center";
+  canvasContext.fillText(playerTwoScore,canvas.width*.75,canvas.height/2 + 75);
+  
+  canvasContext.strokeStyle = 'HoneyDew';
+  canvasContext.beginPath();
+  canvasContext.moveTo(canvas.width/2,0);
+  canvasContext.lineTo(canvas.width/2,canvas.height);
+  canvasContext.stroke();
+}
+</script>
 
 
 </BODY>
