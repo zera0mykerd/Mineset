@@ -76,6 +76,36 @@ change_favicon('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaX
   border-radius: 0px;
 }
 </style>
+
+<!-- Car vehicle -->
+
+<style type="text/css">
+ img {
+   transition: transform 0.2s ease;
+ }
+</style>
+
+<!-- Keydown -->
+
+<style type="text/css">
+    #up {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+    #down {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+    #left {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+    #right {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+</style>
+
 <script type="text/javascript">
 document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&#129145;</button>' );
 var mybutton = document.getElementById("TopBN");
@@ -1282,6 +1312,8 @@ function normalWiki(x) {
 }
 </script>
 
+<div id="car" style="position: absolute; width: 100px; height: 100px;"></div>
+
 <a onclick="location.href = 'https://it.wikipedia.org/wiki/FlatOut';" href="https://it.wikipedia.org/wiki/FlatOut" title="Informazioni su flatout (Fare click).">
 <svg onmouseover="bigWiki(this)" onmouseout="normalWiki(this)" version="1.0" width="518px" height="126px" viewBox="0 0 5180 1260" preserveAspectRatio="xMidYMid meet">
 <g id="layer101" fill="#271814" stroke="none">
@@ -1501,6 +1533,40 @@ function normalWiki(x) {
  </g>
 </svg>
 </a>
+
+<p></p>
+
+	<!--
+	<button id="up">&uarr;</button>
+	<br>
+	<button id="left">&larr;</button>
+	<button id="down">&darr;</button>
+	<button id="right">&rarr;</button>
+	-->
+	
+	<!--<div class="tasti-direzionali">
+    <button id="tasto-su">&uarr;</button>
+	<br>
+    <button id="tasto-sinistra">&larr;</button>
+	<button id="tasto-giù">&darr;</button>
+    <button id="tasto-destra">&rarr;</button>
+	 </div> -->
+	 
+	 <!--
+	<button id="up-button">&uarr;</button>
+	<br>
+    <button id="left-button">&larr;</button>
+	<button id="down-button">&darr;</button>
+    <button id="right-button">&rarr;</button>
+	 -->
+	  
+	  <font face="Geneva" size="7" color="#D2691E"><strong><b><kbd>&uarr;</kbd></b></strong></font>
+	  <br>
+	  <font face="Geneva" size="7" color="#D2691E"><strong><b><kbd>&larr;</kbd></b></strong></font>
+	  <font face="Geneva" size="7" color="#D2691E"><strong><b><kbd>&nbsp; &plus; &nbsp;</kbd></b></strong></font>
+	  <font face="Geneva" size="7" color="#D2691E"><strong><b><kbd>&rarr;</kbd></b></strong></font>
+	  <br>
+	  <font face="Geneva" size="7" color="#D2691E"><strong><b><kbd>&darr;</kbd></b></strong></font>
 
 <p></p>
 
@@ -1875,6 +1941,506 @@ document.write( '<hr size=\"16\" color=\"#4B8A08\" noshade>\n' );
 document.write( '<strong><font size=\"64\" face=\"Segoe UI\" color=\"#3ADF00\"> I computer a 32-bit sono supportati </font></strong>\n' );
 document.write( '<hr size=\"16\" color=\"#4B8A08\" noshade>\n' );
 document.write( '</a>' );
+</script>
+
+<!--
+<script type="text/javascript">
+/*
+// definisci una variabile per tenere traccia dello stato dei tasti
+var tastiPremuti = {};
+// aggiungiamo l'event listener per il click del mouse sui tasti direzionali
+var tasti = document.getElementsByClassName("tasto");
+for (var i = 0; i < tasti.length; i++) {
+  tasti[i].addEventListener("mousedown", gestisciClick);
+}
+
+// funzione per verificare se un tasto direzionale è stato premuto
+function verificaTastiDirezionali(event) {
+  if (event.keyCode == 38) { // tasto su
+    tastiPremuti["su"] = true;
+    eseguiAzione("ArrowUp");
+  }
+  if (event.keyCode == 40) { // tasto giù
+    tastiPremuti["giù"] = true;
+    eseguiAzione("ArrowDown");
+  }
+  if (event.keyCode == 37) { // tasto sinistra
+    tastiPremuti["sinistra"] = true;
+    eseguiAzione("ArrowLeft");
+  }
+  if (event.keyCode == 39) { // tasto destra
+    tastiPremuti["destra"] = true;
+    eseguiAzione("ArrowRight");
+  }
+}
+
+// funzione per verificare se un tasto direzionale è stato rilasciato
+function verificaTastiRilasciati(event) {
+  if (event.keyCode == 38) { // tasto su
+    tastiPremuti["su"] = false;
+  }
+  if (event.keyCode == 40) { // tasto giù
+    tastiPremuti["giù"] = false;
+  }
+  if (event.keyCode == 37) { // tasto sinistra
+    tastiPremuti["sinistra"] = false;
+  }
+  if (event.keyCode == 39) { // tasto destra
+    tastiPremuti["destra"] = false;
+  }
+}
+
+// funzione per eseguire l'azione in base ai tasti premuti
+function eseguiAzione(tasto) {
+  if (tastiPremuti["su"]) {
+    console.log("Hai premuto il tasto SU");
+    // esegui l'azione per il tasto SU
+  }
+  if (tastiPremuti["giù"]) {
+    console.log("Hai premuto il tasto GIÙ");
+    // esegui l'azione per il tasto GIÙ
+  }
+  if (tastiPremuti["sinistra"]) {
+    console.log("Hai premuto il tasto SINISTRA");
+    // esegui l'azione per il tasto SINISTRA
+  }
+  if (tastiPremuti["destra"]) {
+    console.log("Hai premuto il tasto DESTRA");
+    // esegui l'azione per il tasto DESTRA
+  }
+  
+  // creiamo un nuovo evento di tastiera per simulare la pressione del tasto sulla tastiera
+  var nuovoEvento = new KeyboardEvent("keydown", {"key": tasto});
+  
+  // scateniamo l'evento appena creato
+  document.dispatchEvent(nuovoEvento);
+ if (!tastiPremuti["su"] && !tastiPremuti["giù"] && !tastiPremuti["sinistra"] && !tastiPremuti["destra"]) {
+var nuovoEvento = new KeyboardEvent("keyup", {"key": tasto});
+document.dispatchEvent(nuovoEvento);
+}
+}
+
+// funzione per gestire l'evento click del mouse sui tasti direzionali
+function gestisciClick(event) {
+  var tasto = event.target.getAttribute("data-tasto");
+  eseguiAzione(tasto);
+}
+
+for (var i = 0; i < tasti.length; i++) {
+  tasti[i].addEventListener("mouseup", rilasciaTasto);
+}
+
+function rilasciaTasto(event) {
+  var tasto = event.target.getAttribute("data-tasto");
+  // Simula il rilascio del tasto sulla tastiera
+  var nuovoEvento = new KeyboardEvent("keyup", {"key": tasto});
+  document.dispatchEvent(nuovoEvento);
+}
+
+// aggiungiamo l'event listener per la pressione dei tasti
+document.addEventListener("keydown", verificaTastiDirezionali);
+
+// aggiungiamo l'event listener per il rilascio dei tasti
+document.addEventListener("keyup", verificaTastiRilasciati);
+*/
+
+/*
+document.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowUp') {
+        console.log('Hai premuto il tasto Su');
+      } else if (event.key === 'ArrowDown') {
+        console.log('Hai premuto il tasto Giù');
+      } else if (event.key === 'ArrowLeft') {
+        console.log('Hai premuto il tasto Sinistra');
+      } else if (event.key === 'ArrowRight') {
+        console.log('Hai premuto il tasto Destra');
+      }
+    });
+
+    function simulateKeyPress(key) {
+      var event = new KeyboardEvent('keydown', {'key': key});
+      document.dispatchEvent(event);
+    }
+
+    function startKeyPress(key) {
+      simulateKeyPress(key);
+      setTimeout(function() {
+        if (buttonPressed) {
+          startKeyPress(key);
+        }
+      }, 100);
+    }
+
+    var buttonPressed = false;
+
+    document.getElementById('up').addEventListener('mousedown', function() {
+      buttonPressed = true;
+      startKeyPress('ArrowUp');
+    });
+
+    document.getElementById('down').addEventListener('mousedown', function() {
+      buttonPressed = true;
+      startKeyPress('ArrowDown');
+    });
+
+    document.getElementById('left').addEventListener('mousedown', function() {
+      buttonPressed = true;
+      startKeyPress('ArrowLeft');
+    });
+
+    document.getElementById('right').addEventListener('mousedown', function() {
+      buttonPressed = true;
+      startKeyPress('ArrowRight');
+    });
+
+    document.addEventListener('mouseup', function() {
+      buttonPressed = false;
+    });
+*/
+
+/*
+// Seleziona i pulsanti delle frecce
+      const upButton = document.getElementById('up-button');
+      const downButton = document.getElementById('down-button');
+      const leftButton = document.getElementById('left-button');
+      const rightButton = document.getElementById('right-button');
+
+      // Crea un oggetto che mappa l'id del pulsante con la direzione
+      const buttonDirectionMap = {
+        'up-button': 'ArrowUp',
+        'down-button': 'ArrowDown',
+        'left-button': 'ArrowLeft',
+        'right-button': 'ArrowRight',
+      };
+
+      // Imposta la durata del loop in millisecondi
+      const loopDuration = 100;
+
+      // Variabile per mantenere il riferimento all'intervallo del loop
+      let loopInterval;
+
+      // Variabile per mantenere il riferimento all'evento di pressione del tasto
+      let keyPressEvent;
+
+      // Aggiungi un gestore di eventi mousedown a ciascun pulsante delle frecce
+      upButton.addEventListener('mousedown', function() {
+        simulateKeyPress('up-button');
+        loopInterval = setInterval(function() {
+          window.dispatchEvent(keyPressEvent);
+        }, loopDuration);
+      });
+
+      downButton.addEventListener('mousedown', function() {
+        simulateKeyPress('down-button');
+        loopInterval = setInterval(function() {
+          window.dispatchEvent(keyPressEvent);
+        }, loopDuration);
+      });
+
+      leftButton.addEventListener('mousedown', function() {
+        simulateKeyPress('left-button');
+        loopInterval = setInterval(function() {
+          window.dispatchEvent(keyPressEvent);
+        }, loopDuration);
+      });
+
+      rightButton.addEventListener('mousedown', function() {
+        simulateKeyPress('right-button');
+        loopInterval = setInterval(function() {
+          window.dispatchEvent(keyPressEvent);
+        }, loopDuration);
+      });
+
+      // Aggiungi un gestore di eventi mouseup sulla finestra per rimuovere il loop
+      window.addEventListener('mouseup', function() {
+        clearInterval(loopInterval);
+		// Crea un evento di rilascio del tasto
+        const keyUpEvent = new KeyboardEvent('keyup', {
+          key: buttonDirectionMap[buttonId],
+          code: buttonDirectionMap[buttonId],
+          bubbles: true
+        });
+
+        // Simula il rilascio del tasto
+        window.dispatchEvent(keyUpEvent);
+      });
+
+      // Funzione per simulare la pressione di un tasto
+      function simulateKeyPress(buttonId) {
+        // Crea un evento di pressione del tasto
+        keyPressEvent = new InputEvent('input', {
+          data: buttonDirectionMap[buttonId],
+          bubbles: true
+        });
+
+        // Simula la pressione del tasto
+        window.dispatchEvent(keyPressEvent);
+
+        // Crea un evento di pressione del tasto
+        const keyDownEvent = new KeyboardEvent('keydown', {
+          key: buttonDirectionMap[buttonId],
+          code: buttonDirectionMap[buttonId],
+          bubbles: true
+        });
+
+        // Simula la pressione del tasto
+        window.dispatchEvent(keyDownEvent);
+      }
+*/
+
+</script>
+-->
+
+<script type="text/javascript">
+/*
+// Definiamo le costanti 
+const car = document.getElementById("car"); // L'elemento HTML dell'auto
+const pageWidth = window.innerWidth; // Larghezza della pagina
+const pageHeight = window.innerHeight; // Altezza della pagina
+
+// Definiamo le variabili 
+let carX = pageWidth / 2; // La posizione X iniziale dell'auto al centro della pagina
+let carY = pageHeight / 2; // La posizione Y iniziale dell'auto al centro della pagina
+let carSpeed = 60; // Velocità dell'auto aumentata a 60
+const carSize = 100; // Dimensioni dell'auto
+let carDirection = "right"; // Direzione iniziale dell'auto
+
+// Dichiariamo la variabile che conterrà l'immagine dell'auto
+let carImage = new Image();
+carImage.src = "";
+
+// Aggiorniamo la posizione e l'immagine dell'auto
+function updateCar() {
+  car.style.left = carX + "px";
+  car.style.top = carY + "px";
+  car.style.width = carSize + "px";
+  car.style.height = carSize + "px";
+  car.style.transform = `rotate(${getCarRotation()}deg)`;
+  car.src = carImage.src;
+}
+
+// Effettuiamo lo spostamento e cambiamo la direzione dell'auto in base al tasto direzione premuto
+function moveCar(event) {
+  switch (event.keyCode) {
+    case 37: // Sinistra
+      carX -= carSpeed;
+      if (carX < 0) {
+        carX = 0;
+      }
+      carDirection = "left";
+      break;
+    case 38: // Su
+      carY -= carSpeed;
+      if (carY < 0) {
+        carY = 0;
+      }
+      carDirection = "up";
+      break;
+    case 39: // Destra
+      carX += carSpeed;
+      if (carX > pageWidth - carSize) {
+        carX = pageWidth - carSize;
+      }
+      carDirection = "right";
+      break;
+    case 40: // Giù
+      carY += carSpeed;
+      if (carY > pageHeight - carSize) {
+        carY = pageHeight - carSize;
+      }
+      carDirection = "down";
+      break;
+  }
+  updateCar();
+}
+
+// Calcoliamo la rotazione dell'auto in base alla direzione
+function getCarRotation() {
+  switch (carDirection) {
+    case "left":
+      return 270;
+    case "up":
+      return 0;
+    case "right":
+      return 90;
+    case "down":
+      return 180;
+  }
+}
+
+// Associamo la funzione di spostamento all'evento keydown della finestra
+window.addEventListener("keydown", moveCar);
+*/
+
+
+// Definiamo le costanti 
+const car = document.createElement("img"); // Creiamo un nuovo elemento img per visualizzare l'auto
+//car.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABoBAMAAACzuOu2AAAAFVBMVEVHcEwAURYA+N7/tTMAoC0AjPj49QDmviGJAAAAAXRSTlMAQObYZgAAAZhJREFUSMft11GOgyAQAFC9ARPTC5BegMAJlAv0wwPsj/c/wjJAcWYYY012N02z89MKT0QlMzgMLUbYY5BBOzWk9TOBh9u2fU0eI/9NLYaAyQG2VQB44CXAaCAFB97t/VV4Z8gcsdGTcAk7YKCPdwOTBjyQ56QD065wAKC9qiNg/gEFp0/y9F0M6tv2ZNW+CkJ8RgfyHCKJRcxhep4+W2vbIBzU3hJlDAksibsCZgrsb4AgwH4XY0kMQUyypoman46BwQFWTB49cHB7pCFGWNcHhMhnGZcQXe5JV1jTCDq4FYARsCUPHctPerIl8dUkmwGNHZQ7Tb0cBAQkw4R8TlkG+Y8GWChgYSB+Ipg04N8OzBLMlwAcAPNpAI/5qk5nMKAs+x8Hi8jk14GsBeEKSDWru0K6xtJq1mlRKyDQQaIGeI7qAevPc5JgvrduqwNRDa4Dlsx7oGX7vbgflAND93IaGP4adGXxKugrrwT8UXMwgHzbGbC9vVgvuGL45p9vYsQW5mCnxQBAv6umoFRX1vvCR87Jd9Kz/Ru/bcIeNL1YFQAAAABJRU5ErkJggg=="; // Definiamo la sorgente dell'immagine dell'auto
+//car.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAByCAYAAADj29d4AAAALHRFWHRDcmVhdGlvbiBUaW1lAHZlbiAxMiBtYWcgMjAyMyAyMDo1Nzo1OCArMDEwMM0v/TUAAAAHdElNRQfnBQwTAC6HFaG0AAAACXBIWXMAAB7BAAAewQHDaVRTAAAABGdBTUEAALGPC/xhBQAABI5JREFUeNrtXTGP0zAUTk/VAQIxgW4A6ZiYYIGNqeNtSEwsTGzXn8B8P6G3MbEwIbExdmKDBSYmkLihggmBgFvKOcU9N/Gz37Of/ZLGn3RK2sT2976+59jJc66qChLizpUl67Y3UIS5jTfrZMQ4ifG3L1fVp1/n+1UVv1XQ+x9/jrjohlX0aK+7LvlqQbKJJkCXDQ8UAi+Ax/g/LxbgsYtP9urt8unN1rHjk3fV4Y37bWLPv6LrjREhqA9Qhiji0zd2Al5iBDTrggSZHSxqIbVwWLB1gpxG52xnh1rA5saYMtRyIWVC+OE8AIh/1VjT5bQrcqFpkC30ViFpCQ3F29MPRIdAm+AisKbwNmNADoFtQxFAmoA0igCUkzk7n5Sg8PQL0KfxfwB/twC3LvXbeIQIsADbYrxHhNIJShOQRhFAmoA0igDSBKRRBJAmIA1YgM+/2R4+dALAnSG3B2yLCI7bYugQ6MtMkMp38H0A/8NRA6Nvp/6Tdu9WU8R5y+u7STiiPQD7xGV6ZpAyHGU8AbpOVT8nXxYPIBv7+DV87OVDUnuxnhEtgNN4l6HUMoAwqv0YEfj7AILRRxeurfef/f2OrxfhJTICIIw3jY4Sg0mEpFcBjOGuc71CMCDLOIBiPEe5rAKkuj7nan8zBGKfAai4tPQDypVDfk0wBKjxb7Pr//xg7DyJEdoYjBA5Yl/nDoxB4x98WW3f7q+/UqOr2EmRaRyp5yegNQq02KLtHrUE0CebMArWWSGWkdjGgChkAISF4f62ttV3GwJ47Nnxun5Ttb7Bw39MLdCEHorWyutfAugM13B1YshyVs8LEKEdAh40Q4BMhglQm60Q8GDlAb6MSo9AsROSUKAET50lZmIjDCyYnX5Y76tUOpXyBn12zfs5xWYfCisjdZ/Q/NP5g5gtVIcpYqcEyBn/nO0N/qZoEUCagDSKANIEpFEEoJzcl+eDvJmiW44igDQBaRQBokqnvPWViUfxAO8Zg14vMAAUAaQJSKMIIE1AGkUAagHoZmTu5wJQe9SbpXEewJisJMWjhIA0AWmwCCCVJ8TRbvGA2Ar6niXmF+D9D1EDo+Hh7xZATSXvXQUPS//6KB6Kf9DqcUdj+hF4lxDKi7UT9C1o0AkQ2K0NekEGF5IkS4MEDXHqZTK+zxlQEiSSsFN3abnvGKeos0q9XqArt83FBHDAljSdJUm6Af4QYFo2E1M/BdmWzWHXC1AyyKEETXqmKASVZWmMoqjp8rFLXtjS6aMWTxNfU9s5ePgPfjqc9CoArQ4JKd9LAULEyH0p5A0B5CUKMhJtPOOlUGwgJDHosSHaA3JPgrjb5/UA/YAi06oxDuAEaAyIcpMMBmIMQ3822HyTNPMKDiqa7Yu8XN06Hk/QN9jaOT6JqzPZSNC2dij2uxQI8gD1cvNptXK12UEqCfE4d3v6q/fxAgAdoSmGiRTC2OMbMJr9X2yY6HLuYNJ/sgJBUpDI6TrrXH8ymehdU5C6jfl8Ll6fDaxXAYhUKFnu+pILYCMXS5a7vuQC9A2DFyAZzjow1isDd30ag/eAfyF2LrYzCI+iAAAAAElFTkSuQmCC"; // Definiamo la sorgente dell'immagine dell'auto
+car.src = "data:image/webp;base64,UklGRjACAABXRUJQVlA4TCMCAAAvP0AcEF9gpraN/1mNVHBksAkjugi6GGkbqfD8gzPzph4+e0WRJDWXE1J4YwPnWEgWUDD/AeAParbSGZaa9rgh3lyX3W9mghwJdOs2YnZXVSpdAY1mVO3nAv9ens3LyAeID7A/aA+gIXiAnZVbl6zS53gkAeSfMqL/ExDu8kel08c3yq8+F1+/tS/emCZ4qib4agCg7/vdKpJE0Pf9DkCnWffod0AD6HdIplIBWKSySkVqs2KCJCBJWYjssaYZOhFdEnlarD6igFtXe+uH2odb6F4I3t5CqPt1LXGa79zCbdtasDoW0C1cDkRUMNuYeaA2M0cHKk+5oB8eQ5FzziMRkVeujn6nWvZZTNKagAoTUW0k+lEBEAJUVIyk6ibgALTolKksZlxdAhMOh0ssLDwUTY4LzzgcLgEcDnC7qpQLx4WJ6AczE9EPFuYZ5aTRK0IIYcLCbFmK0KwIM/8/bsftyMzRJYlIkiRJRJJHNPAzY/WRp8VgG+4U3LpnBA8shmXgqGMbPzjRIndPTIvqu9vr2oSVo004AopNHDaxLFFkO27H7Sgi7MJ6DzZGj+GHgpxIews5j35ERKecc/HDYSlydST6wbLNrQBUTrnd6BqTW7hrRLWR/OiUcyZyGgrKeSzIr+3ApmjjQcWGULHGbe40/+SvKW0wJBFNFHFJsokk2USSDbDtoZpQavYog3YqzME4mYLj9U1oXt8E18cvnLfC+V0CAA=="; // Definiamo la sorgente dell'immagine dell'auto
+//car.style.position = "absolute"; // Aggiungiamo il CSS per posizionare l'auto
+car.style.position = "fixed";
+car.style.zIndex = "9999"; // Impostiamo la proprietà z-index
+car.style.pointerEvents = "none"; // Disattiviamo il click del mouse sull'auto
+document.body.appendChild(car); // Aggiungiamo l'elemento img alla pagina HTML
+const pageWidth = window.innerWidth; // Larghezza della pagina
+const pageHeight = window.innerHeight; // Altezza della pagina
+const carSpeed = 30; // Velocità dell'auto
+const carSize = 48; // Dimensioni dell'auto
+let carRotation = 0; // L'angolo di rotazione dell'auto
+
+// Definiamo le variabili 
+let carX = pageWidth / 2; // La posizione X iniziale dell'auto al centro della pagina
+let carY = pageHeight / 2; // La posizione Y iniziale dell'auto al centro della pagina
+
+// Aggiungiamo l'audio
+const audio = new Audio('data:audio/ogg;base64,T2dnUwACAAAAAAAAAABglx8KAAAAAEGbygcBHgF2b3JiaXMAAAAAAUSsAAD/////AH0AAP/////JAU9nZ1MAAAAAAAAAAAAAYJcfCgEAAACONS8rD5v/////////////////NQN2b3JiaXMNAAAATGF2ZjU4LjI5LjEwMAQAAAARAAAAYXJ0aXN0PWRlc2t1bGxpbmcYAAAAZGF0ZT0yMDIwOjA2OjIwIDAyOjAwOjAwJgAAAHRpdGxlPUNhciBEcml2ZSBCeSAgIHNvdW5kIGVmZmVjdCAoSEQpHwAAAGVuY29kZXI9TGF2YzU4LjU0LjEwMCBsaWJ2b3JiaXMBBXZvcmJpcx9CQ1YBAAABABRjVilmmVKSW4oZc5gxZxlj1FqKJYQUQiilc1Zbqym1mlrKucWcc86VYlIpRZlSUFuKGWNSKQYZUxJbaSGEFEIHoXMSW2mtpdhaajm2nHOtlVJOKaQYU4hK6JhSTCmkGFOKSuicc9A55pxTjEoINZVaU8kxhZRbSyl0TkIHqYTOUkuxdJBKByV0UDprOZUSUymdY1ZCarmlHFPKraaYc4yB0JBVAAABAMBAEBqyCgBQAAAQhqEoigKEhqwCADIAAATgKI7iKJIiOZJjORYQGrIKAAACABAAAMBwFEmRFMvRHE3SLM3SPFOWZVmWZVmWZVmWXdd1XSA0ZBUAAAEAQCgHGcUYEISUshIIDVkFACAAAACCKMMQA0JDVgEAAAEACFEeIeaho9577xFyHiHmHYPee+8htF456qGk3nvvvfcee++5995775FhXiHnoZPee+8RYhwZxZly3nvvIaScMeidg9577733nnPuOdfee++do95B6anU3nvvlZNeMemdo1577yXVHkLqpaTee++9995777333nvvvfeee++99957763n3mrvvffee++9995777333nvvvffee++9995774HQkFUAABAAAGEYNohxx6T32nthmCeGaeek95575ahnDHoKsfeee++9195777333nsgNGQVAAAIAAAhhBBSSCGFFFJIIYYYYsghhxyCCCqppKKKKqqooooqqiyjjDLKKJOMMsoso4466qjDzkIKKaTSSguttFRbby3VHoQQQgghhBBCCCGEEL73HggNWQUAgAAAMMYYY4xBCCGEEEJIKaWUYoopppgCQkNWAQCAAAACAAAALEmT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AwBQgQ2rI5wUjQUWGrISAMgAACCMQcgghJBBSCGkkFJIKaUEAAAMOAAABJhQBgoNWREAxAkAAIhQSiml1FFKKaWUUkoppZJSSimllFJKKaWUUkoppVRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRS6iillFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSqmklFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFFKKaWUUkoppZRSSimllEpKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoplVJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllAIApCIcAKQeTCgDhYasBABSAQAAY5RSCjronEOMMeack046iBhzjDkpqbSUOQchlJRSSilzzkEIpZSUWuYchJJSSy2lzDkIpaSUWkudlFJSqqm1FkMppbRUU00tlpRSiqnWGGNNKbXUWou1xtpSa63FGGusNbVWW4wtxlprAQA4DQ4AoAc2rI5wUjQWWGjISgAgFQAAMUYpxpyDEDqDkFLOQQchhAYhppxzDjroFGPMOQchhBAqxhhzDkIIIWTOOQcdhBJCyZxzDkIIIZTSQQghhBBKCaWDEEIIIYRQSgihhFBCKKWUEEIIIZRQSikhhBJCKaGUUkIIJYRQSimlFAAAWOAAABBgw+oIJ0VjgYWGrAQAgAAAIGWhhpAsgJBjkFxjGINURKSUYw5sx5yTVkTllFNOREcdZYh7MUboVAQAACAIAAgwAQQGCApGIQgQxgAABCEyQyQUVsECgzJocJgHAA8QERIBQGKCotWFC9DFAC7QhbscEIIgCIIgLBqAAiTAgRPc4Alv8AQ3cAIdRUkdBAAAAACAAgB8AAAcFEBERHMVFhcYGRobHB0eAQAAAAAgBQAfAADHBxAR0VyFxQVGhsYGR4dH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');
+audio.loop = true;
+
+// Aggiorniamo la posizione dell'auto
+function updateCarPosition() {
+// Calcoliamo la posizione Y effettiva dell'auto considerando lo scroll della pagina
+  const scrollY = window.scrollY || window.pageYOffset;
+  const carEffectiveY = carY + scrollY;
+  car.style.left = carX + "px";
+  car.style.top = carY + "px";
+  car.style.width = carSize + "px"
+  
+  //BUG car.style.top = carY + scrollY + "px"; // aggiungi la posizione di scroll
+  
+  //car.style.height = "32px"
+  car.style.transform = `rotate(${carRotation}deg)`;
+  //addTransition();
+}
+
+/*
+// Aggiungiamo un effetto di transizione
+function addTransition() {
+  car.style.transition = "all 0.1s ease-in-out";
+}
+
+// Rimuoviamo l'effetto di transizione dopo che l'animazione è terminata
+car.addEventListener("transitionend", function() {
+  car.style.transition = "";
+});
+*/
+
+// Effettuiamo lo spostamento
+function moveCar(event) {
+  switch (event.keyCode) {
+    case 37: // Sinistra
+      carX -= carSpeed;
+      if (carX < 0) {
+        carX = 0;
+      }
+      carRotation = 270; // Ruotiamo l'auto di 270 gradi in senso antiorario (verso sinistra)
+      break;
+    case 38: // Su
+      carY -= carSpeed;
+      if (carY < 0) {
+        carY = 0;
+      }
+      carRotation = 0; // Ruotiamo l'auto di 270 gradi in senso antiorario (verso su)
+      break;
+    case 39: // Destra
+      carX += carSpeed;
+      if (carX > pageWidth - carSize) {
+        carX = pageWidth - carSize;
+      }
+      carRotation = 90; // Ruotiamo l'auto di 90 gradi in senso orario (verso destra)
+      break;
+    case 40: // Giù
+      carY += carSpeed;
+      if (carY > pageHeight) { // Se l'auto arriva in fondo alla pagina
+        carY = 0 - carSize; // Facciamo ripartire l'auto dall'alto
+      }
+      carRotation = 180; // Ruotiamo l'auto di 90 gradi in senso orario (verso giù)
+      break;
+  }
+  updateCarPosition();
+  if (event.type === "keydown") {
+    audio.play();
+  } else if (event.type === "keyup") {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+}
+
+/*window.addEventListener('scroll', function() {
+  scrollY = window.pageYOffset;
+  updateCarPosition();
+});*/
+
+// Associamo la funzione di spostamento all'evento keydown della finestra
+window.addEventListener("keydown", moveCar);
+window.addEventListener("keyup", moveCar);
+// Aggiorniamo la posizione dell'auto ogni volta che la finestra viene scrollata
+window.addEventListener("scroll", updateCarPosition);
+
+
+
+/*
+// Definiamo le costanti 
+const car = document.createElement("img"); // Creiamo un nuovo elemento img per visualizzare l'auto
+car.src = "data:image/png;base64,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"; // Definiamo la sorgente dell'immagine dell'auto
+car.style.position = "absolute"; // Aggiungiamo il CSS per posizionare l'auto
+document.body.appendChild(car); // Aggiungiamo l'elemento img alla pagina HTML
+const pageWidth = window.innerWidth; // Larghezza della pagina
+const pageHeight = window.innerHeight; // Altezza della pagina
+
+// Definiamo le variabili 
+let carX = pageWidth / 2; // La posizione X iniziale dell'auto al centro della pagina
+let carY = pageHeight / 2; // La posizione Y iniziale dell'auto al centro della pagina
+const carSpeed = 10; // Velocità dell'auto
+const carSize = 100; // Dimensioni dell'auto
+let carRotation = 0; // Angolo di rotazione dell'auto
+
+// Aggiorniamo la posizione e la rotazione dell'auto
+function updateCar() {
+  car.style.left = carX + "px";
+  car.style.top = carY + "px";
+  car.style.transform = `rotate(${carRotation}deg)`;
+}
+
+// Effettuiamo lo spostamento e aggiorniamo la rotazione dell'auto in base al tasto direzione premuto
+function moveCar(event) {
+  switch (event.keyCode) {
+    case 37: // Sinistra
+      carX -= carSpeed;
+      if (carX < 0) {
+        carX = 0;
+      }
+      carRotation = 270; // Ruotiamo l'auto di 270 gradi in senso antiorario (verso sinistra)
+      break;
+    case 38: // Su
+      carY -= carSpeed;
+      if (carY < 0) {
+        carY = 0;
+      }
+      carRotation = 0;
+      break;
+    case 39: // Destra
+      carX += carSpeed;
+      if (carX > pageWidth - carSize) {
+        carX = pageWidth - carSize;
+      }
+      carRotation = 90; // Ruotiamo l'auto di 90 gradi in senso orario (verso destra)
+      break;
+    case 40: // Giù
+      carY += carSpeed;
+      if (carY > pageHeight - carSize) {
+        carY = pageHeight - carSize;
+      }
+      carRotation = 180;
+      break;
+  }
+  updateCar();
+}
+
+// Associamo la funzione di spostamento all'evento keydown della finestra
+window.addEventListener
+*/
+
 </script>
 
 </center>
