@@ -293,6 +293,22 @@ document.write( '<BODY background=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 }
 
 
+.buttoner-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 32px;
+  border-radius: 35px;
+}
+
+.buttoner-container button {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 32px;
+  border-radius: 35px;
+}
+
+
 canvas {
   pointer-events: none;
 }
@@ -1134,7 +1150,7 @@ function normalPrint(x) {
 
 <div id="wrap">
   <div id="startMenu">
-    <h1>Pong</h1>
+    <h1>PING - PONG</h1>
     <button id="startBtn">Avvia</button>
   </div>
   <div id="pauseMenu">
@@ -1150,6 +1166,13 @@ function normalPrint(x) {
     <canvas id="gameCanvas" width="800" height="600"></canvas>
   </div>
 </div>
+
+
+<div class="buttoner-container">
+  <button id="upButton">&uarr;</button>
+  <button id="downButton">&darr;</button>
+</div>
+
 
 <script type="text/javascript">
 function bigWiki(x) {
@@ -2488,8 +2511,8 @@ document.write( '</a>' );
     ballVelocityX = 8,
     ballVelocityY = 0,
     fps = 60,
-    paddleWidth = 10,
-    paddleHeight = 100,
+    paddleWidth = 40,
+    paddleHeight = 200,
     paddleOneY = 250,
     paddleOneDirectionY = null,
     paddleOneVelocityY = 15,
@@ -2592,8 +2615,17 @@ function windowResize() {
   resetBall();
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  // Modifica per separare le racchette dai confini della pagina
+  const minPaddleDistance = 3;
+  paddleOneY = Math.max(minPaddleDistance, Math.min(paddleOneY, canvas.height - paddleHeight - minPaddleDistance));
+  paddleTwoY = Math.max(minPaddleDistance, Math.min(paddleTwoY, canvas.height - paddleHeight - minPaddleDistance));
+
   drawEverything();
 }
+
+
+
 
 function keyDown(e) {
   e.preventDefault();
@@ -2727,39 +2759,91 @@ function moveEverything() {
 }
 
 function drawEverything() {
-  // canvasContext.fillStyle = 'black';
-  // canvasContext.fillRect(0,0,canvas.width,canvas.height); 
   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
   canvasContext.fillStyle = 'Beige';
   canvasContext.beginPath();
   canvasContext.arc(ballPositionX, ballPositionY, ballSize/2, 0, Math.PI*2, true);
   canvasContext.fill();
-  
+
   canvasContext.fillStyle = 'AliceBlue';
-  canvasContext.fillRect(paddleWidth,paddleOneY,paddleWidth,paddleHeight); // x, y, w, h
-  
+  canvasContext.fillRect(paddleWidth, paddleOneY, paddleWidth, paddleHeight);
+
   canvasContext.fillStyle = 'AliceBlue';
-  canvasContext.fillRect(canvas.width - paddleWidth - paddleWidth,paddleTwoY,paddleWidth,paddleHeight); // x, y, w, h
-  
-	
-	
-	
+  canvasContext.fillRect(canvas.width - paddleWidth * 2, paddleTwoY, paddleWidth, paddleHeight);
+
   canvasContext.fillStyle = 'BlanchedAlmond';
   canvasContext.font = "200px 'Roboto', Arial";
   canvasContext.textAlign = "center";
-  canvasContext.fillText(playerOneScore,canvas.width*.25,canvas.height/2 + 75);
-  
+  canvasContext.fillText(playerOneScore, canvas.width * 0.25, canvas.height/2 + 75);
+
   canvasContext.fillStyle = 'Cornsilk';
   canvasContext.font = "200px 'Roboto', Arial";
   canvasContext.textAlign = "center";
-  canvasContext.fillText(playerTwoScore,canvas.width*.75,canvas.height/2 + 75);
-  
+  canvasContext.fillText(playerTwoScore, canvas.width * 0.75, canvas.height/2 + 75);
+
   canvasContext.strokeStyle = 'HoneyDew';
   canvasContext.beginPath();
-  canvasContext.moveTo(canvas.width/2,0);
-  canvasContext.lineTo(canvas.width/2,canvas.height);
+  canvasContext.moveTo(canvas.width/2, 0);
+  canvasContext.lineTo(canvas.width/2, canvas.height);
   canvasContext.stroke();
 }
+
+
+
+var upButton = document.getElementById('upButton');
+var downButton = document.getElementById('downButton');
+
+var paddleOneDirectionY = null;
+var loopInterval = null;
+
+function startLoop() {
+  loopInterval = setInterval(function() {
+    // Azione in loop
+  }, 100);
+}
+
+function stopLoop() {
+  clearInterval(loopInterval);
+  paddleOneDirectionY = null;
+}
+
+function handleUp() {
+  paddleOneDirectionY = 'up';
+  startLoop();
+}
+
+function handleDown() {
+  paddleOneDirectionY = 'down';
+  startLoop();
+}
+
+upButton.addEventListener('mousedown', handleUp);
+upButton.addEventListener('touchstart', handleUp);
+
+downButton.addEventListener('mousedown', handleDown);
+downButton.addEventListener('touchstart', handleDown);
+
+document.addEventListener('mouseup', stopLoop);
+document.addEventListener('mouseleave', stopLoop);
+document.addEventListener('touchend', stopLoop);
+
+document.addEventListener('keydown', function(e) {
+  if (e.repeat) return;
+  switch (e.keyCode) {
+    case 38:
+      handleUp();
+      break;
+    case 40:
+      handleDown();
+      break;
+  }
+});
+
+document.addEventListener('keyup', function(e) {
+  if (e.repeat) return;
+  stopLoop();
+});
+
 </script>
 
 
