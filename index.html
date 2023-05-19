@@ -889,9 +889,65 @@ typewriter.typeString('<font size="7" color="#DBA901" face="Segoe UI">Clicca sui
 <center><p>&#10240;</p></center>
 
 <script type="text/javascript">
+
+//document.write( '<p>&#10240;</p>' );
+//document.write( '<p>&#10240;</p>' );
+
+
 document.write( '<p>&#10240;</p>' );
+
+
+
+
+// Funzione per generare un colore casuale
+function generaColoreCasuale() {
+  var colore = '#';
+  var possibiliCaratteri = '0123456789ABCDEF';
+
+  // Genera sei caratteri esadecimali casuali per rappresentare il colore
+  for (var i = 0; i < 6; i++) {
+    colore += possibiliCaratteri[Math.floor(Math.random() * 16)];
+  }
+
+  return colore;
+}
+
+// Funzione per applicare il cambio di colore
+function applicaCambioColore() {
+  // Ottieni tutti gli elementi con classe "cambia-colore" nel documento
+  var elementi = document.getElementsByClassName('cambia-colore');
+
+  // Itera su tutti gli elementi e cambia il colore del testo
+  for (var i = 0; i < elementi.length; i++) {
+    var elemento = elementi[i];
+
+    // Genera un colore casuale
+    var coloreCasuale = generaColoreCasuale();
+
+    // Inserisci il colore casuale come stile del testo
+    elemento.style.color = coloreCasuale;
+  }
+}
+
+// Chiamata alla funzione per inizializzare il cambio di colore al caricamento della pagina
+document.addEventListener('DOMContentLoaded', function() {
+  applicaCambioColore(); // Applica il cambio di colore iniziale
+
+  // Imposta l'esecuzione periodica della funzione ogni 30 secondi
+  setInterval(applicaCambioColore, 8000);
+});
+
+	
+	
+
+document.write( '<b><p class=\"cambia-colore\">Il portale web in questione &egrave; stato creato praticamente per gioco. Nel corso degli anni &egrave; ormai diventato un progetto professionale, include una vastissima gamma di videogiochi, anime e tanti racconti filosofici, gli easter eggs uniti alla lore delle pagine completano in maniera autonoma ogni struttura metaforica che &egrave; possibile interpretare riguardante il portale. In effetti sembra quasi che ogni sezione abbia una storia da raccontare. Il portale &egrave; destinato a persone di quasi tutte le et&agrave;, l&apos;obbiettivo principale non &egrave; solo di intrattenere un pubblico soprattutto pi&ugrave; giovane, ma anche quello di creare una spinta in pi&ugrave; e invogliare quest&apos;ultimo a imparare e a migliorarsi tramite dei bellissimi e simpaticissimi tweaks eliminando la noia e imparando divertendosi. <br> La maggior parte delle pagine potrebbero sembrare fuorvianti e non inerenti all&apos;argomento desiderato, ma alla fine se si osserva attentamente si noter&agrave; che ogni evento che ruota attorno a questo meraviglioso mondo ha un suo ordine universale. <br> Se si riesce soprattutto a interpretare sia a livello logico che creativo quest&apos;ultime abilit&agrave; verranno incrementate in via esponenziale dopo un attento percorso di lettura ed esperienza diretta con l&apos;interazione dei contenuti unici che il servizio ha da offrire in maniera totalmente priva di qualsivoglia scopo di lucro o altri fini. <br> <em>Penso che sia una cosa strettamente grandiosa il fatto che da dei semplici videogiochi sarebbe possibile arrivare a parlare di vita "<u>reale</u>".</em></p></b>' );
+
+
+
 document.write( '<p>&#10240;</p>' );
-document.write( '<p>&#10240;</p>' );
+//document.write( '<p>&#10240;</p>' );
+//document.write( '<p>&#10240;</p>' );
+
 </script>
 
 <!--<a href="/Games/Minecraft" title="Pagina speciale (dedicata a Minecraft)"><center><button class="minebutton"><h1><font size="6" color="#f2ffb0" face="Arial Black">&#9935;&#65039; Minecraft &#128296;</font></h1></button></center></a><-->
