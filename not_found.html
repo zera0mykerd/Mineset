@@ -102,10 +102,10 @@ window.onload = function() {
     }
   };
 //<![CDATA[
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
@@ -130,24 +130,36 @@ document.onmousedown = dMDown;
 document.onclick = dOClick;
 
 //<![CDATA[
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
 
-document.onmousedown=click
-var times=0
-var times2=10
-function click() {
-if ((event.button==2) || (event.button==3)) {
-if (times>=1) { bye() }
-times++ } }
-function bye() {
-bye() }
+document.onmousedown = click;
+var times = 0;
+var times2 = 10;
+
+function click(event) {
+  if (event.button === 2 || event.button === 3) {
+    if (times >= 1) {
+      bye(times2);
+    }
+    times++;
+  }
+}
+
+function bye(counter) {
+  // Condizione di terminazione
+  if (counter <= 0) {
+    return;
+  }
+  bye(counter - 1);
+}
+
 
 
         if (document.addEventListener) {
@@ -558,7 +570,7 @@ let result = ""
 for(let i = 0; i < STAR_COUNT; i++){
     result += `${randomNumber(-50, 50)}vw ${randomNumber(-50, 50)}vh ${randomNumber(0, 3)}px ${randomNumber(0, 3)}px #fff,`
 }
-console.log(result.substring(0, result.length - 1))
+//console.log(result.substring(0, result.length - 1))
 </script>
 
 </HEAD>

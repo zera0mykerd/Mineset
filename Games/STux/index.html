@@ -96,10 +96,10 @@ window.onload = function() {
       return false;
     }
   };
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
@@ -123,24 +123,35 @@ function dOClick() { return true; }
 document.onmousedown = dMDown;
 document.onclick = dOClick;
 
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
 
-document.onmousedown=click
-var times=0
-var times2=10
-function click() {
-if ((event.button==2) || (event.button==3)) {
-if (times>=1) { bye() }
-times++ } }
-function bye() {
-bye() }
+document.onmousedown = click;
+var times = 0;
+var times2 = 10;
+
+function click(event) {
+  if (event.button === 2 || event.button === 3) {
+    if (times >= 1) {
+      bye(times2);
+    }
+    times++;
+  }
+}
+
+function bye(counter) {
+  // Condizione di terminazione
+  if (counter <= 0) {
+    return;
+  }
+  bye(counter - 1);
+}
 
 
         if (document.addEventListener) {
@@ -885,17 +896,17 @@ body, html{
   bottom: 10px;
   right: 20px;
   z-index: 99;
-  font-size: 18px;
+  font-size: 32px;
   border: none;
   outline: none;
   background-color: SteelBlue;
   color: MidnightBlue;
   padding: 10px;
-  border-radius: 0px;
+  border-radius: 6px;
 }
 </style>
 <script type="text/javascript">
-document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&#129145;</button>' );
+document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&UpArrowBar;</button>' );
 var mybutton = document.getElementById("TopBN");
 window.onscroll = function() {scrollFunction()};
 function scrollFunction() {

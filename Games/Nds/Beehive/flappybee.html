@@ -70,10 +70,10 @@ window.onload = function() {
       return false;
     }
   };
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
@@ -97,24 +97,36 @@ function dOClick() { return true; }
 document.onmousedown = dMDown;
 document.onclick = dOClick;
 
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
 
-document.onmousedown=click
-var times=0
-var times2=10
-function click() {
-if ((event.button==2) || (event.button==3)) {
-if (times>=1) { bye() }
-times++ } }
-function bye() {
-bye() }
+document.onmousedown = click;
+var times = 0;
+var times2 = 10;
+
+function click(event) {
+  if (event.button === 2 || event.button === 3) {
+    if (times >= 1) {
+      bye(times2);
+    }
+    times++;
+  }
+}
+
+function bye(counter) {
+  // Condizione di terminazione
+  if (counter <= 0) {
+    return;
+  }
+  bye(counter - 1);
+}
+
 
 
         if (document.addEventListener) {
@@ -166,10 +178,10 @@ function launchFullScreen(element) {
 
 // Launch fullscreen for browsers that support it!
 launchFullScreen(document.documentElement); // the whole page
-launchFullScreen(document.getElementById("videoElement")); // any individual element
+//launchFullScreen(document.getElementById("videoElement")); // any individual element
 
-window.replace ("index.html","","fullscreen=yes");  
-window.replace('','_parent','');  
+//window.replace ("index.html","","fullscreen=yes");  
+//window.replace('','_parent','');  
 //window.close();
 
 //var elem = document.documentElement; if (elem.requestFullscreen) { elem.requestFullscreen() }
@@ -468,8 +480,8 @@ if (location.protocol != 'https:')
                     Lost = true; //Set the lost flag to true, so they can't unpause;
                     pauseGame(); //"Pause" the game              
                     var cookieScore = getCookie('HighScore');      
-                    console.log(Math.max(CurrentScore,cookieScore));
-                    console.log(cookieScore);
+                    //console.log(Math.max(CurrentScore,cookieScore));
+                    //console.log(cookieScore);
                     setCookie('HighScore', Math.max(CurrentScore,cookieScore), 30000); //Store the highest score between current score and saved score
                     Birdy.BirdyObject.animate({top:'90%'}, 1500, 'linear'); //Drop our birdy
                     $('#FinalScore').html(CurrentScore); //Update the current score
@@ -588,7 +600,7 @@ if (location.protocol != 'https:')
                             $('#DebugInfo').html('Gravity: '+gravVeloc);
 						}else{
 							gravVeloc = 0; //Reset the falling velocity.
-							//console.log('Grav Disabled');
+							////console.log('Grav Disabled');
 						}
 					};
 					
@@ -653,7 +665,7 @@ if (location.protocol != 'https:')
                 function checkCollisions(){
                     $('.Pipe').each(function(){
                         if(isIntersecting(Birdy.BirdyObject, $(this))){
-                            console.log('Hit!');
+                            //console.log('Hit!');
                             endGame();
                         }
                     });
@@ -681,7 +693,7 @@ if (location.protocol != 'https:')
                     //We're out of bounds if the bottom of the bird is below the bottom of the canvas
                     //OR if the bird's top is above the canvas top
                     if(birdy.offset().top+birdy.height()> canvas.offset().top+canvas.height() || birdy.offset().top<canvas.offset().top){ 
-                        console.log('Out of Bounds!'); //Print out that we're out of bounds
+                        //console.log('Out of Bounds!'); //Print out that we're out of bounds
                         endGame();
                     }
                 }
@@ -693,7 +705,7 @@ if (location.protocol != 'https:')
                         var PipeRightXPos = $(this).offset().left + $(this).width(); //Calculate the X coordinate of the pipe's right edge.
                         if(!$(this).data('scored') && BirdyBeakXPos>PipeRightXPos){ //If we're ahead of the pipe and we haven't scored on it yet, add to the score.
                             CurrentScore++; //Increment score
-                            console.log(CurrentScore); //Write to console the score we currently have for debugging purposes
+                            //console.log(CurrentScore); //Write to console the score we currently have for debugging purposes
                             $(this).data('scored', true); //Mark the pipe as scored, so we won't look at it again
                         }
                     });          

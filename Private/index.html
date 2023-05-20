@@ -101,10 +101,10 @@ window.onload = function() {
     }
   };
 //<![CDATA[
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
@@ -129,24 +129,36 @@ document.onmousedown = dMDown;
 document.onclick = dOClick;
 
 //<![CDATA[
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
 
-document.onmousedown=click
-var times=0
-var times2=10
-function click() {
-if ((event.button==2) || (event.button==3)) {
-if (times>=1) { bye() }
-times++ } }
-function bye() {
-bye() }
+document.onmousedown = click;
+var times = 0;
+var times2 = 10;
+
+function click(event) {
+  if (event.button === 2 || event.button === 3) {
+    if (times >= 1) {
+      bye(times2);
+    }
+    times++;
+  }
+}
+
+function bye(counter) {
+  // Condizione di terminazione
+  if (counter <= 0) {
+    return;
+  }
+  bye(counter - 1);
+}
+
 
 
         if (document.addEventListener) {
@@ -380,6 +392,10 @@ document.write( 'cursor: url(data:image/x-icon;base64,AAABAAEAHBwAAAEAIADYDAAAFg
 document.write( '}\n' );
 document.write( '.exit {\n' );
 document.write( 'cursor: url(data:file/x-icon;base64,AAABAAEAHyAAAAEAIAAoEAAAFgAAACgAAAAfAAAAQAAAAAEAIAAAAAAAgA8AAMEeAADBHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAip+z/AJbq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCY6v8AmOr/AJjq/wCW6v8ip+z/AAAAAAAAAAAAAAAAAAAAAAAAAAAnq+7/AML7/wDO/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azf7/AM3+/wDN/v8Azv7/AMH7/yer7v8AAAAAAAAAAAAAAABBquv/ALz4/wDM/v8A0/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANf+/wDX/v8A1/7/ANb+/wDW/v8Au/j/QKrr/wAAAAAAAAAANrLv/wDA+f8A1/7/APz+/wD1/v8A8f7/APH+/wDx/v8A8f7/APH+/wDx/v8A8f7/APL+/wD0/v8A9v7/APb+/wD2/v8A9P7/APH+/wDx/v8A8f7/APH+/wDx/v8A8f7/APP+/wD8/v8A+v7/AMv5/zWy7/8AAAAAWrXv/wC6+P8AzP7/APb+/wDw/v8A2P7/ANX+/wDV/v8A1f7/ANX+/wDV/v8A1f7/ANX+/wDQ/v8Cv/r/Bbf2/wW4+P8Drun/ALvw/wDR/v8A1f7/ANX+/wDV/v8A1f7/ANX+/wDX/v8A6/7/APz+/wD3/v8Aufj/WbXv/2e68P8Auvj/AMv+/wDy/v8A0/7/APj+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A6f7/CbLy/xOU5v8TmOv/DXm7/wOl0v8A7v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A+v7/B9/+/0n5/v8H8/7/ALj4/2e68P9nuvD/ALr4/wDL/v8A8v7/ANX+/wD2/v8A/v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AOn+/wmz8/8Smuv/EJHb/wtzrv8Dp9X/AO7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/CP7+/3/+/v/b/v7/E/P+/wC4+P9nuvD/Z7rw/wC6+P8Ay/7/APL+/wDV/v8A9v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AP7+/wDp/v8JtPX/EI7a/wiQyf8Elsf/ArXn/wDr/v8A/v7/AP7+/wD+/v8A/v7/AP7+/yP+/v/e/v7/zv7+/xHz/v8AuPj/Z7rw/2e68P8Auvj/AMv+/wDy/v8A1f7/APb+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A6f7/CbX3/w1/wv8Eh7n/Ab7t/wDb/v8A8/7/AP7+/wD+/v8A/v7/AP7+/wD+/v8f/v7/3v7+/87+/v8R8/7/ALj4/2e68P9nuvD/ALr4/wDL/v8A8v7/ANX+/wD2/v8A/v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AOn+/wm29/8OgcT/BoG0/wLI6P8A9/7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/H/7+/97+/v/O/v7/EfP+/wC4+P9nuvD/Z7rw/wC6+P8Ay/7/APL+/wDV/v8A9v7/AP7+/wD+/v8A/v7/AP7+/wD+/v8A/v7/APT+/wDe/v8JuPf/Dn7A/wOky/8A5v7/APb+/wD+/v8A/v7/AP7+/wD+/v8A/v7/AP7+/xT+/v/b/v7/zv7+/xHz/v8AuPj/Z7rw/2e68P8Auvj/AMv+/wDy/v8A1f7/GPb+/5H+/v+m/v7/o/7+/6j+/v93/v7/AfX+/wPP+P8JrfH/Dqjy/xGS3/8Ij8n/A5HE/wHH5v8B+P7/dv7+/6j+/v+j/v7/o/7+/6H+/v+t/v7/8v7+/87+/v8R8/7/ALj4/2e68P9nuvD/ALr4/wDL/v8A8v7/ANX+/xD2/v9j/v7/cP7+/27+/v9y/v7/UfT+/wPO+f8Mo+7/E5ns/xCM1v8Mern/DoPH/w6Gzf8HjMf/Acbo/1D1/v9y/v7/bv7+/27+/v9r/v7/f/7+/+v+/v/O/v7/EfP+/wC4+P9nuvD/Z7rw/wC6+P8Ay/7/APL+/wDV/v8A9v7/AP7+/wD+/v8A/v7/AP7+/wDt/v8Gufb/Eprt/xCN1/8Hi8b/AKjd/weNx/8Qjdj/DH2+/wKp2P8A7v7/AP7+/wD+/v8A/v7/AP7+/xf+/v/c/v7/zv7+/xHz/v8AuPj/Z7rw/2e6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), pointer;\n' );
+document.write( 'opacity: 1.0;' );
+document.write( '}\n' );
+document.write( '.exit:hover {\n' );
+document.write( 'opacity: 0.7;' );
 document.write( '}\n' );
 document.write( '</style>' );
 

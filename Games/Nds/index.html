@@ -96,10 +96,10 @@ window.onload = function() {
       return false;
     }
   };
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
@@ -123,24 +123,35 @@ function dOClick() { return true; }
 document.onmousedown = dMDown;
 document.onclick = dOClick;
 
-function clickIE()  {if (document.all) {alert(mes);return false;}}
+function clickIE()  {if (document.all) {return false;}}
 function clickNS(e) {if 
 (document.layers||(document.getElementById&&!document.all)) {
-if (e.which==2||e.which==3) {alert(mes);return false;}}}
+if (e.which==2||e.which==3) {return false;}}}
 if (document.layers) 
 {document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
 else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
 document.oncontextmenu=new Function("return false")
 
-document.onmousedown=click
-var times=0
-var times2=10
-function click() {
-if ((event.button==2) || (event.button==3)) {
-if (times>=1) { bye() }
-times++ } }
-function bye() {
-bye() }
+document.onmousedown = click;
+var times = 0;
+var times2 = 10;
+
+function click(event) {
+  if (event.button === 2 || event.button === 3) {
+    if (times >= 1) {
+      bye(times2);
+    }
+    times++;
+  }
+}
+
+function bye(counter) {
+  // Condizione di terminazione
+  if (counter <= 0) {
+    return;
+  }
+  bye(counter - 1);
+}
 
 
         if (document.addEventListener) {
