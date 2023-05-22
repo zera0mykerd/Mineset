@@ -453,8 +453,105 @@ body, html{
     position:sticky;
     float:center;
 }
-
 </style>
+
+<style type="text/css">
+/* Definizione delle particelle di pioggia */
+@keyframes raindrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(800px);
+  }
+}
+
+/* Creazione dei singoli elementi di pioggia */
+.raindrop {
+  position: fixed;
+  top: -10px;
+  width: 2px;
+  height: 20px;
+  background-color: #00aaff;
+  opacity: 0;
+  animation: raindrop 1s linear infinite;
+  pointer-events: none;
+}
+
+/* Contenitore delle particelle di pioggia */
+.rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Creazione delle particelle di pioggia */
+.rain-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Creazione dei singoli elementi di pioggia */
+.rain-container .raindrop:nth-child(1) {
+  left: 10%;
+  animation-delay: 0.3s;
+}
+
+.rain-container .raindrop:nth-child(2) {
+  left: 20%;
+  animation-delay: 1.2s;
+}
+
+.rain-container .raindrop:nth-child(3) {
+  left: 30%;
+  animation-delay: 1.8s;
+}
+
+/* Aggiungi altre particelle di pioggia come desiderato */
+.rain-container .raindrop:nth-child(4) {
+  left: 40%;
+  animation-delay: 0.5s;
+}
+
+.rain-container .raindrop:nth-child(5) {
+  left: 50%;
+  animation-delay: 1.0s;
+}
+
+.rain-container .raindrop:nth-child(6) {
+  left: 60%;
+  animation-delay: 2.3s;
+}
+
+.rain-container .raindrop:nth-child(7) {
+  left: 70%;
+  animation-delay: 1.6s;
+}
+
+.rain-container .raindrop:nth-child(8) {
+  left: 80%;
+  animation-delay: 0.9s;
+}
+
+.rain-container .raindrop:nth-child(9) {
+  left: 90%;
+  animation-delay: 2.1s;
+}
+
+/* Aggiungi ulteriori particelle di pioggia come desiderato */
+</style>
+
 <script type="text/javascript">
 document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&UpArrowBar;</button>' );
 var mybutton = document.getElementById("TopBN");
@@ -1216,6 +1313,20 @@ function normalPrint(x) {
 </a>
 </div>
 </bdi>
+
+<div class="rain-container">
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <!-- Aggiungi ulteriori particelle di pioggia come desiderato -->
+</div>
+
 </HEAD>
 
 

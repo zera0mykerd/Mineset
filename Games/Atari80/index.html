@@ -393,6 +393,43 @@ body, html{
 	  color: MidnightBlue;
       border: 1px solid black;
     }
+	
+	
+		
+		
+		
+		
+		
+		
+		
+#field {
+    background-color: #229933;
+    float: left;
+    position: relative;
+}
+
+#field td {
+    position: relative;
+}
+
+#deal {
+    margin-top: 1px;
+    float: left;
+    background-color: #229933;
+}
+
+#deal td {
+    border-right: none;
+}
+
+#four {
+    float: right;
+    border-bottom: none;
+    position: relative;
+    background-color: #229933;
+}
+		
+		
 </style>
 
 <!-- Vgames -->
@@ -1977,17 +2014,24 @@ document.write( '</a>' );
 
 <p>&#10240;</p>
 <br><br>
+
+
+
+<br><br><br>
 <p>&#10240;</p>
-
-
+<table id="HELL"></table>
+<p>&#10240;</p>
 <div class="board"></div>
 <br><br>
 <div class="grid"></div>
 <br>
 <button id="leftButton">&loarr;</button>
-<button id="restartButton" style="font-size:24px;">Riavvia partita</button>
 <button id="rightButton">&roarr;</button>
+<br>
+<button id="restartButton" style="font-size:24px;">Riavvia partita</button> <font color="#FFF">|</font> <button style="font-size:24px;" id="partialReloadButton">Ricarica il gioco</button>
 <br><br>
+<br>
+
 
   <table id="tabellone">
     <tr>
@@ -2006,7 +2050,20 @@ document.write( '</a>' );
       <td onclick="eseguiMossa(2, 2)"></td>
     </tr>
   </table>
+<br><br>
 
+
+<table id="griglia"></table>
+<br>
+<button id="mostraCoordinate" style="font-size:24px;">Mostra Coordinate</button>
+<br>
+<button id="reset" style="font-size:24px;">Resetta partita</button>
+
+
+
+
+
+<h1>&#10240;</h1>
 <p>&#10240;</p>
 <br><br><br>
 <svg height="128pt" viewBox="0 0 512 512" width="128pt"><g id="flat"><path d="m200 192h-48v-24h40a8 8 0 0 1 8 8z" fill="#d8595a"/><path d="m312 192h48v-24h-40a8 8 0 0 0 -8 8z" fill="#d8595a"/><path d="m408 328v-136h-304v136l-16 56h52.145a48 48 0 0 0 41.675-24.185l14.149-24.761a14 14 0 0 1 12.156-7.054h95.75a14 14 0 0 1 12.156 7.054l14.149 24.76a48 48 0 0 0 41.675 24.186h52.145z" fill="#0292c9"/><path d="m216 240h-16v-16h-32v16h-16v32h16v16h32v-16h16z" fill="#026ca2"/><circle cx="288" cy="256" fill="#fbb540" r="16"/><circle cx="320" cy="224" fill="#2ad3b3" r="16"/><circle cx="320" cy="288" fill="#faa6b2" r="16"/><circle cx="352" cy="256" fill="#2cbff4" r="16"/><path d="m80 416 40-56a43.593 43.593 0 0 0 28.961-32.807l3.039-15.193 17.373-17.373a22.627 22.627 0 0 0 6.627-16 22.628 22.628 0 0 0 -22.627-22.627h-1.436a22.63 22.63 0 0 0 -14.135 4.958l-33.802 27.042v-64l24-32h40v-14a18 18 0 0 0 -18-18h-37.532a32 32 0 0 0 -26.04 13.4l-24.467 34.255a32 32 0 0 0 -5.961 18.6v85.745l-32 48z" fill="#fdc9a6"/><path d="m432 416-40-56a43.593 43.593 0 0 1 -28.961-32.807l-3.039-15.193-17.373-17.373a22.627 22.627 0 0 1 -6.627-16 22.628 22.628 0 0 1 22.627-22.627h1.436a22.63 22.63 0 0 1 14.135 4.958l33.802 27.042v-64l-24-32h-40v-14a18 18 0 0 1 18-18h37.532a32 32 0 0 1 26.04 13.4l24.467 34.255a32 32 0 0 1 5.961 18.6v85.745l32 48z" fill="#fdc9a6"/><path d="m240 304h-16a8 8 0 0 1 0-16h16a8 8 0 0 1 0 16z" fill="#026ca2"/><path d="m288 304h-16a8 8 0 0 1 0-16h16a8 8 0 0 1 0 16z" fill="#026ca2"/><path d="m280 192h-48l8-24h32z" fill="#026ca2"/><g fill="#fbb540"><path d="m63.994 152a8 8 0 0 1 -7.149-11.58 36.744 36.744 0 0 1 33.044-20.42h6.111a8 8 0 0 1 0 16h-6.111a20.833 20.833 0 0 0 -18.734 11.578 8 8 0 0 1 -7.161 4.422z"/><path d="m47.994 128a8 8 0 0 1 -7.149-11.58 36.744 36.744 0 0 1 33.044-20.42h6.111a8 8 0 0 1 0 16h-6.111a20.833 20.833 0 0 0 -18.734 11.578 8 8 0 0 1 -7.161 4.422z"/><path d="m448.006 152a8 8 0 0 1 -7.161-4.424 20.833 20.833 0 0 0 -18.734-11.576h-6.111a8 8 0 0 1 0-16h6.111a36.744 36.744 0 0 1 33.044 20.422 8 8 0 0 1 -7.149 11.578z"/><path d="m464.006 128a8 8 0 0 1 -7.161-4.424 20.833 20.833 0 0 0 -18.734-11.576h-6.111a8 8 0 0 1 0-16h6.111a36.744 36.744 0 0 1 33.044 20.422 8 8 0 0 1 -7.149 11.578z"/></g></g></svg><br>
@@ -2068,12 +2125,14 @@ document.write( '</a>' );
 <svg width="256pt" height="256pt" viewBox="0 0 242 216" version="1.1"><g id="#b5a686ff"><path fill="#b5a686" opacity="1.00" d=" M 112.62 0.00 L 113.79 0.00 C 118.63 3.61 122.72 8.12 127.21 12.14 C 131.68 16.12 135.65 20.63 140.26 24.46 C 138.44 26.88 136.37 29.09 134.15 31.16 C 130.51 34.54 127.40 38.54 123.23 41.33 C 121.07 39.49 119.01 37.52 117.11 35.39 C 109.82 26.53 107.39 13.95 110.98 3.04 C 111.39 1.96 111.94 0.94 112.62 0.00 Z" /></g><g id="#675846ff"><path fill="#675846" opacity="1.00" d=" M 148.79 4.77 C 149.63 4.19 150.50 2.85 151.69 3.34 C 153.46 3.57 154.84 6.07 153.37 7.45 C 151.31 10.00 148.80 12.14 146.60 14.56 C 149.33 19.25 149.09 25.18 145.93 29.60 C 144.10 27.83 142.22 26.09 140.26 24.46 C 135.65 20.63 131.68 16.12 127.21 12.14 C 129.58 10.68 132.06 9.07 134.95 9.00 C 137.72 8.67 140.34 9.74 142.81 10.84 C 144.83 8.85 146.73 6.73 148.79 4.77 Z" /></g><g id="#938465ff"><path fill="#938465" opacity="1.00" d=" M 140.26 24.46 C 142.22 26.09 144.10 27.83 145.93 29.60 C 150.23 33.85 154.92 37.71 159.04 42.13 C 160.46 43.35 158.94 45.09 157.61 45.46 C 147.93 49.68 136.42 48.97 127.17 43.94 C 125.81 43.15 124.49 42.28 123.23 41.33 C 127.40 38.54 130.51 34.54 134.15 31.16 C 136.37 29.09 138.44 26.88 140.26 24.46 Z" /></g><g id="#34363aff"><path fill="#34363a" opacity="1.00" d=" M 117.11 35.39 C 119.01 37.52 121.07 39.49 123.23 41.33 C 124.49 42.28 125.81 43.15 127.17 43.94 C 127.73 49.66 128.16 55.39 128.66 61.11 C 130.35 61.17 132.06 61.15 133.74 61.38 C 136.65 61.92 139.04 64.44 139.47 67.37 C 139.88 69.91 139.93 72.49 140.08 75.06 C 127.48 72.90 114.51 72.93 101.91 75.09 C 102.07 72.51 102.13 69.92 102.52 67.37 C 102.89 64.42 105.37 61.94 108.26 61.37 C 110.25 61.11 112.26 61.19 114.26 61.15 C 115.18 52.56 116.20 43.98 117.11 35.39 Z" /><path fill="#34363a" opacity="1.00" d=" M 53.01 137.00 C 60.78 136.96 68.56 137.05 76.34 136.95 C 75.77 147.84 76.63 158.76 75.97 169.63 C 68.29 169.34 60.60 169.70 52.92 169.43 C 53.06 164.55 53.02 159.68 52.93 154.81 C 52.92 148.87 52.96 142.94 53.01 137.00 Z" /><path fill="#34363a" opacity="1.00" d=" M 165.66 136.96 C 173.44 137.04 181.22 136.97 188.99 137.00 C 189.04 142.94 189.08 148.87 189.07 154.80 C 188.98 159.67 188.93 164.55 189.08 169.43 C 181.39 169.69 173.69 169.38 166.00 169.61 C 165.39 158.74 166.22 147.84 165.66 136.96 Z" /></g><g id="#b9aa8aff"><path fill="#b9aa8a" opacity="1.00" d=" M 101.91 75.09 C 114.51 72.93 127.48 72.90 140.08 75.06 C 167.36 79.61 192.60 94.64 209.83 116.25 C 208.81 117.31 207.46 117.80 206.01 117.63 C 201.56 117.59 197.11 117.47 192.68 117.91 C 191.70 116.64 190.38 115.69 189.03 114.88 C 191.53 120.12 195.07 124.79 197.52 130.07 C 192.75 131.15 187.84 130.68 183.00 130.73 C 173.67 130.75 164.33 130.71 155.00 130.78 C 152.56 130.86 150.24 130.10 147.99 129.29 C 147.41 129.52 146.26 129.99 145.69 130.23 C 129.23 130.47 112.76 130.47 96.30 130.23 C 95.73 129.99 94.58 129.52 94.00 129.29 C 91.45 130.27 88.76 130.94 86.00 130.79 C 74.80 130.64 63.59 130.84 52.39 130.69 C 52.16 129.96 51.71 128.51 51.48 127.79 C 62.41 111.99 78.58 100.40 96.27 93.27 C 100.10 91.56 104.24 90.60 107.94 88.59 C 93.63 89.84 80.00 95.45 67.77 102.78 C 60.26 107.63 53.19 113.30 47.25 120.00 C 45.06 120.61 43.26 121.99 41.64 123.52 C 37.55 123.54 33.45 123.52 29.37 123.59 C 29.43 122.30 29.49 121.01 29.55 119.73 C 46.76 96.27 73.19 79.85 101.91 75.09 Z" /></g><g id="#635644ff"><path fill="#635644" opacity="1.00" d=" M 67.77 102.78 C 80.00 95.45 93.63 89.84 107.94 88.59 C 104.24 90.60 100.10 91.56 96.27 93.27 C 78.58 100.40 62.41 111.99 51.48 127.79 C 44.65 137.16 40.46 148.13 37.42 159.24 C 35.39 166.81 34.73 174.64 34.07 182.41 C 29.18 182.77 24.08 181.85 19.34 183.31 C 15.97 185.66 16.44 190.34 16.81 193.92 C 17.00 196.13 18.95 197.50 20.27 199.06 C 16.01 199.17 11.74 199.14 7.48 199.11 C 7.53 190.12 7.21 181.08 8.39 172.13 C 9.30 173.55 10.46 174.78 11.80 175.80 C 14.84 174.59 18.22 173.93 20.84 171.86 C 22.45 170.75 22.58 168.68 23.03 166.97 C 26.40 151.45 33.65 136.84 43.66 124.53 C 44.87 123.03 46.06 121.51 47.25 120.00 C 53.19 113.30 60.26 107.63 67.77 102.78 Z" /></g><g id="#584c3aff"><path fill="#584c3a" opacity="1.00" d=" M 189.03 114.88 C 190.38 115.69 191.70 116.64 192.68 117.91 C 194.16 119.88 195.82 121.72 197.49 123.53 C 206.56 134.15 213.08 146.77 217.28 160.05 C 220.93 155.96 223.97 151.39 227.26 147.01 C 231.72 158.83 234.17 171.40 234.48 184.03 C 234.59 189.06 234.50 194.08 234.54 199.11 C 230.14 199.16 225.73 199.21 221.33 199.13 C 222.54 198.08 223.92 197.16 224.85 195.83 C 225.78 193.05 225.67 190.00 225.27 187.13 C 224.89 184.82 222.92 183.19 220.75 182.61 C 217.04 181.02 212.89 182.49 209.00 182.32 C 202.66 182.01 196.30 182.21 189.96 182.59 C 187.44 182.58 185.03 184.54 184.73 187.08 C 184.31 189.66 184.28 192.35 184.83 194.91 C 185.52 196.65 187.15 197.75 188.38 199.08 C 180.90 199.21 173.43 199.02 165.95 199.14 C 163.10 198.99 160.12 201.19 159.75 204.08 C 159.36 206.91 159.28 209.92 160.26 212.65 C 161.23 213.99 162.57 214.99 163.86 216.00 L 79.03 216.00 L 78.02 215.86 C 79.95 214.79 82.21 213.36 82.32 210.88 C 82.93 206.70 83.03 200.37 77.76 199.33 C 69.55 198.84 61.31 199.39 53.09 199.11 C 54.73 197.73 57.14 196.61 57.37 194.19 C 57.92 190.07 58.12 184.45 53.46 182.60 C 57.64 182.56 61.88 182.02 66.03 182.79 C 69.42 183.87 70.29 187.63 70.38 190.78 C 77.52 190.71 84.66 190.71 91.81 190.78 C 91.92 180.63 92.27 170.48 92.12 160.33 C 92.10 159.79 92.05 158.69 92.03 158.14 C 95.55 158.22 99.06 158.28 102.58 158.31 C 102.60 161.57 102.71 164.82 102.93 168.07 C 114.97 168.35 127.02 168.34 139.06 168.09 C 139.29 164.83 139.41 161.57 139.42 158.30 C 142.94 158.28 146.45 158.22 149.97 158.14 C 149.95 158.69 149.90 159.79 149.88 160.34 C 149.71 170.48 150.12 180.62 150.20 190.77 C 157.64 190.68 165.09 190.75 172.54 190.72 C 172.78 188.93 172.73 187.05 173.44 185.37 C 174.33 183.53 176.40 182.84 178.25 182.41 C 188.58 180.58 198.57 176.23 206.82 169.73 C 207.51 166.79 206.62 163.72 206.41 160.75 C 205.20 150.12 202.43 139.60 197.52 130.07 C 195.07 124.79 191.53 120.12 189.03 114.88 M 104.31 204.77 C 115.44 204.69 126.56 204.68 137.69 204.77 C 138.49 196.15 138.61 187.48 138.41 178.83 C 126.80 178.89 115.19 178.90 103.58 178.82 C 103.41 187.47 103.50 196.15 104.31 204.77 Z" /></g><g id="#9c8e6eff"><path fill="#9c8e6e" opacity="1.00" d=" M 209.83 116.25 C 217.22 125.49 223.07 135.94 227.26 147.01 C 223.97 151.39 220.93 155.96 217.28 160.05 C 213.08 146.77 206.56 134.15 197.49 123.53 C 195.82 121.72 194.16 119.88 192.68 117.91 C 197.11 117.47 201.56 117.59 206.01 117.63 C 207.46 117.80 208.81 117.31 209.83 116.25 Z" /></g><g id="#928465ff"><path fill="#928465" opacity="1.00" d=" M 8.39 172.13 C 11.05 153.29 18.14 135.00 29.55 119.73 C 29.49 121.01 29.43 122.30 29.37 123.59 C 33.45 123.52 37.55 123.54 41.64 123.52 C 43.26 121.99 45.06 120.61 47.25 120.00 C 46.06 121.51 44.87 123.03 43.66 124.53 C 33.65 136.84 26.40 151.45 23.03 166.97 C 22.58 168.68 22.45 170.75 20.84 171.86 C 18.22 173.93 14.84 174.59 11.80 175.80 C 10.46 174.78 9.30 173.55 8.39 172.13 Z" /><path fill="#928465" opacity="1.00" d=" M 164.66 160.74 C 165.16 152.82 164.92 144.86 165.66 136.96 C 166.22 147.84 165.39 158.74 166.00 169.61 C 173.69 169.38 181.39 169.69 189.08 169.43 C 188.93 164.55 188.98 159.67 189.07 154.80 C 190.01 156.76 190.56 159.23 192.35 160.57 C 197.00 161.20 201.72 160.70 206.41 160.75 C 206.62 163.72 207.51 166.79 206.82 169.73 C 198.57 176.23 188.58 180.58 178.25 182.41 C 176.40 182.84 174.33 183.53 173.44 185.37 C 172.73 187.05 172.78 188.93 172.54 190.72 C 165.09 190.75 157.64 190.68 150.20 190.77 C 150.12 180.62 149.71 170.48 149.88 160.34 C 154.78 161.07 159.73 160.89 164.66 160.74 Z" /></g><g id="#a49676ff"><path fill="#a49676" opacity="1.00" d=" M 37.42 159.24 C 40.46 148.13 44.65 137.16 51.48 127.79 C 51.71 128.51 52.16 129.96 52.39 130.69 C 63.59 130.84 74.80 130.64 86.00 130.79 C 88.76 130.94 91.45 130.27 94.00 129.29 C 94.58 129.52 95.73 129.99 96.30 130.23 C 94.79 130.76 92.06 130.82 92.10 132.96 C 91.97 141.35 91.82 149.75 92.03 158.14 C 92.05 158.69 92.10 159.79 92.12 160.33 C 87.22 161.09 82.26 160.90 77.33 160.75 C 76.80 152.82 77.04 144.86 76.34 136.95 C 68.56 137.05 60.78 136.96 53.01 137.00 C 52.96 142.94 52.92 148.87 52.93 154.81 C 52.01 156.78 51.43 159.20 49.67 160.58 C 45.64 160.85 40.89 161.89 37.42 159.24 Z" /><path fill="#a49676" opacity="1.00" d=" M 145.69 130.23 C 146.26 129.99 147.41 129.52 147.99 129.29 C 150.24 130.10 152.56 130.86 155.00 130.78 C 164.33 130.71 173.67 130.75 183.00 130.73 C 187.84 130.68 192.75 131.15 197.52 130.07 C 202.43 139.60 205.20 150.12 206.41 160.75 C 201.72 160.70 197.00 161.20 192.35 160.57 C 190.56 159.23 190.01 156.76 189.07 154.80 C 189.08 148.87 189.04 142.94 188.99 137.00 C 181.22 136.97 173.44 137.04 165.66 136.96 C 164.92 144.86 165.16 152.82 164.66 160.74 C 159.73 160.89 154.78 161.07 149.88 160.34 C 149.90 159.79 149.95 158.69 149.97 158.14 C 150.18 149.75 150.02 141.35 149.90 132.96 C 149.92 130.83 147.20 130.75 145.69 130.23 Z" /></g><g id="#6b5c4aff"><path fill="#6b5c4a" opacity="1.00" d=" M 96.30 130.23 C 112.76 130.47 129.23 130.47 145.69 130.23 C 147.20 130.75 149.92 130.83 149.90 132.96 C 150.02 141.35 150.18 149.75 149.97 158.14 C 146.45 158.22 142.94 158.28 139.42 158.30 C 139.41 161.57 139.29 164.83 139.06 168.09 C 127.02 168.34 114.97 168.35 102.93 168.07 C 102.71 164.82 102.60 161.57 102.58 158.31 C 99.06 158.28 95.55 158.22 92.03 158.14 C 91.82 149.75 91.97 141.35 92.10 132.96 C 92.06 130.82 94.79 130.76 96.30 130.23 M 103.56 141.00 C 103.58 149.71 103.56 158.43 103.87 167.14 C 115.28 167.33 126.71 167.32 138.13 167.14 C 138.44 158.43 138.42 149.71 138.44 141.00 C 126.81 141.00 115.19 141.00 103.56 141.00 Z" /></g><g id="#928364ff"><path fill="#928364" opacity="1.00" d=" M 76.34 136.95 C 77.04 144.86 76.80 152.82 77.33 160.75 C 82.26 160.90 87.22 161.09 92.12 160.33 C 92.27 170.48 91.92 180.63 91.81 190.78 C 84.66 190.71 77.52 190.71 70.38 190.78 C 70.29 187.63 69.42 183.87 66.03 182.79 C 61.88 182.02 57.64 182.56 53.46 182.60 C 48.49 182.44 43.53 182.48 38.56 182.59 C 37.07 182.54 35.57 182.45 34.07 182.41 C 34.73 174.64 35.39 166.81 37.42 159.24 C 40.89 161.89 45.64 160.85 49.67 160.58 C 51.43 159.20 52.01 156.78 52.93 154.81 C 53.02 159.68 53.06 164.55 52.92 169.43 C 60.60 169.70 68.29 169.34 75.97 169.63 C 76.63 158.76 75.77 147.84 76.34 136.95 Z" /></g><g id="#b3a484ff"><path fill="#b3a484" opacity="1.00" d=" M 103.56 141.00 C 115.19 141.00 126.81 141.00 138.44 141.00 C 138.42 149.71 138.44 158.43 138.13 167.14 C 126.71 167.32 115.28 167.33 103.87 167.14 C 103.56 158.43 103.58 149.71 103.56 141.00 Z" /></g><g id="#8b7d5eff"><path fill="#8b7d5e" opacity="1.00" d=" M 104.31 204.77 C 103.50 196.15 103.41 187.47 103.58 178.82 C 115.19 178.90 126.80 178.89 138.41 178.83 C 138.61 187.48 138.49 196.15 137.69 204.77 C 126.56 204.68 115.44 204.69 104.31 204.77 Z" /></g><g id="#b2633bff"><path fill="#b2633b" opacity="1.00" d=" M 34.07 182.41 C 35.57 182.45 37.07 182.54 38.56 182.59 C 36.61 184.00 34.39 185.57 33.87 188.09 C 33.42 190.49 33.62 192.95 33.62 195.38 C 37.43 195.42 41.28 195.24 45.06 195.85 C 44.99 196.61 44.86 198.13 44.79 198.89 C 40.55 199.39 36.27 199.03 32.02 199.37 C 27.86 199.75 24.57 203.86 25.15 208.02 C 24.95 212.45 29.45 215.08 33.21 216.00 L 5.75 216.00 C 2.99 215.26 0.49 213.02 0.56 209.98 C 0.53 207.03 -0.06 203.53 2.11 201.14 C 3.44 199.59 5.54 199.18 7.48 199.11 C 11.74 199.14 16.01 199.17 20.27 199.06 C 18.95 197.50 17.00 196.13 16.81 193.92 C 16.44 190.34 15.97 185.66 19.34 183.31 C 24.08 181.85 29.18 182.77 34.07 182.41 Z" /><path fill="#b2633b" opacity="1.00" d=" M 189.96 182.59 C 196.30 182.21 202.66 182.01 209.00 182.32 C 212.89 182.49 217.04 181.02 220.75 182.61 C 216.84 183.17 212.90 182.88 208.99 182.52 C 205.31 182.10 201.41 184.46 200.24 188.00 C 199.73 190.44 199.94 192.96 199.93 195.43 C 203.57 195.71 207.49 194.76 210.96 196.06 C 211.04 196.80 211.18 198.28 211.25 199.02 C 207.14 199.22 203.02 199.06 198.91 199.28 C 194.15 199.39 190.22 204.31 191.26 209.00 C 191.86 212.91 195.84 214.89 199.22 216.00 L 163.86 216.00 C 162.57 214.99 161.23 213.99 160.26 212.65 C 159.28 209.92 159.36 206.91 159.75 204.08 C 160.12 201.19 163.10 198.99 165.95 199.14 C 173.43 199.02 180.90 199.21 188.38 199.08 C 187.15 197.75 185.52 196.65 184.83 194.91 C 184.28 192.35 184.31 189.66 184.73 187.08 C 185.03 184.54 187.44 182.58 189.96 182.59 Z" /></g><g id="#f9b691ff"><path fill="#f9b691" opacity="1.00" d=" M 38.56 182.59 C 43.53 182.48 48.49 182.44 53.46 182.60 C 58.12 184.45 57.92 190.07 57.37 194.19 C 57.14 196.61 54.73 197.73 53.09 199.11 C 61.31 199.39 69.55 198.84 77.76 199.33 C 83.03 200.37 82.93 206.70 82.32 210.88 C 82.21 213.36 79.95 214.79 78.02 215.86 L 79.03 216.00 L 33.21 216.00 C 29.45 215.08 24.95 212.45 25.15 208.02 C 24.57 203.86 27.86 199.75 32.02 199.37 C 36.27 199.03 40.55 199.39 44.79 198.89 C 44.86 198.13 44.99 196.61 45.06 195.85 C 41.28 195.24 37.43 195.42 33.62 195.38 C 33.62 192.95 33.42 190.49 33.87 188.09 C 34.39 185.57 36.61 184.00 38.56 182.59 Z" /></g><g id="#f9b690ff"><path fill="#f9b690" opacity="1.00" d=" M 200.24 188.00 C 201.41 184.46 205.31 182.10 208.99 182.52 C 212.90 182.88 216.84 183.17 220.75 182.61 C 222.92 183.19 224.89 184.82 225.27 187.13 C 225.67 190.00 225.78 193.05 224.85 195.83 C 223.92 197.16 222.54 198.08 221.33 199.13 C 225.73 199.21 230.14 199.16 234.54 199.11 C 237.24 198.98 240.15 200.37 241.06 203.05 C 241.74 205.60 241.57 208.30 241.35 210.90 C 241.05 213.57 238.63 215.40 236.16 215.99 L 237.91 216.00 L 199.22 216.00 C 195.84 214.89 191.86 212.91 191.26 209.00 C 190.22 204.31 194.15 199.39 198.91 199.28 C 203.02 199.06 207.14 199.22 211.25 199.02 C 211.18 198.28 211.04 196.80 210.96 196.06 C 207.49 194.76 203.57 195.71 199.93 195.43 C 199.94 192.96 199.73 190.44 200.24 188.00 Z" /></g></svg>
 <svg width="32pt" height="32pt" viewBox="0 0 64 64" version="1.1"><g id="#373d41ff"><path fill="#373d41" opacity="1.00" d=" M 14.73 7.01 C 16.42 6.38 18.02 5.56 19.25 4.20 L 19.85 5.32 C 19.12 8.57 17.44 11.52 16.19 14.60 C 16.98 15.11 17.76 15.63 18.53 16.16 C 13.39 22.57 12.63 31.07 11.86 38.95 C 11.85 39.70 11.83 41.18 11.83 41.93 C 9.88 41.24 7.94 40.54 6.00 39.80 C 6.72 36.82 8.11 34.07 9.34 31.28 C 10.39 29.45 9.25 27.45 8.86 25.62 C 12.36 20.41 13.91 14.18 16.61 8.56 C 16.14 8.17 15.20 7.40 14.73 7.01 Z" /></g><g id="#ffb69eff"><path fill="#ffb69e" opacity="1.00" d=" M 28.45 9.47 C 32.37 7.88 36.86 11.94 35.70 16.00 C 34.92 20.09 29.17 21.73 26.37 18.63 C 23.46 15.98 24.70 10.62 28.45 9.47 Z" /><path fill="#ffb69e" opacity="1.00" d=" M 18.58 26.47 C 20.23 26.55 21.89 26.64 23.54 26.73 C 23.43 28.23 23.31 29.73 23.20 31.23 C 24.36 30.02 25.54 28.83 26.67 27.60 C 27.41 29.93 27.99 32.43 29.69 34.29 C 31.46 36.75 34.05 38.83 34.62 41.95 C 32.97 41.88 31.32 41.82 29.67 41.82 C 26.85 38.87 23.29 36.82 19.93 34.55 C 17.09 32.78 18.68 29.17 18.58 26.47 Z" /></g><g id="#2a7f58ff"><path fill="#2a7f58" opacity="1.00" d=" M 18.53 16.16 C 22.14 15.89 24.28 19.34 26.62 21.50 C 28.56 23.06 28.31 25.92 26.67 27.60 C 25.54 28.83 24.36 30.02 23.20 31.23 C 23.31 29.73 23.43 28.23 23.54 26.73 C 21.89 26.64 20.23 26.55 18.58 26.47 C 18.68 29.17 17.09 32.78 19.93 34.55 C 19.34 35.19 18.74 35.82 18.14 36.45 C 16.57 38.05 14.94 39.59 13.33 41.14 C 12.97 40.60 12.23 39.50 11.86 38.95 C 12.63 31.07 13.39 22.57 18.53 16.16 Z" /></g><g id="#375f2dff"><path fill="#375f2d" opacity="1.00" d=" M 3.24 32.11 C 4.29 29.42 7.02 27.77 8.86 25.62 C 9.25 27.45 10.39 29.45 9.34 31.28 C 8.11 34.07 6.72 36.82 6.00 39.80 C 7.94 40.54 9.88 41.24 11.83 41.93 C 12.21 43.27 12.65 44.60 13.07 45.93 C 13.19 46.47 13.41 47.56 13.53 48.11 C 12.92 49.03 12.28 49.94 11.60 50.81 C 11.35 51.08 10.85 51.62 10.59 51.88 C 9.14 53.58 7.84 55.41 6.53 57.22 C 5.06 59.75 1.47 60.33 0.00 57.42 L 0.00 55.78 C 1.24 53.60 2.84 51.66 4.40 49.70 C 3.72 47.58 4.13 45.46 6.19 44.31 C 5.31 40.22 3.46 36.31 3.24 32.11 Z" /></g><g id="#28502dff"><path fill="#28502d" opacity="1.00" d=" M 13.33 41.14 C 14.94 39.59 16.57 38.05 18.14 36.45 C 19.55 39.91 20.43 43.55 20.53 47.29 C 18.42 47.56 16.31 47.18 14.33 46.46 C 14.10 44.67 13.88 42.87 13.33 41.14 Z" /></g><g id="#060b061f"><path fill="#060b06" opacity="0.12" d=" M 11.86 38.95 C 12.23 39.50 12.97 40.60 13.33 41.14 C 13.88 42.87 14.10 44.67 14.33 46.46 L 13.07 45.93 C 12.65 44.60 12.21 43.27 11.83 41.93 C 11.83 41.18 11.85 39.70 11.86 38.95 Z" /></g><g id="#ba6746ff"><path fill="#ba6746" opacity="1.00" d=" M 29.67 41.82 C 31.32 41.82 32.97 41.88 34.62 41.95 C 37.41 41.85 39.97 42.84 42.45 44.00 C 43.79 45.99 42.08 47.93 41.37 49.79 C 38.22 47.41 34.34 47.12 30.56 47.50 C 28.17 47.64 25.81 47.23 23.48 46.75 C 23.61 45.85 23.87 44.04 24.01 43.14 C 25.50 41.75 27.79 42.16 29.67 41.82 Z" /><path fill="#ba6746" opacity="1.00" d=" M 58.37 47.45 C 60.84 47.10 62.92 48.98 64.00 51.02 L 64.00 54.10 C 63.02 55.19 62.27 56.61 60.85 57.20 C 57.90 58.60 53.97 56.33 53.86 53.03 C 53.47 50.31 55.64 47.62 58.37 47.45 Z" /></g><g id="#b5d7dcff"><path fill="#b5d7dc" opacity="1.00" d=" M 42.45 44.00 C 44.86 44.03 47.40 43.33 49.74 44.15 C 51.91 45.22 51.53 47.98 51.73 49.98 C 51.65 51.90 52.30 54.24 50.75 55.75 C 49.78 56.73 48.34 56.71 47.07 56.82 C 42.60 57.02 38.13 57.14 33.67 57.44 C 32.49 57.08 31.34 56.64 30.27 56.03 C 30.37 54.98 30.56 52.89 30.65 51.84 L 30.66 50.15 C 30.63 49.49 30.58 48.16 30.56 47.50 C 34.34 47.12 38.22 47.41 41.37 49.79 C 42.08 47.93 43.79 45.99 42.45 44.00 Z" /></g><g id="#5f7381ff"><path fill="#5f7381" opacity="1.00" d=" M 13.07 45.93 L 14.33 46.46 C 16.31 47.18 18.42 47.56 20.53 47.29 C 21.51 47.12 22.49 46.90 23.48 46.75 C 25.81 47.23 28.17 47.64 30.56 47.50 C 30.58 48.16 30.63 49.49 30.66 50.15 C 27.30 51.22 23.69 51.74 20.64 53.61 C 24.02 53.32 27.36 52.64 30.65 51.84 C 30.56 52.89 30.37 54.98 30.27 56.03 C 31.34 56.64 32.49 57.08 33.67 57.44 C 32.02 58.01 30.21 57.81 28.50 58.10 C 25.66 58.39 22.84 59.43 19.96 58.93 C 15.48 58.35 11.01 57.77 6.53 57.22 C 7.84 55.41 9.14 53.58 10.59 51.88 C 11.89 52.81 13.85 53.54 15.26 52.44 C 14.21 51.50 12.99 50.96 11.60 50.81 C 12.28 49.94 12.92 49.03 13.53 48.11 C 13.41 47.56 13.19 46.47 13.07 45.93 Z" /></g><g id="#2a33397f"><path fill="#2a3339" opacity="0.50" d=" M 10.59 51.88 C 10.85 51.62 11.35 51.08 11.60 50.81 C 12.99 50.96 14.21 51.50 15.26 52.44 C 13.85 53.54 11.89 52.81 10.59 51.88 Z" /></g></svg>
 
+<p>&#10240;</p>
+
+
+
 
 <p>&#10240;</p>
 
 <script type="text/javascript" charset="utf-8">
-
-
 document.addEventListener('DOMContentLoaded', () => {
       const grid = document.querySelector('.grid');
       const doodler = document.createElement('div');
@@ -2085,7 +2144,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let doodlerLeftSpace = 50;
       let startPoint = 150;
       let doodlerBottomSpace = startPoint;
-      const gravity = 0.9;
+      const Gravity = 3;
       let upTimerId;
       let downTimerId;
       let isJumping = true;
@@ -2116,6 +2175,7 @@ document.addEventListener('DOMContentLoaded', () => {
           platforms.push(newPlatform);
         }
       }
+	  
 
       function movePlatforms() {
         if (doodlerBottomSpace > 200) {
@@ -2144,29 +2204,41 @@ document.addEventListener('DOMContentLoaded', () => {
         doodler.style.bottom = doodlerBottomSpace + 'px';
       }
 
-      function fall() {
-        isJumping = false;
-        clearInterval(upTimerId);
-        downTimerId = setInterval(function () {
-          doodlerBottomSpace -= 5;
-          doodler.style.bottom = doodlerBottomSpace + 'px';
-          if (doodlerBottomSpace <= 0) {
-            gameOver();
-          }
-          platforms.forEach((platform) => {
-            if (
-              doodlerBottomSpace >= platform.bottom &&
-              doodlerBottomSpace <= platform.bottom + 15 &&
-              doodlerLeftSpace + 60 >= platform.left &&
-              doodlerLeftSpace <= platform.left + 85 &&
-              !isJumping
-            ) {
-              startPoint = doodlerBottomSpace;
-              jump();
-            }
-          });
-        }, 30);
+function fall() {
+  isJumping = false;
+  clearInterval(upTimerId);
+
+  // Definisci un fattore di accelerazione per aumentare la velocità di caduta
+const accelerationFactor = 5;
+
+// Calcola la velocità di caduta aumentata
+const fallSpeed = Gravity * accelerationFactor;
+
+  downTimerId = setInterval(function () {
+    doodlerBottomSpace -= fallSpeed;
+    doodler.style.bottom = doodlerBottomSpace + "px";
+
+    if (doodlerBottomSpace <= 0) {
+      gameOver();
+    }
+
+    platforms.forEach((platform) => {
+      if (
+        doodlerBottomSpace >= platform.bottom &&
+        doodlerBottomSpace <= platform.bottom + 15 &&
+        doodlerLeftSpace + 60 >= platform.left &&
+        doodlerLeftSpace <= platform.left + 85 &&
+        !isJumping
+      ) {
+        startPoint = doodlerBottomSpace;
+        jump();
       }
+    });
+  }, 30);
+}
+
+
+
 
       function jump() {
         clearInterval(downTimerId);
@@ -2237,27 +2309,43 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(leftTimerId);
         clearInterval(rightTimerId);
         restartButton.style.display = 'block';
-		restartButton.style.fontSize = '24px';
+		restartButton.style.fontSize = '32px';
+        partialReloadButton.style.display = 'block';
+		partialReloadButton.style.fontSize = '32px';
       }
 
-      function restartGame() {
-        isGameOver = false;
-        isJumping = false;
-        platforms = [];
-        doodlerLeftSpace = 50;
-        startPoint = 150;
-        doodlerBottomSpace = startPoint;
-        score = 0;
-        clearInterval(upTimerId);
-        clearInterval(downTimerId);
-        clearInterval(leftTimerId);
-        clearInterval(rightTimerId);
-        while (grid.firstChild) {
-          grid.removeChild(grid.firstChild);
-        }
-        restartButton.style.display = 'none';
-        start();
-      }
+
+
+function restartGame() {
+  isGameOver = false;
+  isJumping = true;
+  isGoingLeft = false;
+  isGoingRight = false;
+  platforms = [];
+  doodlerLeftSpace = 50;
+  startPoint = 150;
+  doodlerBottomSpace = startPoint;
+  score = 0;
+  clearInterval(upTimerId);
+  clearInterval(downTimerId);
+  clearInterval(leftTimerId);
+  clearInterval(rightTimerId);
+  document.removeEventListener('keyup', control);
+
+  const platformElements = document.querySelectorAll('.platform');
+  platformElements.forEach((platform) => platform.remove());
+
+  while (grid.firstChild) {
+    grid.removeChild(grid.firstChild);
+  }
+
+  //restartButton.style.display = 'none';
+  start();
+}
+
+
+
+
 
       const restartButton = document.getElementById('restartButton');
       restartButton.addEventListener('click', restartGame);
@@ -2273,6 +2361,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       start();
+    });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+      var partialReloadButton = document.getElementById('partialReloadButton');
+
+      partialReloadButton.addEventListener('click', function() {
+        // Salva la posizione dello scroll prima della ricarica
+        var scrollPosition = window.scrollY;
+
+        // Ricarica la pagina
+        location.reload();
+
+        // Ripristina la posizione dello scroll dopo la ricarica
+        window.scrollTo(0, scrollPosition);
+      });
     });
 
 
@@ -2304,15 +2411,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
+/*
+      function fall() {
+        isJumping = false;
+        clearInterval(upTimerId);
+        downTimerId = setInterval(function () {
+          doodlerBottomSpace -= 5;
+          doodler.style.bottom = doodlerBottomSpace + 'px';
+          if (doodlerBottomSpace <= 0) {
+            gameOver();
+          }
+          platforms.forEach((platform) => {
+            if (
+              doodlerBottomSpace >= platform.bottom &&
+              doodlerBottomSpace <= platform.bottom + 15 &&
+              doodlerLeftSpace + 60 >= platform.left &&
+              doodlerLeftSpace <= platform.left + 85 &&
+              !isJumping
+            ) {
+              startPoint = doodlerBottomSpace;
+              jump();
+            }
+          });
+        }, 30);
+      }
+*/
 
 
 
@@ -2515,7 +2638,7 @@ function fall() {
 </script>
 
 <script type="text/javascript">
-    // Dimensioni del campo minato
+// Dimensioni del campo minato
     const rows = 5;
     const columns = 5;
     const totalMines = 5;
@@ -2582,7 +2705,8 @@ function fall() {
       cellElement.innerHTML = cell.isMine ? 'X' : cell.neighboringMines;
 
       if (cell.isMine) {
-        //console.log("Hai perso!"); // La cella contiene una mina, hai perso!
+        alert("Hai perso!"); // La cella contiene una mina, hai perso!
+		resetGame();
         // Puoi fare ulteriori azioni come mostrare una schermata di game over
       } else if (cell.neighboringMines === 0) {
         // La cella non contiene mine vicine, rivelare le celle adiacenti
@@ -2605,6 +2729,63 @@ function fall() {
         board.appendChild(cellElement);
       }
     }
+	
+	
+// Funzione per resettare il gioco
+function resetGame() {
+  setTimeout(function() {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        field[i][j].isMine = false;
+        field[i][j].isRevealed = false;
+        field[i][j].neighboringMines = 0;
+        const cellElement = document.getElementById(`cell-${i}-${j}`);
+        cellElement.classList.remove('revealed');
+        cellElement.innerHTML = '';
+      }
+    }
+
+    // Piantare nuovamente le mine in posizioni casuali
+    let plantedMines = 0;
+    while (plantedMines < totalMines) {
+      const randomRow = Math.floor(Math.random() * rows);
+      const randomColumn = Math.floor(Math.random() * columns);
+      if (!field[randomRow][randomColumn].isMine) {
+        field[randomRow][randomColumn].isMine = true;
+        plantedMines++;
+      }
+    }
+
+    // Calcolo del numero di mine vicine per ogni cella
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        if (!field[i][j].isMine) {
+          let count = 0;
+          // Controlla le celle vicine in tutte le direzioni
+          for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+              const newRow = i + x;
+              const newColumn = j + y;
+              if (newRow >= 0 && newRow < rows && newColumn >= 0 && newColumn < columns) {
+                if (field[newRow][newColumn].isMine) {
+                  count++;
+                }
+              }
+            }
+          }
+          field[i][j].neighboringMines = count;
+        }
+      }
+    }
+  }, 1000); // 1000 millisecondo = 1 secondo
+}
+
+
+
+
+// Chiamare la funzione per resettare il gioco quando necessario
+//const resetButton = document.querySelector('.reset');
+//resetButton.addEventListener('click', resetGame);
 </script>
 
 
@@ -2751,6 +2932,71 @@ function fall() {
   </script>
 </script>
 
+<script type="text/javascript">
+// Crea la griglia di gioco
+    const griglia = [
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0]
+    ];
+
+    let coordinateSelezionate = [];
+
+    // Funzione per creare la tabella HTML della griglia
+    function creaTabellaGriglia() {
+      const table = document.getElementById("griglia");
+
+      for (let i = 0; i < griglia.length; i++) {
+        const row = document.createElement("tr");
+        for (let j = 0; j < griglia[i].length; j++) {
+          const cell = document.createElement("td");
+          cell.dataset.x = i;
+          cell.dataset.y = j;
+          cell.addEventListener("click", function() {
+            const x = parseInt(this.dataset.x);
+            const y = parseInt(this.dataset.y);
+            coordinateSelezionate.push({ x, y });
+          });
+          row.appendChild(cell);
+        }
+        table.appendChild(row);
+      }
+    }
+
+    // Funzione per mostrare le coordinate selezionate
+    function mostraCoordinate() {
+      let coordinateString = '';
+      for (let i = 0; i < coordinateSelezionate.length; i++) {
+        const coordinate = coordinateSelezionate[i];
+        coordinateString += "(" + coordinate.x + ", " + coordinate.y + ")";
+        if (i < coordinateSelezionate.length - 1) {
+          coordinateString += ", ";
+        }
+      }
+      alert("Coordinate selezionate: " + coordinateString);
+    }
+
+    // Funzione per resettare la griglia e le coordinate selezionate
+    function reset() {
+      coordinateSelezionate = [];
+    }
+
+    // Esegui la funzione per creare la tabella della griglia
+    creaTabellaGriglia();
+
+    // Aggiungi l'evento click al pulsante "Mostra Coordinate"
+    const pulsanteMostraCoordinate = document.getElementById("mostraCoordinate");
+    pulsanteMostraCoordinate.addEventListener("click", mostraCoordinate);
+
+    // Aggiungi l'evento click al pulsante "Reset"
+    const pulsanteReset = document.getElementById("reset");
+    pulsanteReset.addEventListener("click", reset);
+	
+</script>
+
+
 
 <script type="text/javascript">
 // Ottieni i riferimenti ai pulsanti
@@ -2773,6 +3019,415 @@ function pressRight() {
 leftButton.addEventListener('click', pressLeft);
 rightButton.addEventListener('click', pressRight);
 </script>
+
+
+
+
+<script type="text/javascript">
+    // Funzione per creare il gioco del Solitario
+function createSolitaireGame() {
+  var piles = []; // Array di pile di carte
+  var selectedCard = null; // Carta selezionata per il movimento
+
+  // Crea le carte del mazzo
+  var cards = [];
+  for (var suit = 1; suit <= 4; suit++) {
+    for (var rank = 1; rank <= 13; rank++) {
+      var card = {
+        suit: suit,
+        rank: rank,
+        faceUp: false
+      };
+      cards.push(card);
+    }
+  }
+
+  // Mescola le carte
+  shuffle(cards);
+
+  // Crea le pile di gioco
+  for (var i = 0; i < 7; i++) {
+    var pile = [];
+    for (var j = 0; j <= i; j++) {
+      var card = cards.pop();
+      if (j === i) {
+        card.faceUp = true; // L'ultima carta della pila è scoperta
+      }
+      pile.push(card);
+    }
+    piles.push(pile);
+  }
+
+  // Crea la pila di carte rimanenti
+  var remainingCards = cards;
+
+  // Mostra il gioco a schermo
+  renderGame();
+
+  // Funzione per mescolare le carte
+  function shuffle(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  }
+
+  // Funzione per visualizzare il gioco a schermo
+  function renderGame() {
+    var table = document.querySelector('table');
+    table.innerHTML = ''; // Pulisce il contenuto del gioco
+
+    // Mostra le pile di gioco
+    piles.forEach(function (pile, index) {
+      var row = document.createElement('tr');
+      var pileElement = document.createElement('td');
+      pileElement.className = 'pile';
+
+      pile.forEach(function (card, cardIndex) {
+        var cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        if (card.faceUp) {
+          cardElement.textContent = getCardDisplay(card);
+        } else {
+          cardElement.className += ' face-down';
+        }
+        cardElement.addEventListener('click', function () {
+          selectCard(card, pile, cardIndex);
+        });
+        pileElement.appendChild(cardElement);
+      });
+
+      row.appendChild(pileElement);
+      table.appendChild(row);
+    });
+  }
+
+  // Funzione per ottenere la rappresentazione visuale di una carta
+  function getCardDisplay(card) {
+    var suitSymbol = '';
+    switch (card.suit) {
+      case 1:
+        suitSymbol = '♠';
+        break;
+      case 2:
+        suitSymbol = '♥';
+        break;
+      case 3:
+        suitSymbol = '♦';
+        break;
+      case 4:
+        suitSymbol = '♣';
+        break;
+    }
+    var rankDisplay = '';
+    if (card.rank >= 2 && card.rank <= 10) {
+      rankDisplay = card.rank.toString();
+    } else {
+      switch (card.rank) {
+        case 1:
+          rankDisplay = 'A';
+          break;
+        case 11:
+          rankDisplay = 'J';
+          break;
+        case 12:
+          rankDisplay = 'Q';
+          break;
+        case 13:
+          rankDisplay = 'K';
+          break;
+      }
+    }
+    return rankDisplay + suitSymbol;
+  }
+
+  // Funzione per selezionare una carta
+  function selectCard(card, pile, cardIndex) {
+    if (card.faceUp) {
+      if (selectedCard === null) {
+        selectedCard = {
+          card: card,
+          pile: pile,
+          index: cardIndex
+        };
+        toggleCardSelection(true, cardIndex);
+      } else {
+        var isValidMove = isValidCardMove(selectedCard.card, card);
+        if (isValidMove) {
+          moveCard(selectedCard, pile, cardIndex);
+        } else {
+          toggleCardSelection(false, selectedCard.index);
+        }
+        selectedCard = null;
+      }
+    }
+  }
+
+  // Funzione per controllare se un movimento di carta è valido
+  function isValidCardMove(sourceCard, targetCard) {
+    if (sourceCard === targetCard) {
+      return false;
+    }
+    if (sourceCard.rank === targetCard.rank + 1) {
+      return true;
+    }
+    return false;
+  }
+
+  // Funzione per spostare una carta
+  function moveCard(source, targetPile, targetIndex) {
+    var sourcePile = source.pile;
+    var movedCards = sourcePile.splice(source.index);
+    targetPile.splice.apply(targetPile, [targetIndex, 0].concat(movedCards));
+    renderGame();
+  }
+
+  // Funzione per attivare o disattivare la selezione visiva di una carta
+  function toggleCardSelection(selected, cardIndex) {
+    var cardElements = document.querySelectorAll('.card');
+    cardElements.forEach(function (cardElement, index) {
+      if (index === cardIndex) {
+        if (selected) {
+          cardElement.classList.add('selected');
+        } else {
+          cardElement.classList.remove('selected');
+        }
+      } else {
+        cardElement.classList.remove('selected');
+      }
+    });
+  }
+}
+
+// Chiamata alla funzione per creare il gioco all'avvio
+createSolitaireGame();
+
+</script>
+
+<!--
+
+
+<script type="text/javascript">
+/*
+// Seleziona la scacchiera
+var chessboard = document.getElementsByTagName('table')[0];
+var currentPlayer = "white"; // Giocatore corrente
+
+// Aggiungi event listener per la selezione delle celle
+for (var i = 0; i < chessboard.rows.length; i++) {
+  for (var j = 0; j < chessboard.rows[i].cells.length; j++) {
+    chessboard.rows[i].cells[j].addEventListener('click', function () {
+      // Ridimensiona tutte le celle
+      for (var x = 0; x < chessboard.rows.length; x++) {
+        for (var y = 0; y < chessboard.rows[x].cells.length; y++) {
+          chessboard.rows[x].cells[y].classList.remove('selected');
+        }
+      }
+
+      // Seleziona la cella attuale
+      this.classList.add('selected');
+
+      // Controlla se una pedina è selezionata
+      if (selectedPiece) {
+        // Ottieni le coordinate della cella di destinazione
+        var destinationCell = this.id;
+        // Ottieni le coordinate della cella di partenza
+        var originCell = selectedPiece.parentNode.id;
+
+        // Ottieni il tipo di pedina selezionata
+        var pieceType = selectedPiece.getAttribute('data-piece');
+
+        // Verifica la validità del movimento per il tipo di pedina selezionata
+        if (isValidMove(pieceType, originCell, destinationCell)) {
+          // Sposta la pedina alla cella di destinazione
+          this.innerHTML = selectedPiece.innerHTML;
+          this.classList.add('piece', 'selected');
+          selectedPiece.innerHTML = '';
+          selectedPiece.classList.remove('piece', 'selected');
+          selectedPiece = null;
+
+          // Cambia il turno del giocatore
+          currentPlayer = currentPlayer === "white" ? "black" : "white";
+        } else {
+          alert('Mossa non valida!');
+        }
+      }
+    });
+  }
+}
+
+// Aggiungi event listener per il movimento delle pedine
+var selectedPiece = null;
+var pieces = document.getElementsByClassName('piece');
+for (var k = 0; k < pieces.length; k++) {
+  pieces[k].addEventListener('click', function () {
+    // Verifica il turno del giocatore
+    if (this.classList.contains(currentPlayer)) {
+      // Deseleziona la pedina precedente
+      if (selectedPiece) {
+        selectedPiece.classList.remove('selected');
+      }
+
+      // Seleziona la pedina attuale
+      this.classList.add('selected');
+      selectedPiece = this;
+    }
+  });
+}
+
+// Funzione per verificare la validità del movimento della pedina
+function isValidMove(pieceType, originCell, destinationCell) {
+  // Implementa la logica per verificare la validità del movimento
+  // in base al tipo di pedina (es. torre, cavallo, alfiere, ecc.)
+
+  // Questa implementazione di base consente il movimento di qualsiasi
+  // pedina in qualsiasi direzione, ma non tiene conto delle regole
+  // specifiche degli scacchi.
+
+  // Aggiungi le regole degli scacchi per verificare la validità del movimento
+  // in base al tipo di pedina, alle regole di movimento degli scacchi, ecc.
+
+  return true;
+}
+*/
+</script>
+
+
+<style type="text/css">
+		#tavolo {
+			border-collapse: collapse;
+		}
+		.white {
+			background-color: #fff;
+			height: 50px;
+			width: 50px;
+			position: relative;
+		}
+		.black {
+			background-color: #444;
+			height: 50px;
+			width: 50px;
+			position: relative;
+		}
+		.selected {
+			background-color: yellow;
+		}
+		.piece {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 8%;
+			height: 8%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 48px;
+			user-select: none;
+			border-radius: 0px;
+		}
+		
+		.piece:hover {
+			border-radius: 15px;
+		}
+		
+		.piece:active {
+			border-radius: 25px;
+		}
+</style>
+
+
+<table id="tavolo">
+	<tr>
+		<td id="AA" class="white piece" data-piece="rook">&#9814;</td>
+		<td id="AB" class="black piece" data-piece="knight">&#9816;</td>
+		<td id="AC" class="white piece" data-piece="bishop">&#9815;</td>
+		<td id="AD" class="black piece" data-piece="queen">&#9813;</td>
+		<td id="AE" class="white piece" data-piece="king">&#9812;</td>
+		<td id="AF" class="black piece" data-piece="bishop">&#9815;</td>
+		<td id="AG" class="white piece" data-piece="knight">&#9816;</td>
+		<td id="AH" class="black piece" data-piece="rook">&#9814;</td>
+	</tr>
+	
+	<tr>
+		<td id="BA" class="black piece" data-piece="pawn">&#9817;</td>
+		<td id="BB" class="white piece" data-piece="pawn">&#9817;</td>
+		<td id="BC" class="black piece" data-piece="pawn">&#9817;</td>
+		<td id="BD" class="white piece" data-piece="pawn">&#9817;</td>
+		<td id="BE" class="black piece" data-piece="pawn">&#9817;</td>
+		<td id="BF" class="white piece" data-piece="pawn">&#9817;</td>
+		<td id="BG" class="black piece" data-piece="pawn">&#9817;</td>
+		<td id="BH" class="white piece" data-piece="pawn">&#9817;</td>
+	</tr>
+	
+	<tr>
+		<td id="CA" class="white"></td>
+		<td id="CB" class="black"></td>
+		<td id="CC" class="white"></td>
+		<td id="CD" class="black"></td>
+		<td id="CE" class="white"></td>
+		<td id="CF" class="black"></td>
+		<td id="CG" class="white"></td>
+		<td id="CH" class="black"></td>
+	</tr>
+	
+	<tr>
+		<td id="DA" class="black"></td>
+		<td id="DB" class="white"></td>
+		<td id="DC" class="black"></td>
+		<td id="DD" class="white"></td>
+		<td id="DE" class="black"></td>
+		<td id="DF" class="white"></td>
+		<td id="DG" class="black"></td>
+		<td id="DH" class="white"></td>
+	</tr>
+	
+	<tr>
+		<td id="EA" class="white"></td>
+		<td id="EB" class="black"></td>
+		<td id="EC" class="white"></td>
+		<td id="ED" class="black"></td>
+		<td id="EE" class="white"></td>
+		<td id="EF" class="black"></td>
+		<td id="EG" class="white"></td>
+		<td id="EH" class="black"></td>
+	</tr>
+	
+	<tr>
+		<td id="FA" class="black"></td>
+		<td id="FB" class="white"></td>
+		<td id="FC" class="black"></td>
+		<td id="FD" class="white"></td>
+		<td id="FE" class="black"></td>
+		<td id="FF" class="white"></td>
+		<td id="FG" class="black"></td>
+		<td id="FH" class="white"></td>
+	</tr>
+	
+	<tr>
+		<td id="GA" class="white piece" data-piece="pawn">&#9823;</td>
+		<td id="GB" class="black piece" data-piece="pawn">&#9823;</td>
+		<td id="GC" class="white piece" data-piece="pawn">&#9823;</td>
+		<td id="GD" class="black piece" data-piece="pawn">&#9823;</td>
+		<td id="GE" class="white piece" data-piece="pawn">&#9823;</td>
+		<td id="GF" class="black piece" data-piece="pawn">&#9823;</td>
+		<td id="GG" class="white piece" data-piece="pawn">&#9823;</td>
+		<td id="GH" class="black piece" data-piece="pawn">&#9823;</td>
+	</tr>
+	
+	<tr>
+		<td id="HA" class="black piece" data-piece="rook">&#9820;</td>
+		<td id="HB" class="white piece" data-piece="knight">&#9822;</td>
+		<td id="HC" class="black piece" data-piece="bishop">&#9821;</td>
+		<td id="HD" class="white piece" data-piece="queen">&#9819;</td>
+		<td id="HE" class="black piece" data-piece="king">&#9818;</td>
+		<td id="HF" class="white piece" data-piece="bishop">&#9821;</td>
+		<td id="HG" class="black piece" data-piece="knight">&#9822;</td>
+		<td id="HH" class="white piece" data-piece="rook">&#9820;</td>
+	</tr>
+</table>
+-->
 
 </BODY>
 </CENTER>
