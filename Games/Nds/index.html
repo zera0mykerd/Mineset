@@ -261,8 +261,8 @@ document.write( '<BODY background=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 // Crea il tastierino virtuale
 var virtualKeyboard = document.createElement('div');
 virtualKeyboard.id = 'virtual-keyboard';
-virtualKeyboard.style.width = '220px';
-virtualKeyboard.style.height = '70px';
+virtualKeyboard.style.width = '30%';
+virtualKeyboard.style.height = '10%';
 virtualKeyboard.style.border = '3px solid black';
 virtualKeyboard.style.backgroundColor = 'Coral';
 virtualKeyboard.style.borderColor = 'Chocolate';
@@ -275,22 +275,23 @@ virtualKeyboard.style.position = 'fixed';
 virtualKeyboard.style.top = '5%';
 virtualKeyboard.style.left = '50%';
 virtualKeyboard.style.transform = 'translateX(-50%)';
+virtualKeyboard.style.opacity = '0.7';
 
 // Crea il tasto di direzione sinistra
 var leftButton = document.createElement('button');
 leftButton.innerText = '←';
 leftButton.classList.add('keyboard_button');
-leftButton.style.width = '100px';
-leftButton.style.height = '50px';
+leftButton.style.width = '50%';
+leftButton.style.height = '80%';
 leftButton.style.border = '3px double DarkSalmon';
 leftButton.style.backgroundColor = 'Sienna';
 leftButton.style.borderColor = 'DarkSalmon';
-leftButton.style.borderRadius = '12px';
-leftButton.style.fontSize = '36px';
+leftButton.style.borderRadius = '24px';
+leftButton.style.fontSize = '2em';
 leftButton.style.fontColor = 'Navy';
 leftButton.style.zIndex = '2147483647';
 leftButton.style.position = 'relative';
-
+leftButton.style.opacity = '0.7';
 
 var leftIntervalId; // Identificatore dell'intervallo per il loop sinistro
 leftButton.addEventListener('touchstart', function() {
@@ -339,17 +340,17 @@ leftButton.addEventListener('mouseup', function() {
 var rightButton = document.createElement('button');
 rightButton.innerText = '→';
 rightButton.classList.add('keyboard_button');
-rightButton.style.width = '100px';
-rightButton.style.height = '50px';
+rightButton.style.width = '50%';
+rightButton.style.height = '80%';
 rightButton.style.border = '3px double DarkSalmon';
 rightButton.style.backgroundColor = 'Sienna';
 rightButton.style.borderColor = 'DarkSalmon';
-rightButton.style.borderRadius = '12px';
-rightButton.style.fontSize = '36px';
+rightButton.style.borderRadius = '24px';
+rightButton.style.fontSize = '2em';
 rightButton.style.fontColor = 'Navy';
 rightButton.style.zIndex = '2147483647';
 rightButton.style.position = 'relative';
-
+rightButton.style.opacity = '0.7';
 
 var rightIntervalId; // Identificatore dell'intervallo per il loop destro
 rightButton.addEventListener('touchstart', function() {
@@ -398,23 +399,26 @@ rightButton.addEventListener('mouseup', function() {
 var upButton = document.createElement('button');
 upButton.innerText = '↑';
 upButton.classList.add('keyboard_button');
-upButton.style.width = '100px';
-upButton.style.height = '50px';
+upButton.style.width = '50%';
+upButton.style.height = '80%';
 upButton.style.border = '3px double DarkSalmon';
 upButton.style.backgroundColor = 'Sienna';
 upButton.style.borderColor = 'DarkSalmon';
 upButton.style.display = 'flex';
 upButton.style.justifyContent = 'center';
 upButton.style.alignItems = 'center';
-upButton.style.borderRadius = '12px';
-upButton.style.fontSize = '36px';
+upButton.style.borderRadius = '24px';
+upButton.style.fontSize = '200%';
 upButton.style.fontColor = 'Navy';
 upButton.style.zIndex = '2147483647';
 upButton.style.position = 'relative';
+upButton.style.opacity = '0.7';
 upButton.addEventListener('mousedown', function() {
   // Salta
-  if (yPosition >= window.innerHeight - character.offsetHeight) {
+  if ((yPosition >= window.innerHeight - character.offsetHeight) || (jumpCount <= maxJumpCount)) {
     yVelocity = -jumpStrength;
+	jumpCount++;
+	jumpCount++;
     // Riproduci il suono di salto
     jumpSound.play();
   }
@@ -423,31 +427,37 @@ upButton.addEventListener('mousedown', function() {
 // Aggiungi l'evento mouseenter per lo stile :hover
 leftButton.addEventListener('mouseenter', function() {
   leftButton.style.backgroundColor = 'Maroon';
+  leftButton.style.opacity = '0.9';
 });
 
 // Aggiungi l'evento mouseleave per ripristinare lo stile predefinito
 leftButton.addEventListener('mouseleave', function() {
   leftButton.style.backgroundColor = 'Sienna';
+  leftButton.style.opacity = '0.7';
 });
 
 // Aggiungi l'evento mouseenter per lo stile :hover
 rightButton.addEventListener('mouseenter', function() {
   rightButton.style.backgroundColor = 'Maroon';
+  rightButton.style.opacity = '0.9';
 });
 
 // Aggiungi l'evento mouseleave per ripristinare lo stile predefinito
 rightButton.addEventListener('mouseleave', function() {
   rightButton.style.backgroundColor = 'Sienna';
+  rightButton.style.opacity = '0.7';
 });
 
 // Aggiungi l'evento mouseenter per lo stile :hover
 upButton.addEventListener('mouseenter', function() {
   upButton.style.backgroundColor = 'Maroon';
+  upButton.style.opacity = '0.9';
 });
 
 // Aggiungi l'evento mouseleave per ripristinare lo stile predefinito
 upButton.addEventListener('mouseleave', function() {
   upButton.style.backgroundColor = 'Sienna';
+  upButton.style.opacity = '0.7';
 });
 
 
@@ -510,7 +520,6 @@ upButton.addEventListener('touchend', function() {
   enableScroll();
 });
 
-// ...
 
 // Funzione per disabilitare lo scroll
 function disableScroll() {
@@ -537,6 +546,7 @@ virtualKeyboard.appendChild(rightButton);
 // Aggiungi il tastierino alla pagina
 document.body.appendChild(virtualKeyboard);
 </script>
+
 
 <style type="text/css">
 <!-- 
@@ -1448,24 +1458,17 @@ character.id = 'character';
 
 // Imposta l'immagine come sfondo
 character.style.backgroundImage = "url(data:image/gif;base64,R0lGODlhMgAyAPUYAAAAADcAADgAAKYPAa0aCuPVuOTUuhcJABgKAG0iG3ctJHovJqUUA4ctCYM7L4I5Mf/Cne/SnO/VnPDSnfDUndXKrvzfpuHTtxkKAGwiG3ctJXouJnwvJ3owJYYtCYM5Mv/Cnu/TnPHTndfJrvbYoPvepvzfp+LTuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJGgAYACwAAAAAMgAyAAAF/yAmjmRJPsqiruxjvnD8EkNt37Ws7ySN/7ygzPe7CY+jotKI5C2fTedTGY1Nr7lqDzvVbrlLL3gcHYPLZuzRBmi70wP3O6tjywHwO54+rOnzdzZ9RRaFc1NuhRZhJkuKh0+JhYwljoZtWJKLVI1Kj20BoQKipKOalF8/n3qscoqoSZ6XrbSvnBgoKpYWbhUXFykJwsK/FadKK0S7xzirtnA3zpOqs8/QNYoFBtrTzdncm9fY2dnK4+Td4ujWNuvp1xDx8vLmBPP34vn6+2kOyVcNAgocSHDglBWpZLlbeGXGlIUQG3Z6ApFhFyEVMxbyMkJjRo4iPFaMokckRJJ3TEIuROlK5bojtEqK1MMjZsqZd2ra1KSR5o6ddxBMWIigqE8dQG+6o6UzaZsIRFvBTAqVnNGjU4EOtSq1idOq2ZjqCAEAIfkEBRoABwAsAAAAADIAMgAABv/Ag3BILBI/myRHyfwYn9DokzCoWq9VqXZLpGK/3LDU+72Kz8Oy2ozmrt9t91sdj87v2XoXP9fv+Wt+gINxg4CFhnhnVgCNjokDjo95WoySAJCXmJRjVZqZl1adZSWlk3OOpSSBRmuqp2+pJiWsRa6mjXiytHStaq+NAcICxMXGu7V/X8CazZKqyWm/uM7V0L0HSBobtyWpJyfbGePj4CPIakvcd8whpWRW7e+QWPK89dTX9PGq5vP4pQqA+7dvQL+D8Koc7FeQ30ITCQk8JLgPhMWLFyNi3Niwo8ePfLStm+OhpMmTKE+STKJs2sSXd6bMeUkzpq83NGH2EZOzZylXP0NmCfU5VChQIUWJLjx6QClNTXGSOmXmKOrUh1DFaHJaLauWrUq7XuIClqhYSWSbYXA3EYPbs1W3WJNKDW6jtM3YYrUbN4zatQv5xplbVHAbwv0MEwkCADs=)"; // Inserisci il tuo codice base64 qui
-character.style.width = "50px";
-character.style.height = "50px";
+character.style.width = "7%";
+character.style.height = "7%";
 character.style.position = "fixed";
 character.style.pointerEvents = "none";
+character.style.backgroundRepeat = "no-repeat";
+character.style.backgroundSize = "contain";
 
 // Crea l'oggetto Audio
 var jumpSound = new Audio('data:audio/mpeg;base64,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'); // Sostituisci con il percorso del tuo file audio
 
 document.body.appendChild(character);
-
-// Posizione iniziale
-var xPosition = 0;
-var yPosition = window.innerHeight - character.offsetHeight;
-var xVelocity = 0;
-var yVelocity = 0;
-var gravity = 0.3;
-var jumpStrength = 10;
-var movementSpeed = 10;
 
 // Imposta la posizione iniziale
 character.style.left = xPosition + 'px';
@@ -1473,6 +1476,25 @@ character.style.top = yPosition + 'px';
 
 // Controlli del personaggio
 var keysPressed = {};
+// Controlli del personaggio
+var isMovingLeft = false;
+var isMovingRight = false;
+
+// Posizione iniziale
+var xPosition = 0;
+var yPosition = window.innerHeight - character.offsetHeight;
+var xVelocity = 0;
+var yVelocity = 0;
+var gravity = 0.3;
+var jumpStrength = 12;
+var movementSpeed = 12;
+var jumpCount = 0;
+var maxJumpCount = 2;
+
+// Imposta la posizione iniziale
+character.style.left = xPosition + 'px';
+character.style.top = yPosition + 'px';
+
 // Controlli del personaggio
 var isMovingLeft = false;
 var isMovingRight = false;
@@ -1495,11 +1517,15 @@ document.addEventListener('keydown', function(event) {
     }
   }
 
-  if ((event.code === 'Space' || event.code === 'ArrowUp') && yPosition >= window.innerHeight - character.offsetHeight) {
+  if ((event.code === 'Space' || event.code === 'ArrowUp') && (yPosition >= window.innerHeight - character.offsetHeight || jumpCount <= maxJumpCount)) {
     // Salta
+   /* if (yPosition >= window.innerHeight - character.offsetHeight) {
+      // Riproduci il suono di salto solo se siamo a terra
+      jumpSound.play();
+    }*/
+	jumpSound.play();
     yVelocity = -jumpStrength;
-// Riproduci il suono di salto
-    jumpSound.play();
+    jumpCount++;
   }
 });
 
@@ -1523,7 +1549,6 @@ document.addEventListener('keyup', function(event) {
   }
 });
 
-
 // Funzione per verificare se una determinata chiave è premuta
 function isKeyPressed(keyCode) {
   return keysPressed[keyCode] === true;
@@ -1541,11 +1566,16 @@ document.addEventListener('keydown', function(event) {
     xVelocity = movementSpeed;
   }
 
-  if (isKeyPressed('Space') || isKeyPressed('ArrowUp')) {
+  if ((isKeyPressed('Space') || isKeyPressed('ArrowUp')) && (yPosition >= window.innerHeight - character.offsetHeight || jumpCount <= maxJumpCount)) {
     // Salta
-    if (yPosition >= window.innerHeight - character.offsetHeight) {
-      yVelocity = -jumpStrength;
+   /* if (yPosition >= window.innerHeight - character.offsetHeight) {
+      // Riproduci il suono di salto solo se siamo a terra
+      jumpSound.play();
     }
+	*/
+	jumpSound.play();
+    yVelocity = -jumpStrength;
+    jumpCount++;
   }
 });
 
@@ -1568,6 +1598,7 @@ function updatePosition() {
   if (yPosition > window.innerHeight - character.offsetHeight) {
     yPosition = window.innerHeight - character.offsetHeight;
     yVelocity = 0;
+    jumpCount = 0; // Reimposta il conteggio dei salti quando si tocca il suolo
   }
 
   // Aggiorna la posizione orizzontale
@@ -1592,7 +1623,6 @@ function updatePosition() {
 
 // Avvia l'aggiornamento della posizione
 updatePosition();
-
 
 </script>
 
