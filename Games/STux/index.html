@@ -276,6 +276,88 @@ document.write( '<BODY background=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 .snowed {
 	pointer-events: none;
 }
+
+#acquario {
+      width: 100%;
+      height: 128px;
+     /* border: 1px solid #000; */
+      position: relative;
+      overflow: hidden;
+	  background-color: rgba(127, 255, 0, 0.3);
+    }
+
+    .pesce {
+      width: 80px;
+      height: 50px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation-name: nuota;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    .pesce img {
+      max-width: 100%;
+      height: auto;
+      transform: scaleX(1);
+    }
+
+    .pesce.invertito img {
+      transform: scaleX(-1);
+      animation-name: nuota-invertito;
+    }
+
+    @keyframes nuota {
+      0% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(350px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes nuota-invertito {
+      0% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(-350px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+	
+.bolla {
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      background-color: rgba(127, 255, 212, 0.4);
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      animation-name: animazione-bolla;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes animazione-bolla {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-300px);
+      }
+    }
 </style>
 
 <script class="snowed" type="text/javascript">
@@ -1981,6 +2063,12 @@ window.location.href = 'https://mega.nz/file/1Yt2yYQT#_d6yAdrb16Y_ZJCW2QwX1yvfFE
 </script>
 
 
+<div id="ruler">
+    <div class="line"></div>
+  </div>
+  
+  <br>
+
 <p></p>
 <script type="text/javascript">
 document.write( '<a onclick=\"location.href = \'https://mega.nz/#!kdN3GYbR!qA06lP5ovXxszpsKY3B9zpBfc_i4eV5pc1gkoSDFL8k\';\" title=\"STux Download\" href=\"https://mega.nz/#!kdN3GYbR!qA06lP5ovXxszpsKY3B9zpBfc_i4eV5pc1gkoSDFL8k\">' );
@@ -2328,9 +2416,8 @@ document.write( '</a>' );
 <p><br><h1></h1><br></p>
 
 <button id="PAFFO" onclick="eraseInstantly()">&#9999;&#65039; | Cancella tutto | &#9999;&#65039;</button>
-
 <p><br><h1></h1><br></p>
-
+<br>
 <hr align=ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂrightÃƒÂ¢Ã¢â€šÂ¬Ã‚Â size="5" width=ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â300ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â³ color="#DEB887" noshade>
 <svg version="1.1" id="paint_brush" width="10%" viewBox="0 0 318.75 505.208" enable-background="new 0 0 318.75 505.208" xml:space="preserve" sodipodi:docname="paint brush.svg" inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><defs id="defs56"><filter style="color-interpolation-filters:sRGB;" inkscape:label="Drop Shadow" id="filter4109"><feFlood flood-opacity="1" flood-color="rgb(201,141,111)" result="flood" id="feFlood4099" /><feComposite in="flood" in2="SourceGraphic" operator="in" result="composite1" id="feComposite4101" /><feGaussianBlur in="composite1" stdDeviation="3" result="blur" id="feGaussianBlur4103" /><feOffset dx="6" dy="6" result="offset" id="feOffset4105" /><feComposite in="SourceGraphic" in2="offset" operator="over" result="composite2" id="feComposite4107" /></filter></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1052" id="namedview54" showgrid="false" inkscape:zoom="1.6804959" inkscape:cx="159.375" inkscape:cy="252.604" inkscape:window-x="-9" inkscape:window-y="-9" inkscape:window-maximized="1" inkscape:current-layer="paint_brush" /> <g id="brush_parts" style="filter:url(#filter4109)"> <linearGradient id="bristles_1_" gradientUnits="userSpaceOnUse" x1="45.847698" y1="361.83249" x2="232.3062" y2="421.13031">  <stop offset="0" style="stop-color:#FFF200" id="stop35" />  <stop offset="0.1935" style="stop-color:#C1005A" id="stop37" />  <stop offset="0.3871" style="stop-color:#23772D" id="stop39" />  <stop offset="0.5753" style="stop-color:#F47521" id="stop41" />  <stop offset="0.8011" style="stop-color:#3A56A6" id="stop43" />  <stop offset="1" style="stop-color:#EF80B3" id="stop45" /> </linearGradient> <path id="bristles" d="m 207.596,342.097 c 0,0 -20.722,53.627 -18.944,54.259 1.776,0.632 23.059,-52.955 23.059,-52.955 l 5.489,1.737 c 0,0 -0.621,4.33 -1.782,7.499 -1.161,3.168 -6.762,18.466 -6.762,18.466 0,0 -6.77,13.798 -4.957,14.551 1.813,0.754 16.334,-36.731 17.168,-39.354 1.565,0.381 4.892,1.549 4.892,1.549 l -5.14,15.119 c 0,0 -15.918,45.496 -14.555,46.118 1.362,0.623 24.865,-59.601 24.865,-59.601 l 6.092,1.929 c 0,0 -32.518,79.749 -29.03,80.896 3.488,1.147 33.036,-79.628 33.036,-79.628 l 4.616,1.462 -8.388,23.483 c 0,0 -3.95,9.973 -2.707,10.559 1.244,0.585 5.071,-9.997 5.071,-9.997 l 8.194,-23.357 3.166,1.002 c 0,0 -2.403,10.563 -4.043,15.152 -1.575,4.407 -44.464,102.598 -44.464,102.598 0,0 16.434,-45.642 14.971,-46.204 -1.463,-0.562 -24.913,46.204 -24.913,46.204 0,0 12.055,-40.476 9.76,-41.369 -2.294,-0.895 -17.707,35.127 -17.707,35.127 0,0 19.853,-63.036 17.577,-63.825 -2.276,-0.788 -29.405,61.123 -29.405,61.123 0,0 22.537,-64.352 20.442,-65.102 -2.094,-0.749 -28.06,60.194 -28.06,60.194 0,0 11.544,-36.967 9.019,-38.148 -2.526,-1.183 -20.504,40.081 -20.504,40.081 0,0 19.216,-69.969 16.964,-70.868 -2.251,-0.9 -27.916,66.076 -27.916,66.076 0,0 28.805,-85.788 26.447,-86.626 -2.358,-0.838 -35.903,80.21 -35.903,80.21 0,0 26.302,-73.444 23.958,-74.263 -2.345,-0.819 -33.075,75.613 -33.075,75.613 0,0 12.397,-42.11 10.363,-42.949 -2.033,-0.839 -22.404,45.287 -22.404,45.287 0,0 14.843,-47.453 12.542,-48.31 -2.301,-0.857 -19.115,38.023 -19.115,38.023 l 11.824,-45.868 c 0,0 15.89,-43.278 14.154,-43.922 -1.736,-0.644 -38.094,85.919 -38.094,85.919 0,0 27.384,-83.025 24.386,-84.175 -2.998,-1.149 -37.44,83.408 -37.44,83.408 0,0 16.669,-49.611 13.736,-50.594 -2.933,-0.982 -25.77,50.237 -25.77,50.237 0,0 15.467,-45.289 13.129,-46.06 -2.338,-0.771 -19.447,40.091 -19.447,40.091 0,0 22.508,-63.315 20.203,-64.245 -2.305,-0.931 -28.308,59.18 -28.308,59.18 0,0 25.216,-80.275 22.683,-81.111 -2.534,-0.837 -38.177,82.687 -38.177,82.687 l 29.793,-131.184 5.761,1.558 c 0,0 -11.206,33.124 -8.916,34.171 2.29,1.047 11.208,-33.243 11.208,-33.243 l 6.002,1.698 c 0,0 -33.212,90.531 -31.177,91.431 2.035,0.9 36.263,-89.82 36.263,-89.82 l 8.36,2.646 c 0,0 -23.696,67.502 -21.941,68.22 1.755,0.718 25.909,-66.963 25.909,-66.963 l 6.673,2.112 c 0,0 -11.065,29.279 -9.014,30.032 2.051,0.753 11.761,-29.162 11.761,-29.162 l 5.494,1.739 c 0,0 -23.629,63.896 -21.837,65.06 1.792,1.164 24.996,-64.059 24.996,-64.059 l 6.512,2.062 c 0,0 -19.463,51.697 -17.723,52.701 1.74,1.004 22.109,-51.313 22.109,-51.313 l 6.003,1.9 c 0,0 -16.996,50.377 -15.492,51.185 1.503,0.807 19.871,-49.797 19.871,-49.797 l 8.401,2.659 c 0,0 -23.106,64.933 -21.336,65.557 1.77,0.623 25.968,-64.09 25.968,-64.09 l 6.139,1.944 c 0,0 -28.694,73.311 -26.026,74.063 2.668,0.752 29.156,-73.072 29.156,-73.072 l 7.093,2.246 c 0,0 -18.137,43.558 -16.122,44.285 2.015,0.727 19.479,-43.222 19.479,-43.222 l 3.564,1.128 c 0,0 -4.273,14.08 -2.352,14.887 1.923,0.807 6.968,-13.425 6.968,-13.425 l 5.295,1.677 c 0,0 -16.386,45.921 -14.095,46.741 2.292,0.821 18.402,-45.378 18.402,-45.378 l 6.787,2.149 c 0,0 -1.927,3.333 -3.08,7.007 -1.152,3.675 -4.415,14.074 -4.415,14.074 0,0 -19.227,53.355 -17.202,54.034 2.025,0.678 29.787,-73.504 29.787,-73.504 m 45.26,28.254 0.613,0.175 z" inkscape:connector-curvature="0" style="fill:url(#bristles_1_)" /> <path id="clamp" d="m 82.24,262.062 180.06,56.652 c -3.674,13.346 -7.795,26.435 -11.319,37.119 L 69.029,298.222 c 3.485,-10.103 8.05,-23.084 13.211,-36.16 z" inkscape:connector-curvature="0" /> <path id="border" d="m 96.976,228.954 173.239,55.356 c -1.812,10.685 -4.688,22.652 -7.916,34.404 L 82.24,262.062 c 4.552,-11.604 9.59,-23.274 14.736,-33.108 z" inkscape:connector-curvature="0" style="fill:#828487" /> <path id="handle" d="m 270.35,252.566 c 2.742,6.389 2.188,18.02 -0.135,31.744 L 96.976,228.954 c 6.971,-13.305 14.156,-23.234 20.735,-25.017 23.572,-6.389 52.964,18.101 66.945,-6.687 7.97,-14.156 13.373,-45.832 19.762,-75.198 7.119,-32.716 14.791,-65.256 27.867,-81.776 20.802,-26.272 33.986,-20.181 34.594,8.807 0.636,29.542 -15.169,64.581 -25.691,91.435 -8.78,22.383 -23.518,49.236 -21.491,66.796 -2.028,27.017 42.549,26.341 50.653,45.252 z" inkscape:connector-curvature="0" style="fill:#825d21" /> </g> </svg>
 <canvas id="canvas"></canvas>
@@ -2361,6 +2448,9 @@ document.write( '</a>' );
     <div class="wave"></div>
     <div class="wave"></div>
   </div>
+ 
+<div id="acquario"></div>
+ 
 </a>
 
 <wbr>
@@ -2927,6 +3017,124 @@ canvas.addEventListener("mousedown", function(event) {
 
 */
 </script>
+
+  <script type="text/javascript">
+    function generaPesci(numeroPesci) {
+      var acquario = document.getElementById('acquario');
+
+      for (var i = 0; i < numeroPesci; i++) {
+        var pesce = document.createElement('div');
+        pesce.className = 'pesce';
+        var img = document.createElement('img');
+        img.src = 'data:image/gif;base64,R0lGODlhLwAkAPZUAHpIB6drDgsKCsqHF/iwI9aGF7VyEXNQBv6sJfeiHC8wLPOiIv++Wf/OdUhGRHNzc/+xPE4yCjImE9SSGf/GbFk8Bv+4SZF5Ldq6ND8mECQeFNahH718F+qaHOKQF9+QHMB8Eu2bGIdZCWlHBN+dHJRjCqdzE5xoEpBgEaBfDOiWIINWEdiTFat3D09OK2JcUJeReFxdXX98d8l3GK+USs6/Vripia6abdnWhnlrVUYvErp7G/+9ZcmNKOKdFxkXFQAAAGk3BEUxG2BRHJNzHv+0MjgvFnBjJXhdHa6JKSEhH5BtEYNiEdnTwv/Tf7N/E5dpGP/coD82EqdmE//ViP+vSe2nGP/HYoaHhv+oMVtJBf/pqf+6RP/hi//BUP+2V5xbEv+pLv/PbcmUGJ+fnP/1lQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/ilPcHRpbWl6ZWQgd2l0aCBodHRwczovL2V6Z2lmLmNvbS9vcHRpbWl6ZQAh+QQJEQBUACwAAAAALwAkAAAH/4BUgoOEhYaHiImKi4yNjoYOkS85j5WLLzsTLB87lJafhCcgmiQhJDKgqVRPA5umJkk8qpU3HKQdAwAzpgQUs4xLmQUFJ0DCEBYIBL+CME2HKyW7GhW7yMnLzDk2kD+jLcYDvQ3Y2bMyN4Uv3qMR4RYNURTlvzkthDcRGbYD1AYhRcZh4/DrCIoGg1AIEJEpBZAVPpQd0IBkArIWL2a9ACBrFYCHIAwUE4Vgx4VtOVhAAKGkIAYqGzWEAyHiHYoaQ2DgQGFBoYNZQ0hcOLACyMwKAlolIEIDiBEcKWVW8ARqY4QRB4yKMjBR6ZJ8NHAIiaHg3wRVVrFq5WDgqlIQOd8U3LigIAYMCAtYqBoyVa2xADt0QIwYooSEHyOgKLiQ90Q6UEOYUPEr0oA/VypcgdMQYEWEvRdgftTRwuRCYZg/KHT6JIEPUDASC8qaGPBpfq1aFTMaIQCNqgcGPVASTeTlhsh1CHD6IFUOJIRi1DahQ0eP4oCzZwXS3DlVQfZgjVhYgqiI8+g1/FQl4zuVWpx6CKCWoXqF+y5cMDukCQGFBnEdFkl7+yHSQ2YQOAHeYRkVmIgrFNQgiAMSCOHgg7xIOMhYFxqYAF6FdNehIR0oM6IjH57oSEcqtujifoEAACH5BAkRAEEALAUAAgAgACAAAAf/gEGCg4SDDhIOL4WLjI1BMScDkjsyjpaMBpIsKiwwl5+CJiAFmwktNDyglpmknAAzIR9VqYsbVJcBmilAO6MQFr+Lo7gisBIVksDACcIFFI4PApktvAMEVw3KC4Ut1lGMNg7FBTrSHkXYV8skhN3OjEwa0xojBgu/X9m/O+0c1g3cMtSbsUuEDwQhKtA7iOCEolCsaEEE8srAiWqmbriwkcMKhBRK+lkzFCACRUkiMF6wYcSGjR4EKgBxMAiKuy9BjgAoIaDaDJnJaOQAcgEHjBsC6IkEIaLCARRAThoYgSzWBRotazh44KJVTYslqO6MiqKXjgPJWuRwUeOIghg2ySAsKCDoxjQkOQSuIJtLQlmGADT8aKpgjFUbQXr58yRur08B485xQikA2YEKEP0NyrFCgt8dUHxOKLVJJpAMmu2OukEIyTGwRHON0gUg6skbNGYvamwR8jTFin/0VBIj8eLd9U6UtKw8gHPnpmkap9GIc4uSg1E8FcG9+4/iEB3l/jA6KVUdEdKnf/GwLvVGybCROeT5AZb2qhJLBvjIs/T8hIyWAA81DGIEIgAGyIkFBW72X4L6EbDBIg9AOAhDFlpyT4aWPMNhIAAh+QQJEQBHACwBAAIAJAAfAAAH/4BHgoOEhYIOiC+Gi4yNRzEHOzMDOzmOl40mIJQsExeYoIQXkgWdLSY8oaCnnAMrmx9VqYsUUaFQsCkCpBAWvYYTXA1boDmvBRkVAz6+zYY2C15OxJcKUzMBQAbLDBTNC8BFV11dji8jmzoa3N3dEAkkhSQIwuSMJ9qbGpEL9ATe757ISyBu2qIWIzJwwJYPnjooVnyJsDToRgd646gUOtFCgDID+DQtgHLDBQ4iEhUMxFhOEIwIO0YAQQdChDYVIWjQMGnRigQgDgjR8EFQmpNHAEQEyDBzW4VdITrUcAHkRo0aFwRIGFGopzgSLBImFdAUIbqoNC4MqbHzwQGcE+wIEYhYpIinIBXGltVxbOSLHFMVxMBBj4XcogRM5Dh3AIUGbQEMaOBINOyPyRIUWMF5YhDduvEEuRURAXI2FLAqT/hw+ZWOCp7r1qVBiPGPyCXytVo9gOzMzRiOYPCHIHTtCDA5mt7EnENpIE0FfV5A29C5FAFWCFDKSpJT3yqFzy3caEiJ8z8iccfNUQf0GLGLO5LBcenWFY2V6n8KP/6lG6lpldBryCEXFCE1ELTBJT14EE1wL2QmwV+KMLLBgo4sdBEFgwiRGRaqNLIaQbVNGKKFDs5ViBQPnLjIiBgSIoOLL/ZDYyjg3HhEIAAh+QQJEQBGACwAAAIAJQAfAAAH/4BGgoOEhYMOiC+Gi4yNgjEjBiADBjmOl44mHJQsExeYoIUXkgOdLSc8mFuhRkmkHwMrkyxVqYtdZaugo5wCmwsQFsGGGw24upc5sgUZQaXC0MRcVFHIjgpgMwFAkggMFNAL0seXLhWTOhLPFuDCCSSFPl5O1VSNJr6TGgAGwMDtCZ7Em0Zvi71CMHYA0LDpBDcS7zJIOEFA2ApLhKzMoxalUIwTOwREaPhwAZQbOWqYEDZCwcCNBgfBGAkASCQQIkqqHIIDRgMSP4A4eGksCgUjylC0qGBzxwympXzU0ADEhg0cOUSOQEgC5oRYOmRJaLo0UggfNI4cwXHhxQMmHfHOEnLSDhylERH4BT0gqdkkky8u0NCg5MHPBSwyXll8xQqRHOb4ZiDL8O8EphN/uPiigtLcuj0OVRDBVOm2EpZNDQAiwPSUQTzALbbi8cCIfCi4vfr6lXVTuUa+zR5j6EWFsCdK6G44a8dY1mEFxR7OCFLyFctJkaopQCjs2bQbDTHd+omI5AHSJ59cWBCGcBscyUA9JcJEALbPr9jPNMZcL0XA44gNzWklQTr2ReDCUIVwwUV4jvTwATAYIHWgBIg8wAgGVhCAyQ0TeiOaBBqy0shXwBDyAoYmnhiiDYUI4V+Li6BYA42sQHQjjqFAiGMgACH5BAkRAEMALAEAAgAkAB8AAAf/gEOCg4SFgg6IL4aLjI1DDwc7IAM7OY6XjSaTBSwTlpiggxeSnCEtJjyhoJqUHgMrm1Wpi1dRW6ubKQKkEBa9hhsWYreYOQCTGRUDKsK+BItWXk7EjgopMwFABssMFM4LwEW11ItCI8gS3N3dEAkkhSwIXBRdVIwn2ugGC/IE3u1P4CUQN23RkxEZOGDL506HhBP+Eqz4JOiGj371Cp1oIUCZASgMS9x4gYOILwAKBMqjNwiGix0jgJzjIEKbihA0LrjAAYOHDw1AUrb8wG+ePWMiAuiQuS3CrhAqakgBYqNGSQESRhSy2I8EC4THfjBtMeIcVBrGcKCFdHMCISsd5LoqrQCghICxGZLGhfIih1QFMbwtYPF2YBEESWS80HEABVAUAQxo2HhxQoUfDzU4IHDzxCAMnPsNQuq0xEcBkDtVnsDiblLGn7v2IATpcmQU+Vqx7nRXJlwMggwj8GEoR4QIt3PnQgaked3gXW0sclBh44p8p0g17S2UROjhjUaYxhcp6e3bGZrHiA2+kbHIxyE3fr1ixeX17C/d2MQBK0KHxx2niEqX9ODBAlcA94AEDDrwwIDQvOOIgXFRMIgDDMqgSiO7fUHIYg5syAiFnBUiBIQiFjZYcSlGWEOLoYAD4xCBAAAh+QQJEQBFACwFAAIAIAAfAAAH/4BFgoOEgw4Kh4WKi4xFMSIzAwU7OY2Wiy2SLD4sMJefgiYgmgstNDyglpmTHgMAox9VqIs4lyeaKQI7IAsQFhBWij0sUZZMK6MSFZK/vwmKmbOMSpkBQJkEVxTNC4VJo1TTyAU6GgUqvk4MziSEq8GKTD8Gya+9vQ3OT+70LBTeOoKMyoXCRxYVESQssfKrxAt+ktyVAPLKwERRCUrcUFKDSbYSSiD6+OcoQAWKkVZcQ3dhow0bGwhEAOJg0JIAu74UQXIAjACUIGZqonEECAwcN2gI0DACIogUFUagAAI0yIihMKTYqOHggYtNEwZ9s3ggqgiqKMiOK5VjSEdENcwQLCgglh4Kr1LR4tRwy+CHAz/4VlAQkwUUQTfsXhA0ZIWGaxYFpAXLaUKHmVethtq1T5AMABkURq5mmbIOqhGGbeZAg1AOZXYhc4ClaQRV2YmfKlLQs8XZiv04T/ypJEaRaq3jlVjO9OkJnNBPzKS5mlGOFL4HrxDRk7t328Y3J1eU+IPlpSOUJUzo4sVDsUkaDUtwpdYhCRJyyHifStB8X57hJ0R/wnRAnw2DCJEfgYQURkAthgzI4CCbEFCDIjJMSGEvGlqyAEkaBgIAIfkECREATgAsCQACABwAIAAAB/+AToKDgi8Khi+EiouMTi8tAyySOY2VhDc7BZIdJBeWn5ATH5wmSTyfjDQGkR6cADMhH1UUjTiLF6uaKUCZCxAWCFaMNowrKLAaFZEWDMAJizI0izE/mS28AwQUDcAQwoonTZcKJyAFOgLL21fOGIoAp4MVGdY/Bwa+2tzeO+/ugkQEiLAGRISPYPOYkOAXg9CIDQABFDRXAluWABeO2Mhx0IAChxBjlJAwEcQKi0xquLiBw4QFiQ4GvejRY8RJbCAipIuVsSAOJBt+2JNRaMWIChJLBlHG84YEloccmJtQKOEIICUzvIplIIcCGxcO3eBX1QFSrAYC7JBw7GCHFRqw7DEht+DDCWIvADgZknSVxxW9OG2qSA9ABEF8HUnUAemEwFybRiXV0KPuXk97J5YryYoVCqxAlCW5PEiJsbT2djS2ppokECVE98KQabNchgg1y6ndfRVIQ8SKcvAWWOKAMRHIjWr4XUgRplE9BCQzoiPCPOsxnSuqjOAKDhnUJQh5ICMRKifcITQoJN78eUGiutdgLwHLe/icLMyXmf3+KPX3VZJfgALSQmAjBh4oSCAAIfkEBREARAAsCwACABoAIAAAB/+ARIKDDoUvOYOJiouEICwkHxwyjJSJJgOPKgskk5WUNzsTHz6blzyei0mOoyEDBzObVaeoRBerLCdAoQsQFgiziTZNiTIAJ7AaFbC9vgSLwokOGjMDBroDBA0NzQuKN8OCOQIBjhHXFtoU3MQYgjdGEasSyiFc6E7NHOyCSEAloSn8kUoAQAOSHr0MxBiUo92SEf4c5YLCKscFGDmwDVDAEIdFAddAiDhXosaRHFuQQAgAxIG7DSMAABkXqsK4DgiW1JiJ48IGCQIqICoWBCJNAwcyaIRiY8gFHENeKAjQYQIRGRFizmzBwUBWjQOk0qChJEbDTUTgaf1hgJyOFRquF5wAqsWEg7MBbmBxsLbtDoMcMlXVCBLFMRtYkUCM1/WoKFaRZgrcsJcIxFfkHGPazFLykKuIYowjN5cxwK47vEoWlOGIIL6kI0joIeIYabcgO0WAMQgJ6QP+oBxYUduwiKQLwyWicUuAQR3QK0h34bKSqF9OpEqQcLcyKoQJIFCpkXZ7clpEMlEgT0SaEPSCrjNoN8jIA/jpw1NQdB8/Tiv4UZLAfgEyAkyBggQCADs='; // Inserisci qui il link alla sprite sheet del pesciolino desiderato
+        pesce.appendChild(img);
+        acquario.appendChild(pesce);
+
+        var randomX = Math.floor(Math.random() * (acquario.offsetWidth - 80));
+        var randomY = Math.floor(Math.random() * (acquario.offsetHeight - 50));
+
+        pesce.style.top = randomY + 'px';
+        pesce.style.left = randomX + 'px';
+
+        // Aggiungi la classe "invertito" ai pesci che nuotano verso sinistra
+        if (Math.random() < 0.5) {
+          pesce.classList.add('invertito');
+        }
+      }
+    }
+
+    generaPesci(16); // Numero di pesci desiderato
+  </script>
+  
+<script type="text/javascript">
+    function generaBolle(numeroBolle) {
+      var acquario = document.getElementById('acquario');
+
+      for (var i = 0; i < numeroBolle; i++) {
+        var bolla = document.createElement('div');
+        bolla.className = 'bolla';
+        acquario.appendChild(bolla);
+
+        var randomX = Math.floor(Math.random() * (acquario.offsetWidth - 40));
+        bolla.style.left = randomX + 'px';
+      }
+    }
+    generaBolle(16); // Numero di bolle desiderato
+  </script>
+  
+<script type="text/javascript">
+// Crea il righello
+var ruler = document.createElement("div");
+ruler.id = "ruler";
+
+// Stili iniziali del righello
+ruler.style.position = "absolute";
+ruler.style.top = "0";
+ruler.style.left = "0";
+ruler.style.width = "100%";
+ruler.style.height = "20px";
+ruler.style.background = "blue"; // Imposta lo sfondo blu
+ruler.style.color = "lightblue"; // Imposta il colore dei caratteri azzurro
+ruler.style.fontFamily = "Arial, sans-serif";
+ruler.style.fontSize = "12px";
+ruler.style.textAlign = "center";
+ruler.style.zIndex = "9999";
+ruler.style.overflow = "hidden";
+ruler.style.opacity = "0.5";
+
+document.body.appendChild(ruler);
+
+// Funzione per la calibrazione del righello
+function calibrateRuler() {
+  ruler.style.top = document.getElementById("ruler").offsetTop + "px";
+  ruler.style.left = document.getElementById("ruler").offsetLeft + "px";
+  ruler.style.width = document.getElementById("ruler").offsetWidth + "px";
+
+  var dpi = window.devicePixelRatio * 96;
+  var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  var physicalWidth = screenWidth / dpi;
+  var cm = Math.round(physicalWidth * 2.54);
+
+  // Rimuovi le linee e i numeri precedenti
+  while (ruler.firstChild) {
+    ruler.firstChild.remove();
+  }
+
+  var cmWidth = ruler.offsetWidth / cm;
+
+  for (var i = 0; i <= cm; i++) {
+    var line = document.createElement("div");
+    line.style.position = "absolute";
+    line.style.top = "0";
+    line.style.bottom = "0";
+    line.style.left = (i * cmWidth) + "px";
+    line.style.width = "1px";
+    line.style.background = "white"; // Imposta il colore delle linee a bianco
+    line.style.opacity = "0.3"; // Imposta l'opacità delle linee
+    ruler.appendChild(line);
+
+    var tick = document.createElement("div");
+    tick.style.position = "absolute";
+    tick.style.bottom = "0";
+    tick.style.fontSize = "10px";
+    tick.style.transform = "translateX(-50%)";
+    tick.style.left = (i * cmWidth) + "px";
+    tick.style.color = "lightblue"; // Imposta il colore dei numeri azzurro
+	line.style.opacity = "0.5"; // Imposta l'opacità
+    tick.innerHTML = i;
+    ruler.appendChild(tick);
+  }
+}
+
+calibrateRuler();
+
+// Aggiornamento del righello durante il ridimensionamento della finestra
+window.addEventListener("resize", function () {
+  calibrateRuler();
+});
+
+</script>
+
 </BODY>
 </CENTER>
 </html>
