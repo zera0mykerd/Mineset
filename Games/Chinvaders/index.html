@@ -1516,6 +1516,11 @@ function createMissile(event) {
   missile.style.borderWidth = "2px";
   missile.style.outlineColor = "yellow";
   missile.style.outlineWidth = "2px";
+  missile.style.opacity = "0.5";
+  
+  // Aggiungi effetto bordo sfumato e luminoso
+  missile.style.boxShadow = '0 0 5px 5px rgba(139, 0, 0, 0.3), 0 0 7px 7px rgba(139, 0, 0, 0.3)';
+
 
   // Calcola la posizione del cursore rispetto alla finestra del browser, tenendo conto dello scroll
   var mouseX = event.clientX + larghezzaGen;
