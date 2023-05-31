@@ -2455,6 +2455,108 @@ function handleOrientation(event) {
   </script>
   
 <script type="text/javascript">
+
+window.addEventListener("DOMContentLoaded", function() {
+  var monitorer = document.getElementById("monitorerer");
+  monitorer.style.width = "100%";
+  monitorer.style.height = "35%";
+  monitorer.style.backgroundColor = "DarkBlue";
+  monitorer.style.position = "relative";
+  monitorer.style.overflow = "hidden";
+  monitorer.style.display = "flex";
+  monitorer.style.justifyContent = "center";
+  monitorer.style.alignItems = "center";
+
+  var waveformCanvas = document.createElement("canvas");
+  waveformCanvas.id = "waveformCanvas";
+  waveformCanvas.style.width = "100%";
+  waveformCanvas.style.height = "100%";
+  waveformCanvas.style.position = "absolute";
+  waveformCanvas.style.top = "0";
+  waveformCanvas.style.left = "0";
+  waveformCanvas.style.backgroundColor = "DarkBlue";
+
+  monitorer.appendChild(waveformCanvas);
+
+  var canvas = waveformCanvas;
+  var context = canvas.getContext("2d");
+  var width = canvas.offsetWidth;
+  var height = canvas.offsetHeight;
+  var centerX = width / 2;
+  var centerY = height / 2;
+  var amplitude = 50; // Ampiezza dell'onda (regolabile)
+  var frequency = 0.01; // Frequenza dell'onda (regolabile)
+  var phase = 0;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  function handleMotionEvent(event) {
+    var acceleration = event.accelerationIncludingGravity;
+
+    // Calcola l'intensità del movimento
+    var intensity = Math.sqrt(
+      Math.pow(acceleration.x, 2) +
+      Math.pow(acceleration.y, 2) +
+      Math.pow(acceleration.z, 2)
+    );
+
+    // Aggiorna la frequenza dell'onda in base all'intensità del movimento
+    frequency = intensity * 0.55; // Aumenta il fattore di scala per rendere l'onda più sensibile
+
+    // Limita la frequenza all'intervallo desiderato
+    frequency = Math.min(Math.max(frequency, 0.001), 0.1); // Puoi regolare i valori minimi e massimi
+
+    // Ridisegna l'onda
+    drawWaveform();
+  }
+
+  function drawWaveform() {
+    context.clearRect(0, 0, width, height);
+    context.beginPath();
+    context.moveTo(0, centerY);
+
+    for (var x = 0; x < width; x += 1) {
+      var angle = (x / width) * 2 * Math.PI * frequency;
+      var offsetY = Math.sin(angle + phase) * amplitude;
+      var y = centerY + offsetY;
+
+      // Utilizza quadraticCurveTo per creare una curva anziché una linea retta
+      var controlPointX = x + (width / 2 - x) / 2;
+      context.quadraticCurveTo(controlPointX, y, x, y);
+    }
+
+    context.strokeStyle = "#00FFFF";
+    context.stroke();
+  }
+
+  function updateWaveform() {
+    phase += 0.05; // Velocità dell'oscillazione (regolabile)
+    drawWaveform();
+    requestAnimationFrame(updateWaveform);
+  }
+
+  // Registra l'evento di motion per ottenere i dati di accelerazione
+  window.addEventListener("devicemotion", handleMotionEvent);
+
+  updateWaveform();
+
+  // Ridisegna il grafico quando la finestra del browser viene ridimensionata
+  window.addEventListener("resize", function() {
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    centerX = width / 2;
+    centerY = height / 2;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    drawWaveform();
+  });
+});
+
+
+/*
 window.addEventListener("DOMContentLoaded", function() {
   var monitorer = document.getElementById("monitorerer");
   monitorer.style.width = "100%";
@@ -2553,6 +2655,7 @@ window.addEventListener("DOMContentLoaded", function() {
     drawWaveform();
   });
 });
+*/
   </script>
 
 </BODY>
