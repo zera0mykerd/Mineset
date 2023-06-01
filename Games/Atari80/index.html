@@ -524,7 +524,8 @@ body, html{
 	border-width: 8px;
 	padding: 8px;
 	border-color: Teal;
-	background-color: Thistle;
+	/* background-color: Thistle; */
+	background-color: LightBlue;
 	color: SlateBlue;
 	text-align: center;
 	z-index: 99999;
@@ -545,7 +546,7 @@ body, html{
         #tetris {
             width: 200px;
             height: 400px;
-            border: 1px solid black;
+            border: 6px double DarkSlateBlue;
             margin: 0 auto;
             position: relative;
             background-color: Indigo;
@@ -558,8 +559,38 @@ body, html{
             position: absolute;
             background-color: MediumOrchid;
         }
-  </style>
+		
+	#keypad{
 
+}
+		
+	#button-left{
+		border-radius: 16px;
+		border-color: Lavender;
+		background-color: LavenderBlush;
+		border-width: 6px;
+		color: DeepPink;
+		font-size: 24px;
+}
+		
+	#button-right{
+		border-radius: 16px;
+		border-color: Lavender;
+		background-color: LavenderBlush;
+		border-width: 6px;
+		color: DeepPink;
+		font-size: 24px;
+}
+		
+	#button-down{
+		border-radius: 16px;
+		border-color: Lavender;
+		background-color: LavenderBlush;
+		border-width: 6px;
+		color: DeepPink;
+		font-size: 24px;
+}
+  </style>
 
 <!-- Vgames -->
 
@@ -834,8 +865,14 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
   <button class="keypress" onclick="changeDirection('right')">&rarr;</button>
   <button class="keypress" onclick="changeDirection('down')">&darr;</button>
 
-<div id="SnakeGame"></div>
+<div id="gameContainer">
+  <div id="SnakeGame"></div>
+  <br>
+  <button id="destroyButton" onclick="destroyGame()" style="border-radius: 4px; font-size: 24px;">&#128165; Disattiva tasti fisici &#128165;</button>
+  <br>
+</div>
 
+<br/>
   <button class="keypress" onclick="changeDirection('up')">&uarr;</button><br/>
   <button class="keypress" onclick="changeDirection('left')">&larr;</button>
   <button class="keypress" onclick="changeDirection('right')">&rarr;</button><br/>
@@ -1117,11 +1154,18 @@ document.write( '</a>' );
 
 <p>&#10240;</p>
 
+<div id="keypad">
+  <button id="button-left">←</button>
+  <button id="button-down">↓</button>
+  <button id="button-right">→</button>
+</div>
+
+<br>
 
 <div id="tetris"></div>
 
 
-<p>&#10240;</p>
+<!--<p>&#10240;</p>-->
 
 <script type="text/javascript" charset="utf-8">
 document.addEventListener('DOMContentLoaded', () => {
@@ -1698,7 +1742,7 @@ function fall() {
 
       if (cell.isMine) {
         alert("Hai perso!"); // La cella contiene una mina, hai perso!
-		resetGame();
+		resetMineGame();
         // Puoi fare ulteriori azioni come mostrare una schermata di game over
       } else if (cell.neighboringMines === 0) {
         // La cella non contiene mine vicine, rivelare le celle adiacenti
@@ -1724,7 +1768,7 @@ function fall() {
 	
 	
 // Funzione per resettare il gioco
-function resetGame() {
+function resetMineGame() {
 playAudio();
   setTimeout(function() {
     for (let i = 0; i < rows; i++) {
@@ -2494,6 +2538,7 @@ const gridSize = 10;
 let direction = "right";
 let score = 0;
 let gameover = false;
+let paused = false;
 let snake = [
    { x: gridSize * 4, y: gridSize * 3 },
    { x: gridSize * 3, y: gridSize * 3 },
@@ -2651,10 +2696,14 @@ function isEatingFood() {
    return snake[0].x === food.x && snake[0].y === food.y;
 }
 
-// Gestisce gli input dell'utente per cambiare direzione
+// Gestisce gli input dell'utente per cambiare direzione solo se il gioco non è in pausa
 document.addEventListener("keydown", (e) => {
    if (gameover) {
       resetGame();
+      return;
+   }
+
+   if (paused) {
       return;
    }
 
@@ -2702,192 +2751,498 @@ function changeDirection(newDirection) {
   direction = newDirection;
 }
 
+
+
+
+
+// Funzione per distruggere completamente il gioco
+function destroyGame() {
+   // Rimuovi il contenuto del div SnakeGame
+   const snakeGame = document.getElementById("SnakeGame");
+   snakeGame.innerHTML = "";
+
+   // Rimuovi il pulsante di distruzione
+   const destroyButton = document.getElementById("destroyButton");
+   destroyButton.remove();
+
+   // Imposta gameover e paused su true
+   gameover = true;
+   paused = true;
+}
+
+
+
+
+
+
+
+
+
 </script>
 
 
 <script type="text/javascript">
 // Dimensioni del campo di gioco
-        const rows = 20;
-        const columns = 10;
+const rowsers = 20;
+const columners = 10;
 
-        // Creazione del campo di gioco
-        let grid = [];
-        for (let row = 0; row < rows; row++) {
-            grid[row] = [];
-            for (let col = 0; col < columns; col++) {
-                grid[row][col] = 0;
+// Creazione del campo di gioco
+let grid = [];
+for (let row = 0; row < rowsers; row++) {
+    grid[row] = [];
+    for (let col = 0; col < columners; col++) {
+        grid[row][col] = 0;
+    }
+}
+
+// Creazione del tetramino (forma)
+const tetraminoes = [
+    [[1, 1, 1, 1]],
+    [[1, 1], [1, 1]],
+    [[1, 1, 0], [0, 1, 1]],
+    [[0, 1, 1], [1, 1, 0]],
+    [[1, 1, 1], [0, 1, 0]],
+    [[1, 1, 1], [1, 0, 0]],
+    [[1, 1, 1], [0, 0, 1]]
+];
+
+// Generazione di un tetramino casuale
+function generateTetramino() {
+    const randomIndex = Math.floor(Math.random() * tetraminoes.length);
+    return tetraminoes[randomIndex];
+}
+
+// Posizione corrente del tetramino
+let currentTetramino = generateTetramino();
+let currentRow = 0;
+let currentCol = Math.floor(columners / 2) - Math.floor(currentTetramino[0].length / 2);
+
+// Variabile per la pausa del gioco
+let gamePaused = true;
+
+// Funzione per disegnare il campo di gioco
+function drawGrid() {
+    let tetrisElement = document.getElementById("tetris");
+    tetrisElement.innerHTML = "";
+
+    for (let row = 0; row < rowsers; row++) {
+        for (let col = 0; col < columners; col++) {
+            if (grid[row][col] === 1) {
+                let blocker = document.createElement("div");
+                blocker.className = "blocker";
+                blocker.style.top = row * 20 + "px";
+                blocker.style.left = col * 20 + "px";
+                tetrisElement.appendChild(blocker);
             }
         }
+    }
+}
 
-        // Creazione del tetramino (forma)
-        const tetraminoes = [
-            [[1, 1, 1, 1]],
-            [[1, 1], [1, 1]],
-            [[1, 1, 0], [0, 1, 1]],
-            [[0, 1, 1], [1, 1, 0]],
-            [[1, 1, 1], [0, 1, 0]],
-            [[1, 1, 1], [1, 0, 0]],
-            [[1, 1, 1], [0, 0, 1]]
-        ];
-
-        // Generazione di un tetramino casuale
-        function generateTetramino() {
-            const randomIndex = Math.floor(Math.random() * tetraminoes.length);
-            return tetraminoes[randomIndex];
-        }
-
-        // Posizione corrente del tetramino
-        let currentTetramino = generateTetramino();
-        let currentRow = 0;
-        let currentCol = Math.floor(columns / 2) - Math.floor(currentTetramino[0].length / 2);
-
-        // Funzione per disegnare il campo di gioco
-        function drawGrid() {
-            let tetrisElement = document.getElementById("tetris");
-            tetrisElement.innerHTML = "";
-
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < columns; col++) {
-                    if (grid[row][col] === 1) {
-                        let blocker = document.createElement("div");
-                        blocker.className = "blocker";
-                        blocker.style.top = row * 20 + "px";
-                        blocker.style.left = col * 20 + "px";
-                        tetrisElement.appendChild(blocker);
-                    }
-                }
+// Funzione per disegnare il tetramino corrente
+function drawTetramino() {
+    for (let row = 0; row < currentTetramino.length; row++) {
+        for (let col = 0; col < currentTetramino[row].length; col++) {
+            if (currentTetramino[row][col] === 1) {
+                let blocker = document.createElement("div");
+                blocker.className = "blocker";
+                blocker.style.top = (currentRow + row) * 20 + "px";
+                blocker.style.left = (currentCol + col) * 20 + "px";
+                document.getElementById("tetris").appendChild(blocker);
             }
         }
+    }
+}
 
-        // Funzione per disegnare il tetramino corrente
-        function drawTetramino() {
-            for (let row = 0; row < currentTetramino.length; row++) {
-                for (let col = 0; col < currentTetramino[row].length; col++) {
-                    if (currentTetramino[row][col] === 1) {
-                        let blocker = document.createElement("div");
-                        blocker.className = "blocker";
-                        blocker.style.top = (currentRow + row) * 20 + "px";
-                        blocker.style.left = (currentCol + col) * 20 + "px";
-                        document.getElementById("tetris").appendChild(blocker);
-                    }
-                }
+// Funzione per controllare le collisioni
+function checkCollision() {
+    for (let row = 0; row < currentTetramino.length; row++) {
+        for (let col = 0; col < currentTetramino[row].length; col++) {
+            if (
+                currentTetramino[row][col] === 1 &&
+                (currentRow + row >= rowsers ||
+                    currentCol + col < 0 ||
+                    currentCol + col >= columners ||
+                    grid[currentRow + row][currentCol + col] === 1)
+            ) {
+                return true;
             }
         }
+    }
+    return false;
+}
 
-        // Funzione per controllare le collisioni
-        function checkCollision() {
-            for (let row = 0; row < currentTetramino.length; row++) {
-                for (let col = 0; col < currentTetramino[row].length; col++) {
-                    if (
-                        currentTetramino[row][col] === 1 &&
-                        (currentRow + row >= rows ||
-                            currentCol + col < 0 ||
-                            currentCol + col >= columns ||
-                            grid[currentRow + row][currentCol + col] === 1)
-                    ) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        // Funzione per bloccare il tetramino corrente nel campo di gioco
-        function lockTetramino() {
-            for (let row = 0; row < currentTetramino.length; row++) {
-                for (let col = 0; col < currentTetramino[row].length; col++) {
-                    if (currentTetramino[row][col] === 1) {
-                        grid[currentRow + row][currentCol + col] = 1;
-                    }
-                }
+// Funzione per bloccare il tetramino corrente nel campo di gioco
+function lockTetramino() {
+    for (let row = 0; row < currentTetramino.length; row++) {
+        for (let col = 0; col < currentTetramino[row].length; col++) {
+            if (currentTetramino[row][col] === 1) {
+                grid[currentRow + row][currentCol + col] = 1;
+				playAudio();
             }
         }
+    }
+}
 
-        // Funzione per cancellare le righe complete
-        function clearRows() {
-            for (let row = rows - 1; row >= 0; row--) {
-                if (grid[row].every(cell => cell === 1)) {
-                    grid.splice(row, 1);
-                    grid.unshift(new Array(columns).fill(0));
-                }
-            }
+// Funzione per cancellare le righe complete
+function clearrowsers() {
+    for (let row = rowsers - 1; row >= 0; row--) {
+        if (grid[row].every(cell => cell === 1)) {
+            grid.splice(row, 1);
+            grid.unshift(new Array(columners).fill(0));
+			playAudio();
         }
+    }
+}
 
-        // Funzione per muovere il tetramino verso il basso
-        function moveDown() {
-            currentRow++;
+// Funzione per muovere il tetramino verso il basso
+function moveDown() {
+    if (!gamePaused) {
+        currentRow++;
+		//playAudio();
+
+        if (checkCollision()) {
+            currentRow--;
+            lockTetramino();
+            clearrowsers();
+            currentTetramino = generateTetramino();
+            currentRow = 0;
+            currentCol = Math.floor(columners / 2) - Math.floor(currentTetramino[0].length / 2);
 
             if (checkCollision()) {
-                currentRow--;
-                lockTetramino();
-                clearRows();
-                currentTetramino = generateTetramino();
-                currentRow = 0;
-                currentCol = Math.floor(columns / 2) - Math.floor(currentTetramino[0].length / 2);
-
-                if (checkCollision()) {
-                    // Gioco finito
-                    alert("Game Over!");
-                    grid = [];
-                    for (let row = 0; row < rows; row++) {
-                        grid[row] = [];
-                        for (let col = 0; col < columns; col++) {
-                            grid[row][col] = 0;
-                        }
+                // Gioco finito
+                playAudio();
+                alert("Game Over!");
+				playAudio();
+                grid = [];
+                for (let row = 0; row < rowsers; row++) {
+                    grid[row] = [];
+                    for (let col = 0; col < columners; col++) {
+                        grid[row][col] = 0;
                     }
                 }
             }
-
-            drawGrid();
-            drawTetramino();
         }
 
-        // Funzione per muovere il tetramino a sinistra
-        function moveLeft() {
-            currentCol--;
-
-            if (checkCollision()) {
-                currentCol++;
-            }
-
-            drawGrid();
-            drawTetramino();
-        }
-
-        // Funzione per muovere il tetramino a destra
-        function moveRight() {
-            currentCol++;
-
-            if (checkCollision()) {
-                currentCol--;
-            }
-
-            drawGrid();
-            drawTetramino();
-        }
-
-        // Gestione degli eventi della tastiera
-        function handleKeyPress(event) {
-            if (event.code === "ArrowDown") {
-                moveDown();
-            } else if (event.code === "ArrowLeft") {
-                moveLeft();
-            } else if (event.code === "ArrowRight") {
-                moveRight();
-            }
-        }
-
-        // Aggiunta dell'event listener per la gestione della tastiera
-        document.addEventListener("keydown", handleKeyPress);
-
-        // Loop di gioco
-        setInterval(moveDown, 1000);
-
-        // Disegna il campo di gioco iniziale
         drawGrid();
         drawTetramino();
+    }
+}
+
+// Funzione per muovere il tetramino a sinistra
+function moveLeft() {
+    if (!gamePaused) {
+        currentCol--;
+
+        if (checkCollision()) {
+            currentCol++;
+        }
+
+        drawGrid();
+        drawTetramino();
+    }
+}
+
+// Funzione per muovere il tetramino a destra
+function moveRight() {
+    if (!gamePaused) {
+        currentCol++;
+
+        if (checkCollision()) {
+            currentCol--;
+        }
+
+        drawGrid();
+        drawTetramino();
+    }
+}
+
+// Funzione per mettere in pausa il gioco
+function togglePause() {
+    gamePaused = !gamePaused;
+    if (gamePaused) {
+        clearInterval(gameInterval);
+    } else {
+        gameInterval = setInterval(moveDown, 1000);
+    }
+}
+
+
+
+
+
+
+
+// Gestione degli eventi della tastiera
+function handleKeyPress(event) {
+    if (!gamePaused) {
+        if (event.code === "ArrowDown") {
+            moveDown();
+        } else if (event.code === "ArrowLeft") {
+            moveLeft();
+        } else if (event.code === "ArrowRight") {
+            moveRight();
+        } else if (event.code === "Space") {
+            togglePause();
+        }
+    }
+}
+
+// Aggiunta dell'event listener per la gestione della tastiera
+document.addEventListener("keydown", handleKeyPress);
+
+// Loop di gioco
+let gameInterval = setInterval(moveDown, 1000);
+
+// Disegna il campo di gioco iniziale
+drawGrid();
+drawTetramino();
+
+// Creazione del pulsante per la pausa
+let pauseButton = document.createElement("button");
+pauseButton.innerText = "Alterna";
+pauseButton.addEventListener("click", togglePause);
+pauseButton.style.backgroundColor = "#D3B8FF";
+pauseButton.style.color = "#4D2A6E";
+pauseButton.style.border = "3px solid #B28CFF";
+pauseButton.style.borderRadius = "10px";
+pauseButton.style.padding = "10px 20px";
+pauseButton.style.fontWeight = "bold";
+pauseButton.style.fontSize = "16px";
+pauseButton.style.margin = "12px auto 0";
+pauseButton.style.marginTop = "12px";
+pauseButton.style.display = "block";
+pauseButton.style.transition = "background-color 0.3s, color 0.3s";
+
+pauseButton.addEventListener("mousedown", function () {
+  pauseButton.style.textShadow = "0 0 2px #7AE39A";
+});
+
+pauseButton.addEventListener("mouseup", function () {
+  pauseButton.style.textShadow = "";
+});
+
+pauseButton.addEventListener("mouseenter", function () {
+  pauseButton.style.backgroundColor = "#E8D5FF";
+  pauseButton.style.border = "3px solid #937EFF";
+});
+
+pauseButton.addEventListener("mouseleave", function () {
+  pauseButton.style.backgroundColor = "#D3B8FF";
+  pauseButton.style.border = "3px solid #B28CFF";
+});
+
+document.body.appendChild(pauseButton);
+
+
+
+
+
+// Definisci le variabili di loop
+let autoMoveDown;
+let autoMoveLeft;
+let autoMoveRight;
+
+// Funzione per gestire l'evento mousedown sui pulsanti del tastierino
+function handleButtonMouseDown(event) {
+    if (!gamePaused) {
+        const buttonId = event.target.id;
+        if (buttonId === "button-down") {
+            moveDown();
+            autoMoveDown = setInterval(moveDown, 150);
+        } else if (buttonId === "button-left") {
+            moveLeft();
+            autoMoveLeft = setInterval(moveLeft, 150);
+        } else if (buttonId === "button-right") {
+            moveRight();
+            autoMoveRight = setInterval(moveRight, 150);
+        }
+    }
+}
+
+// Funzione per gestire l'evento mouseup sui pulsanti del tastierino
+function handleButtonMouseUp(event) {
+    if (!gamePaused) {
+        const buttonId = event.target.id;
+        if (buttonId === "button-down") {
+            clearInterval(autoMoveDown);
+        } else if (buttonId === "button-left") {
+            clearInterval(autoMoveLeft);
+        } else if (buttonId === "button-right") {
+            clearInterval(autoMoveRight);
+        }
+    }
+}
+
+// Funzione per gestire l'evento touchstart sui pulsanti del tastierino
+function handleButtonTouchStart(event) {
+    event.preventDefault(); // Previene il comportamento di default del touch (ad es. lo scrolling della pagina)
+
+    if (!gamePaused) {
+        const buttonId = event.target.id;
+        if (buttonId === "button-down") {
+            moveDown();
+            autoMoveDown = setInterval(moveDown, 150);
+        } else if (buttonId === "button-left") {
+            moveLeft();
+            autoMoveLeft = setInterval(moveLeft, 150);
+        } else if (buttonId === "button-right") {
+            moveRight();
+            autoMoveRight = setInterval(moveRight, 150);
+        }
+    }
+}
+
+// Funzione per gestire l'evento touchend sui pulsanti del tastierino
+function handleButtonTouchEnd(event) {
+    if (!gamePaused) {
+        const buttonId = event.target.id;
+        if (buttonId === "button-down") {
+            clearInterval(autoMoveDown);
+        } else if (buttonId === "button-left") {
+            clearInterval(autoMoveLeft);
+        } else if (buttonId === "button-right") {
+            clearInterval(autoMoveRight);
+        }
+    }
+}
+
+// Aggiunta degli event listener per il mousedown e mouseup sui pulsanti del tastierino
+document.getElementById("button-down").addEventListener("mousedown", handleButtonMouseDown);
+document.getElementById("button-left").addEventListener("mousedown", handleButtonMouseDown);
+document.getElementById("button-right").addEventListener("mousedown", handleButtonMouseDown);
+
+// Aggiunta degli event listener per il touchstart e touchend sui pulsanti del tastierino
+document.getElementById("button-down").addEventListener("touchstart", handleButtonTouchStart);
+document.getElementById("button-left").addEventListener("touchstart", handleButtonTouchStart);
+document.getElementById("button-right").addEventListener("touchstart", handleButtonTouchStart);
+
+document.getElementById("button-down").addEventListener("touchend", handleButtonTouchEnd);
+document.getElementById("button-left").addEventListener("touchend", handleButtonTouchEnd);
+document.getElementById("button-right").addEventListener("touchend", handleButtonTouchEnd);
+
+
+document.getElementById("button-down").addEventListener("mouseup", handleButtonMouseUp);
+document.getElementById("button-down").addEventListener("mouseleave", handleButtonMouseUp);
+document.getElementById("button-left").addEventListener("mouseup", handleButtonMouseUp);
+document.getElementById("button-left").addEventListener("mouseleave", handleButtonMouseUp);
+document.getElementById("button-right").addEventListener("mouseup", handleButtonMouseUp);
+document.getElementById("button-right").addEventListener("mouseleave", handleButtonMouseUp);
+
+
+
+// Funzione per creare il tastierino con i pulsanti e posizionarlo sopra il campo di gioco
+function createKeypad() {
+    const tetrisElement = document.getElementById("tetris");
+
+    const keypadElement = document.createElement("div");
+    keypadElement.id = "keypad";
+
+    const buttonLeft = document.createElement("button");
+    buttonLeft.id = "button-left";
+    buttonLeft.innerText = "←";
+    buttonLeft.addEventListener("mousedown", handleButtonMouseDown);
+    buttonLeft.addEventListener("mouseup", handleButtonMouseUp);
+    buttonLeft.addEventListener("mouseleave", handleButtonMouseUp);
+    //keypadElement.appendChild(buttonLeft);
+	
+    const buttonDown = document.createElement("button");
+    buttonDown.id = "button-down";
+    buttonDown.innerText = "↓";
+    buttonDown.addEventListener("mousedown", handleButtonMouseDown);
+    buttonDown.addEventListener("mouseup", handleButtonMouseUp);
+    buttonDown.addEventListener("mouseleave", handleButtonMouseUp);
+    //keypadElement.appendChild(buttonDown);
+
+    const buttonRight = document.createElement("button");
+    buttonRight.id = "button-right";
+    buttonRight.innerText = "→";
+    buttonRight.addEventListener("mousedown", handleButtonMouseDown);
+    buttonRight.addEventListener("mouseup", handleButtonMouseUp);
+    buttonRight.addEventListener("mouseleave", handleButtonMouseUp);
+    //keypadElement.appendChild(buttonRight);
+	
+	
+	buttonDown.style.backgroundColor = "fuchsia";
+    buttonDown.style.border = "3px solid magenta";
+    buttonDown.style.fontSize = "24px";
+    buttonDown.style.marginLeft = "auto";
+	buttonDown.style.margin = "auto";
+	buttonDown.style.justifyContent = "center";
+	buttonDown.style.alignItems = "center";
+	
+
+    buttonLeft.style.backgroundColor = "fuchsia";
+    buttonLeft.style.border = "3px solid magenta";
+    buttonLeft.style.fontSize = "24px";
+    buttonLeft.style.margin = "0 auto";
+	buttonLeft.style.justifyContent = "center";
+	buttonLeft.style.alignItems = "center";
+
+    buttonRight.style.backgroundColor = "fuchsia";
+    buttonRight.style.border = "3px solid magenta";
+    buttonRight.style.fontSize = "24px";
+    buttonRight.style.margin = "0 auto";
+	buttonRight.style.justifyContent = "center";
+	buttonRight.style.alignItems = "center";
+	
+	keypadElement.style.display = "flex";
+	keypadElement.style.justifyContent = "center";
+
+	
+
+    tetrisElement.appendChild(keypadElement);
+	//document.body.appendChild(keypadElement);
+}
+
+
+// Funzione per gestire l'evento keydown della tastiera
+function handleKeyDown(event) {
+    if (!gamePaused) {
+        if (event.code === "ArrowDown") {
+            moveDown();
+            autoMoveDown = setInterval(moveDown, 150);
+        } else if (event.code === "ArrowLeft") {
+            moveLeft();
+            autoMoveLeft = setInterval(moveLeft, 150);
+        } else if (event.code === "ArrowRight") {
+            moveRight();
+            autoMoveRight = setInterval(moveRight, 150);
+        }
+    }
+}
+
+// Funzione per gestire l'evento keyup della tastiera
+function handleKeyUp(event) {
+    if (!gamePaused) {
+        if (event.code === "ArrowDown") {
+            clearInterval(autoMoveDown);
+        } else if (event.code === "ArrowLeft") {
+            clearInterval(autoMoveLeft);
+        } else if (event.code === "ArrowRight") {
+            clearInterval(autoMoveRight);
+        }
+    }
+}
+
+// Aggiunta degli event listener per il movimento continuo dei tasti
+document.addEventListener("keydown", handleKeyDown);
+document.addEventListener("keyup", handleKeyUp);
+
+
+//Chiamata alla funzione per il tastierino!
+createKeypad();
+
 </script>
 
+<script type="text/javascript">
+//Anti-scroll system
+window.addEventListener("keydown", function(e) {
+    // Impedisci lo scorrimento della pagina su freccia in alto e in basso
+    if([38, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+}, false);
+</script>
 
 </BODY>
 </CENTER>
