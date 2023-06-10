@@ -421,6 +421,71 @@ body.hide-scroll {
 }
 </style>
 
+<style type="text/css">
+    #audio-container {
+      width: 500px;
+      margin: 50px auto;
+      text-align: center;
+	  border-style: ridge;
+	  border-width: 16px;
+	  padding: 32px;
+	  border-color: DarkOliveGreen;
+	  background-color: DarkKhaki;
+	  border-radius: 32px;
+    }
+
+	 /* border-color: rgba(85, 107, 47, 0.5); */
+	 /* background-color: rgba(189, 183, 107, 0.5); */
+
+	#play-button:hover, #stop-button:hover {
+		filter: contrast(200%);
+	}
+	
+	#play-button:active, #stop-button:active {
+		filter: saturate(30%);
+	}
+	
+	#play-button:disabled, #stop-button:disabled {
+		filter: grayscale(100%);
+	}
+	
+
+#frequency-range[type="range"] {
+  /* Personalizza qui il tuo stile specifico per l'elemento con ID "myRange" */
+  width: 500px; /* Larghezza del cursore */
+}
+
+
+#volume-range::-webkit-slider-runnable-track {
+  background-color: #ADFF2F;
+}
+
+#volume-range::-moz-range-track {
+  background-color: #ADFF2F;
+}
+
+#volume-range::-ms-track {
+  background-color: #ADFF2F;
+}
+
+#volume-range::-ms-fill-lower {
+  background-color: #ADFF2F;
+}
+
+#volume-range::-webkit-slider-thumb {
+  background-color: #000080;
+}
+
+#volume-range::-moz-range-thumb {
+  background-color: #000080;
+}
+
+#volume-range::-ms-thumb {
+  background-color: #000080;
+}
+
+</style>
+
 <!-- Top Arrow -->
 <style type="text/css">
 #TopBN {
@@ -1485,7 +1550,55 @@ function normalWiki(x) {
 <br>
 
 <script type="text/javascript">
-document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &egrave; un videogioco di abilit&agrave; tridimensionale che si ispira alle meccaniche di gioco di Marble Madness e di Super Monkey Ball, creato nel 2006 da Robert Kooima. &Egrave; un software libero, distribuito sotto licenza GNU General Public License per Linux, FreeBSD, Windows, macOS, Sega Dreamcast e iOS, si adatta dunque a molti sistemi operativi, sono in fase di sviluppo le versioni per Android e Nokia N900. Il motore grafico e quello fisico di Neverball sono utilizzati anche dal videogioco di minigolf Neverputt. <br> <strong>Modalit&agrave; di gioco:</strong> Lo scopo del gioco &egrave; principalmente quello di portare a destinazione una pallina, evitando di farla precipitare nel vuoto e cercando di superare tutti gli ostacoli presenti. Per superare un livello &egrave; necessario raccogliere abbastanza punti facendo passare la pallina sopra le monete presenti nel gioco. Ve ne sono tre tipi: gialle, che valgono un punto, rosse, che ne valgono cinque, e blu, che valgono dieci punti. Il motore fisico non prevede una "linea di terra" quindi tutto fluttua nell&#39;aria. &Egrave; quindi legittimo, in una mappa, posizionare oggetti in qualsiasi punto nello spazio. Al contrario di altri giochi simili, il giocatore che utilizza il mouse non controlla direttamente la palla, ma il campo di gioco: piegandolo nelle varie direzioni la palla tender&agrave; a muoversi per la forza di gravit&agrave;. Il giocatore deve tenere conto dell&#39;inerzia della pallina, evitando quindi movimenti troppo bruschi o inclinazioni troppo ripide. In realt&agrave;, l&#39;uso della tastiera permette maggiore controllo della pallina poich&eacute; quest&#39;ultima viene controllata direttamente permettendo cos&igrave; un movimento minore e pi&ugrave; facilmente controllabile. A seconda del giocatore si pu&ograve; preferire indistintamente l&#39;uno o l&#39;altro. Esiste anche la modalit&agrave; Sfida che permette di sbloccare livelli bonus presenti nel set corrispondente, dove l&#39;utente guadagna una vita (precisamente palla) ogni 100 punti e 1 punto equivale a una moneta gialla. Se si perde il livello (in caso di cadute, tempo scaduto ecc...) si perde una vita. Per ogni set da 25 livelli incluso di default ci sono in genere 5 livelli bonus (oltre ai 20 regolari) ma non esiste alcun limite: un creatore di livelli pu&ograve; specificare quali livelli saranno quelli bonus. <br> <strong>Trucchi:</strong> Sono inoltre disponibili alcuni trucchi. Assicurarsi di aver attivato il blocco maiuscole e digitare nel menu principale -> Per vecchie versioni di NeverBall: "CHEAT" (senza le virgolette); Per nuove versioni di NeverBall: "XYZYY" (senza le virgolette); L&#39;attivazione comporter&agrave;: La trasformazione della voce "Gioca" in "Imbroglia"; La comparsa di un set nascosto, chiamato "Neverball Elements", dove sono contenute tutte le possibilit&agrave; di personalizzazione dei livelli in NeverBall, che sono un aiuto per i creatori di livelli e un divertimento assicurato per i normali utenti; La comparsa del percorso al file .SOL (vedere sezione Core) del livello selezionato durante la visualizzazione dei livelli dei set; Lo sblocco di tutti i livelli disponibili in tutti i set (temporaneo, ma i livelli completati verranno comunque sbloccati permanentemente); La possibilit&agrave; di completare un livello immediatamente premendo il tasto C mentre lo si sta giocando; Per disattivare la modalit&agrave; "Imbroglia" &egrave; possibile premere il tasto di una lettera qualsiasi nel menu principale. Naturalmente &egrave; immorale usare un trucco ma NeverBall &egrave; un gioco di abilit&agrave;, non di avventura, quindi &egrave; giusto fornire la possibilit&agrave; di giocare tutti i livelli. In ogni caso per i creatori di livelli, come sopracitato, pu&ograve; essere utile. <br> <strong>Storia:</strong> Neverball &egrave; nato il 4 agosto 2004, sotto lo sviluppo di Robert Kooima. Lo stesso Kooima si assume il ruolo di mapper, developer e artista. Nelle prime versione, prima della differenziazione fra set, Kooima aveva assegnato un numero di versione in base al numero di livelli. Successivamente al Neverball Team si &egrave; aggiunto Mehdi Yousfi-Monod, allora laureando in informatica all&#39;universit&agrave; di Montpellier. A partire dalla versione 1.6.0 del gioco, sono disponibili i Rotating Objects e il gioco viene distribuito nativamente con delle traduzioni in italiano, in ungherese e in polacco. Neverball utilizza GNU Gettext per la traduzione automatica del gioco. Quest&#39;ultimo conta numerose traduzioni. Il gioco &egrave; stato tradotto nella lingua italiana a giugno 2011 (rendendo la traduzione disponibile come download separato) da Andrea Del Santo e Giacomo Frate. Come gi&agrave; sottolineato, per Windows e Linux in lingua italiana Neverball &egrave; distribuito automaticamente tradotto dalla release "1.6". <br> <strong>La Community:</strong> Neverball &egrave; un gioco completamente community-driven. Da qualche anno esiste un forum ufficiale per la Comunit&agrave; di Neverball. Esistono, come per Quake III Arena, numerosi livelli personalizzati riuniti in Set. Nuncabola (che in spagnolo significa "Mai palla", proprio come "Never Ball") &egrave; una versione del gioco scritta in Java. Neverball &egrave; scritto interamente in C e usa openGL che limita l&#39;uso del gioco sui PC, escludendo sistemi Embedded di vario tipo. Ora &egrave; disponibile una versione su Java attraverso Nuncabola, originariamente scritto da Florian Priester, traduttore tedesco, che, come gi&agrave; detto, &egrave; interamente scritto in Java AWT. Neverball &egrave; disponibile anche sotto il nome di Neverball ME per Android e iPhone. <br> <strong>Core:</strong> NeverBall Replay (*.nbr) &egrave; un formato di file sviluppato da Robert Kooima, e distribuito con la licenza GNU General Public License, esattamente come Neverball e Neverputt. Un NeverBall Replay File &egrave; un insieme di istruzioni che consentono di riprodurre la partita salvata, e include un header di informazioni, che contiene il Reference al file SOL che contiene informazioni sulla mappa. Solid Format File (*.sol) &egrave; il formato compilato, versione alleggerita dei file BSP di Quake III. Esso &egrave; un insieme statico di strutture geometriche ed entit&agrave; del gioco. Come il NBR, &egrave; distribuito sotto GPL. Per ottenere Solid File, i file Mapcode (*.map) devono essere compilati con Map Compiler (mapc), un&#39;utility compresa in Neverball.</font>\n' );
+document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &egrave; un videogioco di abilit&agrave; tridimensionale che si ispira alle meccaniche di gioco di Marble Madness e di Super Monkey Ball, creato nel 2006 da Robert Kooima. &Egrave; un software libero, distribuito sotto licenza GNU General Public License per Linux, FreeBSD, Windows, macOS, Sega Dreamcast e iOS, si adatta dunque a molti sistemi operativi, sono in fase di sviluppo le versioni per Android e Nokia N900. Il motore grafico e quello fisico di Neverball sono utilizzati anche dal videogioco di minigolf Neverputt. <br> <strong>Modalit&agrave; di gioco:</strong> Lo scopo del gioco &egrave; principalmente quello di portare a destinazione una pallina, evitando di farla precipitare nel vuoto e cercando di superare tutti gli ostacoli presenti. Per superare un livello &egrave; necessario raccogliere abbastanza punti facendo passare la pallina sopra le monete presenti nel gioco. Ve ne sono tre tipi: gialle, che valgono un punto, rosse, che ne valgono cinque, e blu, che valgono dieci punti. Il motore fisico non prevede una "linea di terra" quindi tutto fluttua nell&#39;aria. &Egrave; quindi legittimo, in una mappa, posizionare oggetti in qualsiasi punto nello spazio. Al contrario di altri giochi simili, il giocatore che utilizza il mouse non controlla direttamente la palla, ma il campo di gioco: piegandolo nelle varie direzioni la palla tender&agrave; a muoversi per la forza di gravit&agrave;. Il giocatore deve tenere conto dell&#39;inerzia della pallina, evitando quindi movimenti troppo bruschi o inclinazioni troppo ripide. In realt&agrave;, l&#39;uso della tastiera permette maggiore controllo della pallina poich&eacute; quest&#39;ultima viene controllata direttamente permettendo cos&igrave; un movimento minore e pi&ugrave; facilmente controllabile. A seconda del giocatore si pu&ograve; preferire indistintamente l&#39;uno o l&#39;altro. Esiste anche la modalit&agrave; Sfida che permette di sbloccare livelli bonus presenti nel set corrispondente, dove l&#39;utente guadagna una vita (precisamente palla) ogni 100 punti e 1 punto equivale a una moneta gialla. Se si perde il livello (in caso di cadute, tempo scaduto ecc...) si perde una vita. Per ogni set da 25 livelli incluso di default ci sono in genere 5 livelli bonus (oltre ai 20 regolari) ma non esiste alcun limite: un creatore di livelli pu&ograve; specificare quali livelli saranno quelli bonus. <br> <strong>Trucchi:</strong> Sono inoltre disponibili alcuni trucchi. Assicurarsi di aver attivato il blocco maiuscole e digitare nel menu principale -> Per vecchie versioni di NeverBall: "CHEAT" (senza le virgolette); Per nuove versioni di NeverBall: "XYZYY" (senza le virgolette); L&#39;attivazione comporter&agrave;: La trasformazione della voce "Gioca" in "Imbroglia"; La comparsa di un set nascosto, chiamato "Neverball Elements", dove sono contenute tutte le possibilit&agrave; di personalizzazione dei livelli in NeverBall, che sono un aiuto per i creatori di livelli e un divertimento assicurato per i normali utenti; La comparsa del percorso al file .SOL (vedere sezione Core) del livello selezionato durante la visualizzazione dei livelli dei set; Lo sblocco di tutti i livelli disponibili in tutti i set (temporaneo, ma i livelli completati verranno comunque sbloccati permanentemente); La possibilit&agrave; di completare un livello immediatamente premendo il tasto C mentre lo si sta giocando; Per disattivare la modalit&agrave; "Imbroglia" &egrave; possibile premere il tasto di una lettera qualsiasi nel menu principale. Naturalmente &egrave; immorale usare un trucco ma NeverBall &egrave; un gioco di abilit&agrave;, non di avventura, quindi &egrave; giusto fornire la possibilit&agrave; di giocare tutti i livelli. In ogni caso per i creatori di livelli, come sopracitato, pu&ograve; essere utile.' );
+</script>
+
+<div id="audio-container">
+  <h1 style="color: DarkSlateBlue; font-family: Arial Black;">
+<svg width="72px" height="72px" viewBox="0 0 48 48" fill="#000000"><g stroke-width="0"/><gstroke-linecap="round" stroke-linejoin="round"/><g><path class="a" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#004001" d="M3.5,25.018h9.8767l2.2775-10.9731,2.2775,20.1622L20.2092,9.0623l2.2775,29.8754L24.7642,9.1925,27.0417,36.428l2.2775-25.4062L31.5967,29.778l2.2775-16.2172,2.2775,11.3627H44.5"/></g></svg>
+  MAudioGen
+<svg width="72px" height="72px" viewBox="0 0 48 48" fill="#000000"><g stroke-width="0"/><gstroke-linecap="round" stroke-linejoin="round"/><g><path class="a" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#004001" d="M3.5,25.018h9.8767l2.2775-10.9731,2.2775,20.1622L20.2092,9.0623l2.2775,29.8754L24.7642,9.1925,27.0417,36.428l2.2775-25.4062L31.5967,29.778l2.2775-16.2172,2.2775,11.3627H44.5"/></g></svg>
+  </h1>
+    <label style="color: MidnightBlue; font-family: Arial Black; font-size: 32px;" for="frequency-range">Frequenza: </label>
+    <input style="color: Aquamarine;" type="range" id="frequency-range" min="20" max="20000" step="1" value="20"><br>
+	<input style="border-color: DarkBlue; background-color: DarkCyan; color: Aquamarine; margin-left: 8px;" type="number" id="frequency-input" min="20" max="20000" value="20"><br><br>
+    <span style="color: RoyalBlue; font-family: Segoe UI Black;" id="frequency-label">20 Hz</span><br><br>
+    <br>
+    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-square">&#9632; <small><ins>Onda:</ins></small> <strong>Quadra</strong> &#9632;</label>
+    <input type="radio" name="waveform" id="waveform-square" value="square" checked>
+    <br>
+    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-sine">&sim; <small><ins>Onda:</ins></small> <strong>Sinusoidale</strong> &sim;</label>
+    <input type="radio" name="waveform" id="waveform-sine" value="sine">
+    <br>
+    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-triangle">&#9650; <small><ins>Onda:</ins></small> <strong>Triangolare</strong> &#9650;</label>
+    <input type="radio" name="waveform" id="waveform-triangle" value="triangle">
+    <br>
+    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-sawtooth">&#9653; <small><ins>Onda:</ins></small> <strong>Dente di Sega</strong> &#9653;</label>
+    <input type="radio" name="waveform" id="waveform-sawtooth" value="sawtooth">
+    
+    <br><br>
+	
+    <label style="color: RebeccaPurple; font-family: Arial;" for="noise-checkbox"><em>Rumore Bianco</em>&rarr;</label>
+    <input type="checkbox" id="noise-checkbox" value="noise">
+    
+    <label style="color: RebeccaPurple; font-family: Arial;" for="diapason-checkbox"><em>Diapason</em>&rarr;</label>
+    <input type="checkbox" id="diapason-checkbox" value="diapason">
+    
+    <label style="color: RebeccaPurple; font-family: Arial;" for="pink-noise-checkbox"><em>Rumore Rosa</em>&rarr;</label>
+    <input type="checkbox" id="pink-noise-checkbox" value="pink-noise">
+    
+    <label style="color: RebeccaPurple; font-family: Arial;" for="brown-noise-checkbox"><em>Rumore Marrone</em>&rarr;</label>
+    <input type="checkbox" id="brown-noise-checkbox" value="brown-noise">
+<br><br>
+<button style="font-size: 32px; border-color: Green; border-width: 6px; color: ForestGreen; background-color: LightGreen; font-family: Arial;" id="play-button">&#9658; Play</button>
+<font size="6">&nbsp; &nbsp; &nbsp;</font>
+<button style="font-size: 32px; border-color: Red; border-width: 6px; color: FireBrick; background-color: IndianRed; font-family: Arial;" id="stop-button" disabled>&#10074;&#10074; Stop</button>
+<br><br>
+<span id="emojv">&#128266;</span> <input type="range" id="volume-range" min="0" max="1" step="0.01" value="0.5"><br>
+</div>
+
+<script type="text/javascript">
+document.write( '<br> <strong>Storia:</strong> Neverball &egrave; nato il 4 agosto 2004, sotto lo sviluppo di Robert Kooima. Lo stesso Kooima si assume il ruolo di mapper, developer e artista. Nelle prime versione, prima della differenziazione fra set, Kooima aveva assegnato un numero di versione in base al numero di livelli. Successivamente al Neverball Team si &egrave; aggiunto Mehdi Yousfi-Monod, allora laureando in informatica all&#39;universit&agrave; di Montpellier. A partire dalla versione 1.6.0 del gioco, sono disponibili i Rotating Objects e il gioco viene distribuito nativamente con delle traduzioni in italiano, in ungherese e in polacco. Neverball utilizza GNU Gettext per la traduzione automatica del gioco. Quest&#39;ultimo conta numerose traduzioni. Il gioco &egrave; stato tradotto nella lingua italiana a giugno 2011 (rendendo la traduzione disponibile come download separato) da Andrea Del Santo e Giacomo Frate. Come gi&agrave; sottolineato, per Windows e Linux in lingua italiana Neverball &egrave; distribuito automaticamente tradotto dalla release "1.6". <br> <strong>La Community:</strong> Neverball &egrave; un gioco completamente community-driven. Da qualche anno esiste un forum ufficiale per la Comunit&agrave; di Neverball. Esistono, come per Quake III Arena, numerosi livelli personalizzati riuniti in Set. Nuncabola (che in spagnolo significa "Mai palla", proprio come "Never Ball") &egrave; una versione del gioco scritta in Java. Neverball &egrave; scritto interamente in C e usa openGL che limita l&#39;uso del gioco sui PC, escludendo sistemi Embedded di vario tipo. Ora &egrave; disponibile una versione su Java attraverso Nuncabola, originariamente scritto da Florian Priester, traduttore tedesco, che, come gi&agrave; detto, &egrave; interamente scritto in Java AWT. Neverball &egrave; disponibile anche sotto il nome di Neverball ME per Android e iPhone. <br> <strong>Core:</strong> NeverBall Replay (*.nbr) &egrave; un formato di file sviluppato da Robert Kooima, e distribuito con la licenza GNU General Public License, esattamente come Neverball e Neverputt. Un NeverBall Replay File &egrave; un insieme di istruzioni che consentono di riprodurre la partita salvata, e include un header di informazioni, che contiene il Reference al file SOL che contiene informazioni sulla mappa. Solid Format File (*.sol) &egrave; il formato compilato, versione alleggerita dei file BSP di Quake III. Esso &egrave; un insieme statico di strutture geometriche ed entit&agrave; del gioco. Come il NBR, &egrave; distribuito sotto GPL. Per ottenere Solid File, i file Mapcode (*.map) devono essere compilati con Map Compiler (mapc), un&#39;utility compresa in Neverball.</font>\n' );
 document.write( '<p></p>' );
 </script>
 
@@ -3058,6 +3171,240 @@ window.addEventListener("DOMContentLoaded", function() {
     }
 </script>
 
+<script type="text/javascript">
+
+//let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioContext = null;
+let oscillator = null;
+let gainNode = null;
+const frequencyRange = document.getElementById('frequency-range');
+const frequencyInput = document.getElementById('frequency-input');
+const frequencyLabel = document.getElementById('frequency-label');
+const volumeRange = document.getElementById('volume-range');
+let playButton = document.getElementById('play-button');
+let stopButton = document.getElementById('stop-button');
+let noiseCheckbox = document.getElementById('noise-checkbox');
+let diapasonCheckbox = document.getElementById('diapason-checkbox');
+let pinkNoiseCheckbox = document.getElementById('pink-noise-checkbox');
+let brownNoiseCheckbox = document.getElementById('brown-noise-checkbox');
+let effects = [];
+let bufferSource = null;
+
+function initializeAudioContext() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioContext.createGain();
+  gainNode.connect(audioContext.destination);
+
+  // Rimuovi l'event listener dopo la prima interazione
+  document.removeEventListener('click', initializeAudioContext);
+  document.removeEventListener('mousedown', initializeAudioContext);
+  document.removeEventListener('keydown', initializeAudioContext);
+  
+  // Abilita i pulsanti Play e Stop
+  playButton.disabled = false;
+  stopButton.disabled = false;
+}
+
+// Disabilita i pulsanti Play e Stop inizialmente
+playButton.disabled = true;
+stopButton.disabled = true;
+
+// Aggiungi l'event listener "click" all'intera pagina
+document.addEventListener('click', initializeAudioContext);
+document.addEventListener('mousedown', initializeAudioContext);
+document.addEventListener('keydown', initializeAudioContext);
+
+function startTone() {
+  let frequency = document.getElementById('frequency-range').value;
+  let waveform = document.querySelector('input[name="waveform"]:checked').value;
+
+  oscillator = audioContext.createOscillator();
+  oscillator.type = waveform;
+  oscillator.frequency.value = frequency;
+
+  if (effects.length > 0) {
+    let bufferSize = audioContext.sampleRate * 2;
+    let buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    let data = buffer.getChannelData(0);
+
+    addEffects(data, effects);
+
+    bufferSource = audioContext.createBufferSource();
+    bufferSource.buffer = buffer;
+    bufferSource.loop = true;
+    bufferSource.connect(gainNode);
+    bufferSource.start();
+  }
+
+  oscillator.connect(gainNode);
+  oscillator.start();
+
+  frequencyLabel.textContent = frequency + ' Hz';
+
+  playButton.disabled = true;
+  stopButton.disabled = false;
+}
+
+function stopTone() {
+  if (oscillator) {
+    oscillator.stop();
+    oscillator.disconnect();
+    oscillator = null;
+  }
+
+  if (bufferSource) {
+    bufferSource.stop();
+    bufferSource.disconnect();
+    bufferSource = null;
+  }
+
+  playButton.disabled = false;
+  stopButton.disabled = true;
+}
+
+function addEffects(bufferData, effects) {
+  for (let i = 0; i < bufferData.length; i++) {
+    for (let j = 0; j < effects.length; j++) {
+      let effect = effects[j];
+
+      switch (effect) {
+        case 'noise':
+          bufferData[i] += Math.random() * 2 - 1; // Rumore bianco
+          break;
+        case 'diapason':
+          bufferData[i] += Math.sin(i * Math.PI * 2 * 440 / audioContext.sampleRate); // Diapason
+          break;
+        case 'pink-noise':
+          bufferData[i] += (Math.random() * 2 - 1) / Math.sqrt(i + 1); // Rumore rosa
+          break;
+        case 'brown-noise':
+          let lastValue = 0;
+          bufferData[i] += (lastValue + 0.02 * (Math.random() * 2 - 1)) / Math.sqrt(i + 1); // Rumore marrone
+          lastValue = bufferData[i];
+          break;
+      }
+    }
+  }
+}
+
+noiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('noise');
+  } else {
+    let index = effects.indexOf('noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+diapasonCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('diapason');
+  } else {
+    let index = effects.indexOf('diapason');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+pinkNoiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('pink-noise');
+  } else {
+    let index = effects.indexOf('pink-noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+brownNoiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('brown-noise');
+  } else {
+    let index = effects.indexOf('brown-noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+// Event listener per l'input del volume
+volumeRange.addEventListener('input', function() {
+  let volume = parseFloat(volumeRange.value);
+  gainNode.gain.value = volume;
+});
+
+// Event listener per l'input della frequenza
+frequencyRange.addEventListener('input', function() {
+  let frequency = parseInt(frequencyRange.value);
+  frequencyInput.value = frequency;
+  frequencyLabel.textContent = frequency + ' Hz';
+
+  if (oscillator) {
+    oscillator.frequency.value = frequency;
+  }
+});
+
+frequencyInput.addEventListener('input', function() {
+  let frequency = parseInt(frequencyInput.value);
+
+  if (frequency >= frequencyRange.min && frequency <= frequencyRange.max) {
+    frequencyRange.value = frequency;
+    frequencyLabel.textContent = frequency + ' Hz';
+
+    if (oscillator) {
+      oscillator.frequency.value = frequency;
+    }
+  }
+});
+
+// Event listener per il pulsante Play
+playButton.addEventListener('click', startTone);
+
+// Event listener per il pulsante Stop
+stopButton.addEventListener('click', stopTone);
+
+playButton.addEventListener('mousedown', startTone);
+stopButton.addEventListener('mousedown', stopTone);
+
+playButton.addEventListener('touchstart', startTone);
+stopButton.addEventListener('touchstart', stopTone);
+
+// Ottenere l'elemento input range e lo span delle emoji
+const emojiSpan = document.getElementById('emojv');
+
+// Funzione per ottenere la sequenza di emoji
+function getEmoji(volume) {
+  if (volume === 0) {
+    return '🔇';
+  } else if (volume === 1) {
+    return '📢';
+  } else {
+    const maxVolume = parseFloat(volumeRange.max);
+    const minVolume = parseFloat(volumeRange.min);
+    const numEmojis = 10; // Numero di emoji nella sequenza
+    const emoji = ['🔈', '🔉', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊'];
+
+    // Calcolare l'indice dell'emoji basato sul volume
+    const index = Math.floor(((volume - minVolume) / (maxVolume - minVolume)) * numEmojis);
+
+    // Restituire l'emoji corrispondente all'indice
+    return emoji[index];
+  }
+}
+
+// Aggiornare l'emoji quando il valore del range cambia
+volumeRange.addEventListener('input', function() {
+  const volume = parseFloat(volumeRange.value);
+  const emoji = getEmoji(volume);
+  
+  emojiSpan.textContent = emoji; // Sostituisci l'emoji nell'elemento span
+});
+
+</script>
 
 <script type="text/javascript">
 
