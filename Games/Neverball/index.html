@@ -1554,6 +1554,7 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
 </script>
 
 <div id="audio-container">
+<canvas style="border-color: Maroon; border-width: 6px; border-style: double; background-color: rgba(205, 92, 92, 0.3);" id="freqmonitor" width="450px" height="100px"></canvas>
   <h1 style="color: DarkSlateBlue; font-family: Arial Black;">
 <svg width="72px" height="72px" viewBox="0 0 48 48" fill="#000000"><g stroke-width="0"/><gstroke-linecap="round" stroke-linejoin="round"/><g><path class="a" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#004001" d="M3.5,25.018h9.8767l2.2775-10.9731,2.2775,20.1622L20.2092,9.0623l2.2775,29.8754L24.7642,9.1925,27.0417,36.428l2.2775-25.4062L31.5967,29.778l2.2775-16.2172,2.2775,11.3627H44.5"/></g></svg>
   MAudioGen
@@ -1564,11 +1565,11 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
 	<input style="border-color: DarkBlue; background-color: DarkCyan; color: Aquamarine; margin-left: 8px;" type="number" id="frequency-input" min="20" max="20000" value="20"><br><br>
     <span style="color: RoyalBlue; font-family: Segoe UI Black;" id="frequency-label">20 Hz</span><br><br>
     <br>
-    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-square">&#9632; <small><ins>Onda:</ins></small> <strong>Quadra</strong> &#9632;</label>
-    <input type="radio" name="waveform" id="waveform-square" value="square" checked>
-    <br>
     <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-sine">&sim; <small><ins>Onda:</ins></small> <strong>Sinusoidale</strong> &sim;</label>
-    <input type="radio" name="waveform" id="waveform-sine" value="sine">
+    <input type="radio" name="waveform" id="waveform-sine" value="sine" checked>
+    <br>
+    <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-square">&#9632; <small><ins>Onda:</ins></small> <strong>Quadra</strong> &#9632;</label>
+    <input type="radio" name="waveform" id="waveform-square" value="square">
     <br>
     <label style="color: MidnightBlue; font-family: Arial Black;" for="waveform-triangle">&#9650; <small><ins>Onda:</ins></small> <strong>Triangolare</strong> &#9650;</label>
     <input type="radio" name="waveform" id="waveform-triangle" value="triangle">
@@ -3172,8 +3173,6 @@ window.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <script type="text/javascript">
-
-//let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let audioContext = null;
 let oscillator = null;
 let gainNode = null;
@@ -3189,6 +3188,10 @@ let pinkNoiseCheckbox = document.getElementById('pink-noise-checkbox');
 let brownNoiseCheckbox = document.getElementById('brown-noise-checkbox');
 let effects = [];
 let bufferSource = null;
+let animationerId = null; // ID dell'animazione
+let isPlaying = false; // Flag per indicare se l'audio è in riproduzione
+let currentWaveform = 'sine'; // Inizialmente impostato su 'sine' (sinusoide)
+let x = 0;
 
 function initializeAudioContext() {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -3198,7 +3201,7 @@ function initializeAudioContext() {
   // Rimuovi l'event listener dopo la prima interazione
   document.removeEventListener('click', initializeAudioContext);
   document.removeEventListener('mousedown', initializeAudioContext);
-  document.removeEventListener('keydown', initializeAudioContext);
+
   
   // Abilita i pulsanti Play e Stop
   playButton.disabled = false;
@@ -3212,11 +3215,18 @@ stopButton.disabled = true;
 // Aggiungi l'event listener "click" all'intera pagina
 document.addEventListener('click', initializeAudioContext);
 document.addEventListener('mousedown', initializeAudioContext);
-document.addEventListener('keydown', initializeAudioContext);
+
+
+//Inizializza l'onda con la linea continua
+drawWave(0);
 
 function startTone() {
-  let frequency = document.getElementById('frequency-range').value;
+  let frequency = parseInt(frequencyRange.value);
   let waveform = document.querySelector('input[name="waveform"]:checked').value;
+  
+  if (isPlaying && waveform !== currentWaveform) {
+    stopTone(); // Ferma l'onda precedente se il tipo di onda è cambiato
+  }
 
   oscillator = audioContext.createOscillator();
   oscillator.type = waveform;
@@ -3243,7 +3253,25 @@ function startTone() {
 
   playButton.disabled = true;
   stopButton.disabled = false;
+
+  isPlaying = true;
+  animateWave(); // Avvia l'animazione dell'onda
+  currentWaveform = waveform; // Aggiorna il tipo di onda corrente
 }
+
+
+function animateWave() {
+  if (!isPlaying) {
+    return;
+  }
+
+  const frequency = parseInt(frequencyRange.value);
+  drawWave(frequency);
+
+  // Richiama l'animazione alla prossima chiamata del browser
+  animationerId = requestAnimationFrame(animateWave);
+}
+
 
 function stopTone() {
   if (oscillator) {
@@ -3260,7 +3288,12 @@ function stopTone() {
 
   playButton.disabled = false;
   stopButton.disabled = true;
+
+  isPlaying = false;
+  cancelAnimationFrame(animationerId); // Interrompi l'animazione
+  drawLine();
 }
+
 
 function addEffects(bufferData, effects) {
   for (let i = 0; i < bufferData.length; i++) {
@@ -3287,6 +3320,99 @@ function addEffects(bufferData, effects) {
   }
 }
 
+
+const waveformInputs = document.querySelectorAll('input[name="waveform"]');
+waveformInputs.forEach(function(input) {
+  input.addEventListener('change', function() {
+    drawWave(parseInt(frequencyRange.value)); // Ridisegna l'onda con la nuova forma selezionata
+	drawLine(); //Applica però la linea allo stop
+  });
+});
+
+waveformInputs.forEach(input => {
+  input.addEventListener('change', function() {
+    if (isPlaying) {
+      changeWaveform(this.value);
+    }
+  });
+});
+
+function changeWaveform(waveform) {
+  if (isPlaying) {
+    stopTone(); // Ferma l'onda precedente se il tipo di onda è cambiato durante la riproduzione
+    currentWaveform = waveform; // Aggiorna il tipo di onda corrente
+    startTone(); // Avvia la riproduzione dell'onda con la nuova forma
+  } else {
+    currentWaveform = waveform; // Aggiorna il tipo di onda corrente
+    drawWave(parseInt(frequencyRange.value)); // Ridisegna l'onda con la nuova forma
+  }
+}
+
+
+
+function drawWave(frequency) {
+  const canvas = document.getElementById('freqmonitor');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height / 2);
+
+  const amplitude = canvas.height / 2;
+  const phaseShift = 0.05; //Sensibilità onda
+ // const minFrequency = 0;
+ // const maxFrequency = 20000;
+ // const clampedFrequency = Math.max(minFrequency, Math.min(maxFrequency, frequency));
+ // const wavelength = canvas.width / (clampedFrequency * 2);
+ const minFrequency = 0;
+ const maxFrequency = 20000;
+ const scalingFactor = 50 / maxFrequency; // Fattore di scala per la variazione dell'ampiezza
+ const clampedFrequency = Math.max(minFrequency, Math.min(maxFrequency, frequency));
+ const scaledFrequency = clampedFrequency * scalingFactor;
+
+const wavelength = canvas.width / (scaledFrequency * 2);
+  let x = 0;
+  let y = canvas.height / 2;
+
+  const waveform = document.querySelector('input[name="waveform"]:checked').value;
+
+  for (let i = 0; i < canvas.width; i++) {
+    x = i;
+
+    switch (waveform) {
+      case 'sine':
+        y = canvas.height / 2 + Math.sin((x / wavelength) * 2 * Math.PI + phaseShift) * amplitude;
+        break;
+      case 'square':
+        y = canvas.height / 2 + Math.sign(Math.sin((x / wavelength) * 2 * Math.PI + phaseShift)) * amplitude;
+        break;
+      case 'triangle':
+        const trianglePos = ((x / wavelength) + phaseShift) % 1;
+        if (trianglePos < 0.25) {
+          y = canvas.height / 2 + (trianglePos * 4) * amplitude;
+        } else if (trianglePos < 0.75) {
+          y = canvas.height / 2 + ((0.5 - trianglePos) * 4) * amplitude;
+        } else {
+          y = canvas.height / 2 + ((trianglePos - 1) * 4) * amplitude;
+        }
+        break;
+      case 'sawtooth':
+        const sawtoothPos = ((x / wavelength) + phaseShift) % 1;
+        y = canvas.height / 2 + (sawtoothPos * 2 - 1) * amplitude;
+        break;
+    }
+
+    ctx.lineTo(x, y);
+  }
+
+  ctx.strokeStyle = 'DarkRed';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(205, 92, 92, 0.3)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+}
+
+
 noiseCheckbox.addEventListener('change', function() {
   if (this.checked) {
     effects.push('noise');
@@ -3295,6 +3421,11 @@ noiseCheckbox.addEventListener('change', function() {
     if (index > -1) {
       effects.splice(index, 1);
     }
+  }
+  
+  if (isPlaying) {
+    stopTone();
+    startTone();
   }
 });
 
@@ -3307,6 +3438,11 @@ diapasonCheckbox.addEventListener('change', function() {
       effects.splice(index, 1);
     }
   }
+  
+  if (isPlaying) {
+    stopTone();
+    startTone();
+  }
 });
 
 pinkNoiseCheckbox.addEventListener('change', function() {
@@ -3317,6 +3453,11 @@ pinkNoiseCheckbox.addEventListener('change', function() {
     if (index > -1) {
       effects.splice(index, 1);
     }
+  }
+  
+  if (isPlaying) {
+    stopTone();
+    startTone();
   }
 });
 
@@ -3329,7 +3470,13 @@ brownNoiseCheckbox.addEventListener('change', function() {
       effects.splice(index, 1);
     }
   }
+  
+  if (isPlaying) {
+    stopTone();
+    startTone();
+  }
 });
+
 
 // Event listener per l'input del volume
 volumeRange.addEventListener('input', function() {
@@ -3379,14 +3526,14 @@ const emojiSpan = document.getElementById('emojv');
 // Funzione per ottenere la sequenza di emoji
 function getEmoji(volume) {
   if (volume === 0) {
-    return '🔇';
+    return '\uD83D\uDD07';
   } else if (volume === 1) {
-    return '📢';
+    return '\uD83D\uDCE2';
   } else {
     const maxVolume = parseFloat(volumeRange.max);
     const minVolume = parseFloat(volumeRange.min);
     const numEmojis = 10; // Numero di emoji nella sequenza
-    const emoji = ['🔈', '🔉', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊'];
+    const emoji = ['\uD83D\uDD08', '\uD83D\uDD08', '\uD83D\uDD08', '\uD83D\uDD09', '\uD83D\uDD09', '\uD83D\uDD09', '\uD83D\uDD0A', '\uD83D\uDD0A', '\uD83D\uDD0A', '\uD83D\uDD0A'];
 
     // Calcolare l'indice dell'emoji basato sul volume
     const index = Math.floor(((volume - minVolume) / (maxVolume - minVolume)) * numEmojis);
@@ -3404,6 +3551,23 @@ volumeRange.addEventListener('input', function() {
   emojiSpan.textContent = emoji; // Sostituisci l'emoji nell'elemento span
 });
 
+
+//Animazione iniziale per indicare lo stato inattivo
+function drawLine() {
+const canvas = document.getElementById("freqmonitor");
+const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.moveTo(canvas.width + 20, 0);
+  ctx.lineTo(x, canvas.height);
+  ctx.strokeStyle = "blue";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  
+  requestAnimationFrame(drawLine);
+}
+
+drawLine();
 </script>
 
 <script type="text/javascript">
@@ -4530,6 +4694,239 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Puoi eseguire altre azioni qui in base all'inclinazione
   }
+});
+*/
+
+/*
+//let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioContext = null;
+let oscillator = null;
+let gainNode = null;
+const frequencyRange = document.getElementById('frequency-range');
+const frequencyInput = document.getElementById('frequency-input');
+const frequencyLabel = document.getElementById('frequency-label');
+const volumeRange = document.getElementById('volume-range');
+let playButton = document.getElementById('play-button');
+let stopButton = document.getElementById('stop-button');
+let noiseCheckbox = document.getElementById('noise-checkbox');
+let diapasonCheckbox = document.getElementById('diapason-checkbox');
+let pinkNoiseCheckbox = document.getElementById('pink-noise-checkbox');
+let brownNoiseCheckbox = document.getElementById('brown-noise-checkbox');
+let effects = [];
+let bufferSource = null;
+
+function initializeAudioContext() {
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioContext.createGain();
+  gainNode.connect(audioContext.destination);
+
+  // Rimuovi l'event listener dopo la prima interazione
+  document.removeEventListener('click', initializeAudioContext);
+  document.removeEventListener('mousedown', initializeAudioContext);
+  document.removeEventListener('keydown', initializeAudioContext);
+  
+  // Abilita i pulsanti Play e Stop
+  playButton.disabled = false;
+  stopButton.disabled = false;
+}
+
+// Disabilita i pulsanti Play e Stop inizialmente
+playButton.disabled = true;
+stopButton.disabled = true;
+
+// Aggiungi l'event listener "click" all'intera pagina
+document.addEventListener('click', initializeAudioContext);
+document.addEventListener('mousedown', initializeAudioContext);
+document.addEventListener('keydown', initializeAudioContext);
+
+function startTone() {
+  let frequency = document.getElementById('frequency-range').value;
+  let waveform = document.querySelector('input[name="waveform"]:checked').value;
+
+  oscillator = audioContext.createOscillator();
+  oscillator.type = waveform;
+  oscillator.frequency.value = frequency;
+
+  if (effects.length > 0) {
+    let bufferSize = audioContext.sampleRate * 2;
+    let buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    let data = buffer.getChannelData(0);
+
+    addEffects(data, effects);
+
+    bufferSource = audioContext.createBufferSource();
+    bufferSource.buffer = buffer;
+    bufferSource.loop = true;
+    bufferSource.connect(gainNode);
+    bufferSource.start();
+  }
+
+  oscillator.connect(gainNode);
+  oscillator.start();
+
+  frequencyLabel.textContent = frequency + ' Hz';
+
+  playButton.disabled = true;
+  stopButton.disabled = false;
+}
+
+function stopTone() {
+  if (oscillator) {
+    oscillator.stop();
+    oscillator.disconnect();
+    oscillator = null;
+  }
+
+  if (bufferSource) {
+    bufferSource.stop();
+    bufferSource.disconnect();
+    bufferSource = null;
+  }
+
+  playButton.disabled = false;
+  stopButton.disabled = true;
+}
+
+function addEffects(bufferData, effects) {
+  for (let i = 0; i < bufferData.length; i++) {
+    for (let j = 0; j < effects.length; j++) {
+      let effect = effects[j];
+
+      switch (effect) {
+        case 'noise':
+          bufferData[i] += Math.random() * 2 - 1; // Rumore bianco
+          break;
+        case 'diapason':
+          bufferData[i] += Math.sin(i * Math.PI * 2 * 440 / audioContext.sampleRate); // Diapason
+          break;
+        case 'pink-noise':
+          bufferData[i] += (Math.random() * 2 - 1) / Math.sqrt(i + 1); // Rumore rosa
+          break;
+        case 'brown-noise':
+          let lastValue = 0;
+          bufferData[i] += (lastValue + 0.02 * (Math.random() * 2 - 1)) / Math.sqrt(i + 1); // Rumore marrone
+          lastValue = bufferData[i];
+          break;
+      }
+    }
+  }
+}
+
+noiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('noise');
+  } else {
+    let index = effects.indexOf('noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+diapasonCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('diapason');
+  } else {
+    let index = effects.indexOf('diapason');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+pinkNoiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('pink-noise');
+  } else {
+    let index = effects.indexOf('pink-noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+brownNoiseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    effects.push('brown-noise');
+  } else {
+    let index = effects.indexOf('brown-noise');
+    if (index > -1) {
+      effects.splice(index, 1);
+    }
+  }
+});
+
+// Event listener per l'input del volume
+volumeRange.addEventListener('input', function() {
+  let volume = parseFloat(volumeRange.value);
+  gainNode.gain.value = volume;
+});
+
+// Event listener per l'input della frequenza
+frequencyRange.addEventListener('input', function() {
+  let frequency = parseInt(frequencyRange.value);
+  frequencyInput.value = frequency;
+  frequencyLabel.textContent = frequency + ' Hz';
+
+  if (oscillator) {
+    oscillator.frequency.value = frequency;
+  }
+});
+
+frequencyInput.addEventListener('input', function() {
+  let frequency = parseInt(frequencyInput.value);
+
+  if (frequency >= frequencyRange.min && frequency <= frequencyRange.max) {
+    frequencyRange.value = frequency;
+    frequencyLabel.textContent = frequency + ' Hz';
+
+    if (oscillator) {
+      oscillator.frequency.value = frequency;
+    }
+  }
+});
+
+// Event listener per il pulsante Play
+playButton.addEventListener('click', startTone);
+
+// Event listener per il pulsante Stop
+stopButton.addEventListener('click', stopTone);
+
+playButton.addEventListener('mousedown', startTone);
+stopButton.addEventListener('mousedown', stopTone);
+
+playButton.addEventListener('touchstart', startTone);
+stopButton.addEventListener('touchstart', stopTone);
+
+// Ottenere l'elemento input range e lo span delle emoji
+const emojiSpan = document.getElementById('emojv');
+
+// Funzione per ottenere la sequenza di emoji
+function getEmoji(volume) {
+  if (volume === 0) {
+    return '🔇';
+  } else if (volume === 1) {
+    return '📢';
+  } else {
+    const maxVolume = parseFloat(volumeRange.max);
+    const minVolume = parseFloat(volumeRange.min);
+    const numEmojis = 10; // Numero di emoji nella sequenza
+    const emoji = ['🔈', '🔉', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊', '🔊'];
+
+    // Calcolare l'indice dell'emoji basato sul volume
+    const index = Math.floor(((volume - minVolume) / (maxVolume - minVolume)) * numEmojis);
+
+    // Restituire l'emoji corrispondente all'indice
+    return emoji[index];
+  }
+}
+
+// Aggiornare l'emoji quando il valore del range cambia
+volumeRange.addEventListener('input', function() {
+  const volume = parseFloat(volumeRange.value);
+  const emoji = getEmoji(volume);
+  
+  emojiSpan.textContent = emoji; // Sostituisci l'emoji nell'elemento span
 });
 */
 </script>
