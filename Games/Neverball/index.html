@@ -449,6 +449,18 @@ body.hide-scroll {
 		filter: grayscale(100%);
 	}
 	
+#toggle-checkbox:hover {
+	filter: contrast(200%);
+}
+
+#toggle-checkbox:active {
+	filter: saturate(30%);
+}
+
+#toggle-checkbox:disabled {
+	filter: grayscale(100%);
+}
+
 
 #frequency-range[type="range"] {
   /* Personalizza qui il tuo stile specifico per l'elemento con ID "myRange" */
@@ -1591,8 +1603,10 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
     <label style="color: RebeccaPurple; font-family: Arial;" for="brown-noise-checkbox"><em>Rumore Marrone</em>&rarr;</label>
     <input type="checkbox" id="brown-noise-checkbox" value="brown-noise">
 <br><br>
-<button style="font-size: 32px; border-color: Green; border-width: 6px; color: ForestGreen; background-color: LightGreen; font-family: Arial;" id="play-button">&#9658; Play</button>
-<font size="6">&nbsp; &nbsp; &nbsp;</font>
+<button style="font-size: 32px; border-color: Green; border-width: 6px; color: ForestGreen; background-color: LightGreen; font-family: Arial;" id="play-button"><strong>&#9658; Play</strong></button>
+<font size="4">&nbsp;</font> 
+<button style="font-size: 18px; border-color: DarkBlue; border-width: 6px; color: Indigo; background-color: DodgerBlue; font-family: Arial;" id="toggle-checkbox">&#9746; MuteCH &#9745;</button>
+<font size="4">&nbsp;</font>
 <button style="font-size: 32px; border-color: Red; border-width: 6px; color: FireBrick; background-color: IndianRed; font-family: Arial;" id="stop-button" disabled>&#10074;&#10074; Stop</button>
 <br><br>
 <span id="emojv">&#128266;</span> <input type="range" id="volume-range" min="0" max="1" step="0.01" value="0.5"><br>
@@ -3183,6 +3197,7 @@ const volumeRange = document.getElementById('volume-range');
 let playButton = document.getElementById('play-button');
 let stopButton = document.getElementById('stop-button');
 let noiseCheckbox = document.getElementById('noise-checkbox');
+let togglecheckbox = document.getElementById('toggle-checkbox');
 let diapasonCheckbox = document.getElementById('diapason-checkbox');
 let pinkNoiseCheckbox = document.getElementById('pink-noise-checkbox');
 let brownNoiseCheckbox = document.getElementById('brown-noise-checkbox');
@@ -3192,6 +3207,8 @@ let animationerId = null; // ID dell'animazione
 let isPlaying = false; // Flag per indicare se l'audio è in riproduzione
 let currentWaveform = 'sine'; // Inizialmente impostato su 'sine' (sinusoide)
 let x = 0;
+let toggleState = false;
+
 
 function initializeAudioContext() {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -3206,11 +3223,13 @@ function initializeAudioContext() {
   // Abilita i pulsanti Play e Stop
   playButton.disabled = false;
   stopButton.disabled = false;
+  togglecheckbox.disabled = false;
 }
 
 // Disabilita i pulsanti Play e Stop inizialmente
 playButton.disabled = true;
 stopButton.disabled = true;
+togglecheckbox.disabled = true;
 
 // Aggiungi l'event listener "click" all'intera pagina
 document.addEventListener('click', initializeAudioContext);
@@ -3224,10 +3243,37 @@ function startTone() {
   let frequency = parseInt(frequencyRange.value);
   let waveform = document.querySelector('input[name="waveform"]:checked').value;
   
-  if (isPlaying && waveform !== currentWaveform) {
-    stopTone(); // Ferma l'onda precedente se il tipo di onda è cambiato
-  }
+  //if (isPlaying && waveform !== currentWaveform) {
+  //  stopTone(); // Ferma l'onda precedente se il tipo di onda è cambiato
+  //}
+  
+if (isPlaying && waveform !== currentWaveform || toggleState) {
 
+
+  playButton.disabled = true;
+  togglecheckbox.disabled = true;
+  stopButton.disabled = false;
+  isPlaying = true;
+  chline();
+
+  if (effects.length > 0) {
+    let bufferSize = audioContext.sampleRate * 2;
+    let buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    let data = buffer.getChannelData(0);
+
+    addEffects(data, effects);
+
+    bufferSource = audioContext.createBufferSource();
+    bufferSource.buffer = buffer;
+    bufferSource.loop = true;
+    bufferSource.connect(gainNode);
+    bufferSource.start();
+  }
+  
+  
+  
+  
+} else {
   oscillator = audioContext.createOscillator();
   oscillator.type = waveform;
   oscillator.frequency.value = frequency;
@@ -3252,11 +3298,13 @@ function startTone() {
   frequencyLabel.textContent = frequency + ' Hz';
 
   playButton.disabled = true;
+  togglecheckbox.disabled = true;
   stopButton.disabled = false;
 
   isPlaying = true;
   animateWave(); // Avvia l'animazione dell'onda
   currentWaveform = waveform; // Aggiorna il tipo di onda corrente
+  }
 }
 
 
@@ -3274,25 +3322,28 @@ function animateWave() {
 
 
 function stopTone() {
-  if (oscillator) {
-    oscillator.stop();
-    oscillator.disconnect();
-    oscillator = null;
+    if (oscillator) {
+      oscillator.stop();
+      oscillator.disconnect();
+      oscillator = null;
+    }
+
+    if (bufferSource) {
+      bufferSource.stop();
+      bufferSource.disconnect();
+      bufferSource = null;
+    }
+
+    playButton.disabled = false;
+	togglecheckbox.disabled = false;
+    stopButton.disabled = true;
+
+    isPlaying = false;
+    cancelAnimationFrame(animationerId); // Interrompi l'animazione
+    drawLine();
   }
 
-  if (bufferSource) {
-    bufferSource.stop();
-    bufferSource.disconnect();
-    bufferSource = null;
-  }
 
-  playButton.disabled = false;
-  stopButton.disabled = true;
-
-  isPlaying = false;
-  cancelAnimationFrame(animationerId); // Interrompi l'animazione
-  drawLine();
-}
 
 
 function addEffects(bufferData, effects) {
@@ -3325,7 +3376,11 @@ const waveformInputs = document.querySelectorAll('input[name="waveform"]');
 waveformInputs.forEach(function(input) {
   input.addEventListener('change', function() {
     drawWave(parseInt(frequencyRange.value)); // Ridisegna l'onda con la nuova forma selezionata
-	drawLine(); //Applica però la linea allo stop
+	if (toggleState) {
+	chline(); //Applica però la linea allo stop
+	} else {
+	drawLine();
+ }
   });
 });
 
@@ -3413,6 +3468,9 @@ const wavelength = canvas.width / (scaledFrequency * 2);
 }
 
 
+
+
+
 noiseCheckbox.addEventListener('change', function() {
   if (this.checked) {
     effects.push('noise');
@@ -3443,6 +3501,7 @@ diapasonCheckbox.addEventListener('change', function() {
     stopTone();
     startTone();
   }
+  
 });
 
 pinkNoiseCheckbox.addEventListener('change', function() {
@@ -3459,6 +3518,7 @@ pinkNoiseCheckbox.addEventListener('change', function() {
     stopTone();
     startTone();
   }
+  
 });
 
 brownNoiseCheckbox.addEventListener('change', function() {
@@ -3475,7 +3535,9 @@ brownNoiseCheckbox.addEventListener('change', function() {
     stopTone();
     startTone();
   }
+  
 });
+
 
 
 // Event listener per l'input del volume
@@ -3514,11 +3576,27 @@ playButton.addEventListener('click', startTone);
 // Event listener per il pulsante Stop
 stopButton.addEventListener('click', stopTone);
 
+
 playButton.addEventListener('mousedown', startTone);
 stopButton.addEventListener('mousedown', stopTone);
 
 playButton.addEventListener('touchstart', startTone);
 stopButton.addEventListener('touchstart', stopTone);
+
+
+togglecheckbox.addEventListener('click', function() {
+  toggleState = !toggleState; // Inverti lo stato del pulsante toggle
+
+  if (toggleState) {
+    togglecheckbox.style.borderRadius = '50%'; // Applica lo stile con il border radius
+	togglecheckbox.style.borderStyle = 'dotted';
+  } else {
+    togglecheckbox.style.borderRadius = ''; // Rimuovi lo stile
+	togglecheckbox.style.borderStyle = ''; // Rimuovi lo stile
+  }
+});
+
+
 
 // Ottenere l'elemento input range e lo span delle emoji
 const emojiSpan = document.getElementById('emojv');
@@ -3568,6 +3646,60 @@ const ctx = canvas.getContext("2d");
 }
 
 drawLine();
+
+
+//Linea di checkbox
+
+function chline() {
+  const canvas = document.getElementById("freqmonitor");
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
+  
+  ctx.clearRect(0, 0, width, height);
+  ctx.beginPath();
+  
+  // Disegna la prima linea diagonale ("\")
+  ctx.moveTo(0, 0);
+  ctx.lineTo(width, height);
+  
+  // Imposta il colore della linea a "Chartreuse"
+  ctx.strokeStyle = "Chartreuse";
+  
+  // Imposta lo spessore della linea a 2
+  ctx.lineWidth = 2;
+  
+  // Disegna la prima linea
+  ctx.stroke();
+  
+  // Disegna la seconda linea diagonale ("/")
+  ctx.moveTo(width, 0);
+  ctx.lineTo(0, height);
+  
+  // Disegna la seconda linea
+  ctx.stroke();
+
+  // Disegna la croce in mezzo alla "X" (forma di asterisco)
+  ctx.moveTo(width / 2, 0);
+  ctx.lineTo(width / 2, height);
+
+  ctx.moveTo(0, height / 2);
+  ctx.lineTo(width, height / 2);
+
+  // Imposta il colore della croce a "Chartreuse"
+  ctx.strokeStyle = "Chartreuse";
+
+  // Imposta lo spessore della croce a 2
+  ctx.lineWidth = 2;
+
+  // Disegna la croce
+  ctx.stroke();
+  
+  requestAnimationFrame(chline);
+}
+
+
+
 </script>
 
 <script type="text/javascript">
