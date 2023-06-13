@@ -1743,6 +1743,15 @@ document.write( '<p>&#10240;</p>' );
     <option value="3">Massa</option>
     <option value="4">Tempo</option>
     <option value="5">Temperatura</option>
+	<option value="6">Velocità</option>
+	<option value="7">Pressione</option>
+	<option value="8">Forza</option>
+	<option value="9">Lavoro</option>
+	<option value="10">Potenza</option>
+	<option value="11">Angolo</option>
+	<option value="12">Dati</option>
+	<option value="13">Carburante</option>
+	<option value="14">Cucina</option>
   </select>
   
   <p style="font-family: Arial;">Seleziona l'unità di misura di partenza:</p>
@@ -2010,8 +2019,116 @@ document.getElementById("trsound").addEventListener("touchmove", function() {
 };
 
 
+var velocity = {
+  name: "Velocità",
+  units: [
+    { name: "Metro al secondo", symbol: "m/s", multiplier: 1 },
+    { name: "Chilometro all'ora", symbol: "km/h", multiplier: 0.277778 },
+    { name: "Miglio all'ora", symbol: "mph", multiplier: 0.44704 },
+    { name: "Nodo", symbol: "kn", multiplier: 0.514444 },
+    { name: "Piede al secondo", symbol: "ft/s", multiplier: 0.3048 },
+    { name: "Mach", symbol: "Ma", multiplier: 340.3 },
+    { name: "Miglia nautiche all'ora", symbol: "knots", multiplier: 0.514444 }
+  ]
+};
 
-    var measurements = [length, area, volume, mass, time, temperature];
+
+var pressure = {
+  name: "Pressione",
+  units: [
+    { name: "Pascal", symbol: "Pa", multiplier: 1 },
+    { name: "Bar", symbol: "bar", multiplier: 100000 },
+    { name: "Atmosfera", symbol: "atm", multiplier: 101325 },
+    { name: "Millimetro di mercurio", symbol: "mmHg", multiplier: 133.322 },
+    //{ name: "Torr", symbol: "Torr", multiplier: 133.322 }
+  ]
+};
+
+var force = {
+  name: "Forza",
+  units: [
+    { name: "Newton", symbol: "N", multiplier: 1 },
+    { name: "Chilogrammo-forza", symbol: "kgf", multiplier: 9.80665 },
+    { name: "Libbra-forza", symbol: "lbf", multiplier: 4.44822 }
+  ]
+};
+
+var work = {
+  name: "Lavoro",
+  units: [
+    { name: "Joule", symbol: "J", multiplier: 1 },
+    { name: "Chilogrammetro", symbol: "kgm", multiplier: 9.80665 },
+    { name: "Caloria", symbol: "cal", multiplier: 4.184 },
+    { name: "Kilowattora", symbol: "kWh", multiplier: 3600000 },
+    { name: "Erg", symbol: "erg", multiplier: 0.0000001 }
+  ]
+};
+
+var power = {
+  name: "Potenza",
+  units: [
+    { name: "Watt", symbol: "W", multiplier: 1 },
+    { name: "Cavallo vapore", symbol: "CV", multiplier: 735.49875 },
+    { name: "BTU al secondo", symbol: "BTU/s", multiplier: 1055.05585 },
+    { name: "Kilocaloria al secondo", symbol: "kcal/s", multiplier: 4184 },
+    { name: "Erg al secondo", symbol: "erg/s", multiplier: 0.0000001 }
+  ]
+};
+
+
+var angle = {
+  name: "Angolo",
+  units: [
+    { name: "Radiante", symbol: "rad", multiplier: 1 },
+    { name: "Grado", symbol: "°", multiplier: 0.0174533 },
+    { name: "Sessagesimale", symbol: "'", multiplier: 0.000290888 },
+    { name: "Sessantesimale", symbol: "''", multiplier: 0.00000484814 },
+    { name: "Grado (°)", symbol: "deg", multiplier: 0.0174533 },
+    { name: "Minuto (' or min)", symbol: "'", multiplier: 0.000290888 },
+    { name: "Secondo ('' or sec)", symbol: "''", multiplier: 0.00000484814 }
+  ]
+};
+
+var data = {
+  name: "Dati",
+  units: [
+    { name: "Bit", symbol: "bit", multiplier: 1 },
+    { name: "Byte", symbol: "B", multiplier: 8 },
+    { name: "Kilobit", symbol: "Kb", multiplier: 1024 },
+    { name: "Kilobyte", symbol: "KB", multiplier: 8192 },
+    { name: "Megabit", symbol: "Mb", multiplier: 1048576 },
+    { name: "Megabyte", symbol: "MB", multiplier: 8388608 },
+    { name: "Gigabit", symbol: "Gb", multiplier: 1073741824 },
+    { name: "Gigabyte", symbol: "GB", multiplier: 8589934592 },
+    { name: "Terabit", symbol: "Tb", multiplier: 1099511627776 },
+    { name: "Terabyte", symbol: "TB", multiplier: 8796093022208 }
+  ]
+};
+
+var fuel = {
+  name: "Carburante",
+  units: [
+    { name: "Litro", symbol: "l", multiplier: 1 },
+    { name: "Gallone", symbol: "gal", multiplier: 3.78541 }
+	//{ name: "Litro per 100 chilometri", symbol: "l/100km", multiplier: 1 },
+    //{ name: "Miglio per gallone (MPG)", symbol: "mpg", multiplier: 235.215 }
+  ]
+};
+
+var cooking = {
+  name: "Cucina",
+  units: [
+    { name: "Cucchiaino", symbol: "cucchiaino", multiplier: 1 },
+    { name: "Cucchiaio", symbol: "cucchiaio", multiplier: 3 },
+    { name: "Tazza", symbol: "tazza", multiplier: 48 },
+    { name: "Millilitro", symbol: "ml", multiplier: 0.202884 },
+    { name: "Litro", symbol: "l", multiplier: 202.884 }
+  ]
+};
+
+var measurements = [length, area, volume, mass, time, temperature, velocity, pressure, force, work, power, angle, data, fuel, cooking];
+
+
     
     // Funzione di validazione dell'input dell'utente
     function validateInput(value) {
