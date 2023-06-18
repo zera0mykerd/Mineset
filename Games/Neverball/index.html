@@ -2873,7 +2873,6 @@ function generateRandomData(motionSpeed) {
 }
 
 
-
 // Funzione per aggiornare il grafico basato sui dati di movimento
 function updateChart(motionData) {
   const bars = document.getElementsByClassName('bar');
@@ -2904,6 +2903,7 @@ monitor.style.filter = 'contrast(200%) saturate(8)';
 // Applica l'opacità al grafico
 //monitor.style.opacity = '0.5';
 
+/*
 // Crea le barre del grafico
 for (let i = 0; i < 20; i++) {
   const bar = document.createElement('div');
@@ -2920,6 +2920,32 @@ for (let i = 0; i < 20; i++) {
 
   monitor.appendChild(bar);
 }
+*/
+
+// Calcola la larghezza totale delle barre in base alla larghezza del monitor
+const monitorWidth = monitor.clientWidth;
+const barWidth = 40; // Larghezza di ogni singola barra
+const margin = 10; // Margine tra le barre
+const totalBars = Math.floor((monitorWidth - margin) / (barWidth + margin));
+
+// Calcola il margine rimanente per distribuire uniformemente lo spazio tra le barre
+const remainingMargin = (monitorWidth - (totalBars * barWidth)) / (totalBars - 1);
+
+// Crea le barre del grafico
+for (let i = 0; i < totalBars; i++) {
+  const bar = document.createElement('div');
+  bar.classList.add('bar');
+
+  // Applica gli stili alle barre
+  bar.style.opacity = '1.0';
+  bar.style.display = 'inline-block';
+  bar.style.width = barWidth + 'px';
+  bar.style.backgroundColor = 'rgba(0, 255, 0, 1.0)';
+  bar.style.marginRight = i === totalBars - 1 ? '0' : remainingMargin + 'px';
+
+  monitor.appendChild(bar);
+}
+
 
 // Funzione per gestire i dati di movimento
 function handleMotionData(event) {
