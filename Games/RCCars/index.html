@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="it">
 
 <HEAD>
@@ -274,7 +275,9 @@ document.write( '<BODY background=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 
 </script>
 
+<!--
 <SCRIPT type="text/javascript">
+/*
 grphcs=new Array(2)
 Image0=new Image();
 Image0.src=grphcs[0]="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABVlBMVEVHcExs0vxmyPBfyfZYuN80ZXlr0Ppjwuls0v1t0/5du+Jhwupiw+tfu+FpzfZPx/pbstZQr9ZozPVDhJ5TvelKuuk5b4Zn0/9az/9kxe1Zr9NVpshnyPFqzvhNstxNxfdQyv08dY1Mx/pWzf9bwu1j0f9UstkyYnZf0P83aoA+kbRdzv1Rn8BQvetXqsxHq9Q+hKEoUWIpV2pastdUqs4vte4XtvhYq85MtN9Ou+lXvOdPsdtJsNxt1P9azv9KwPJQwO9Esd9e0P9Vzf8+rdx31/9Bt+ik5P982P/C7f9h0P8xephCu+4xr+MrXnJ21v9f0P9Hve5DrdlXzP1Xzv9Blro3dpEkpdtGlbU5eZQ1s+hLl7cbrOhGlrc4dpBKkrA4bIItWWsvYXUwb4k5r+FYtd07c4o6os4fsOwnY3wlcZEieZ04seMlvPoYmM1AjKxKpswslcB0J0lXAAAAcnRSTlMAAw8gL4YFFgIBJRsZHwlGKkIKYTtSeUQ+FC03DgdKS1ByTEMoOTqJLn9uJEBDM1dsoZ4sOZHIMU5JNEdUZktRRGFaWG1YZ5tntTWNZY2aTypZYjQ9aH+qXHmET79cfVJ9lZCPeTJ1d7akqbB8qMZqUZhAVceFAAABF0lEQVQYGc3AxWKDMBgA4B8KpElgUOqU1N197u7u7m7vf9kLJDvtsA/+G+Zq8BtGFSKBGJYVn08GMUkPDMcNDEIaMRNDigZCLJtMBPM2CNkj42ZwNApCcmAiMzlGQQhNZSLpaQWDACaz4Zy5EJdAgAUWwyuRtTkXBPSZ5Vxxd3udAJ9XWdrcqmRrvR0JuOzafNFD6f3JYRS49HS4QhGy7s66GHhIMuJBUd15659rwKME9zwIGd1evykDT6dhEmp0vt4/HgzgofuNvFOvPj69XFnAY5fLR6eXn9+vNyUHA49v9eD44va5rYYIBh63udFuta5V1Y+Ay2ulCgVVVVN1Bnya5Q+VQv6YDCISGqzGDBvEMBtgXvhrP9+HIiGZ58gtAAAAAElFTkSuQmCC";
@@ -351,7 +354,73 @@ Cstep[i]+=Step[i];
 setTimeout('fall()',8);
 }
 window.onload=fall
+*/
+
+//HTML5 recoded:
+
+var grphcs = [
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABVlBMVEVHcExs0vxmyPBfyfZYuN80ZXlr0Ppjwuls0v1t0/5du+Jhwupiw+tfu+FpzfZPx/pbstZQr9ZozPVDhJ5TvelKuuk5b4Zn0/9az/9kxe1Zr9NVpshnyPFqzvhNstxNxfdQyv08dY1Mx/pWzf9bwu1j0f9UstkyYnZf0P83aoA+kbRdzv1Rn8BQvetXqsxHq9Q+hKEoUWIpV2pastdUqs4vte4XtvhYq85MtN9Ou+lXvOdPsdtJsNxt1P9azv9KwPJQwO9Esd9e0P9Vzf8+rdx31/9Bt+ik5P982P/C7f9h0P8xephCu+4xr+MrXnJ21v9f0P9Hve5DrdlXzP1Xzv9Blro3dpEkpdtGlbU5eZQ1s+hLl7cbrOhGlrc4dpBKkrA4bIItWWsvYXUwb4k5r+FYtd07c4o6os4fsOwnY3wlcZEieZ04seMlvPoYmM1AjKxKpswslcB0J0lXAAAAcnRSTlMAAw8gL4YFFgIBJRsZHwlGKkIKYTtSeUQ+FC03DgdKS1ByTEMoOTqJLn9uJEBDM1dsoZ4sOZHIMU5JNEdUZktRRGFaWG1YZ5tntTWNZY2aTypZYjQ9aH+qXHmET79cfVJ9lZCPeTJ1d7akqbB8qMZqUZhAVceFAAABF0lEQVQYGc3AxWKDMBgA4B8KpElgUOqU1N197u7u7m7vf9kLJDvtsA/+G+Zq8BtGFSKBGJYVn08GMUkPDMcNDEIaMRNDigZCLJtMBPM2CNkj42ZwNApCcmAiMzlGQQhNZSLpaQWDACaz4Zy5EJdAgAUWwyuRtTkXBPSZ5Vxxd3udAJ9XWdrcqmRrvR0JuOzafNFD6f3JYRS49HS4QhGy7s66GHhIMuJBUd15659rwKME9zwIGd1evykDT6dhEmp0vt4/HgzgofuNvFOvPj69XFnAY5fLR6eXn9+vNyUHA49v9eD44va5rYYIBh63udFuta5V1Y+Ay2ulCgVVVVN1Bnya5Q+VQv6YDCISGqzGDBvEMBtgXvhrP9+HIiGZ58gtAAAAAElFTkSuQmCC",
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABNVBMVEVHcExi6eFk7+Zg6+MzeHRr/PNn8ult/vVs/fRe4dlk6eFVyMFp9u1Y5dxN/fJW//Vd3dVk//Zg//Vc/fM1fXli7ONLsqxZ3tZl8Odq+fBV29NJ3tRL8uhQzcVN3dRZ//VEn5lX0spZ08s259wqZmMraGQziYQoZWFM2tFT2NBM5dtS5dxT8edG5Npd//Vr+vFp9u1T4NdF6+E739VNxb1T//RY//Vc5dxb//WO//hL//RI9OlQ8edk//Uy6N18//cz3tNc//Vv//af//mO//hDvbVN9eo7kItJ8edBmJNBubId8+ZX9+1DysI3qqJW7+Uvi4Yd//FTwrtD2tEzqaFBt69I1Msn//FItK0wcW1a08wwgXxD185Fq6Um8+YyubEitKscvLMnd3JIwro1jIcpdXEa//EGk6AwAAAAZ3RSTlMAGBMehwMNAQIjFjcKMUpNJjowJ4IaTy4RBzZTTkNJUmAzLoCem4ihTT5OQD5cWwUJPl51TENCKD2IVFdEVYpnhzNHhXFiSnVUZ2i6NGJ+NZK+PWKIaFfEV44sj2Jdp4mvvaNXg57N7rOtEQAAAOtJREFUGBntwNWagkAABeADDAwDCEipmPGp27MVbnd3d8f7P8K+wIxXXvpjQIgbBkUPuppL8+ih4I8O5UzIGRl3ZNiBXH7MK1VUSFFlwisVGYUMZe68O57qkNEzXnduuliAjLG0nu0uz6iQWVjcDjb31qYgMbmykw3D8+YGh5hW3Qq1mF0f1yGWrgaaYml3l0ccQuVqEFuK/3J/Y0Bo9uAkVli9+ddmECqfVhpP9vfbJ7EpRNjZ7UPy+v7xS650iJi7F+2f568OiRomhKz9Vqf1SEjNghhlhxEhUc3nkKCqnSS2wiHHHYejr/4BdMEaEvFeGtQAAAAASUVORK5CYII="
+  ];
+
+  // Numero di immagini
+  var Amount = 32;
+
+  var Ypos = [];
+  var Xpos = [];
+  var Speed = [];
+  var Step = [];
+  var Cstep = [];
+
+  var imageContainer = document.querySelector('.rain_container');
+  var Hwin = window.innerHeight;
+  var WWin = window.innerWidth - 8;
+
+  for (var i = 0; i < Amount; i++) {
+    var P = Math.floor(Math.random() * grphcs.length);
+    var rndPic = grphcs[P];
+    var img = document.createElement('img');
+    img.src = rndPic;
+    img.style.position = 'absolute';
+    img.style.top = '0px';
+    imageContainer.appendChild(img);
+    Ypos[i] = Math.round(Math.random() * Hwin);
+    Xpos[i] = Math.round(Math.random() * WWin);
+    Speed[i] = Math.random() * 5 + 3;
+    Cstep[i] = 0;
+    Step[i] = Math.random() * 0.5 + 0.05;
+  }
+
+  function fall() {
+    Hwin = window.innerHeight;
+    WWin = window.innerWidth - 70;
+
+    for (var i = 0; i < Amount; i++) {
+      var sy = Speed[i] * Math.sin(8 * Math.PI / 16);
+      var sx = Speed[i] * 0;
+      Ypos[i] += sy;
+      Xpos[i] += sx;
+
+      if (Ypos[i] > Hwin) {
+        Ypos[i] = -0;
+        Xpos[i] = Math.round(Math.random() * WWin);
+        Speed[i] = Math.random() * 5 + 3;
+      }
+
+      var img = imageContainer.children[i];
+      img.style.left = Math.min(WWin, Xpos[i]) + 'px';
+      img.style.top = Ypos[i] + 'px';
+      Cstep[i] += Step[i];
+    }
+
+    requestAnimationFrame(fall);
+  }
+
+  window.onload = function() {
+    requestAnimationFrame(fall);
+  };
 </SCRIPT>
+-->
 
 <style type="text/css">
 <!-- 
@@ -637,6 +706,7 @@ function normalImg(x) {
   x.style.width = "100pt";
 }
 </script>
+
 <a onclick="location.href = '..';" href=".." title="Clicca qui per tornare indietro.">
 <svg onmouseover="bigImg(this)" onmouseout="normalImg(this)" width="100pt" height="100pt" viewBox="0 0 170 170" version="1.1">
 <g id="#f2fe00fe">
@@ -1302,7 +1372,16 @@ function normalImg(x) {
 #printerer{
     float:right;
 }​
+
+  /* Stile per il contenitore delle immagini */
+  .rain_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+	pointer-events: none;
+  }
 </style>
+<span class="rain_container"></span>
 <script type="text/javascript">
 function bigPrint(x) {
   x.style.height = "64pt";
@@ -1850,7 +1929,7 @@ function normalWiki(x) {
 </svg>
 </a>
 
-<p></p>
+<p>&#32;</p>
 
 
 <p>&#10240;</p>
@@ -1878,7 +1957,7 @@ window.location.href = 'https://mega.nz/file/QIEyxZ5T#RXJO9T14QcbmBIBKhHY7-OBXKB
 }
 </script>
 
-<p></p>
+<p>&#32;</p>
 <script type="text/javascript">
 document.write( '<a onclick=\"location.href = \'https://mega.nz/file/QIEyxZ5T#RXJO9T14QcbmBIBKhHY7-OBXKBWISmQ9Mxz-3WUQ2nY\';\" title=\"RCCars\" href=\"https://mega.nz/file/QIEyxZ5T#RXJO9T14QcbmBIBKhHY7-OBXKBWISmQ9Mxz-3WUQ2nY\">' );
 document.write( '<button type="button" onclick="RedirectRemote()" name=RCC>\n' );
@@ -2309,6 +2388,69 @@ window.onload = () => {
 	this.addEventListener("mousemove", coordMoveer);
 };
 */
+
+let grphcs = [
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABVlBMVEVHcExs0vxmyPBfyfZYuN80ZXlr0Ppjwuls0v1t0/5du+Jhwupiw+tfu+FpzfZPx/pbstZQr9ZozPVDhJ5TvelKuuk5b4Zn0/9az/9kxe1Zr9NVpshnyPFqzvhNstxNxfdQyv08dY1Mx/pWzf9bwu1j0f9UstkyYnZf0P83aoA+kbRdzv1Rn8BQvetXqsxHq9Q+hKEoUWIpV2pastdUqs4vte4XtvhYq85MtN9Ou+lXvOdPsdtJsNxt1P9azv9KwPJQwO9Esd9e0P9Vzf8+rdx31/9Bt+ik5P982P/C7f9h0P8xephCu+4xr+MrXnJ21v9f0P9Hve5DrdlXzP1Xzv9Blro3dpEkpdtGlbU5eZQ1s+hLl7cbrOhGlrc4dpBKkrA4bIItWWsvYXUwb4k5r+FYtd07c4o6os4fsOwnY3wlcZEieZ04seMlvPoYmM1AjKxKpswslcB0J0lXAAAAcnRSTlMAAw8gL4YFFgIBJRsZHwlGKkIKYTtSeUQ+FC03DgdKS1ByTEMoOTqJLn9uJEBDM1dsoZ4sOZHIMU5JNEdUZktRRGFaWG1YZ5tntTWNZY2aTypZYjQ9aH+qXHmET79cfVJ9lZCPeTJ1d7akqbB8qMZqUZhAVceFAAABF0lEQVQYGc3AxWKDMBgA4B8KpElgUOqU1N197u7u7m7vf9kLJDvtsA/+G+Zq8BtGFSKBGJYVn08GMUkPDMcNDEIaMRNDigZCLJtMBPM2CNkj42ZwNApCcmAiMzlGQQhNZSLpaQWDACaz4Zy5EJdAgAUWwyuRtTkXBPSZ5Vxxd3udAJ9XWdrcqmRrvR0JuOzafNFD6f3JYRS49HS4QhGy7s66GHhIMuJBUd15659rwKME9zwIGd1evykDT6dhEmp0vt4/HgzgofuNvFOvPj69XFnAY5fLR6eXn9+vNyUHA49v9eD44va5rYYIBh63udFuta5V1Y+Ay2ulCgVVVVN1Bnya5Q+VQv6YDCISGqzGDBvEMBtgXvhrP9+HIiGZ58gtAAAAAElFTkSuQmCC",
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAABNVBMVEVHcExi6eFk7+Zg6+MzeHRr/PNn8ult/vVs/fRe4dlk6eFVyMFp9u1Y5dxN/fJW//Vd3dVk//Zg//Vc/fM1fXli7ONLsqxZ3tZl8Odq+fBV29NJ3tRL8uhQzcVN3dRZ//VEn5lX0spZ08s259wqZmMraGQziYQoZWFM2tFT2NBM5dtS5dxT8edG5Npd//Vr+vFp9u1T4NdF6+E739VNxb1T//RY//Vc5dxb//WO//hL//RI9OlQ8edk//Uy6N18//cz3tNc//Vv//af//mO//hDvbVN9eo7kItJ8edBmJNBubId8+ZX9+1DysI3qqJW7+Uvi4Yd//FTwrtD2tEzqaFBt69I1Msn//FItK0wcW1a08wwgXxD185Fq6Um8+YyubEitKscvLMnd3JIwro1jIcpdXEa//EGk6AwAAAAZ3RSTlMAGBMehwMNAQIjFjcKMUpNJjowJ4IaTy4RBzZTTkNJUmAzLoCem4ihTT5OQD5cWwUJPl51TENCKD2IVFdEVYpnhzNHhXFiSnVUZ2i6NGJ+NZK+PWKIaFfEV44sj2Jdp4mvvaNXg57N7rOtEQAAAOtJREFUGBntwNWagkAABeADDAwDCEipmPGp27MVbnd3d8f7P8K+wIxXXvpjQIgbBkUPuppL8+ih4I8O5UzIGRl3ZNiBXH7MK1VUSFFlwisVGYUMZe68O57qkNEzXnduuliAjLG0nu0uz6iQWVjcDjb31qYgMbmykw3D8+YGh5hW3Qq1mF0f1yGWrgaaYml3l0ccQuVqEFuK/3J/Y0Bo9uAkVli9+ddmECqfVhpP9vfbJ7EpRNjZ7UPy+v7xS650iJi7F+2f568OiRomhKz9Vqf1SEjNghhlhxEhUc3nkKCqnSS2wiHHHYejr/4BdMEaEvFeGtQAAAAASUVORK5CYII="
+  ];
+
+  // Numero di immagini
+  let Amount = 32;
+
+  let Ypos = [];
+  let Xpos = [];
+  let Speed = [];
+  let Step = [];
+  let Cstep = [];
+
+  let imageContainer = document.querySelector('.rain_container');
+  let Hwin = window.innerHeight;
+  let WWin = window.innerWidth - 8;
+
+  for (let i = 0; i < Amount; i++) {
+    let P = Math.floor(Math.random() * grphcs.length);
+    let rndPic = grphcs[P];
+    let img = document.createElement('img');
+    img.src = rndPic;
+    img.style.position = 'absolute';
+    img.style.top = '0px';
+    imageContainer.appendChild(img);
+    Ypos[i] = Math.round(Math.random() * Hwin);
+    Xpos[i] = Math.round(Math.random() * WWin);
+    Speed[i] = Math.random() * 5 + 3;
+    Cstep[i] = 0;
+    Step[i] = Math.random() * 0.5 + 0.05;
+  }
+
+  function fall() {
+    Hwin = window.innerHeight;
+    WWin = window.innerWidth - 70;
+
+    for (let i = 0; i < Amount; i++) {
+      let sy = Speed[i] * Math.sin(8 * Math.PI / 16);
+      let sx = Speed[i] * 0;
+      Ypos[i] += sy;
+      Xpos[i] += sx;
+
+      if (Ypos[i] > Hwin) {
+        Ypos[i] = -0;
+        Xpos[i] = Math.round(Math.random() * WWin);
+        Speed[i] = Math.random() * 5 + 3;
+      }
+
+      let img = imageContainer.children[i];
+      img.style.left = Math.min(WWin, Xpos[i]) + 'px';
+      img.style.top = Ypos[i] + 'px';
+      Cstep[i] += Step[i];
+    }
+
+    requestAnimationFrame(fall);
+  }
+
+  window.onload = function() {
+    requestAnimationFrame(fall);
+  };
+  
 </script>
 
 </BODY>
