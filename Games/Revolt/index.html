@@ -1858,10 +1858,11 @@ document.write( '<p>&#32;</p>\n' );
   <div class="buttons">
     <button onclick="decrement()">-</button>
     <button onclick="increment()">+</button><br>
-    <br><button onclick="reset()">Reset</button>
+    <br><button onclick="reset()">&circlearrowleft;</button> <!-- <br><button onclick="reset()">&circlearrowleft;</button> -->
+	<span style="font-size: 48px; background-color: Beige; border-radius: 64px; padding: 4px;" id="audtoggle"> &#128264;</span>
+	<br><br>
   </div>
 </div>
-<br>
 
 <center><p><br></p> <!-- <canvas oncontextmenu="return false;"></canvas> --></center>
 <script type="text/javascript">
@@ -2038,29 +2039,61 @@ for (var i = 0; i < elementi.length; i++) {
   if (count < 65535) {
     count++;
     updateCounter();
+    // Crea un nuovo elemento audio
+    const audio = new Audio();
+    // Imposta la sorgente audio utilizzando il file audio desiderato
+    audio.src = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAHAAADYABVVVVVVVVVVVVVVVVVVXFxcXFxcXFxcXFxcXFxjo6Ojo6Ojo6Ojo6Ojo6qqqqqqqqqqqqqqqqqqqrHx8fHx8fHx8fHx8fHx+Pj4+Pj4+Pj4+Pj4+Pj//////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAQgAAAAAAAAA2DreBT/AAAAAAAAAAAAAAAAAAAA//NEZAAExQ6IAaCUAASwiMZBRTgAgAAAA/////////////////UhCEITkIQhCBwOAQAwDAMAw+Hw+LuAG4xIP+c55BAAA4RG/88bg/Ae9y+4B6n/TLBOf47Dc0Kn/rc+//NEZBIHUSsUAMFEAAWgnZmJk5gAib//m9NJE3//yfMECcW5///9ZuT6TDgDIYWngSf///46QurBRiEICrBCACAAIHlw96ZQ8JXP/rUh/1BLX//qxWs1Gk2Aw1ogwGAA//NEZAwHJPN7L8MIAAUwEnDhgxAAAAsoHClSM4BuGbKP/SdAoSgZudG//f+r+JDHMuub/p//8YDRfhUOX/iy4E6lgQAAp9RT4lPICuoJe2viOtjfty3RL7FIPYbpeq3Z//NEZAkGNPdWAMeUAAYADmgBgxAAMEcauvnC34iFSoocV/bKf//6f/f////KVlKx9W6UrWq2aLQpyzTvXGqPEDx48MUt9NN1lvp/cv6P//JHv6fWGFIDHzZEADE9Mmtu//NEZAoGSENMZce8AAYBlnCxgRAAPUq9sEJ7Kw2/8Ija9uavhWTE/81qNjfpvf6xmv8SxdQrWW/eH/s5WgMAAYP5mABBX/////////////7MFbV+uqpBCAC6HOtsTwuK//NEZAoGgPssCMaUAAWABkVxgBAAVkIsqw6Yn4CiDl/0Wi/+VBIokA3/4dMUqOv/+odAUgeKJAOP///KQokPgAAEECADqmS3T1u/Z9v+e/5GKI/9ykxBTUUzLjEwMKqq//NEZAsAAAGkAOAAAAAAA0gBwAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq'; // codice in base64
+    audio.volume = 0.9; // Imposta il volume
+    // Verifica se l'audio è abilitato prima di riprodurlo
+    if (audioEnabled) {
+      // Riproduci il suono solo se l'audio è abilitato
+      audio.play();
+    }
   } else {
     // Non fare nulla se il contatore ha già raggiunto il limite
   }
 }
 
+
   function decrement() {
-  if (count > 0) {
+  if (count > -65535) {
     count--;
     updateCounter();
+    // Crea un nuovo elemento audio
+    const audio = new Audio();
+    // Imposta la sorgente audio utilizzando il file audio desiderato
+    audio.src = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAGAAADQwBfX19fX19fX19fX19fX19ff39/f39/f39/f39/f39/f3+fn5+fn5+fn5+fn5+fn5+fv7+/v7+/v7+/v7+/v7+/v7/f39/f39/f39/f39/f39/f3/////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAL0AAAAAAAAA0NHWuDiAAAAAAAAAAAAAAAAAAAAAP/7EGQAAAB0D0gFBGAADuIY8KCMAEJgQ1YYJAAAPgfqAwIgAP//k7/u7wDA3B/BD//if//AAC67u710TdwMPHYAH+rHVGwwj5xe8+2trAPHvLO3Q5/lJ5mAGezdcAHdUp8E/9TL/GAJ//sSZAIAAJARVQYMQAAMwAqgwAgAAoCZZBgRAAA8hiuDBCAAVYKSJ1kblYEj+PDv/5LUScwiWgrovus6v9mzzH8f/sf850/yHRv/ELYJ/+IACCPQnsI/+E4IO6FHPLh/+lez+CWvVvgo//sQZAOAAJwXXoYEoAAPAAugwAgAAmwdbJwxAAA3AG1jgDACtMeWOZyt/FXqYngqvr2YpiR0XnUAm6ky4Qvequx21kaqCcFTMwx47gKWXYw8ptJVJQABESwGY4/iym4rQg7LbbBQxBz/+xJkA4EwggvaIAMQMBDAmxQAIwBCMB1ngAxBIDwCatQBiAoxlU7TMrQr32rEbdshA0igRhEDheRH5u/d2gr7/qnAEEgMYVNnhmBit/IB51iCHiwSXyWHkDCIdM/QugJiQADghTvNa2v/+xBkBQEwpg7UwEAagBIgqqgAQwICODFTFBEAAEAF6tKKIATGr+2DGMCEbFfXpN7MAADBBWoGd2Ia3E0tcYq0VlBBIjQSFnJ/1qPedIJSp7dvWJIZJANIIZFO6o2trMDagDUhxYKP/v/7EmQCgACJD1QGBGAAD8G6cMEIAEHgOPwcMQAIPAKgQ4YwAc1+hWw1lWBp2WRt9SA4qUq5cvxLPlEs8zx8k03GZjoUBNVX/+pSzATBR03GZuhQEwVw3/8VkMChvRRMQU1FMy4xMDCqqg=='; // codice in base64
+    audio.volume = 0.5; // Imposta il volume
+    // Verifica se l'audio è abilitato prima di riprodurlo
+    if (audioEnabled) {
+      // Riproduci il suono solo se l'audio è abilitato
+      audio.play();
+    }
   } else {
-    // Non fare nulla se il contatore è già a 0 o se ha raggiunto il limite
+    // Non fare nulla se il contatore ha già raggiunto il limite
   }
 }
 
 
   function reset() {
-    count = 0;
-    updateCounter();
+  count = 0;
+  updateCounter();
+  const audio = new Audio();
+  audio.src = 'data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAFAAAC2gBtbW1tbW1tbW1tbW1tbW1tbW1tkpKSkpKSkpKSkpKSkpKSkpKSkpK2tra2tra2tra2tra2tra2tra2ttvb29vb29vb29vb29vb29vb29vb//////////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAMGAAAAAAAAAtqP8R7HAAAAAAAAAAAAAAAAAAAAAP/7EGQAAABaAK8NAEAMAcAQAKwAAQR8mTwYKQAANI7cgwDQACA///9YPvE4OAgGD1j3J8R/5iTX44BCgjH/CysAvyGEX/8XOM8IAA2IHT/+MmGM3L////49B2iV/+BJk40Q8f///X5l//sSZAMD8JQSXwcEQAIOoxmQ4LQAQgwle8EEYCA6jCWAA8VxYNL+3Wp9KEm/9S4lX/8b////9jM4NQEwF43IvDxDPDGEdCDbEu3DkgUeNqEIs/5k9/8wn9B5IA/LSyp7ba6MOKokLAYF//sQZAUDsKkD2yBjGAAOgwooACJYAkgHaIEIQAgfhiigAImKDxcwKIIRX79NH/QAAYiAGoKPcc3/oP+tRLqO22oxhAU6uWFokZyK7zf58XpCU6Dhr+pnpjIWHEBnhJ/X+v7BHmtzTyn/+xJkCAGQpxFVgGERwA9gCjkAIjgCbAthFCEAAC2IZ1KAIADxNUebNgAGsGgAf62V301O8o//ar7//mDChMOLKS8nH33u2P6iNX9AAb+K/Uf/Dn+XARANLBPOy2jiEVnOL85K5nMH1zD/+xBkCQAA+yNThixAAA8gObDBgAABgAkEHDAAAC4AHEOCAAC3jkRfup5qG/QSJ6OMhsDYsXPS59PVd/bW7yp2lQEBEljwb/rO8GlB0Shoss7////WdJYlTEFNRTMuMTAwqqqqqqqqqg==';
+  audio.volume = 1.0; // Imposta il volume
+  // Verifica se l'audio è abilitato prima di riprodurlo
+  if (audioEnabled) {
+    // Riproduci il suono solo se l'audio è abilitato
+    audio.play();
+  } else {
+    // Non fare nulla
   }
+}
+
 
 function updateCounter() {
-  // Sanitizzazione dell'input utilizzando una regex per consentire solo numeri naturali da 0 a 9
-  const sanitizedCount = count.toString().match(/\d+/);
+  // Sanitizzazione dell'input utilizzando una regex per consentire numeri interi negativi da -65535 a 65535
+  const sanitizedCount = count.toString().match(/-?\d+/);
   // Verifichiamo se c'è un numero valido
   if (sanitizedCount && sanitizedCount.length > 0) {
     // Otteniamo il primo numero trovato (dovrebbe essere l'unico)
@@ -2077,6 +2110,30 @@ function updateCounter() {
     counterElement.textContent = count;
   }
 }
+
+
+
+
+
+let audioEnabled = true;
+const audtoggle = document.getElementById('audtoggle');
+const audioElements = document.querySelectorAll('Audio');
+
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  if (audioEnabled) {
+    audtoggle.textContent = '️\uD83D\uDD08';
+    audioElements.forEach(audio => audio.muted = false);
+  } else {
+    audtoggle.textContent = '\uD83D\uDD07';
+    audioElements.forEach(audio => audio.muted = true);
+  }
+}
+
+audtoggle.addEventListener('click', toggleAudio);
+
+
+
 </script>
 
 </center>
