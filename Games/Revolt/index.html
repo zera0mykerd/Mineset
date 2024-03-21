@@ -195,6 +195,55 @@ position: relative;
 z-index: 2;
  pointer-events: none;
 }
+
+
+  .counter-container {
+    text-align: center;
+    margin-top: 50px;
+	background-color: LightGoldenRodYellow;
+	padding: 10px 20px;
+	margin: 0 10px
+	border: 16px solid Cornsilk;
+	border-style: solid;
+	border-color: Cornsilk;
+	border-size: 64px;
+	border-radius: 64px;
+	text-align: center;
+	max-width: 256px;
+  }
+
+  .counter {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+	background-color: Gold;
+	margin: 0 10px
+	padding: 10px 20px;
+	border-radius: 8px;
+	border: none;
+  }
+
+  .buttons button {
+    font-size: 32px;
+	font-weight: bold;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+	background-color: DarkKhaki;
+	color: #3B240B;
+  }
+
+  .buttons button:hover {
+    background-color: DarkOrange;
+  }
+  
+  .buttons button:active {
+    background-color: Coral;
+  }
+
+
 </style>
 
 <script type="text/javascript">
@@ -1798,8 +1847,21 @@ document.write( '<font size=\"3\" color=\"#9B2335\" face=\"Monaco\"> <strong>Con
 document.write( '<font size=\"3\" color=\"#DD4124\" face=\"Monaco\"> Tonnellate di auto e livelli realizzati dagli utenti sono stati realizzati per Re-Volt nel corso del decennio e RVGL rimane compatibile con tutti loro. Dai un&#39;occhiata alle migliori piste e alle migliori auto. RVGL ha notevolmente ampliato le possibilit&agrave; per consentire ai contenuti creati dagli utenti non solo di corrispondere, ma anche di sostituire l&#39;originale. Consulta la documentazione per un elenco esaustivo di tutte le opzioni disponibili per i produttori di piste e auto. Di seguito &egrave; riportato un assaggio di ci&ograve; che &egrave; possibile con RVGL: </font> <br>\n' );
 document.write( '<font size=\"3\" color=\"#EFC050\" face=\"Monaco\"> <br> <strong>Per i livelli:</strong> <br> - Texture ad alta risoluzione (fino a 8192x8192) e pi&ugrave; formati di texture (BMP, PNG, JPG). <br>- Trasparenza alfa attraverso le trame (sono supportati sia BMP a 32 bit che PNG). <br>- Personalizzazione avanzata (oggetti animati, grafica, musica ed effetti sonori). <br>- Livelli personalizzati di Battle Tag e Stunt Arena e supporto per le modalit&agrave; Practice e Time Trial. <br>- Vari limiti estesi per supportare livelli pi&ugrave; ampi e complessi.- Ambiente di sviluppo in-game migliorato. <br>  <br> <strong>Per le auto:</strong> <br> - Texture ad alta risoluzione. <br>- Supporto per box art per auto, ombre e suoni del motore dell&#39;auto. <br>- Le statistiche vengono visualizzate nel frontend. <br>- Effetti speciali: volo d&#39;autore (come UFO) e auto guidabili capovolte (come Rotor). <br>- Animazioni: hanno parti che girano con la ruota, come Panga! <br>- Cappuccio personalizzabile e telecamera retrovisiva per ogni auto. <br> </font> <br>\n' );
 document.write( '<p>&#32;</p>\n' );
-
 </script>
+
+<div class="counter-container">
+  <h1>
+  <svg width="48pt" height="48pt" viewBox="0 0 24 24" fill="none" stroke="#e6d200"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M11.9994 21.4098H5.93944C2.46944 21.4098 1.01944 18.9298 2.69944 15.8998L5.81944 10.2798L8.75944 4.99979C10.5394 1.78979 13.4594 1.78979 15.2394 4.99979L18.1794 10.2898L21.2994 15.9098C22.9794 18.9398 21.5194 21.4198 18.0594 21.4198H11.9994V21.4098Z" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <g opacity="0.4"> <path d="M21.4405 19.9996L12.0005 13.3896L2.56055 19.9996" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12 3V13.39" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g> </g></svg>
+  <font color="#8A4B08" face="sans-serif" size="7">MKCounter</font>
+  </h1>
+  <font color="#61380B" size="8" face="Courier New"><div id="counter" class="counter"><var>0</var></div></font>
+  <div class="buttons">
+    <button onclick="decrement()">-</button>
+    <button onclick="increment()">+</button><br>
+    <br><button onclick="reset()">Reset</button>
+  </div>
+</div>
+<br>
 
 <center><p><br></p> <!-- <canvas oncontextmenu="return false;"></canvas> --></center>
 <script type="text/javascript">
@@ -1966,13 +2028,56 @@ for (var i = 0; i < elementi.length; i++) {
     riproduciAudio();
   });
 }
-
-
-
-
 </script>
 
+<script type="text/javascript">
+  let count = 0;
+  const counterElement = document.getElementById('counter');
 
+  function increment() {
+  if (count < 65535) {
+    count++;
+    updateCounter();
+  } else {
+    // Non fare nulla se il contatore ha già raggiunto il limite
+  }
+}
+
+  function decrement() {
+  if (count > 0) {
+    count--;
+    updateCounter();
+  } else {
+    // Non fare nulla se il contatore è già a 0 o se ha raggiunto il limite
+  }
+}
+
+
+  function reset() {
+    count = 0;
+    updateCounter();
+  }
+
+function updateCounter() {
+  // Sanitizzazione dell'input utilizzando una regex per consentire solo numeri naturali da 0 a 9
+  const sanitizedCount = count.toString().match(/\d+/);
+  // Verifichiamo se c'è un numero valido
+  if (sanitizedCount && sanitizedCount.length > 0) {
+    // Otteniamo il primo numero trovato (dovrebbe essere l'unico)
+    const validCount = parseInt(sanitizedCount[0]);
+    // Codifichiamo il valore prima di aggiungerlo al DOM
+    const encodedCount = encodeURI(validCount);
+    // Aggiorniamo il contatore nel DOM con il valore codificato
+    counterElement.textContent = encodedCount;
+    // Aggiorniamo la variabile di conteggio con il valore sanitizzato
+    count = validCount;
+  } else {
+    // Se il valore di count non è valido, impostiamo il contatore su 0
+    count = 0;
+    counterElement.textContent = count;
+  }
+}
+</script>
 
 </center>
 
