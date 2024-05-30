@@ -412,6 +412,10 @@ function normalPrint(x) {
 
 <p>&#10240;</p>
 
+<a href="ElysianTempest"><button onclick="location.href = 'ElysianTempest';" style="background-color: ForestGreen; color: LightGreen; border-radius: 64px; font-size: 32px; font-style: bold;">&#x1F517;</button></a>
+<font style="visibility: hidden;">---</font>
+
+
 <div id="iframeContainer">
     <iframe id="Iframegame" src="ElysianTempest/index.html"></iframe>
 </div>
@@ -419,6 +423,10 @@ function normalPrint(x) {
 <br>
 
 <button style="background-color: CornflowerBlue; color: #00008B; border-radius: 64px; font-size: 32px; font-style: bold;" id="fullscreenBtn">&#x26F6;</button>
+
+<font style="visibility: hidden;">---</font>
+
+
 
 <br/><br/>
 
@@ -446,6 +454,8 @@ function normalPrint(x) {
 
 <script type="text/javascript">
  
+ 
+ 
 document.getElementById('fullscreenBtn').addEventListener('click', function() {
     var iframe = document.getElementById('Iframegame');
     if (iframe.requestFullscreen) {
@@ -454,17 +464,22 @@ document.getElementById('fullscreenBtn').addEventListener('click', function() {
         iframe.mozRequestFullScreen();
     } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
         iframe.webkitRequestFullscreen();
+    } else if (iframe.webkitEnterFullscreen) { // iPhone|iPod
+        iframe.webkitEnterFullscreen();
     } else if (iframe.msRequestFullscreen) { // IE/Edge
         iframe.msRequestFullscreen();
     }
+	
     
     // Aggiungi il codice per ruotare lo schermo su dispositivi mobili
     if (window.screen.orientation && window.screen.orientation.lock) {
         window.screen.orientation.lock('landscape').catch(function(error) {
-            //console.log('Errore nel bloccare l\'orientamento: ', error);
+            ////alert('Errore nel bloccare l\'orientamento: ', error);
         });
     }
 });
+
+
 
 
     // Funzione per reindirizzare gli eventi della tastiera all'iframe
