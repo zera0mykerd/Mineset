@@ -1072,7 +1072,15 @@ function escapeHTML(value) {
 
 	
 	
-	
+document.addEventListener('DOMContentLoaded', function() {
+    const targetElement = document.getElementById('pwgen');
+    if (window.location.hash === '#pwgen' && targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
 	
 	
 	
