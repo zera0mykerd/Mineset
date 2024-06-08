@@ -1573,6 +1573,7 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
   MAudioGen
 <svg width="72px" height="72px" viewBox="0 0 48 48" fill="#000000"><g stroke-width="0"/><gstroke-linecap="round" stroke-linejoin="round"/><g><path class="a" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="#004001" d="M3.5,25.018h9.8767l2.2775-10.9731,2.2775,20.1622L20.2092,9.0623l2.2775,29.8754L24.7642,9.1925,27.0417,36.428l2.2775-25.4062L31.5967,29.778l2.2775-16.2172,2.2775,11.3627H44.5"/></g></svg>
   </h1>
+  
     <label style="color: MidnightBlue; font-family: Arial Black; font-size: 32px;" for="frequency-range">Frequenza: </label>
     <input style="color: Aquamarine;" type="range" id="frequency-range" min="20" max="20000" step="1" value="20"><br>
 	<input style="border-color: DarkBlue; background-color: DarkCyan; color: Aquamarine; margin-left: 8px;" type="number" id="frequency-input" min="20" max="20000" value="20"><br><br>
@@ -1603,6 +1604,7 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
     
     <label style="color: RebeccaPurple; font-family: Arial;" for="brown-noise-checkbox"><em>Rumore Marrone</em>&rarr;</label>
     <input type="checkbox" id="brown-noise-checkbox" value="brown-noise">
+	
 <br><br>
 <button style="font-size: 32px; border-color: Green; border-width: 6px; color: ForestGreen; background-color: LightGreen; font-family: Arial;" id="play-button"><strong>&#9658; Play</strong></button>
 <font size="4">&nbsp;</font> 
@@ -1615,6 +1617,62 @@ document.write( '<font face=\"Arial\" size=\"3\" color=\"#04B404\">Neverball &eg
 </span>
 
 <script type="text/javascript">
+
+/*
+  function sanitizeInput(input) {
+    return input.replace(/[<>"'\/]/g, function(match) {
+      return {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;'
+      }[match];
+    });
+  }
+
+  function sanitizeAndSetValue(inputId, value) {
+    const sanitizedValue = sanitizeInput(value);
+    document.getElementById(inputId).value = sanitizedValue;
+  }
+
+  // Chiamare questa funzione per sanificare i valori degli input radio
+  sanitizeAndSetValue('waveform-sine', 'sine');
+  sanitizeAndSetValue('waveform-square', 'square');
+  sanitizeAndSetValue('waveform-triangle', 'triangle');
+  sanitizeAndSetValue('waveform-sawtooth', 'sawtooth');
+  sanitizeAndSetValue('noise-checkbox', 'noise');
+  sanitizeAndSetValue('diapason-checkbox', 'diapason');
+  sanitizeAndSetValue('pink-noise-checkbox', 'pink-noise');
+  sanitizeAndSetValue('brown-noise-checkbox', 'brown-noise');
+*/
+
+// Funzione per sanitizzare il valore di un input
+function sanitizeInput(input) {
+  return input.replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+}
+
+// Seleziona tutti gli input radio e checkbox
+const radioInputs = document.querySelectorAll('input[type="radio"]');
+const checkboxInputs = document.querySelectorAll('input[type="checkbox"]');
+
+// Aggiungi un event listener a ogni input radio e checkbox
+radioInputs.forEach(input => {
+  input.addEventListener('input', () => {
+    input.value = sanitizeInput(input.value);
+  });
+});
+
+checkboxInputs.forEach(input => {
+  input.addEventListener('input', () => {
+    input.value = sanitizeInput(input.value);
+  });
+});
+
+
 document.write( '<br> <strong>Storia:</strong> Neverball &egrave; nato il 4 agosto 2004, sotto lo sviluppo di Robert Kooima. Lo stesso Kooima si assume il ruolo di mapper, developer e artista. Nelle prime versione, prima della differenziazione fra set, Kooima aveva assegnato un numero di versione in base al numero di livelli. Successivamente al Neverball Team si &egrave; aggiunto Mehdi Yousfi-Monod, allora laureando in informatica all&#39;universit&agrave; di Montpellier. A partire dalla versione 1.6.0 del gioco, sono disponibili i Rotating Objects e il gioco viene distribuito nativamente con delle traduzioni in italiano, in ungherese e in polacco. Neverball utilizza GNU Gettext per la traduzione automatica del gioco. Quest&#39;ultimo conta numerose traduzioni. Il gioco &egrave; stato tradotto nella lingua italiana a giugno 2011 (rendendo la traduzione disponibile come download separato) da Andrea Del Santo e Giacomo Frate. Come gi&agrave; sottolineato, per Windows e Linux in lingua italiana Neverball &egrave; distribuito automaticamente tradotto dalla release "1.6". <br> <strong>La Community:</strong> Neverball &egrave; un gioco completamente community-driven. Da qualche anno esiste un forum ufficiale per la Comunit&agrave; di Neverball. Esistono, come per Quake III Arena, numerosi livelli personalizzati riuniti in Set. Nuncabola (che in spagnolo significa "Mai palla", proprio come "Never Ball") &egrave; una versione del gioco scritta in Java. Neverball &egrave; scritto interamente in C e usa openGL che limita l&#39;uso del gioco sui PC, escludendo sistemi Embedded di vario tipo. Ora &egrave; disponibile una versione su Java attraverso Nuncabola, originariamente scritto da Florian Priester, traduttore tedesco, che, come gi&agrave; detto, &egrave; interamente scritto in Java AWT. Neverball &egrave; disponibile anche sotto il nome di Neverball ME per Android e iPhone. <br> <strong>Core:</strong> NeverBall Replay (*.nbr) &egrave; un formato di file sviluppato da Robert Kooima, e distribuito con la licenza GNU General Public License, esattamente come Neverball e Neverputt. Un NeverBall Replay File &egrave; un insieme di istruzioni che consentono di riprodurre la partita salvata, e include un header di informazioni, che contiene il Reference al file SOL che contiene informazioni sulla mappa. Solid Format File (*.sol) &egrave; il formato compilato, versione alleggerita dei file BSP di Quake III. Esso &egrave; un insieme statico di strutture geometriche ed entit&agrave; del gioco. Come il NBR, &egrave; distribuito sotto GPL. Per ottenere Solid File, i file Mapcode (*.map) devono essere compilati con Map Compiler (mapc), un&#39;utility compresa in Neverball.</font>\n' );
 document.write( '<p>&#32;</p>' );
 </script>
@@ -1656,6 +1714,47 @@ document.write( '<p>&#32;</p>' );
 function RedirectRemote() {
 window.location.href = 'https://neverball.org/download.php';
 }
+
+// Funzione per sanitizzare e validare gli input
+function sanitizeAndValidateInput() {
+  // Ottieni i valori degli input
+  const densityInput = document.getElementById('density');
+  const gravityInput = document.getElementById('gravity');
+  const dragInput = document.getElementById('drag');
+
+  // Sanitizza e valida i valori
+  const density = sanitizeAndValidateNumber(densityInput.value, 0, 2000, 1.22);
+  const gravity = sanitizeAndValidateNumber(gravityInput.value, 0, 50, 1);
+  const drag = sanitizeAndValidateNumber(dragInput.value, 0, 1, 0.47);
+
+  // Aggiorna i valori degli input
+  densityInput.value = density;
+  gravityInput.value = gravity;
+  dragInput.value = drag;
+
+  // Restituisci i valori sanitizzati e validati
+  return { density, gravity, drag };
+}
+
+// Funzione per sanitizzare e validare un numero
+function sanitizeAndValidateNumber(value, min, max, defaultValue) {
+  // Converti il valore in numero
+  let numericValue = parseFloat(value);
+
+  // Se il valore non è un numero valido, restituisci il valore predefinito
+  if (isNaN(numericValue) || numericValue < min || numericValue > max) {
+    return defaultValue;
+  }
+
+  // Arrotonda il valore al secondo decimale
+  return Math.round(numericValue * 100) / 100;
+}
+
+// Esempio di utilizzo
+const { density, gravity, drag } = sanitizeAndValidateInput();
+//console.log('Density:', density);
+//console.log('Gravity:', gravity);
+//console.log('Drag:', drag);
 </script>
 
 <p>&#32;</p>
@@ -1734,7 +1833,55 @@ document.write( '<p>&#32;</p>' );
 </script>
   <span id="flashlight"><svg onmouseover="bigScreen(this)" onmouseout="normalScreen(this)" width="128pt" height="128pt" viewBox="0 0 779.88 584.38" version="1.1"> <g id="layer1" transform="translate(-7.2051 -140.17)"> <g id="g4014" transform="matrix(.84033 0 0 .84033 -435.15 56.289)"> <g id="g3975" transform="matrix(.63038 0 0 .63038 700.57 186.59)"> <rect id="rect3181" height="848.6" width="157.88" y="-137.65" x="-276.29" fill="#cfcb34"/> <rect id="rect3951" transform="scale(-1,1)" height="848.6" width="266.42" y="-137.65" x="-148.01" fill="#04ca97"/> <rect id="rect3953" height="848.6" width="268.39" y="-137.65" x="148.01" fill="#00d004"/> <rect id="rect3955" transform="scale(-1,1)" height="848.6" width="274.31" y="-137.65" x="-690.72" fill="#ce00cd"/> <rect id="rect3957" height="848.6" width="272.34" y="-137.65" x="690.72" fill="#cf0004"/> <rect id="rect3959" transform="scale(-1,1)" height="848.6" width="232.87" y="-137.65" x="-1195.9" fill="#0000d0"/> <rect id="rect3961" transform="scale(1,-1)" height="254.58" width="157.88" y="-965.53" x="-276.29" fill="#fff"/> <rect id="rect3965" transform="scale(-1)" height="254.58" width="266.42" y="-965.53" x="-148.01" fill="#f9f9f9"/> <rect id="rect3967" transform="scale(1,-1)" height="254.58" width="268.39" y="-965.53" x="148.01" fill="#97989c"/> <rect id="rect3969" transform="scale(-1)" height="254.58" width="274.31" y="-965.53" x="-690.72" fill="#656764"/> <rect id="rect3971" transform="scale(1,-1)" height="254.58" width="272.34" y="-965.53" x="690.72" fill="#2e3430"/> <rect id="rect3973" transform="scale(-1)" height="254.58" width="232.87" y="-965.53" x="-1195.9"/> </g> </g> </g> </svg> </span>
   <br>
+  
   <input type="color" id="colorPicker">
+  
+  <script type="text/javascript">
+// Seleziona l'elemento input con l'id "colorPicker"
+const colorPicker = document.getElementById('colorPicker');
+
+// Aggiungi un event listener per il cambiamento del valore dell'input
+colorPicker.addEventListener('input', function() {
+  // Sanitizza il valore dell'input
+  let color = sanitizeColor(this.value);
+
+  // Valida il valore dell'input
+  if (isValidColor(color)) {
+    // Se il valore è valido, imposta il valore dell'input
+    this.value = escapeHTML(color);
+  } else {
+    // Se il valore non è valido, reimposta il valore precedente
+    this.value = this.defaultValue;
+  }
+});
+
+// Funzione per sanitizzare il valore dell'input
+function sanitizeColor(color) {
+  // Rimuovi eventuali caratteri non validi
+  return color.replace(/[^#0-9a-fA-F]/g, '');
+}
+
+// Funzione per verificare se il valore dell'input è valido
+function isValidColor(color) {
+  // Verifica se il valore è un colore esadecimale valido
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
+}
+
+// Funzione per eseguire l'escaping del valore dell'input
+function escapeHTML(str) {
+  return str.replace(/[&<>"']/g, function(match) {
+    switch (match) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#039;';
+    }
+  });
+}
+
+  </script>
+  
 <script type="text/javascript">
 document.write( '<p>&#32;</p>' );
 document.write( '<a title\="\&#128300; Modello standard particelle elementari &#9883;&#65039;" onclick=\"location.href = \'https://it.wikipedia.org/wiki/Modello_standard\';\" href=\"https://it.wikipedia.org/wiki/Modello_standard\">' );
@@ -2256,6 +2403,8 @@ window.onload = function() {
 <div id="compassbutton"></div><br>
 <br>
 
+<div id="compass">
+
 <details>
 <summary>
 <div id="bussola">
@@ -2273,9 +2422,7 @@ window.onload = function() {
 </svg>
 </div><br>
 </summary>
-
-<font size="6" color="#A9F5A9" face="Arial">&ddarr;</font>
-<div id="compass">
+<font size="6" color="#A9F5A9" face="Arial">&ddarr;</font><br>
 <svg width="256px" height="256px" viewBox="0 0 1024 1024" class="icon" version="1.1" fill="#000000" transform="rotate(-45)">
 <g stroke-width="0"/>
 <g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="8.192"/>
@@ -2294,9 +2441,9 @@ window.onload = function() {
 </g>
 </g>
 </svg>
-</div>
 </details>
 
+</div>
 
 <br><font size="3" face="Tahoma" color="#5F9EA0"><i><small></sup>&#129517; Richiede un magnetometro e un accelerometro &#129517; <br>&#128241; consigliato utilizzo da mobile &#128241;<br> <em>&#128208; (rischio dati errati di calibrazione)</em> &#128208; <br> &#9881;&#65039; Entrambe hanno un funzionamento diverso &#9881;&#65039; </sup></small></i></font><br>
 <p>&#32;</p>
@@ -3508,6 +3655,41 @@ const wavelength = canvas.width / (scaledFrequency * 2);
 }
 
 
+frequencyInput.addEventListener('input', () => {
+  const value = parseFloat(frequencyInput.value);
+
+  if (isNaN(value) || value < 20 || value > 20000) {
+    frequencyInput.style.borderColor = 'red';
+    frequencyInput.setCustomValidity('Il valore deve essere compreso tra 20 e 20000.');
+
+    if (value > 20000) {
+      // Se il valore è maggiore di 20000, imposta il valore a 20000
+      frequencyInput.value = 20000;
+    }
+  } else {
+    frequencyInput.style.borderColor = 'DarkBlue';
+    frequencyInput.setCustomValidity('');
+  }
+});
+
+
+frequencyRange.addEventListener('input', validateFrequencyRange);
+
+function validateFrequencyRange() {
+  const currentValue = frequencyRange.value;
+  const sanitizedValue = sanitizeInput(currentValue);
+  if (sanitizedValue < 20 || sanitizedValue > 20000) {
+    frequencyRange.setCustomValidity('Il valore deve essere compreso tra 20 e 20000 Hz.');
+  } else {
+    frequencyRange.setCustomValidity('');
+  }
+}
+
+function sanitizeInput(input) {
+  const tempElement = document.createElement('div');
+  tempElement.textContent = input;
+  return tempElement.innerText;
+}
 
 
 
@@ -3579,12 +3761,19 @@ brownNoiseCheckbox.addEventListener('change', function() {
 });
 
 
-
 // Event listener per l'input del volume
 volumeRange.addEventListener('input', function() {
   let volume = parseFloat(volumeRange.value);
   gainNode.gain.value = volume;
 });
+
+volumeRange.addEventListener('input', validateVolumeRange);
+function validateVolumeRange() {
+  const value = volumeRange.value;
+  if (value < 0 || value > 1) {
+    volumeRange.value = Math.max(0, Math.min(1, value));
+  }
+}
 
 // Event listener per l'input della frequenza
 frequencyRange.addEventListener('input', function() {
@@ -4168,7 +4357,7 @@ function updateParticles(event) {
 
 
 <script type="text/javascript">
-
+/*
 document.addEventListener('DOMContentLoaded', function() {
     const targetElement = document.getElementById('frequencygen');
     if (window.location.hash === '#frequencygen' && targetElement) {
@@ -4218,6 +4407,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetElement = document.getElementById('compass');
     if (window.location.hash === '#compass' && targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hashElement = document.getElementById(window.location.hash.slice(1));
+    if (hashElement) {
+        hashElement.scrollIntoView({ behavior: 'smooth' });
     } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }

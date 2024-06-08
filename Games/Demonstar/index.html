@@ -2255,14 +2255,13 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
 <wbr><wbr><wbr><dialog style="background-color: lime; opacity: 0.3;" open>Architetto</dialog><br><br><br>
 </p>
 
+<!--
 <div id="ncalc">
 <var>
 <div class= "formstyle">
 <form name = "format">
-	<!-- This input box shows the button pressed by the user in calculator. -->
   <input id = "calc" class="calcoler" type ="text" readonly name = "answer"> <br> <br>
-  <!-- Display the calculator button on the screen. -->
-  <!-- onclick() function display the number prsses by the user. -->
+
   <input type = "button" class="calcoler" value = "1" onclick = "format.answer.value += '1' ">
   <input type = "button" class="calcoler" value = "2" onclick = "format.answer.value += '2' ">
   <input type = "button" class="calcoler" value = "3" onclick = "format.answer.value += '3' ">
@@ -2281,16 +2280,123 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
   <input type = "button" class="calcoler" value = "/" onclick = "format.answer.value += '/' ">
   <input type = "button" class="calcoler" value = "0" onclick = "format.answer.value += '0' ">
     <input type = "button" class="calcoler" value = "." onclick = "format.answer.value += '.' ">
-	<!-- When we click on the '=' button, the onclick() shows the sum results on the calculator screen. -->
   <input type = "button" class="calcoler" value = "=" onclick = "format.answer.value = eval(format.answer.value) ">
   <br> 
-  <!-- Display the Cancel button and erase all data entered by the user. -->
   <input type = "button" class="calcoler" value = "Canc" onclick = "format.answer.value = ' ' " id= "clear" >
   <br> 
 </form>
 </div>
 </var>
 </div>
+-->
+
+
+<div id="ncalc">
+    <var>
+        <div class="formstyle">
+            <form name="format">
+
+                <input id="calc" class="calcoler" type="text" readonly name="answer"> <br> <br>
+
+                <input type="button" class="calcoler" value="1" onclick="appendToInput('1')">
+                <input type="button" class="calcoler" value="2" onclick="appendToInput('2')">
+                <input type="button" class="calcoler" value="3" onclick="appendToInput('3')">
+                <input type="button" class="calcoler" value="+" onclick="appendToInput('+')">
+                <br> <br>
+                <input type="button" class="calcoler" value="4" onclick="appendToInput('4')">
+                <input type="button" class="calcoler" value="5" onclick="appendToInput('5')">
+                <input type="button" class="calcoler" value="6" onclick="appendToInput('6')">
+                <input type="button" class="calcoler" value="-" onclick="appendToInput('-')">
+                <br> <br>
+                <input type="button" class="calcoler" value="7" onclick="appendToInput('7')">
+                <input type="button" class="calcoler" value="8" onclick="appendToInput('8')">
+                <input type="button" class="calcoler" value="9" onclick="appendToInput('9')">
+                <input type="button" class="calcoler" value="*" onclick="appendToInput('*')">
+                <br> <br>
+                <input type="button" class="calcoler" value="/" onclick="appendToInput('/')">
+                <input type="button" class="calcoler" value="0" onclick="appendToInput('0')">
+                <input type="button" class="calcoler" value="." onclick="appendToInput('.')">
+
+                <input type="button" class="calcoler" value="=" onclick="calculateResult()">
+                <br> 
+
+                <input type="button" class="calcoler" value="Canc" onclick="clearInput()" id="clear">
+                <br> 
+            </form>
+        </div>
+    </var>
+</div>
+
+
+<script type="text/javascript">
+  function sanitizeInput(input) {
+  // Sanitizza l'input rimuovendo caratteri speciali come < e >
+  input.value = input.value.replace(/[<>]/g, '');
+}
+
+function validateInput(input) {
+  // Verifica se l'input contiene solo caratteri numerici e operatori matematici
+  return /^[0-9+\-*\/\.]*$/.test(input.value);
+}
+
+function appendToInput(value) {
+  // Aggiunge il valore all'input dopo la sanitizzazione
+  const inputField = document.querySelector('#calc');
+  inputField.value += value;
+}
+
+function calculateResult() {
+  const inputField = document.querySelector('#calc');
+  let result = inputField.value;
+
+  // Utilizza la validazione dell'input prima di calcolare il risultato
+  if (!validateInput(inputField)) {
+    clearInput();
+    return;
+  }
+
+  // Utilizza un blocco try-catch per gestire gli errori di valutazione
+  try {
+    // Sanitizza l'input prima di valutarlo
+    result = result.replace(/[^0-9+\-*\/\.]/g, '');
+    inputField.value = eval(result);
+  } catch (error) {
+    // In caso di errore, richiama la funzione clearInput() per ripulire l'input
+    clearInput();
+  }
+}
+
+function clearInput() {
+  // Pulisce l'input
+  document.querySelector('#calc').value = '';
+}
+
+
+/*
+  function sanitizeInput(input) {
+    input.value = input.value.replace(/[<>]/g, '');
+  }
+
+  function appendToInput(value) {
+    document.querySelector('#calc').value += value;
+  }
+
+  function calculateResult() {
+    let result = document.querySelector('#calc').value;
+  try {
+    result = result.replace(/[^0-9+\-*\/\.]/g, '');
+    document.querySelector('#calc').value = eval(result);
+  } catch (error) {
+    clearInput();
+  }
+}
+
+  function clearInput() {
+    document.querySelector('#calc').value = '';
+  }
+  */
+</script>
+
 
 <br><font size="2" color="#00FF00" face="Lucida Console"><strong>Spiegazione del dialogo con l'architetto:</strong></font><br>
 <br><font size="1" color="#00FF00" face="Lucida Console">Quando l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; minaccia che le macchine distruggeranno l&apos;umanità &#3616;&jukcy;&#3663; dice che loro non possono permetterselo, ricordate: hanno bisogno degli umani per sopravvivere, ma l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; dice che le macchine sono preparate ad accettare certi livelli di sopravvivenza e lui è preparato ad assumersi invece la responsabilità di tutti i miliardi di esseri umani in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; le cui vite vengono mostrate negli infiniti schermi, i suoi predecessori erano disegnati per essere affezionati al resto della sua specie, per facilitare la funzione del &#120288;&#120306;&#120320;&#120320;&#120310;&#120302;, ma mentre loro avevano un affetto generalizzato per tutti gli umani esiste un affetto molto più specifico: l&apos;amore di &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; che ora è entrata in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; per salvargli la vita al corso della sua proprio come lo aveva sognato come ha fatto nino assegnare &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; che muore prevenendo il futuro che dato che i suoi poteri sono limitati soltanto a &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, questo è il momento della verità dove l&apos;anomalia della scelta si rivela di nuovo. Ci sono due porte: una porta alla sorgente salvando l&apos;umanità, l&apos;altra lo riporterà in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; dove potrà salvare &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; e causare l&apos;estinzione dell&apos;umanità: il problema è la scelta, ma noi sappiamo già come andrà. L&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; già lo vede, la concatenazione di reazioni biochimiche che segnala l&apos;origine di un emozione a livello encefalico nata per aiutare la riproduzione che lo acceca nel vedere la semplice realtà, lei morirà e lui non può fare nulla a riguardo e &#3616;&jukcy;&#3663; puntualmente sceglie la seconda porta: andare a salvare &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274;! L&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; commenta in modo emblematico: speranza e illusione umana quintessenziale, che sia la fonte della vostra più grande forza, sia la vostra più grande debolezza. 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 nel primo film aveva parlato di un uomo in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; che era capace di cambiare ciò che voleva e modificare &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; secondo la propria volontà, fu lui a liberare i primi uomini, ad insegnare loro la realtà ossia che &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; è falsa. Dopo la sua morte l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359; profetizzo il suo ritorno e finché &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; esiste l&apos;umanità non sarà mai liberata, ora sappiamo che sta parlando del quinto eletto: il predecessore di &#3616;&jukcy;&#3663;, quello che aveva ottenuto grandi poteri aveva scoperto la verità e poi si era unito alla sorgente, aveva liberato un gruppo di umani a cui insegna la verità per la liberazione, combattere contro le macchie quando in realtà questa era una trappola per gli umani che rifiutano &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, un modo per incanalarla in una falsa speranza, riunirli in un luogo controllato, favorire lo scopo del piano delle macchine e poi venire distrutti altro che Lion, è un&apos;altra &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; lion, è già una trappola delle macchine, così una trappola filosofica e il materiale senza bisogno di violare il <i>Rasoio di Occam</i> postulando infiniti livelli di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, &#3616;&jukcy;&#3663; raggiunge &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; che è stata colpita proprio come nel suo sogno e il suo cuore si è fermato, encefalogramma piatto, è morta! Ma &#3616;&jukcy;&#3663; dice di amarla e che non è pronto ad affrontare la vita senza di lei e così in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; infila la mano dentro il suo sterno e raggiunge il cuore facendo un massaggio cardiaco e la resuscita in vita reale ricambiando a ciò che le aveva fatto nel primo film, questo è il secondo miracolo che &#8577;&Iukcy;&Fcy; fa, risulta inspiegabile per i suoi poteri dato che &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; era morta anche nel mondo reale e mette in dubbio la profezia dell&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf;, aveva detto che sarebbe morta e invece no, quindi può sbagliarsi anche sull&apos;umanità. La profezia è una menzogna anche a coloro che sono fuori da &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, vivono nell&apos;illusione dell&apos;illusione di essere liberi dalle macchine e la rivolta è pilotata da coloro che in teoria dovrebbero essere rimossi dal potere e la forma di controllo migliore quella che non fa rendere conto i soggetti di essere controllati mal illude di essere liberi, l&apos;opposto della profezia benevola dell&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359;. Quando &#3616;&jukcy;&#3663; di tutto si trova davanti a 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 lui risponde quasi in lacrime. E al tempo stesso con furore &quot;l&apos;altro&quot; si rifiuta di accettare questa realtà come il &#3616;&jukcy;&#3663; si rifiuto di accettare che &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; era un&apos;illusione, nel primo film 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 da un lato sembra comportarsi in modo dogmatico, rifiuta qualsiasi critica al suo credo, ma in realtà la sua fede in uno di &#3616;&jukcy;&#3663; è la liberazione dell&apos;umanità che ora sta venendo messa alla prova, rimane solida giustamente come vedremo nel terzo film. 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 ha sempre avuto ragione, intanto le sentinelle attaccano la nave e la distruggono. La nave che prende il nome dal Re che disse: &quot;ho sognato un sogno&quot; e ora quel sogno è lasciato, ricordiamo che 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 è il &#8577;&Iukcy;&Fcy; del sogno, la nave è distrutta e la profezia è falsa, sono tutti sconvolti, ma &#3616;&jukcy;&#3663; sente che qualcosa è cambiato impone le mani verso le sentinelle e come nel primo film aveva bloccato miracolosamente i proiettili, ora miracolosamente blocca le sentinelle e le fondare in corto circuito, ma nella vita reale questo è il terzo miracolo che non si può spiegare con un fortissimo parallelismo tra l&apos;altro con il primo film: anche lì nel momento di massimo sconforto &#3616;&jukcy;&#3663; ha scoperto il suo potere e ha trasceso quello che nessuno credeva possibile, a questo punto però cade in coma questa scena ha scatenato molte teorie. Una delle più popolari è appunto quella che il mondo reale sia in realtà un altro livello di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, cosa che permette di fare miracoli e anche qua in teoria supportata persino dal film &quot;Theories&quot;, ma come vedremo nel terzo film non è così e la spiegazione è che sia molto più semplice, sia molto più logica, sia molto più profonda e a sorpresa vediamo steso accanto a lui nella scena finale un altro personaggio in coma che in &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; era stato assorbito da &#4752;&#4896;&#4878;&#4949;&#4824;, infatti non ha solo imparato da chinare &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, ma anche tutto ciò che è collegato a &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; comprese le menti umane e questo è molto importante anche per capire i futuri poteri di &#3616;&jukcy;&#3663;, si è scaricato nell&apos;avatar del mondo fisico, si è installato in un cervello umano hackerare la psiche umana e prenderne il controllo, e anche questo contribuisce alla caratteristica dell&apos;agente &#4752;&#4896;&#4878;&#4949;&#4824;, questo però si traduce nel fatto che macchina e umani in un certo senso sono compatibili, la concatenazione causale ha un inizio e una fine nella scelta. Il resto è la concatenazione meccanicistica di causa ed effetto e le conseguenze della libera scelta volendo fare un paragone fisico la libertà e la libera scelta nasce da stati quantisticamente indefiniti e quindi indeterminati nel collasso della funzione d&apos;onda delle sinapsi cerebrali e i sistemi non lineari sono abbastanza sensibili da tradurre queste piccolissime variabili quantistiche in effetti macroscopici che poi attivano la catena di domino di causa effetto. In questo modo la coscienza in modo non deterministico è assolutamente libera, potrebbe ad esempio dare inizio alla concatenazione causale e a spiegare il libero arbitrio, pur esistendo molte altre versioni su come il libero arbitrio sia compatibile con il meccanicismo classico come l&apos;anima o la non computabilità della mente e tantissime altre teorie in questo rientra il dibattito fra compatibilismo determinismo, libertarismo, libero arbitrio e tutte le altre possibilità. Più una persona conosce, più è in grado di vedere le scelte, di attivare tanti percorsi, tante catene alternative: <strong>La conoscenza libera dalle catene</strong> rende l&apos;uomo libero con una pedina o un pezzo del domino, un giocatore attivo, mentre l&apos;ignoranza rende parte della concatenazione causale condizionabile: <u>schiavo</u>, è come un gioco matematico le cui regole sono valide solo nel gioco perché il gioco è stato programmato così dai programmatori un&apos;equazione, ma in questa equazione chi stabilisce le regole? Ossia i limiti delle cose obbligatorie che devono accadere? Il principio di causa ed effetto ci sono anche delle variabili nascoste che non possiamo conoscere e che indicano la volontà, la libertà e noi siamo quelle variabili, quei piccoli numeri che non si conoscono nell&apos;equazione, potrebbero essere qualsiasi numero, potrebbero avere qualsiasi valore e ogni numero avrà un effetto diverso sull&apos;equazione e quindi un risultato diverso, un effetto diverso. Quando noi scegliamo la variabile viene scoperta prima di allora tutte le variabili sono vere come il gatto di Schrödinger. Come se teneva Kirk, tutte le scelte potenziali non ancora fatte sono ancora tutte attuabili finché non ne citiamo una sola annullando tutte le altre e questo rende la scelta così terribile da trasformarla in un peso gravoso per l&apos;uomo, insostenibile. Quelle variabili possono addirittura rompere le regole e diventare anomalie, possono diventare, i buchi, i bug, i trucchi del gioco per fare una scelta che violi le regole come fa &#3616;&jukcy;&#3663; con il gioco di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, bisogna però essere connessi a qualcosa che sta oltre le regole di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, se noi siamo numeri in un&apos;equazione bisogna essere connessi a qualcosa oltre le regole dell&apos;equazione, oltre l&apos;equazione stessa la conoscenza ci permette di evadere il condizionamento e di essere liberi, su questo si basa anche il &quot;cogito&quot;: cambiare il risultato come vogliamo, ma sempre nelle regole di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, per violare invece le regole &#3616;&jukcy;&#3663; è connesso a ciò che ha creato &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;: ossia la sorgente, l&apos;UNO. &#3616;&jukcy;&#3663; sceglie di fare una cosa impossibile, la cosa irrazionale, la cosa che non bisogna fare perché ha l&apos;intelligenza di super-elevazione: sa che è previsto che lui faccia una scelta, ma l&apos;emozione in questo caso l&apos;amore lo spinge a non farlo e a salvare &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274;. Facendo questa scelta è uscito dalla strada predeterminata, e seguita dai suoi predecessori, è uscito dal piano, è uscito fuori dal seminato aprendo di infinite e illimitate possibilità ed entrare in uno scenario che l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; nella sua perfezione calcolatrice non poteva prevedere, qualcosa oltre i suoi piani, oltre le regole è il vero atto rivoluzionario, ma la posta in gioco è tutta l&apos;umanità. L&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; con il suo modo di ragionare soltanto deduttivo deduce infallibilmente le conseguenze dalle premesse degli assiomi di partenza, ma come la crisi dei fondamenti matematici ci ha insegnato questi assiomi sono arbitrari, siamo noi a scegliere quali insiemi di partenza adottare, quali regole formali che associano i segni ed i simboli a loro significato cambiando le regole del gioco. L&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; prevede da A e B, ma non è capace di vedere oltre B e tutte le altre possibilità e non è stato lui a scegliere. Invece &#3616;&jukcy;&#3663; rappresenta la logica para-consistente che apre tutte le altre possibilità e anche a piccole contraddizioni, ma che permette di vedere tutte le vie possibili oltre gli schemi, le regole che mettono paletti: dicono puoi fare questo e quest&apos;altro, ma cambiando le regole cambiano gli assiomi di partenza e quindi si aprono tutte le altre infinite possibilità, per questo per quanto possa sembrare ironico a volte con la logica si possono fare deduzioni sbagliate se si parte da premesse sbagliate, di contro andando contro le regole della logica classica esplorando anche le contraddizioni violando le leggi affidandosi non solo alla razionalità, ma anche all&apos;intuizione &quot;l&apos;indus&quot;, leggere la capacità di vedere oltre gli schemi, di affidarsi anche a cose irrazionali come l&apos;amore o idealistiche come la fede permette di esplorare anche questi campi inesplorati, oltre la fisica si aprono le porte della metafisica, della matematica, della logica, della fenomenologia, oltre la realtà si aprono le porte della fantasia e come mostrato: la quantità combinazioni calcolabili da tutti quanti se l&apos;universo fosse un enorme supercomputer è infinitamente più grande dell&apos;universo stesso.<strong&gt;La nostra mente in un certo senso è più grande del mondo che la contiene!</strong&gt;.  L&apos;intuito inoltre permette di decidere gli schemi di partenza, in questo discorso rientra anche il <i>Teorema di incompletezza di Gödel</i> con il quale dimostrò che qualsiasi teorema matematico, qualsiasi cosa si dimostra in matematica non può essere completa e consistente al tempo stesso nel senso che per dimostrare vero un certo teorema servono elementi che non sono dimostrati veri in quel teorema stesso, ma in un altro. Quella regola vale anche per quell&apos;altro e così via. Nessuna teoria è chiusa e completa, tutte si basano su una sorta di atto di fede, una catena finita: o procede all&apos;infinito o si conclude, quindi assiomi con chi sceglie gli assiomi: il punto di partenza, il big bang di ogni universo matematico possibile, l&apos;uomo con la sua capacità, la logica segue un percorso con il calcolo, ma seguendo sempre le stesse regole. Si vuole invece sfuggire alla regola, bisogna andare al di là utilizzando altre capacità mentali dell&apos;uomo che sono comunque necessarie in matematica, come appunto l&apos;intuizione quando si creano nuovi sistemi e nuove regole matematiche, come la filosofia in scienza, come la fenomenologia in filosofia e siamo al punto di partenza, è la scelta che ciò che dà inizio alla casualità e non viceversa. Come ha detto 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜 tutto ha inizio con una scelta e se questa esistenza è un gioco in cui ci sono rischi, statistiche da calcolare noi cerchiamo una ricompensa nella vittoria e apprendendo impariamo sempre di più, otteniamo nuove informazioni e con quelle informazioni scopriamo ciò che ci mancava, abbiamo calcoli sempre presenti e riusciamo a manipolare gli eventi a nostro favore. Ma tutto questo richiede un rischio, rischiamo di fare la cosa stupida e andare contro le regole perché quelle regole possono essere evase come in una prigione, è contraria al regolamento fuggire, la logica suggerisce di seguire le regole per evitare la punizione, ma trascendendo quelle regole vediamo che fuori dalla prigione c&apos;è un mondo libero con altre possibilità e altre leggi migliori e dobbiamo fare la cosa rischiosa forse stupida per aprire il muro e le sue infinite possibilità, fuori dal percorso della grande città in cui non vediamo c&apos;è l&apos;orizzonte, liberi dall&apos;indecisione che il deserto del reale offre alla vista, proprio come nelle filosofie delle religioni noi siamo in questa realtà per imparare per conoscere per poi un giorno trascendere il limite della realtà, diventerà qualcosa di più, rischiare con il nostro libero arbitrio a volte possiamo sbagliare, a volte quel rischio ci condurrà a soffrire, ma da quel male noi impariamo sempre qualcosa o qualcuno imparerà a noi, ogni sofferenza è parte di una visione che porta ad una crescita come &#3616;&jukcy;&#3663; ha sofferto nel suo cammino adesso ha una grande forza, è molto più forte come in ogni viaggio dell&apos;eroe che si rispetti del resto alcuni scambiano la propria libertà in cambio della sicurezza, niente rischi, niente sbagli, in cambio del potere tolto delle nostre mani fare le proprie scelte poi sorbirsi delle responsabilità, gli effetti per la causa ed effetto che ne escono sono difficili, a volte da sopportare è dura e molti preferiscono che siano altri a fare le scelte per loro. &#3616;&jukcy;&#3663; è sempre stato invece un ribelle: dalla rivolta contro &#4752;&#4896;&#4878;&#4949;&#4824; alla rivolta contro le macchine, la rivolta contro il suo capo di lavoro fino allo scegliere di disobbedire all&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; e salvare &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274;, &#3616;&jukcy;&#3663; si è ribellato al dominio delle macchine e azionato il loro piano è sempre stata una questione di piano delle macchine versus libera scelta dell&apos;uomo e &#3616;&jukcy;&#3663; che è l&apos;eletto, il &#120288;&#120306;&#120320;&#120320;&#120310;&#120302;. Ha sempre campionato la libertà umana e soprattutto all&apos;uscita dagli schemi non ha mai obbedito a chi gli ha dato ordini e non si è mai lasciato dire che cosa può fare e cosa non può fare, ha sempre trovato vie che nessuno prima riteneva possibili davanti, trova una terza via ed è solo con la libera scelta data dalla propria volontà che si può spezzare il gioco dell&apos;eterno ritorno scegliendo un azione che vale la pena ripetere per tutta l&apos;eternità perché liberamente scelta da noi e quindi irrimediabilmente nostra che renda l&apos;eterno ripetersi degno oppure che lo distrugga con la novità data dall&apos;imprevedibile decisione di ogni uomo, lui non segue gli ordini, non si fa dire quali strade scegliere è lui a disegnare il processo, a scegliere la strada giusta, un uomo sceglie uno schiavo e obbedisce, in tutto questo allora cosa c&apos;entra il destino, la profezia? Quel qualcosa che sia l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359; o che sia &#8577;&Iukcy;&Fcy; che in tutta questa storia di libere scelte sa già tutto, la risposta sta nel <i>Concetto Junghiano</i> di sincronicità: ossia coincidenze piene di significato, ci sono coincidenze che sono prive di significato, ma alcune coincidenze non possono fare a meno di accendere una lampadina nella nostra mente, comunicare un messaggio che solo noi possiamo capire, oppure è cambiato nella nostra vita quel piccolo dettaglio che proprio in quel momento sembrava così azzeccato, che è stato così importante questo concetto parecchio simile a quello di <i>Provvidenza Manzoniana</i> deriva dalla catena di causalità che origina fuori il gioco, fuori il programma dal programmatore stesso che sia l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359; che tramite tutte le cose che prevede lentamente ti porta ad un percorso o che sia una provvidenza divina filosoficamente intesa il programmatore quello fuori dalle regole del gioco e dalla concatenazione del reale e la causa di questi piccoli dettagli spesso così improbabile statisticamente assurdi che putacaso avvengono al proprio mondo al soggetto serve per completare un certo percorso. Come è successo a 𝙼𝚘𝚛𝚙𝚑𝚎𝚞𝚜, a &#120243;&#120267;&#120258;&#120263;&#120258;&#120269;&#120274; che hanno tutti quanti avuto dei cammini mistici esistenziali, il mondo ha parlato con loro tramite dei segnali che l&apos;hanno portata a crescere, a chiedersi che è solo una coincidenza da un lato, il futuro è come un albero pieno di ramificazioni tutti gli infiniti motori possibili, che finché non ne scegliamo uno sono tutti ancora accessibili dall&apos;altro, questo programmatore che sembra conoscere le scelte dei personaggi liberi e anche la ribellione al programma non abbiamo una sorta di paradiso imposto, ma possiamo fare invece le nostre scelte, non subiamo passivamente una profezia, ma siamo dinamici e cerchiamo di ribellarci, di usare questa profezia contro la profezia stessa, di cambiarla. E dato che l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359; questo lo sa adotta la sua profezia per ottenere un certo fine, adatta alle coincidenze, adatta agli eventi, a quello che ci succede per darci gli input necessari a crescere e procedere in un certo modo, saremo liberi di scegliere ogni volta, ma il piano sarà sempre personalizzato per noi, per farci capire certe cose e farci crescere, le nostre libere scelte sono comprese nel piano stesso, le scelte che ci appartengono sono al di là delle regole di questo mondo e sono totalmente nostre, ma questo non vuol dire che non siano comunque comprese da chi come noi è oltre il programma e vede sia l&apos;equazione con i numeri suoi fissi, sia noi che siamo le variabili e adatta in modo probabilistico come nel caso dell&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359;. L&apos;equazione accettando le nostre reazioni, è un piano che si evolve dinamico, plasmato anche da noi, dalle nostre scelte noi non lo stiamo solo subendo, è un piano che impara con noi, noi impariamo dal piano e cambiamo il mondo secondo la nostra volontà e il piano si modifica per accomodare le nostre scelte e procedere comunque verso un fine è come se &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; stessa fosse stata disegnata da qualcosa di intelligente che ha un piano, tutto su un piano che usa le libere scelte degli umani buone o cattive che siano per giungere sempre allo stesso climax le macchine hanno programmato &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; senza la possibilità di far crescere gli umani e questo la dice lunga su quanto poco li capiscano, le macchine soprattutto non capiscono l&apos;amore. Il loro non comprendere l&apos;amore ha portato la scelta non prevista di &#3616;&jukcy;&#3663;, di non salvare &quot;LUI&quot;, per questo le macchine vogliono studiare e integrare nella loro programmazione la mente umana ed in effetti le macchine non possono crescere, sono stagnanti, non fanno salti qualitativi, ma solo quantitativi e paradossalmente l&apos;unica cosa che ha fatto evolvere le macchine qualitativamente sono proprio gli umani, nel controllarli le macchine sono evolute, hanno creato l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf;, hanno creato &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;, hanno creato l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359;, il merovingio, sempre più intelligenti sempre più geniali, ogni personaggio. Le macchine inoltre nella pianificazione originaria di &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; volevano usare gli umani come processori dato che il cervello umano è un computer estremamente potente, in un certo senso vorrebbero inconsciamente unirsi agli esseri umani e forse qualcuno agisce dietro le quinte per realizzare proprio questo scopo, secondo alcuni addirittura ogni nuovo eletto non è una semplice iterazione del precedente, ogni nuovo eletto è in un certo senso più potente, anche se le macchine non se ne accorgono, più vite possono accrescere la saggezza e l&apos;esperienza dell&apos;IO verso l&apos;illuminazione, del resto anche l&apos;&#65327;&#65362;&#65345;&#65347;&#65359;&#65356;&#65359; però ha detto da anni che forse stava aspettando la sua prossima vita, questo eletto questo ONE che rappresenta tutta l&apos;umanità nella loro libera scelta e che deve unirsi alla sorgente, la divinità delle macchine e diventare un giorno tutt&apos;uno con essa è forse infuria di nuovo, giungerà un giorno a quello che avvierà questa unione: il creatore mette una piccola regola ed impone agli umani non violarla, in questo caso di accettare la virtualità e non cercare la vera conoscenza, la realtà oltre l&apos;illusione. Crea un mondo matematicamente perfetto e poi si siede e sta a guardare senza assistere l&apos;umanità, il giardino infatti è senza tempo come la prima &#120340;&#120354;&#120373;&#120371;&#120362;&#120377; che era eterna e immutabile, non c&apos;è mutazione, non c&apos;è evoluzione, crescita e vita che sono fondamentali per ogni essere vivente, specie per gli esseri umani e la nuova conoscenza e l&apos;evoluzione, il cambiamento che rompe la stasi viene da fuori &#120340;&#120354;&#120373;&#120371;&#120362;&#120377;. Viene dallo scoprire la verità è la pillola rossa, la mela rossa. &#3616;&jukcy;&#3663; in questo senso è il serpente, è colui che mette in moto, eliminò lo status-quo che porta la nuova conoscenza. Ironicamente il serpente è voluto dal creatore, ma a quale scopo? Lewis sosteneva che esistessero due forme di bene, il bene minore e il bene maggiore. Il bene minore sarebbe stato per un uomo obbedire alla regola e rimanere nella simulazione che conferma l&apos;illusione senza mai conoscere il male e senza mai impararlo, il bene maggiore invece sarebbe stato commettere il male, soffrire e venire esiliato, imparare a vivere nel mondo reale, crescere e migliorarsi per poi diventare qualcosa di più cresciuto, diventare buoni dopo aver subito, ho commesso il male, la sintesi che rende la tesi più ricca dopo aver passato l&apos;antitesi, in questo senso mangiare la mela è stato un bene una cosa voluta dal &#8577;&Iukcy;&Fcy; della simulazione perché l&apos;uomo in questo modo ha fatto le sue scelte, è cresciuto, è stato un dipendente e quando ritorna lo fa per sua volontà, è più forte e più cresciuto, è più esperto, più saggio. Quindi il serpente escogitato dal creatore stesso è come una sorta di backdoor, una via d&apos;uscita per lasciare all&apos;uomo la possibilità di crescere, in fondo al giardino che era stato creato come un cancello, era previsto che potesse uscire dato che chi non esce sarebbe rimasto sempre obbediente come una semplice macchina senza la facoltà di disobbedire o di dire sì di propria volontà, dopo aver scelto e capito l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; tutto vestito di bianco &#3616;&jukcy;&#3663; invece è tutto vestito di nero, il parallelismo risulta evidente. &#3616;&jukcy;&#3663; è la scelta, &#3616;&jukcy;&#3663; rappresenta e contiene la possibilità di uscire da questo giardino e fare le proprie scelte così come lui ha scelto di andare, di non andare alla sorgente, oppure di uscire dalla porta e rifiutarsi e non partecipare al piano. L&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; è malvagio, ma non ha creato &#3616;&jukcy;&#3663; in modo benevolo per lasciare gli esseri umani crescere bensì per tenerli sotto controllo, ma inavvertitamente questo li sta rendendo più liberi perché ora non stanno per organizzare la rivoluzione e allora ci sono due possibilità: o l&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; non l&apos;aveva previsto, o c&apos;è qualcosa di più grande e saggio dell&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf;, che aveva un piano per l&apos;umanità, qualcuno che ha previsto il serpente, &#3616;&jukcy;&#3663; sta per contrastare il malvagio demiurgo &Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf;, sia per aiutarli nella liberazione, ma se non è stato il creatore a creare il serpente allora chi è stato e chi è che aveva previsto il dominio illusorio dell&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf;? Ha creato un serpente originariamente come strumento dell&apos;&Aopf;&ropf;&copf;&hopf;&iopf;&topf;&eopf;&topf;&topf;&oopf; per opprimere, dominare, ma in realtà sarebbe per liberare gli esseri umani, chi è questo &#8577;&Iukcy;&Fcy; più grande del demiurgo che sta liberando gli umani dal falso &#8577;&Iukcy;&Fcy; che ha unificato tutti gli umani contro un unico nemico che tira le fila per unire uomini e macchine?<br><br> <mark><i>Sembra quasi che gli esseri umani anche quando hanno ogni cosa non si accontentino mai, inoltre sembra che siano invidiosi della felicit&agrave; altrui e porta questi ultimi a portare ella stessa via e si gode quando si porta via quella stessa felicit&agrave; che faceva stare bene quella persona.</i></mark> </font><br>
@@ -2318,6 +2424,74 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
 </div>
 <br>
 <script type="text/javascript">
+
+ // Funzione per sanitizzare l'input
+  function sanitizeInput(input) {
+    // Rimuove tutti i caratteri non numerici dalla stringa
+    return input.replace(/[^0-9]/g, '');
+  }
+
+
+  // Funzione per validare l'input
+  //function validateInput(input) {
+    // Controlla se l'input è vuoto o meno
+  //  return input.trim().length > 0;
+  //}
+
+function validateInput(input) {
+  // Ottieni l'elemento DOM dell'input
+  const inputElement = document.getElementById(input);
+
+  // Verifica se l'elemento esiste e se ha uno degli ID specificati
+  if (inputElement && (inputElement.id === "dateInput" || inputElement.id === "timeInput")) {
+    // Controlla se l'input è vuoto o meno
+    return inputElement.value.trim().length > 0;
+  } else {
+    // Se l'elemento non esiste o non ha uno degli ID specificati, considera l'input come valido
+    return true;
+  }
+}
+
+
+  // Funzione per effettuare l'escaping dell'input (nel caso sia necessario)
+  function escapeInput(input) {
+    // Esegui l'escaping dell'input in base alle tue esigenze
+    // Ad esempio, potresti utilizzare la funzione escape() o encodeURIComponent()
+    return encodeURIComponent(input);
+  }
+
+  // Gestione dell'evento di cambio per l'input data
+  document.getElementById('dateInput').addEventListener('change', function(event) {
+    var inputDate = event.target.value;
+    // Sanitizza l'input
+    var sanitizedDate = sanitizeInput(inputDate);
+    // Valida l'input
+    var isValid = validateInput(sanitizedDate);
+    if (!isValid) {
+      alert('La data inserita non è valida.');
+      // Puoi aggiungere ulteriori azioni qui, come reimpostare l'input
+    }
+    // Escaping dell'input (se necessario)
+    var escapedDate = escapeInput(sanitizedDate);
+    // Ora puoi utilizzare escapedDate per inviare l'input al server in modo sicuro
+  });
+
+  // Gestione dell'evento di cambio per l'input ora
+  document.getElementById('timeInput').addEventListener('change', function(event) {
+    var inputTime = event.target.value;
+    // Sanitizza l'input
+    var sanitizedTime = sanitizeInput(inputTime);
+    // Valida l'input
+    var isValid = validateInput(sanitizedTime);
+    if (!isValid) {
+      alert('L\'ora inserita non è valida.');
+      // Puoi aggiungere ulteriori azioni qui, come reimpostare l'input
+    }
+    // Escaping dell'input (se necessario)
+    var escapedTime = escapeInput(sanitizedTime);
+    // Ora puoi utilizzare escapedTime per inviare l'input al server in modo sicuro
+  });
+
 const d = new Date();
 document.getElementById("scalendar").innerHTML = d;
 </script>
@@ -2801,7 +2975,6 @@ document.write("</table></p>");
  <tr>
  
 
-
  <td>
  <button class="btn" data-value='4'>4</button>
  </td>
@@ -2866,196 +3039,184 @@ document.write("</table></p>");
 </table>
 </div>
 
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 const actions = document.querySelector('.actions');
- const ans = document.querySelector('.ans');
- //console.log(actions);
- //console.log(ans);
- let expression = '';
- let a=0;
- actions.addEventListener('click', (e) => {
- //console.log(e.target);
- const value = e.target.dataset['value'];
+const ans = document.querySelector('.ans');
+let expression = '';
+let a = 0;
 
- if(value !== undefined) {
- // I'm good to go.
- if(value == 'ce') {
- expression = '';
- ans.value = 0;
- return true;
- }
- else if(value == 'x^2'){
- expression =square();
- }
- 
- else if(value == 'x^4'){
- expression =square() *expression *expression;
- }
- 
- else if(value == 'x^6'){
- expression =square() *expression *expression *expression *expression;
- }
- 
- else if(value == 'x^8'){
- expression =square() *expression *expression *expression *expression *expression *expression;
- }
- 
- else if(value == 'radic'){
- expression = Math.sqrt(expression);
- }
- else if(value == 'log'){
- expression = Math.log(expression);
- }
- else if(value == 'sin'){
- expression = Math.sin(expression);
- }
- else if(value == 'cos'){
- expression = Math.cos(expression);
- }
- else if(value == 'tan'){
- expression = Math.tan(expression);
- }
- 
- else if(value == 'Ran'){
- expression = Math.random(expression);
- }
- 
- else if(value == 'round'){
- expression = Math.round(expression);
- }
- 
- else if(value == 'abs'){
- expression = Math.abs(expression);
- }
- 
- else if(value == 'ceil'){
- expression = Math.ceil(expression);
- }
- 
- else if(value == 'floor'){
- expression = Math.floor(expression);
- }
- 
- else if(value == 'fround'){
- expression = Math.fround(expression);
- }
- 
- else if(value == 'imul'){
- expression = Math.imul(expression);
- }
- 
- else if(value == 'pow'){
- expression = Math.pow(expression);
- }
- 
- else if(value == 'sign'){
- expression = Math.sign(expression);
- }
- 
- else if(value == 'cbrt'){
- expression = Math.cbrt(expression);
- }
- 
- else if(value == 'trunc'){
- expression = Math.trunc(expression);
- }
- 
- else if(value == 'sqrt'){
- expression = Math.sqrt(expression);
- }
- 
- else if(value == 'sinh'){
- expression = Math.sinh(expression);
- }
- 
- else if(value == 'cosh'){
- expression = Math.cosh(expression);
- }
- 
- else if(value == 'hypot'){
- expression = Math.hypot(expression);
- }
- 
- else if(value == 'atan'){
- expression = Math.atan(expression);
- }
- 
- else if(value == 'atanh'){
- expression = Math.atanh(expression);
- }
- 
- else if(value == 'acos'){
- expression = Math.acos(expression);
- }
- 
- else if(value == 'acosh'){
- expression = Math.acosh(expression);
- }
- 
- else if(value == 'asin'){
- expression = Math.asin(expression);
- }
- 
- else if(value == 'asinh'){
- expression = Math.asinh(expression);
- }
- 
- else if(value == 'atan2'){
- expression = Math.atan2(expression);
- }
- 
- else if(value == 'clz32'){
- expression = Math.clz32(expression);
- }
- 
- else if(value == 'expm1'){
- expression = Math.expm1(expression);
- }
- 
- else if(value == 'log10'){
- expression = Math.log10(expression);
- }
- 
- else if(value == 'log1p'){
- expression = Math.log1p(expression);
- }
- 
- else if(value == 'log2'){
- expression = Math.log2(expression);
- }
- 
- else if(value == 'min'){
- expression = Math.min(expression);
- }
- 
- else if(value == 'max'){
- expression = Math.max(expression);
- }
+actions.addEventListener('click', (e) => {
+    const value = e.target.dataset['value'];
 
- else if(value == '=') {
- const answer = eval(expression);
- expression = answer;
- 
- } else {
- expression += value;
- }
+    try {
+        if (value !== undefined) {
+            if (value == 'ce') {
+                expression = '';
+                ans.value = 0;
+                return true;
 
- if(expression == undefined) {
- expression = '';
- ans.value = 0;
- } else {
- ans.value = expression;
- }
- // expression += value;
+            } else if (value == 'x^2') {
+                expression = square();
+            } else if (value == 'x^4') {
+                expression = square() * expression * expression;
+            } else if (value == 'x^6') {
+                expression = square() * expression * expression * expression * expression;
+            } else if (value == 'x^8') {
+                expression = square() * expression * expression * expression * expression * expression * expression;
+            } else if (value == 'radic') {
+                expression = Math.sqrt(expression);
+            } else if (value == 'log') {
+                expression = Math.log(expression);
+            } else if (value == 'sin') {
+                expression = Math.sin(expression);
+            } else if (value == 'cos') {
+                expression = Math.cos(expression);
+            } else if (value == 'tan') {
+                expression = Math.tan(expression);
+            } else if (value == 'Ran') {
+                expression = Math.random(expression);
+            } else if (value == 'round') {
+                expression = Math.round(expression);
+            } else if (value == 'abs') {
+                expression = Math.abs(expression);
+            } else if (value == 'ceil') {
+                expression = Math.ceil(expression);
+            } else if (value == 'floor') {
+                expression = Math.floor(expression);
+            } else if (value == 'fround') {
+                expression = Math.fround(expression);
+            } else if (value == 'imul') {
+                expression = Math.imul(expression);
+            } else if (value == 'pow') {
+                expression = Math.pow(expression);
+            } else if (value == 'sign') {
+                expression = Math.sign(expression);
+            } else if (value == 'cbrt') {
+                expression = Math.cbrt(expression);
+            } else if (value == 'trunc') {
+                expression = Math.trunc(expression);
+            } else if (value == 'sqrt') {
+                expression = Math.sqrt(expression);
+            } else if (value == 'sinh') {
+                expression = Math.sinh(expression);
+            } else if (value == 'cosh') {
+                expression = Math.cosh(expression);
+            } else if (value == 'hypot') {
+                expression = Math.hypot(expression);
+            } else if (value == 'atan') {
+                expression = Math.atan(expression);
+            } else if (value == 'atanh') {
+                expression = Math.atanh(expression);
+            } else if (value == 'acos') {
+                expression = Math.acos(expression);
+            } else if (value == 'acosh') {
+                expression = Math.acosh(expression);
+            } else if (value == 'asin') {
+                expression = Math.asin(expression);
+            } else if (value == 'asinh') {
+                expression = Math.asinh(expression);
+            } else if (value == 'atan2') {
+                expression = Math.atan2(expression);
+            } else if (value == 'clz32') {
+                expression = Math.clz32(expression);
+            } else if (value == 'expm1') {
+                expression = Math.expm1(expression);
+            } else if (value == 'log10') {
+                expression = Math.log10(expression);
+            } else if (value == 'log1p') {
+                expression = Math.log1p(expression);
+            } else if (value == 'log2') {
+                expression = Math.log2(expression);
+            } else if (value == 'min') {
+                expression = Math.min(expression);
+            } else if (value == 'max') {
+                expression = Math.max(expression);
+            } else if (value == '=') {
+                const answer = eval(expression);
+                expression = answer;
+            } else {
+                expression += value;
+            }
+
+            if (expression == undefined) {
+                expression = '';
+                ans.value = 0;
+            } else {
+                ans.value = expression;
+            }
+        }
+    } catch (error) {
+        // Gestione degli errori qui
+		expression = '';
+		ans.value = 0;
+    }
+});
+
+const square = () => {
+    return eval(expression * expression);
+}
 
 
- }
 
- });
- const square =()=> {
- return eval(expression*expression);
- }
+
+
+// Seleziona l'elemento input
+var inputElement = document.querySelector('input[name="ipercalcolo"]');
+
+// Mappa dei caratteri HTML speciali e delle loro entità corrispondenti
+var htmlEntities = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#x27;',
+};
+
+// Funzione per sostituire i caratteri HTML speciali con le loro entità corrispondenti
+function escapeHtml(text) {
+  return text.replace(/[&<>"'\/]/g, function (match) {
+    return htmlEntities[match];
+  });
+}
+
+// Imposta il valore dell'input come testo puro
+inputElement.value = escapeHtml(inputElement.value);
+
+
+
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br><br>
 <p>&#32;</p>
@@ -3086,6 +3247,156 @@ canvas {display: block;}
 -->
 
 <script type="text/javascript">
+
+/*
+
+const actions = document.querySelector('.actions');
+const ans = document.querySelector('.ans');
+
+let expression = '';
+let a = 0;
+
+actions.addEventListener('click', (e) => {
+    const value = e.target.dataset['value'];
+
+    if (value !== undefined) {
+        // Sanificazione dell'input
+        const sanitizedValue = encodeURIComponent(value);
+
+        // Se il valore è un operatore
+        if (sanitizedValue == 'ce') {
+            expression = '';
+            ans.value = 0;
+            return true;
+        } 
+
+        try { 
+            if (value == 'x^2') {
+                expression = square();
+            } else if (value == 'x^4') {
+                expression = square() * square();
+            } else if (value == 'x^6') {
+                expression = square() * square() * square();
+            } else if (value == 'x^8') {
+                expression = square() * square() * square() * square();
+            } else if (value == 'radic') {
+                expression = Math.sqrt(expression);
+            } else if (value == 'log') {
+                expression = Math.log(expression);
+            } else if (value == 'sin') {
+                expression = Math.sin(expression);
+            } else if (value == 'cos') {
+                expression = Math.cos(expression);
+            } else if (value == 'tan') {
+                expression = Math.tan(expression);
+            } else if (value == 'Ran') {
+                expression = Math.random(expression);
+            } else if (value == 'round') {
+                expression = Math.round(expression);
+            } else if (value == 'abs') {
+                expression = Math.abs(expression);
+            } else if (value == 'ceil') {
+                expression = Math.ceil(expression);
+            } else if (value == 'floor') {
+                expression = Math.floor(expression);
+            } else if (value == 'fround') {
+                expression = Math.fround(expression);
+            } else if (value == 'imul') {
+                expression = Math.imul(expression);
+            } else if (value == 'pow') {
+                expression = Math.pow(expression, 2); // aggiunto un secondo argomento
+            } else if (value == 'sign') {
+                expression = Math.sign(expression);
+            } else if (value == 'cbrt') {
+                expression = Math.cbrt(expression);
+            } else if (value == 'trunc') {
+                expression = Math.trunc(expression);
+            } else if (value == 'sqrt') {
+                expression = Math.sqrt(expression);
+            } else if (value == 'sinh') {
+                expression = Math.sinh(expression);
+            } else if (value == 'cosh') {
+                expression = Math.cosh(expression);
+            } else if (value == 'hypot') {
+                expression = Math.hypot(expression);
+            } else if (value == 'atan') {
+                expression = Math.atan(expression);
+            } else if (value == 'atanh') {
+                expression = Math.atanh(expression);
+            } else if (value == 'acos') {
+                expression = Math.acos(expression);
+            } else if (value == 'acosh') {
+                expression = Math.acosh(expression);
+            } else if (value == 'asin') {
+                expression = Math.asin(expression);
+            } else if (value == 'asinh') {
+                expression = Math.asinh(expression);
+            } else if (value == 'atan2') {
+                expression = Math.atan2(expression, 2); // aggiunto un secondo argomento
+            } else if (value == 'clz32') {
+                expression = Math.clz32(expression);
+            } else if (value == 'expm1') {
+                expression = Math.expm1(expression);
+            } else if (value == 'log10') {
+                expression = Math.log10(expression);
+            } else if (value == 'log1p') {
+                expression = Math.log1p(expression);
+            } else if (value == 'log2') {
+                expression = Math.log2(expression);
+            } else if (value == 'min') {
+                expression = Math.min(expression);
+            } else if (value == 'max') {
+                expression = Math.max(expression);
+            } else if (value == '=') { 
+                const encodedExpression = encodeURIComponent(expression);
+
+                // Controllo se l'espressione contiene solo caratteri consentiti
+                if (isValidExpression(expression)) {
+                    const answer = eval(decodeURIComponent(encodedExpression)); // Decodifica l'espressione prima di valutarla
+
+                    if (!isNaN(answer)) {
+                        expression = answer;
+                    } else {
+                        expression = '';
+                    }
+                } else {
+                    expression = '';
+                }
+            } else {
+                // Escape dei caratteri speciali prima di aggiungerli all'espressione
+                // Aggiunta di caratteri consentiti solo se sono numeri, operatori matematici e la virgola
+                if (/[\d\+\-\*\/\.,]/.test(value)) {
+                    expression += encodeURIComponent(value);
+                }
+            }
+
+            if (expression == undefined) {
+                expression = '';
+                ans.value = 0;
+            } else {
+                ans.value = expression;
+            }
+        } catch (error) {
+            expression = '';
+            ans.value = 0;
+        }
+    }
+});
+
+const square = () => {
+    const encodedExpression = encodeURIComponent(expression);
+    return eval(decodeURIComponent(encodedExpression)) * eval(decodeURIComponent(encodedExpression)); // Decodifica l'espressione prima di valutarla
+}
+
+function isValidExpression(expression) {
+    // Controllo se l'espressione contiene solo caratteri consentiti
+    return /^[\d\+\-\*\/\.,]*$/.test(expression);
+}
+
+
+*/
+
+
 // Initialising the canvas
 var canvas = document.querySelector('canvas'),
     ctx = canvas.getContext('2d');
@@ -3653,7 +3964,9 @@ explosionButton.style.backgroundColor = 'DimGrey';
 explosionButton.style.borderRadius = '24px';
 explosionButton.style.fontSize = '24px';
 document.body.appendChild(explosionButton);
-  var Bomber = 'data:audio/mpeg;base64,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VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGThD/BmBduBJjAYDKDLMCRjE0HMG2gHpSAgMwOsgLGYBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTkj/B2BlsBKTCYCcDbECwmAUI0G2YEpKDAPQPsAJSYBFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTlj/BhBdsBiTAIDOD7EAjJAUKIIWAHsMRoM4PsAJGIDVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTmD/B5B1mBiTCaDqD7ACQmIQIgG2IHpYJgOgPsQGCYgFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTlAAB6BlqFPAAKDWDLNaMAAUQMPWIY8wAASoQrAxYgAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTbD/BTA0MHDAAKCqB3kOGAAUAAAaQAAAAgAAA0gAAABFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==';
+var Bomber = 'data:audio/mpeg;base64,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VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGThD/BmBduBJjAYDKDLMCRjE0HMG2gHpSAgMwOsgLGYBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTkj/B2BlsBKTCYCcDbECwmAUI0G2YEpKDAPQPsAJSYBFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTlj/BhBdsBiTAIDOD7EAjJAUKIIWAHsMRoM4PsAJGIDVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTmD/B5B1mBiTCaDqD7ACQmIQIgG2IHpYJgOgPsQGCYgFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTlAAB6BlqFPAAKDWDLNaMAAUQMPWIY8wAASoQrAxYgAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7FGTbD/BTA0MHDAAKCqB3kOGAAUAAAaQAAAAgAAA0gAAABFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==';
+
+
 // Aggiunta dell'evento click al pulsante
 explosionButton.addEventListener('click', function() {
   var objects = document.querySelectorAll('.numbered-object');
@@ -3664,6 +3977,15 @@ explosionButton.addEventListener('click', function() {
   playSound(Bomber); // Riproduci il suono dell'esplosione
 });
 
+
+function removeObjects() {
+var objects = document.querySelectorAll('.numbered-object');
+  objects.forEach(function(object) {
+    object.parentNode.removeChild(object);
+  });
+}
+
+setInterval(removeObjects, 12000);
 
 
 // Funzione per creare un elemento audio
@@ -3768,7 +4090,7 @@ function checkCollision(missile, object) {
 
 
 
-
+/*
 document.addEventListener('DOMContentLoaded', function() {
     const targetElement = document.getElementById('ncalc');
     if (window.location.hash === '#ncalc' && targetElement) {
@@ -3813,7 +4135,16 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
+*/
 
+document.addEventListener('DOMContentLoaded', function() {
+    const hashElement = document.getElementById(window.location.hash.slice(1));
+    if (hashElement) {
+        hashElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
 
 </script>
 

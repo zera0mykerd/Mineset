@@ -3531,7 +3531,7 @@ function hideRuler() {
 hideRuler();
 
 
-
+/*
 document.addEventListener('DOMContentLoaded', function() {
     const targetElement = document.getElementById('boarder');
     if (window.location.hash === '#boarder' && targetElement) {
@@ -3545,6 +3545,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetElement = document.getElementById('goniostyler');
     if (window.location.hash === '#goniostyler' && targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hashElement = document.getElementById(window.location.hash.slice(1));
+    if (hashElement) {
+        hashElement.scrollIntoView({ behavior: 'smooth' });
     } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
