@@ -2534,7 +2534,15 @@ document.write( '</a>' );
 
 <p><br><h1></h1><br></p>
 
-<button id="PAFFO" onclick="eraseInstantly()">&#9999;&#65039; | Cancella tutto | &#9999;&#65039;</button>
+<button id="PAFFO" onclick="eraseInstantly()">&#128465;&#65039; | Cancella tutto | &#128465;&#65039;</button>
+<p><br><br><br></p>
+<button id="POFFA" onclick="toggleSwitch()" style="color: Navy; font-size: 24px; background-color: LightSkyBlue; opacity: 0.8; border-color: Indigo;">[Only Touch] &#9999;&#65039; | Alterna gomma/matita | &#9999;&#65039; (solo mobile)</button>
+<p><br><br><br></p>
+<button id="Muteaudio" onclick="muteAudio()" style="color: Maroon; font-size: 18px; background-color: IndianRed; opacity: 0.8; border-color: FireBrick;">&#129467; | Annulla audio (debug) | &#129467;</button>
+<p><br><br><br></p>
+<input style="width: 80%;" type="range" value="8" min="1" max="32" id="lineSizeSlider" oninput="updateLineSize()"><br><br>
+<p><font color="Aquamarine" face="Verdana" size="5"><i> &#128396;&#65039; <u>Dimensione</u></i>: <strong><kbd style="color: Aqua; font-size: 32px;"><span id="eraserSizeDisplay">*</span></kbd></strong></font></p>
+
 <p><br><h1></h1><br></p>
 <br>
 <hr align="center" size="5" width="100%" color="#DEB887" noshade>
@@ -2782,6 +2790,8 @@ var currentColor = getRandomColor(); // Colore casuale di default
 var selectedColor = null; //seleziona il colore
 
 
+
+/*
 // Aggiungi un elemento di input di tipo "color" per selezionare il colore
 var colorInput = document.createElement("input");
 colorInput.type = "color";
@@ -2804,9 +2814,53 @@ colorInput.addEventListener("change", function() {
 
 // Aggiungi l'elemento input al documento
 document.body.appendChild(colorInput);
+*/
 
 
-// ... il resto del codice rimane invariato ...
+
+// Funzione per validare il colore in formato hex
+function isValidColor(color) {
+  return /^#[0-9A-F]{6}$/i.test(color);
+}
+
+// Funzione per sanitizzare un valore di colore
+function sanitizeColor(color) {
+  // Escape HTML per prevenire l'inserimento di codice dannoso
+  return color.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Aggiungi un elemento di input di tipo "color" per selezionare il colore
+var colorInput = document.createElement("input");
+colorInput.type = "color";
+colorInput.value = currentColor;
+
+// Imposta lo stile per posizionare l'elemento al centro del canvas
+colorInput.style.position = "fixed";
+colorInput.style.top = "50%";
+colorInput.style.left = "50%";
+colorInput.style.transform = "translate(-50%, -50%)";
+
+// Imposta il colore corrente in base all'input dell'utente
+colorInput.addEventListener("input", function(event) {
+  var newColor = event.target.value;
+  if (isValidColor(newColor)) {
+    selectedColor = sanitizeColor(newColor); // Sanitizzazione del colore
+  }
+});
+
+colorInput.addEventListener("change", function() {
+  var newColor = colorInput.value;
+  if (isValidColor(newColor)) {
+    currentColor = sanitizeColor(newColor); // Sanitizzazione del colore
+  }
+});
+
+// Aggiungi l'elemento input al documento
+document.body.appendChild(colorInput);
+
+
+
+
 
 // Funzione per posizionare l'elemento di input di colore al centro del canvas
 function positionColorInput() {
@@ -2862,9 +2916,58 @@ var isDrawing = false;
 var lastX = 0;
 var lastY = 0;
 var lineSize = 5;
-var eraserSize = lineSize * 16;
+var eraserSize = lineSize * 8;
 var cursorOffsetX = 0;
 var cursorOffsetY = 0;
+
+
+//modifica dimensione gomma
+/*
+function updateLineSize() {
+  let slider = document.getElementById("lineSizeSlider");
+  lineSize = slider.value;
+  eraserSize = lineSize * 8;
+  document.getElementById("eraserSizeDisplay").textContent = eraserSize;
+  // Qui puoi aggiungere ulteriore logica per utilizzare i nuovi valori di lineSize e eraserSize
+}
+*/
+
+function updateLineSize() {
+  // Recupera l'elemento slider
+  let slider = document.getElementById("lineSizeSlider");
+
+  // Sanitizza il valore dell'input
+  let inputValue = parseInt(slider.value);
+
+  // Valida il valore dell'input
+  if (isNaN(inputValue) || inputValue < 1 || inputValue > 32) {
+    // Se il valore non è valido, imposta un valore predefinito
+    inputValue = 8;
+    slider.value = inputValue;
+  }
+
+  // Aggiorna il valore di lineSize
+  lineSize = inputValue;
+
+  // Calcola il valore dell'eraser size
+  eraserSize = lineSize * 8;
+
+  // Funzione di escape HTML (non strettamente necessaria qui, ma utile come esempio)
+  function escapeHtml(unsafe) {
+      return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+  }
+
+  // Aggiorna il display dell'eraser size
+  document.getElementById("eraserSizeDisplay").textContent = escapeHtml(eraserSize.toString());
+}
+
+
+
 
 // Funzione per calcolare l'offset del cursore all'interno del canvas
 function calculateCursorOffset(event) {
@@ -2882,14 +2985,16 @@ function getRandomColor() {
   return "rgb(" + red + "," + green + "," + blue + ")";
 }
 
+
 // Funzione per cancellare in modo istantaneo
 function eraseInstantly() {
   //context.clearRect(x - eraserSize, y - eraserSize, eraserSize * 2, eraserSize * 2);
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = gradient; // Imposta il colore di riempimento con il gradiente
   context.fillRect(0, 0, canvas.width, canvas.height); // Riempie l'intero canvas con il colore corrente
+  drawingSound.pause();
+  erasingSound.pause();
 }
-
 
 
 // Funzione per disegnare una linea
@@ -2910,12 +3015,7 @@ function erase(x, y) {
   context.fill();
 }
 
-function getRandomColor() {
-  var red = Math.floor(Math.random() * 256);
-  var green = Math.floor(Math.random() * 256);
-  var blue = Math.floor(Math.random() * 256);
-  return "rgb(" + red + "," + green + "," + blue + ")";
-}
+
 
 var isErasing = false; // Variabile per tenere traccia dello stato della gomma
 
@@ -2925,6 +3025,7 @@ function eraseWhenRightButtonDown(event) {
     // Eliminare la porzione del disegno sotto il cursore del mouse
     var cursorOffset = calculateCursorOffset(event);
     erase(cursorOffset.offsetX, cursorOffset.offsetY);
+	isErasing = true;
 
     // Evitare la selezione del testo della pagina
     window.getSelection().removeAllRanges();
@@ -2941,7 +3042,8 @@ function drawWhenNotErasing(event) {
     var cursorOffset = calculateCursorOffset(event);
     var currentX = cursorOffset.offsetX;
     var currentY = cursorOffset.offsetY;
-    drawLine(lastX, lastY, currentX, currentY);
+    //drawLine(lastX, lastY, currentX, currentY);
+	erase(lastX, lastY, currentX, currentY);
     lastX = currentX;
     lastY = currentY;
   }
@@ -2968,13 +3070,21 @@ document.addEventListener("mousemove", handleMouseMove);
 //EVENT LISTENERS
 
 
+
 // Gestire l'evento mousemove per disegnare e riprodurre i suoni solo quando un tasto del mouse è premuto ed è in movimento
+
 canvas.addEventListener("mousemove", function(event) {
   if ((isDrawing || isErasing) && (event.buttons === 1 || event.buttons === 2)) {
     var cursorOffset = calculateCursorOffset(event);
     var currentX = cursorOffset.offsetX;
     var currentY = cursorOffset.offsetY;
-    drawLine(lastX, lastY, currentX, currentY);
+	
+    if (isErasing === false) {
+      drawLine(lastX, lastY, currentX, currentY);
+    } else {
+      erase(lastX, lastY, currentX, currentY);
+    }
+	
     lastX = currentX;
     lastY = currentY;
 
@@ -2989,6 +3099,8 @@ canvas.addEventListener("mousemove", function(event) {
     }
   }
 });
+
+
 
 // Gestire gli eventi del mouse per disegnare linee
 canvas.addEventListener("mousedown", function(event) {
@@ -3033,9 +3145,13 @@ canvas.addEventListener("mouseleave", function(event) {
 });
 
 
-// ... il codice precedente rimane invariato ...
+
+
+
+
 
 // Aggiungi gli eventi touch per il disegno su dispositivi mobili
+
 var isTouchDrawing = false; // Variabile per tenere traccia dello stato del disegno con il touch
 var isEraserActive = false; // Variabile per tenere traccia dello stato della gomma
 
@@ -3047,6 +3163,8 @@ canvas.addEventListener("touchstart", function(event) {
   var cursorOffset = calculateCursorOffset(touch);
   lastX = cursorOffset.offsetX;
   lastY = cursorOffset.offsetY;
+  drawingSound.paused
+  erasingSound.paused
 
   // Attiva/disattiva la gomma
   if (isEraserActive) {
@@ -3063,8 +3181,15 @@ canvas.addEventListener("touchstart", function(event) {
 canvas.addEventListener("touchend", function() {
   isDrawing = false;
   isTouchDrawing = false;
+  drawingSound.paused
+  erasingSound.paused
   enableScroll(); // Abilita nuovamente lo scroll
 });
+
+
+
+
+var isSwitchEraseActived = false;
 
 canvas.addEventListener("touchmove", function(event) {
   event.preventDefault();
@@ -3073,17 +3198,55 @@ canvas.addEventListener("touchmove", function(event) {
     var cursorOffset = calculateCursorOffset(touch);
     var currentX = cursorOffset.offsetX;
     var currentY = cursorOffset.offsetY;
-    drawLine(lastX, lastY, currentX, currentY);
+
+    if (!isSwitchEraseActived) {
+      // Disegna la linea
+      drawLine(lastX, lastY, currentX, currentY);
+	  isErasing = false;
+	  isDrawing = true;
+    } else {
+      // Cancella la linea
+      erase(lastX, lastY, currentX, currentY);
+	  isErasing = true;
+	  isDrawing = false;
+    }
+
     lastX = currentX;
     lastY = currentY;
 
-    if (isDrawing) {
-      if (drawingSound.paused) {
-        drawingSound.play();
-      }
-    }
+if (isDrawing) {
+  if (drawingSound.paused) {
+    drawingSound.play();
   }
+}
+
+if (isErasing) {
+  if (erasingSound.paused) {
+    erasingSound.play();
+  }
+}
+ 
+ 
+ }
 });
+
+
+
+// Funzione per alternare la gomma
+function toggleSwitch() {
+  isSwitchEraseActived = !isSwitchEraseActived;
+  drawingSound.pause();
+  erasingSound.pause();
+  return isSwitchEraseActived;
+}
+
+
+// Funzione per mutare gli audio
+function muteAudio() {
+  drawingSound.pause();
+  erasingSound.pause();
+}
+
 
 function disableScroll() {
   document.body.classList.add("no-scroll"); // Aggiunge una classe al body per disabilitare lo scroll
@@ -3386,6 +3549,8 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
+
+
 
 </script>
 
