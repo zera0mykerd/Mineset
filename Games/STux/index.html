@@ -2534,13 +2534,14 @@ document.write( '</a>' );
 
 <p><br><h1></h1><br></p>
 
-<button id="PAFFO" onclick="eraseInstantly()">&#128465;&#65039; | Cancella tutto | &#128465;&#65039;</button>
+<button id="PAFFO" onclick="eraseInstantly()">&#128293; | Cancella tutto | &#128165;</button>
 <p><br><br><br></p>
-<button id="POFFA" onclick="toggleSwitch()" style="color: Navy; font-size: 24px; background-color: LightSkyBlue; opacity: 0.8; border-color: Indigo;">[Only Touch] &#9999;&#65039; | Alterna gomma/matita | &#9999;&#65039; (solo mobile)</button>
+<button id="POFFA" onclick="toggleSwitch()" style="color: Navy; font-size: 24px; background-color: LightSkyBlue; opacity: 0.8; border-color: Indigo;">[Only Touch] &#128465;&#65039; | Alterna gomma/matita | &#9999;&#65039; (solo mobile)</button>
+<br><span id="erasestatus"></span>
 <p><br><br><br></p>
 <button id="Muteaudio" onclick="muteAudio()" style="color: Maroon; font-size: 18px; background-color: IndianRed; opacity: 0.8; border-color: FireBrick;">&#129467; | Annulla audio (debug) | &#129467;</button>
 <p><br><br><br></p>
-<input style="width: 80%;" type="range" value="8" min="1" max="32" id="lineSizeSlider" oninput="updateLineSize()"><br><br>
+<font size="4">&#128394;&#65039;</font><input style="width: 80%;" type="range" value="8" min="1" max="32" id="lineSizeSlider" oninput="updateLineSize()"><font size="4">&#128397;&#65039;</font><br><br>
 <p><font color="Aquamarine" face="Verdana" size="5"><i> &#128396;&#65039; <u>Dimensione</u></i>: <strong><kbd style="color: Aqua; font-size: 32px;"><span id="eraserSizeDisplay">*</span></kbd></strong></font></p>
 
 <p><br><h1></h1><br></p>
@@ -2791,32 +2792,6 @@ var selectedColor = null; //seleziona il colore
 
 
 
-/*
-// Aggiungi un elemento di input di tipo "color" per selezionare il colore
-var colorInput = document.createElement("input");
-colorInput.type = "color";
-colorInput.value = currentColor;
-
-// Imposta lo stile per posizionare l'elemento al centro del canvas
-colorInput.style.position = "fixed";
-colorInput.style.top = "50%";
-colorInput.style.left = "50%";
-colorInput.style.transform = "translate(-50%, -50%)";
-
-// Imposta il colore corrente in base all'input dell'utente
-colorInput.addEventListener("input", function(event) {
-  selectedColor = event.target.value;
-});
-
-colorInput.addEventListener("change", function() {
-  currentColor = colorInput.value;
-});
-
-// Aggiungi l'elemento input al documento
-document.body.appendChild(colorInput);
-*/
-
-
 
 // Funzione per validare il colore in formato hex
 function isValidColor(color) {
@@ -2920,17 +2895,6 @@ var eraserSize = lineSize * 8;
 var cursorOffsetX = 0;
 var cursorOffsetY = 0;
 
-
-//modifica dimensione gomma
-/*
-function updateLineSize() {
-  let slider = document.getElementById("lineSizeSlider");
-  lineSize = slider.value;
-  eraserSize = lineSize * 8;
-  document.getElementById("eraserSizeDisplay").textContent = eraserSize;
-  // Qui puoi aggiungere ulteriore logica per utilizzare i nuovi valori di lineSize e eraserSize
-}
-*/
 
 function updateLineSize() {
   // Recupera l'elemento slider
@@ -3232,11 +3196,45 @@ if (isErasing) {
 
 
 
+// Seleziona l'elemento con id "erasestatus"
+var eraseStatusElement = document.getElementById('erasestatus');
+
+// Definisci la funzione per aggiornare l'immagine
+function updateEraseStatusImage() {
+    // Crea un nuovo elemento img
+    var imgElement = document.createElement('img');
+
+    // Imposta l'attributo src dell'immagine in base al valore di isSwitchEraseActived
+    if (!isSwitchEraseActived) {
+        imgElement.src = defaultCursorImageURL; // Sostituisci con il percorso della tua seconda immagine
+		imgElement.width = 48;
+		imgElement.height = 48;
+    } else {
+        imgElement.src = rightClickCursorImageURL; // Sostituisci con il percorso della tua prima immagine
+		imgElement.width = 48;
+		imgElement.height = 48;
+    }
+
+    // Rimuovi l'elemento img precedente, se presente
+    while (eraseStatusElement.firstChild) {
+        eraseStatusElement.removeChild(eraseStatusElement.firstChild);
+    }
+
+    // Inserisci il nuovo elemento img nell'elemento con id "erasestatus"
+    eraseStatusElement.appendChild(imgElement);
+}
+
+// Richiama la funzione updateEraseStatusImage ogni 3 secondi
+//setInterval(updateEraseStatusImage, 3000);
+
+
+
 // Funzione per alternare la gomma
 function toggleSwitch() {
   isSwitchEraseActived = !isSwitchEraseActived;
   drawingSound.pause();
   erasingSound.pause();
+  updateEraseStatusImage();
   return isSwitchEraseActived;
 }
 
@@ -3256,6 +3254,7 @@ function enableScroll() {
   document.body.classList.remove("no-scroll"); // Rimuove la classe dal body per abilitare nuovamente lo scroll
 }
 
+updateEraseStatusImage();
 
 
 
@@ -3271,7 +3270,41 @@ function enableScroll() {
 
 
 
+//modifica dimensione gomma
+/*
+function updateLineSize() {
+  let slider = document.getElementById("lineSizeSlider");
+  lineSize = slider.value;
+  eraserSize = lineSize * 8;
+  document.getElementById("eraserSizeDisplay").textContent = eraserSize;
+  // Qui puoi aggiungere ulteriore logica per utilizzare i nuovi valori di lineSize e eraserSize
+}
+*/
 
+/*
+// Aggiungi un elemento di input di tipo "color" per selezionare il colore
+var colorInput = document.createElement("input");
+colorInput.type = "color";
+colorInput.value = currentColor;
+
+// Imposta lo stile per posizionare l'elemento al centro del canvas
+colorInput.style.position = "fixed";
+colorInput.style.top = "50%";
+colorInput.style.left = "50%";
+colorInput.style.transform = "translate(-50%, -50%)";
+
+// Imposta il colore corrente in base all'input dell'utente
+colorInput.addEventListener("input", function(event) {
+  selectedColor = event.target.value;
+});
+
+colorInput.addEventListener("change", function() {
+  currentColor = colorInput.value;
+});
+
+// Aggiungi l'elemento input al documento
+document.body.appendChild(colorInput);
+*/
 
 /*
 // Gestire gli eventi del mouse per cambiare il cursore e riprodurre l'audio
