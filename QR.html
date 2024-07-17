@@ -226,6 +226,42 @@ body, html{
 * { cursor: url(data:file/octet-stream;base64,UklGRh4EAABXRUJQVlA4TBEEAAAvH8AHEPcHOZIkRVJmVs/uMfPr7PTX4TRiaihQA5IkSY6UzGq1Aq01vAJuvB1eIc+a0+rd6u4qSLbtppH+l4qZa1anFlD7309NoRmMkuY/AHjd+m4nhKGzIjQkDoED0IBYgAU4BBsSM2hIyqAEDMBIDKACjDBR7bcGvt6bpBkf8Kf/ts+ZD3/j/+5svvf2ePfvf6jk+wUPQowrS2KGfz4HVDVCsmJRcOmA5CqACCAAQiQygEIk0UgMMJZQLRCpLCpRUEgMRiNCcaIAm3QmYEEtGwAFGrQiQGFCWxo6HI614Yf9rtJmZLctLCoNw5RsMAFCtFAKPko6k3THjVjrznez2avFhkJF0z0LmrCOKkbJAqZ75t5Ma3pP3LvlRr9il0b+lmu7OnRsc4c2cdCzKl3PCY/C0+zC/mZGEP/IMP11oEs5oTCTa/Dm4G61EL2J7rKL8sJbKG9mNVMDORQm4ORGZUb4EVaUqfImTUFGvBpvWbSQ3kVXaY23alVDL4Y2YQPR/tl9ladDv3cJHwa2PrDVgaM2c9DHDtuEjR8whnAXMANd0AWNw3kIyeAMS9ykWwgwAVCrA5fVPfOsQphPwl7mTrBymMd2q5PClAgmVFSSAQkBggSSCiQCCIAQAQgkkQIEQMkDAxEOouACJAk0gULwFdBVR0ZPVnV/yyR6d3tlkEGj8BFfXtY3U2lf5lpyWwQFEKcUAjD2tzBI79rlyMPe1nq+OpaFk6MJSLtt29hb7Sd2att2G9u2bau2bdt2G7vma9uuFfPrvU1E/ycABnj3s5f3/8fWpy8aa+/h2/akuaGm8vl7XOseNzfUVJQVr/qIZ+2j5obq8rKigtyN33GsedhUX11eWpSfk5W+fifa6ldNdVVvS4ryczLTklO2t6I9eF31pqQwPzszLTkxLmEHYPzwbuWmvIy0pMTYmOjwna3t/5AAfvzasDk1PiY6KqxNJ1i8/CIawK6fW3oiIzrsXdycFi1WnMEA0NLV1ukf6GqzYPpsG8J+HNDiFhLkMmfyWKsxGvuLWOxCg6dNNDA2sxzUJ15+AUtwyFQ9fSMzS+thM5WEAxj+BoYETNQ3MrWwHjpyvv0lDH9C/YJmTDI0sbAaMqJfpDyHBp2BQX5TDE3MrQYPHzVrycndaAeD3fxdJhibW47uncdcqryMBjo3T6/Z48dNV3vzyGQp8TDaPht7T5e5C+WSTg9fCtXmChp8WuboKlXIfN07bWkU8ZejaC0EobPNEoXS3kdFE3ClV9HgAEXqZLNIqBWwpGQx5fQhNDjOWOKwVCjmcJhispR0FQOcoK9YKmDxhTQ+i0y6jmPPN/pSOYvHElPIhDtnccDhryyFkMNmkK7d3Qt4j33mCBmnbt4+AtjP3Lh56/xvGKgA), default; }
 </style>
 
+<!-- Top Arrow -->
+<style type="text/css">
+#TopBN {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 47.5%;
+  z-index: 99;
+  font-size: 45px;
+  border: none;
+  outline: none;
+  background-color: Cyan;
+  color: CadetBlue;
+  padding: 5px;
+  border-radius: 100px;
+  opacity: 0.7;
+}
+</style>
+<script type="text/javascript">
+document.write( '<button onclick=\"topFunction()\" id=\"TopBN\" title=\"Vai in cima alla pagina.\">&uarr;</button>' );
+var mybutton = document.getElementById("TopBN");
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+<!-- End Arrow -->
+
 <style type="text/css">
 ::-webkit-scrollbar {
   width: 14px;
@@ -266,8 +302,10 @@ mark {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(173, 216, 230, 0.7);
-  color: #00008B;
+ /* background-color: rgba(173, 216, 230, 0.7); */
+ /* color: #00008B; */
+  background-color: rgba(50, 205, 50, 0.5);
+  color: #008000;
   white-space: nowrap;
 }
 
