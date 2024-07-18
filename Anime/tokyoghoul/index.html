@@ -121,34 +121,37 @@ function normalExternal(x) {
 </script>
 
 <script type="text/javascript">
+
 ChangeFontSize = function(element, shouldIncreaseFontsize)
 {
-    var small=24;
-    var large = small * 1.25;
+    var defaultFontSize = 32; // Assuming the default font size is 16px
+    var smallFontSize = defaultFontSize * 0.06; // 6% of the default font size
+    var largeFontSize = defaultFontSize * 1.25; // 125% of the default font size
+
     if(shouldIncreaseFontsize) {
-         element.style.fontSize = large + "px";
+         element.style.fontSize = largeFontSize + "px";
     }
     else {
-         element.style.fontSize = small + "px";
+         element.style.fontSize = smallFontSize + "px";
     }
-
 }
+
 
 //Separator
 
 ChangeFontSizeRel = function(element, shouldDecreaseFontsize)
 {
-    let smaller=34;
-    let largeer = smaller * 1.25;
+    let baseFontSize = 24;
+    let percentageChange = 5.0;
+
     if(shouldDecreaseFontsize) {
-         element.style.fontSize = smaller + "px";
+         element.style.fontSize = (baseFontSize * (100 - percentageChange) / 100) + "px";
     }
     else {
-         element.style.fontSize = largeer + "px";
-		 element.style.fontSize = smaller - 5 + "px";
+         element.style.fontSize = (baseFontSize * (100 + percentageChange) / 100) + "px";
     }
-
 }
+
 </script>
 
 <a onclick="location.href = '..';" href=".." title="Clicca qui per tornare indietro.">
@@ -404,13 +407,13 @@ a:active {
 </HEAD>
 
 <BODY>
-<title>&#10015 &#120191;&#120212;&#120208;&#120222;&#120212; &#120178;&#120205;&#120212;&#120218;&#120209; &#10015</title>
+<title>&#11160; &#120191;&#120212;&#120208;&#120222;&#120212; &#120178;&#120205;&#120212;&#120218;&#120209; &#11162;</title>
 
 <body bgcolor="#000000"></body>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<strong><a href=""><font face="arial" size="8" style="color: #FE642E">&#10014 TOKYO GHOUL - Lista Episodi &#10014</font></a></strong>
+<strong><a href=""><font face="arial" size="8" style="color: #FE642E">&#11166; TOKYO GHOUL - Lista Episodi &#11164;</font></a></strong>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
@@ -437,51 +440,51 @@ a:active {
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-1';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-1"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(1) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-1';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-1"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(1) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-2';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-2"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(2) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-2';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-2"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(2) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-3';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-3"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(3) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-3';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-3"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(3) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-4';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-4"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(4) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-4';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-4"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(4) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-5';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-5"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(5) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-5';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-5"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(5) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-6';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-6"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(6) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-6';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-6"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(6) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-7';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-7"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(7) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-7';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-7"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(7) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-8';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-8"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(8) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-8';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-8"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(8) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-9';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-9"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(9) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-9';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-9"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(9) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-10';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-10"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(10) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-10';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-10"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(10) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-11';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-11"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(11) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-11';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-11"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(11) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
-<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-12';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-12"><font face="arial" size="4"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(12) - Episodio</div></font></a>
+<a onclick="location.href = 'https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-12';" title="Clicca per visionare." href="https://www.animesaturn.com/ep/Tokyo-Ghoul-ITA-ep-12"><font face="arial" size="5.0%"> <!-- color="#FFBF00" --> <div onmouseout="javascript:ChangeFontSizeRel(this, false);" onmouseover="javascript:ChangeFontSize(this, true);">(12) - Episodio</div></font></a>
 
 <hr align="center" size="1" width="100%" color="#0000FF" noshade>
 
