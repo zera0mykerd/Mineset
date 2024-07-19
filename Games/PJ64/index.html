@@ -5765,6 +5765,24 @@ document.getElementById("DADO").addEventListener("touchmove", handleDiceClick);
 document.getElementById("DADO").addEventListener("keydown", handleDiceClick);
 
 document.addEventListener("click", handleClick);
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const targetElement = document.getElementById('testacroce');
+    if (window.location.hash === '#testacroce' && targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+
+
+
 </script>
 
 </BODY>

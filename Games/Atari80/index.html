@@ -3316,6 +3316,24 @@ window.addEventListener("keydown", function(e) {
         e.preventDefault();
     }
 }, false);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const targetElement = document.getElementById('tabellone');
+    if (window.location.hash === '#tabellone' && targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+
+
+
+
 </script>
 
 </BODY>
