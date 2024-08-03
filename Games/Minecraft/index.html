@@ -89,6 +89,9 @@ a:active {
 }
 
 
+.chatground {
+	background-color: rgba(0, 0, 0, 0.1);
+}
 
 
 	#iframeContainer {
@@ -727,7 +730,7 @@ var audio = new Audio("data:audio/ogg;base64,T2dnUwACAAAAAAAAAADYjIq7AAAAAFZ2MrQ
 //audio.stop();
 //}
 
-audio.loop = true;
+audio.loop = false;
 
 audio.onended = function(){
 audio.play();
@@ -1084,7 +1087,7 @@ document.write( '<font class=\"newfonts\" face=\"Courier New\" size=\"4\" color=
 document.write( '<p>&#32;</p>' );
 document.write( '<br><font class=\"newfonts\" face=\"Lucida Console\" size=\"3\" color=\"#8A0808\"><strong>Avvertenza:</strong> Si consiglia di fare un backup per le versioni di minecraft per Linux/MacOS dato che lo script procede a sovrascrivere le proprie versioni su questi sistemi operativi. (per disabilitare la funzione basta modificare gli script shell [.sh])... in ogni caso una volta eseguiti gli script bisogna rimuovere i comandi di sostituzione con un comune editor di testo senza toccare il comando di esecuzione di Java. <br> A causa della limitazione dei sistemi unix-like (ES: MacOSX/Linux/BSD/Solaris) non &egrave; completamente possibile mantenere i files sulla USB, verranno quindi trasferiti nella directory home. Una volta finita la sessione la cartella &egrave; dotata di scripts appositi per rimuovere tutte le tracce di esecuzione.</font>\n' );
 document.write( '<p>&#10240;</p>' );
-document.write( '<br><font class=\"newfonts\" face=\"Lucida Console\" size=\"3\" color=\"#0B3B0B\"><strong>Nota:</strong> Per quanto riguarda le versioni dedicate ai telefoni cellulari nel caso in cui si voglia mantenere le impostazioni personalizzate, importare impostazioni, mods e tanto altro bisogna scaricare anche le versioni per computer e decomprimere i files di configurazione inerenti alla cartella del gioco spostando quegli stessi files modificati nella cartella alla quale (nelle impostazioni del launcher) risulta ubicata. <br><br> <strong>Accorgimenti per il sistema di iPhone:</strong> Risulta obbligatorio l&#39;ausilio del <u><i>JailBreak</i></u> dato che viene installata un&#39;applicazione da fonti di terze parti non gestite dall&#39;azienda produttrice del dispositivo a cui appartiene.</font>\n' );
+document.write( '<br><font class=\"newfonts\" face=\"Lucida Console\" size=\"3\" color=\"#0B3B0B\"><strong>Nota:</strong> Per quanto riguarda le versioni dedicate ai telefoni cellulari nel caso in cui si voglia mantenere le impostazioni personalizzate, importare impostazioni, mods e tanto altro bisogna scaricare anche le versioni per computer e decomprimere i files di configurazione inerenti alla cartella del gioco spostando quegli stessi files modificati nella cartella alla quale (nelle impostazioni del launcher) risulta ubicata. <br><br> <strong>Accorgimenti per il sistema di iPhone:</strong> Risultava obbligatorio l&#39;ausilio del <u><i>JailBreak</i></u> dato che viene installata un&#39;applicazione da fonti di terze parti non gestite dall&#39;azienda produttrice del dispositivo a cui appartiene.</font>\n' );
 
 //document.write( '<p>&#10240;</p>' );
 //document.write( '<p>&#10240;</p>' );
@@ -1161,11 +1164,59 @@ document.write( '</div>\n' );
 document.write( '<hr align=\"center\" size=\"4\" width=\"100%\" color=\"DeepPink\" noshade>' );
 
 
-document.write( '<p>⠀</p>' );
+//document.write( '<p>⠀</p>' );
 
 
 document.write( '<p>&#10240;</p>' );
-document.write( '<svg id=\"Capa_1\" enable-background=\"new 0 0 510 510\" height=\"128pt\" viewBox=\"0 0 510 510\" width=\"128pt\"><linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceOnUse\" x1=\"179.548\" x2=\"179.548\" y1=\"16.564\" y2=\"79.544\"><stop offset=\"0\" stop-color=\"#ff9100\"/><stop offset=\"1\" stop-color=\"#e63950\"/></linearGradient><linearGradient id=\"SVGID_2_\" gradientUnits=\"userSpaceOnUse\" x1=\"134.718\" x2=\"134.718\" y1=\"16.564\" y2=\"79.544\"><stop offset=\"0\" stop-color=\"#fdbf00\"/><stop offset=\"1\" stop-color=\"#ff9100\"/></linearGradient><linearGradient id=\"SVGID_3_\" gradientUnits=\"userSpaceOnUse\" x1=\"58.115\" x2=\"356.085\" y1=\"35.005\" y2=\"332.976\"><stop offset=\"0\" stop-color=\"#ffda2d\"/><stop offset=\"1\" stop-color=\"#fdbf00\"/></linearGradient><linearGradient id=\"lg1\"><stop offset=\"0\" stop-color=\"#76e2f8\"/><stop offset=\"1\" stop-color=\"#48b2e3\"/></linearGradient><linearGradient id=\"SVGID_4_\" gradientUnits=\"userSpaceOnUse\" x1=\"378.706\" x2=\"393.086\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"SVGID_5_\" gradientUnits=\"userSpaceOnUse\" x1=\"418.837\" x2=\"433.217\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"SVGID_6_\" gradientUnits=\"userSpaceOnUse\" x1=\"458.967\" x2=\"473.348\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"lg2\"><stop offset=\"0\" stop-color=\"#ff9100\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#ff9100\"/></linearGradient><linearGradient id=\"SVGID_7_\" gradientUnits=\"userSpaceOnUse\" x1=\"255\" x2=\"255\" xlink:href=\"#lg2\" y1=\"342.315\" y2=\"425.163\"/><linearGradient id=\"SVGID_8_\" gradientUnits=\"userSpaceOnUse\" x1=\"434.826\" x2=\"241.01\" xlink:href=\"#lg2\" y1=\"406.791\" y2=\"281.556\"/><linearGradient id=\"SVGID_9_\" gradientUnits=\"userSpaceOnUse\" x1=\"209.289\" x2=\"458.848\" y1=\"268.711\" y2=\"518.271\"><stop offset=\"0\" stop-color=\"#b9dd39\"/><stop offset=\"1\" stop-color=\"#0b799d\"/></linearGradient><linearGradient id=\"SVGID_10_\" gradientUnits=\"userSpaceOnUse\" x1=\"247.812\" x2=\"-18.188\" y1=\"347.781\" y2=\"575.781\"><stop offset=\"0\" stop-color=\"#0b799d\" stop-opacity=\"0\"/><stop offset=\".3645\" stop-color=\"#096380\" stop-opacity=\".365\"/><stop offset=\".76\" stop-color=\"#084f67\" stop-opacity=\".76\"/><stop offset=\"1\" stop-color=\"#07485e\"/></linearGradient><g><g><path d=\"m266.783 79.505h-174.47v-49.69c0-16.467 13.348-29.815 29.814-29.815h114.841c16.466 0 29.815 13.348 29.815 29.815z\" fill=\"url(#SVGID_1_)\"/><path d=\"m221.953 79.505h-174.471v-49.69c0-16.467 13.349-29.815 29.815-29.815h114.841c16.466 0 29.815 13.348 29.815 29.815z\" fill=\"url(#SVGID_2_)\"/><path d=\"m174.47 56.592v-26.777c0-16.467-13.348-29.815-29.814-29.815h-114.841c-16.467 0-29.815 13.348-29.815 29.815v321.925c0 23.458 19.017 42.475 42.475 42.475h425.05c23.458 0 42.475-19.017 42.475-42.475v-239.698c0-23.458-19.017-42.475-42.475-42.475h-280.08c-7.166 0-12.975-5.809-12.975-12.975z\" fill=\"url(#SVGID_3_)\"/><g><path d=\"m387.317 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_4_)\"/><path d=\"m427.448 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_5_)\"/><path d=\"m467.579 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_6_)\"/></g><path d=\"m0 304.771v46.969c0 23.458 19.017 42.475 42.475 42.475h425.05c23.458 0 42.475-19.017 42.475-42.475v-46.969z\" fill=\"url(#SVGID_7_)\"/></g><path d=\"m509.153 360.208-186.638-186.639c-4.586-6.357-12.052-7.498-20.49-7.498h-88.095c-13.947 0-22.252 8.305-22.252 22.252v98.309h-38.598c-25.104 0-37.39 24.632-24.051 45.899l35.685 61.682h302.811c20.558.001 37.703-14.605 41.628-34.005z\" fill=\"url(#SVGID_8_)\"/><g><path d=\"m356.92 283.631h-29.641v-95.307c0-13.947-11.307-25.254-25.254-25.254h-88.095c-13.947 0-25.254 11.307-25.254 25.254v95.307h-35.596c-25.104 0-40.392 27.634-27.053 48.901l101.92 162.502c12.516 19.955 41.59 19.955 54.106 0l101.92-162.502c13.339-21.268-1.949-48.901-27.053-48.901z\" fill=\"url(#SVGID_9_)\"/><path d=\"m356.92 283.631h-29.641v-95.307c0-13.947-11.307-25.254-25.254-25.254h-47.025v346.93c10.398 0 20.795-4.989 27.053-14.966l101.92-162.502c13.339-21.268-1.949-48.901-27.053-48.901z\" fill=\"url(#SVGID_10_)\"/></g></g></svg><br><br><br>\n' );
+
+
+document.write( '<font class=\"oldfonts\" face=\"Arial Black\" color=\"Black\" size=\"6\">TUTORIAL</font>\n' );
+
+document.write( '<details>' );
+document.write( '<summary title=\"TUTORIAL\"><div id=\"tutorialdir\" onmouseover=\"this.style.rotate=\'180deg\';\" onmouseout=\"this.style.rotate=\'0deg\';\" onclick=\"this.style.filter = this.style.filter === \'invert(100%)\' ? \'invert(0%)\' : \'invert(100%)\';\"><svg id=\"Capa_1\" enable-background=\"new 0 0 510 510\" height=\"128pt\" viewBox=\"0 0 510 510\" width=\"128pt\"><linearGradient id=\"SVGID_1_\" gradientUnits=\"userSpaceOnUse\" x1=\"179.548\" x2=\"179.548\" y1=\"16.564\" y2=\"79.544\"><stop offset=\"0\" stop-color=\"#ff9100\"/><stop offset=\"1\" stop-color=\"#e63950\"/></linearGradient><linearGradient id=\"SVGID_2_\" gradientUnits=\"userSpaceOnUse\" x1=\"134.718\" x2=\"134.718\" y1=\"16.564\" y2=\"79.544\"><stop offset=\"0\" stop-color=\"#fdbf00\"/><stop offset=\"1\" stop-color=\"#ff9100\"/></linearGradient><linearGradient id=\"SVGID_3_\" gradientUnits=\"userSpaceOnUse\" x1=\"58.115\" x2=\"356.085\" y1=\"35.005\" y2=\"332.976\"><stop offset=\"0\" stop-color=\"#ffda2d\"/><stop offset=\"1\" stop-color=\"#fdbf00\"/></linearGradient><linearGradient id=\"lg1\"><stop offset=\"0\" stop-color=\"#76e2f8\"/><stop offset=\"1\" stop-color=\"#48b2e3\"/></linearGradient><linearGradient id=\"SVGID_4_\" gradientUnits=\"userSpaceOnUse\" x1=\"378.706\" x2=\"393.086\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"SVGID_5_\" gradientUnits=\"userSpaceOnUse\" x1=\"418.837\" x2=\"433.217\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"SVGID_6_\" gradientUnits=\"userSpaceOnUse\" x1=\"458.967\" x2=\"473.348\" xlink:href=\"#lg1\" y1=\"109.598\" y2=\"120.555\"/><linearGradient id=\"lg2\"><stop offset=\"0\" stop-color=\"#ff9100\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#ff9100\"/></linearGradient><linearGradient id=\"SVGID_7_\" gradientUnits=\"userSpaceOnUse\" x1=\"255\" x2=\"255\" xlink:href=\"#lg2\" y1=\"342.315\" y2=\"425.163\"/><linearGradient id=\"SVGID_8_\" gradientUnits=\"userSpaceOnUse\" x1=\"434.826\" x2=\"241.01\" xlink:href=\"#lg2\" y1=\"406.791\" y2=\"281.556\"/><linearGradient id=\"SVGID_9_\" gradientUnits=\"userSpaceOnUse\" x1=\"209.289\" x2=\"458.848\" y1=\"268.711\" y2=\"518.271\"><stop offset=\"0\" stop-color=\"#b9dd39\"/><stop offset=\"1\" stop-color=\"#0b799d\"/></linearGradient><linearGradient id=\"SVGID_10_\" gradientUnits=\"userSpaceOnUse\" x1=\"247.812\" x2=\"-18.188\" y1=\"347.781\" y2=\"575.781\"><stop offset=\"0\" stop-color=\"#0b799d\" stop-opacity=\"0\"/><stop offset=\".3645\" stop-color=\"#096380\" stop-opacity=\".365\"/><stop offset=\".76\" stop-color=\"#084f67\" stop-opacity=\".76\"/><stop offset=\"1\" stop-color=\"#07485e\"/></linearGradient><g><g><path d=\"m266.783 79.505h-174.47v-49.69c0-16.467 13.348-29.815 29.814-29.815h114.841c16.466 0 29.815 13.348 29.815 29.815z\" fill=\"url(#SVGID_1_)\"/><path d=\"m221.953 79.505h-174.471v-49.69c0-16.467 13.349-29.815 29.815-29.815h114.841c16.466 0 29.815 13.348 29.815 29.815z\" fill=\"url(#SVGID_2_)\"/><path d=\"m174.47 56.592v-26.777c0-16.467-13.348-29.815-29.814-29.815h-114.841c-16.467 0-29.815 13.348-29.815 29.815v321.925c0 23.458 19.017 42.475 42.475 42.475h425.05c23.458 0 42.475-19.017 42.475-42.475v-239.698c0-23.458-19.017-42.475-42.475-42.475h-280.08c-7.166 0-12.975-5.809-12.975-12.975z\" fill=\"url(#SVGID_3_)\"/><g><path d=\"m387.317 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_4_)\"/><path d=\"m427.448 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_5_)\"/><path d=\"m467.579 128h-10.229c-5.867 0-10.623-4.756-10.623-10.623v-10.229c0-5.867 4.756-10.623 10.623-10.623h10.229c5.867 0 10.623 4.756 10.623 10.623v10.229c0 5.867-4.756 10.623-10.623 10.623z\" fill=\"url(#SVGID_6_)\"/></g><path d=\"m0 304.771v46.969c0 23.458 19.017 42.475 42.475 42.475h425.05c23.458 0 42.475-19.017 42.475-42.475v-46.969z\" fill=\"url(#SVGID_7_)\"/></g><path d=\"m509.153 360.208-186.638-186.639c-4.586-6.357-12.052-7.498-20.49-7.498h-88.095c-13.947 0-22.252 8.305-22.252 22.252v98.309h-38.598c-25.104 0-37.39 24.632-24.051 45.899l35.685 61.682h302.811c20.558.001 37.703-14.605 41.628-34.005z\" fill=\"url(#SVGID_8_)\"/><g><path d=\"m356.92 283.631h-29.641v-95.307c0-13.947-11.307-25.254-25.254-25.254h-88.095c-13.947 0-25.254 11.307-25.254 25.254v95.307h-35.596c-25.104 0-40.392 27.634-27.053 48.901l101.92 162.502c12.516 19.955 41.59 19.955 54.106 0l101.92-162.502c13.339-21.268-1.949-48.901-27.053-48.901z\" fill=\"url(#SVGID_9_)\"/><path d=\"m356.92 283.631h-29.641v-95.307c0-13.947-11.307-25.254-25.254-25.254h-47.025v346.93c10.398 0 20.795-4.989 27.053-14.966l101.92-162.502c13.339-21.268-1.949-48.901-27.053-48.901z\" fill=\"url(#SVGID_10_)\"/></g></g></svg></div><br></summary><br><br>\n' );
+
+document.write( '<kbd><font class=\"newfonts\" face=\"Arial Black\" color=\"Black\" size=\"4\">\n' );
+document.write( '<h1 class=\"chatground\">Guida alla Creazione di una Versione Portable di Minecraft</h1>\n' );
+document.write( '    <p class=\"chatground\">In questa guida, ti mostrerò come creare una versione portable di Minecraft. Ci sono due cartelle principali da gestire, e il processo può variare a seconda del tuo sistema operativo. <br> <i>(Ti consiglio di scaricare i file dai rispettivi siti ufficiali, oppure prendere i link anche dal portale)</i> <br><br> <a href=\"https://www.java.com/\" title=\"Link scaricamento...\"><u>Binari Java</u></a> <br> <a href=\"https://openjdk.org/\" title=\"Link scaricamento...\"><u>Binari Java (Open)</u></a> <br> <a href=\"https://mc-launcher.com/\" title=\"Link scaricamento...\"><u>Launcher</u></a> <br> <br><br> Ecco i passaggi da seguire:</p>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">1. Scarica Java</h2>\n' );
+document.write( '    <p class=\"chatground\">Prima di tutto, hai bisogno dei binari di Java. Ti consiglio di scaricare Java 8 in formato portable. Se non riesci a trovare una versione portable, puoi installare Java normalmente, poi andare nella cartella di installazione, copiare i file necessari e, se vuoi, disinstallare Java.</p>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">2. Gestione delle Cartelle</h2>\n' );
+document.write( '    <p class=\"chatground\">Avrai bisogno di due cartelle principali:</p>\n' );
+document.write( '    <ul class=\"chatground\">\n' );
+document.write( '        <li class=\"chatground\"><strong>Cartella di Java</strong>: Qui metterai i binari di Java.</li>\n' );
+document.write( '        <li class=\"chatground\"><strong>Cartella di Minecraft</strong>: Questa cartella conterrà i dati di Minecraft e del launcher.</li>\n' );
+document.write( '    </ul>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">3. Sottocartelle Necessarie</h2>\n' );
+document.write( '    <p class=\"chatground\">All\'interno della cartella di Minecraft, crea almeno due sottocartelle:</p>\n' );
+document.write( '    <ul class=\"chatground\">\n' );
+document.write( '        <li class=\"chatground\"><strong>.minecraft o minecraft</strong>: Qui dovrai inserire i tuoi dati di Minecraft.</li>\n' );
+document.write( '        <li class=\"chatground\"><strong>Cartella di Configurazione del Launcher</strong>: Questa cartella conterrà i file di configurazione del launcher.</li>\n' );
+document.write( '    </ul>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">4. Controlla gli Script</h2>\n' );
+document.write( '    <p class=\"chatground\">Apri gli script forniti e assicurati che i nomi delle cartelle siano corretti. Gli script sono progettati per essere modificati, quindi puoi personalizzarli come preferisci.</p>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">5. Configurazione della Cartella</h2>\n' );
+document.write( '    <p class=\"chatground\">Gli script utilizzeranno l\'eseguibile Java che si trova nella stessa cartella di Minecraft. Questo assicura che la cartella di configurazione non venga salvata in posizioni predefinite come:</p>\n' );
+document.write( '    <ul class=\"chatground\">\n' );
+document.write( '        <li class=\"chatground\"><strong>Windows</strong>: %appdata%</li>\n' );
+document.write( '        <li class=\"chatground\"><strong>Linux</strong>: $HOME</li>\n' );
+document.write( '        <li class=\"chatground\"><strong>Mac</strong>: ~/Library/Application Support</li>\n' );
+document.write( '    </ul>\n' );
+document.write( '\n' );
+document.write( '    <h2 class=\"chatground\">6. Posiziona il Launcher</h2>\n' );
+document.write( '    <p class=\"chatground\">Nella cartella principale, metti il launcher di Minecraft in formato .jar. Questo file dovrà essere eseguito dallo script. In alcuni script, il launcher potrebbe essere rinominato in \"Minecraft.jar\" o \"Launcher.jar\" per impostazione predefinita.</p>\n' );
+document.write( '\n' );
+document.write( '    <p class=\"chatground\">Seguendo questi passaggi, sarai in grado di configurare una versione portable di Minecraft in modo semplice e veloce. Buon divertimento!</p>\n' );
+document.write( '</font></kbd>' );
+
+
+document.write( '</details><br><br>' );
+
+
 </script>
 
 <!--<script type="text/javascript">
@@ -1206,12 +1257,12 @@ document.write( '</a>' );
 <!--
 <script type="text/javascript">
 function RedirectWindows() {
-window.location.href = 'https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view';
+window.location.href = '';
 }
 </script>
 <hr class="dashed">
 <script type="text/javascript">
-document.write( '<a onclick=\"location.href = \'https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view\" style=\"text-decoration:none\">' );
+document.write( '<a onclick=\"location.href = \'\';\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\">' );
 document.write( '<button type="button" onclick="RedirectWindows()" name=MineD>\n' );
 document.write( '<hr align=\"center\" size=\"8\" width=\"-1\" color=\"#0B0B61\" noshade>\n' );
 document.write( '<font class=\"newfonts\" size=\"128\"><span style=\"color: #086A87;\"><b>&#128160; <strong><u>Scarica Minecraft</u></strong> <i>(Windows)</i> &#128160;</b></font></span>\n' );
@@ -1226,12 +1277,12 @@ document.write( '<p>&#32;</p>' );
 
 <script type="text/javascript">
 function RedirectLinux() {
-window.location.href = 'https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view';
+window.location.href = '';
 }
 </script>
 
 <script type="text/javascript">
-document.write( '<a onclick=\"location.href = \'https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view\" style=\"text-decoration:none\">' );
+document.write( '<a onclick=\"location.href = \'\';\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\">' );
 document.write( '<button type="button" onclick="RedirectLinux()" name=MineD>\n' );
 document.write( '<hr align=\"center\" size=\"8\" width=\"-1\" color=\"#61380B\" noshade>\n' );
 document.write( '<font class=\"newfonts\" size=\"128\"><span style=\"color: #B18904;\"><b>&#128039; <strong><u>Scarica Minecraft</u></strong> <i>(Linux)</i> &#128039;</b></font></span>\n' );
@@ -1248,12 +1299,12 @@ document.write( '<p>&#32;</p>' );
 
 <script type="text/javascript">
 function RedirectMac() {
-window.location.href = 'https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view';
+window.location.href = '';
 }
 </script>
 
 <script type="text/javascript">
-document.write( '<a onclick=\"location.href = \'https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view\" style=\"text-decoration:none\">' );
+document.write( '<a onclick=\"location.href = \'\';\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\">' );
 document.write( '<button type="button" onclick="RedirectMac()" name=MineD>\n' );
 document.write( '<hr align=\"center\" size=\"8\" width=\"-1\" color=\"#610B5E\" noshade>\n' );
 document.write( '<font class=\"newfonts\" size=\"128\"><span style=\"color: #F781D8;\"><b>&#127822; <strong><u>Scarica Minecraft</u></strong> <i>(MacOS)</i> &#127822;</b></font></span>\n' );
@@ -1308,15 +1359,15 @@ document.write( '<p>&#x200B;</p>' );
 
 <script type="text/javascript">
 function RedirectWindows() {
-window.location.href = 'https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view';
+window.location.href = '';
 }
 
 function RedirectLinux() {
-window.location.href = 'https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view';
+window.location.href = '';
 }
 
 function RedirectMac() {
-window.location.href = 'https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view';
+window.location.href = '';
 }
 
 
@@ -1340,11 +1391,71 @@ document.write( '<br>' );
 
 <script type="text/javascript">
 
-document.write( '<a onclick=\"audio.play()\" onclick=\"location.href = \'https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/19bZY2SC7DKbD5uK68eqC5xAeNwE0P1uF/view\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
+function downlinux() {
+    // Data URI del file ZIP in formato Base64
+    const dataUri = "data:file/zip;base64,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"; // Sostituisci con il tuo dato Base64 completo
+    const fileName = "zMinePatch_Linux.zip"; // Nome del file da scaricare
+
+    // Creazione di un link temporaneo per il download
+    const link = document.createElement('a');
+    link.href = dataUri;
+    link.download = fileName;
+
+    // Aggiunta del link al documento
+    document.body.appendChild(link);
+    
+    // Simulazione del click sul link per avviare il download
+    link.click();
+    
+    // Rimozione del link dal documento
+    document.body.removeChild(link);
+}
+
+function downwindows() {
+    // Data URI del file ZIP in formato Base64
+    const dataUri = "data:file/zip;base64,UEsDBBQAAAAAANKwA1kAAAAAAAAAAAAAAAAbAAAAek1pbmVQYXRjaF9XaW5kb3dzL0FwcGRhdGEvUEsDBBQAAAAAAOmwA1kAAAAAAAAAAAAAAAAmAAAAek1pbmVQYXRjaF9XaW5kb3dzL0FwcGRhdGEvLm1pbmVjcmFmdC9QSwMEFAAAAAgAwrADWRt1SBO5AQAAfgQAACUAAAB6TWluZVBhdGNoX1dpbmRvd3MvQ29weW1pbmVDb25maWcuYmF0pVTbatwwEH03+B+mBkP74s0PBBrSLSzNhaSlUAiEqTzeHSpLQpJLkod+e0eOV+s1XUqpX3SZmTNnzoz8ntTOgu26siiLtG/KInLUBNefPrIsyjomn22j+91AIVro9nYEAjbKao1wv7m8vf+8+Xpxvb75soY4xMjA0KIsLUPTsyHlsYsS00SNg1E78mAoBccB4cK5DxgTpOaM+mpu2ZOK1j8DRnHV1GReDodAqYZAUVuFOu099XAr+ckIkgZHXlkfLLSCJszRx3FzgtOIBVWwg1f0mH3Oa3ROysH64RBYHTtnjLlzvqz+xg333FAEADUwBIbo7U9MrqPszXdMbHG75cFsOamW0jxMPFppEBvR3Jrz+lfrziZ7Tn3pCWGeSHozBb1IEEEgMNYABQ5RhOVOjpLxSY5Q1TP8uoK3ZQHy9T+kQUtjWbzLOcdRmSedKW+O6574Cg3zItc7ppZ8mjbTke9xJLQns+zQgdGTTOfznz2Oac5bCas1rDaw+ibUgbQIMaGNs391gn7Wqhkrnj2Xw3JChOUr+B8RMtZJEeYeSxEOI/oPIszoL0SYfhevJSvbO01R6nmTn+tvUEsDBBQAAAAAAPyZA1kAAAAAAAAAAAAAAAAYAAAAek1pbmVQYXRjaF9XaW5kb3dzL0phdmEvUEsDBBQAAAAIAPWDNFQgGB1MmgAAAM0AAAAcAAAAek1pbmVQYXRjaF9XaW5kb3dzL1N0YXJ0LmJhdIWMsQ7CIBRFdxL+4S2OUmNcm5SIi7GmiR1ZnhTaYlsQqHHy22Vxdrsn5+RWWg0OnDGUVHEYTYJiR8nt1AJvGsFbXnLvO0xIyVFAIWDz6XwuOj1BEaF4QvYie8nmcdEqoElyjTooVINmNrrlTzy5PlJyxhfK+7hImwfTbw1bkc3B7plxYcZUx/7qLs49Vh/LFNYcWAxQ/35Ypi9QSwECFAAUAAAAAADSsANZAAAAAAAAAAAAAAAAGwAAAAAAAAAAABAAAAAAAAAAek1pbmVQYXRjaF9XaW5kb3dzL0FwcGRhdGEvUEsBAhQAFAAAAAAA6bADWQAAAAAAAAAAAAAAACYAAAAAAAAAAAAwAAAAOQAAAHpNaW5lUGF0Y2hfV2luZG93cy9BcHBkYXRhLy5taW5lY3JhZnQvUEsBAhQAFAAAAAgAwrADWRt1SBO5AQAAfgQAACUAAAAAAAAAAQAgAAAAfQAAAHpNaW5lUGF0Y2hfV2luZG93cy9Db3B5bWluZUNvbmZpZy5iYXRQSwECFAAUAAAAAAD8mQNZAAAAAAAAAAAAAAAAGAAAAAAAAAAAABAAAAB5AgAAek1pbmVQYXRjaF9XaW5kb3dzL0phdmEvUEsBAhQAFAAAAAgA9YM0VCAYHUyaAAAAzQAAABwAAAAAAAAAAQAgAAAArwIAAHpNaW5lUGF0Y2hfV2luZG93cy9TdGFydC5iYXRQSwUGAAAAAAUABQCAAQAAgwMAAAAA"; // Sostituisci con il tuo dato Base64 completo
+    const fileName = "zMinePatch_Windows.zip"; // Nome del file da scaricare
+
+    // Creazione di un link temporaneo per il download
+    const link = document.createElement('a');
+    link.href = dataUri;
+    link.download = fileName;
+
+    // Aggiunta del link al documento
+    document.body.appendChild(link);
+    
+    // Simulazione del click sul link per avviare il download
+    link.click();
+    
+    // Rimozione del link dal documento
+    document.body.removeChild(link);
+}
+
+function downmac() {
+    // Data URI del file ZIP in formato Base64
+    const dataUri = "data:file/zip;base64,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"; // Sostituisci con il tuo dato Base64 completo
+    const fileName = "zMinePatch_MacOS.zip"; // Nome del file da scaricare
+
+    // Creazione di un link temporaneo per il download
+    const link = document.createElement('a');
+    link.href = dataUri;
+    link.download = fileName;
+
+    // Aggiunta del link al documento
+    document.body.appendChild(link);
+    
+    // Simulazione del click sul link per avviare il download
+    link.click();
+    
+    // Rimozione del link dal documento
+    document.body.removeChild(link);
+}
+
+document.write( '<a onclick=\"audio.play(); setTimeout(() => audio.pause(), 250);\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
 document.write( ' <div class=\"wrapper\" style=\"padding: 10px;\">\n' );
-document.write( ' <div class=\"button\" onclick=\"RedirectWindows()\">\n' );
+document.write( ' <div class=\"button\" onclick=\"downwindows()\">\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#0B0B61\" noshade>\n' );
-document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #00ACE6;\"><sub><b>&#128160; <strong>Scarica Minecraft</strong></sub> <i><sup>(Windows)</sup></i></b></font></span>\n' );
+document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #00ACE6;\"><sub><b>&#128160; <strong>Scarica gli Scripts</strong></sub> <i><sup>(Windows)</sup></i></b></font></span>\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#0B0B61\" noshade>\n' );
 document.write( ' </div>\n' );
 document.write( ' </div>\n' );
@@ -1353,11 +1464,11 @@ document.write( '</a>\n' );
 document.write( '\n' );
 document.write( '<p>&#32;</p>\n' );
 document.write( '\n' );
-document.write( '<a onclick=\"audio.play()\" onclick=\"location.href = \'https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/19utPV6XlsLX7TWfptsAIommOOxrxXpKK/view\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
+document.write( '<a onclick=\"audio.play(); setTimeout(() => audio.pause(), 250);\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
 document.write( ' <div class=\"wrapper\" style=\"padding: 10px;\">\n' );
-document.write( ' <div class=\"button\" onclick=\"RedirectLinux()\">\n' );
+document.write( ' <div class=\"button\" onclick=\"downlinux()\">\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#61380B\" noshade>\n' );
-document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #B18904;\"><sub><b>&#128039; <strong>Scarica Minecraft</strong></sub> <i><sup>(Linux)</sup></i></b></font></span>\n' );
+document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #B18904;\"><sub><b>&#128039; <strong>Scarica gli Scripts</strong></sub> <i><sup>(Linux)</sup></i></b></font></span>\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#61380B\" noshade>\n' );
 document.write( ' </div>\n' );
 document.write( ' </div>\n' );
@@ -1366,11 +1477,11 @@ document.write( '</a>\n' );
 document.write( '\n' );
 document.write( '<p>&#32;</p>\n' );
 document.write( '\n' );
-document.write( '<a onclick=\"audio.play()\" onclick=\"location.href = \'https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view\';\" title=\"Clicca qui per scaricare.\" href=\"https://drive.google.com/file/d/1Qj8io7U8c84jV_fu-ysBR1Ocm9niPFJh/view\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
+document.write( '<a onclick=\"audio.play(); setTimeout(() => audio.pause(), 250);\" title=\"Clicca qui per scaricare.\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
 document.write( ' <div class=\"wrapper\" style=\"padding: 10px;\">\n' );
-document.write( ' <div class=\"button\" onclick=\"RedirectMac()\">\n' );
+document.write( ' <div class=\"button\" onclick=\"downmac()\">\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#610B5E\" noshade>\n' );
-document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #F781D8;\"><sub><b>&#127822; <strong>Scarica Minecraft</strong></sub> <i><sup>(MacOS)</sup></i> </b></font></span>\n' );
+document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #F781D8;\"><sub><b>&#127822; <strong>Scarica gli Scripts</strong></sub> <i><sup>(MacOS)</sup></i> </b></font></span>\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#610B5E\" noshade>\n' );
 document.write( ' </div>\n' );
 document.write( ' </div>\n' );
@@ -1398,11 +1509,11 @@ document.write( '<svg id=\"mobile\" height=\"72pt\" width=\"72pt\" viewBox=\"0 0
 
 <script type="text/javascript">
 
-document.write( '<a onclick=\"audio.play()\" onclick=\"location.href = \'https://pojavlauncherteam.github.io/INSTALL.html#android\';\" title=\"Clicca qui per scaricare.\" href=\"https://pojavlauncherteam.github.io/INSTALL.html#android\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
+document.write( '<a onclick=\"audio.play(); setTimeout(() => audio.pause(), 250);\" onclick=\"location.href = \'https://pojavlauncherteam.github.io/INSTALL.html#android\';\" title=\"Clicca qui per scaricare.\" href=\"https://pojavlauncherteam.github.io/INSTALL.html#android\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
 document.write( ' <div class=\"wrapper\" style=\"padding: 10px;\">\n' );
 document.write( ' <div class=\"button\" onclick=\"RedirectAndroid()\">\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#38610B\" noshade>\n' );
-document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #04B404;\"><sub><b>&#129302; <strong>Scarica Minecraft</strong></sub> <i><sup>(Android)</sup></i></b></font></span>\n' );
+document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #04B404;\"><sub><b>&#129302; <strong>Scarica gli Scripts</strong></sub> <i><sup>(Android)</sup></i></b></font></span>\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#38610B\" noshade>\n' );
 document.write( ' </div>\n' );
 document.write( ' </div>\n' );
@@ -1411,11 +1522,11 @@ document.write( '</a>\n' );
 document.write( '\n' );
 document.write( '<p>&#32;</p>\n' );
 document.write( '\n' );
-document.write( '<a onclick=\"audio.play()\" onclick=\"location.href = \'https://pojavlauncherteam.github.io/INSTALL.html#ios\';\" title=\"Clicca qui per scaricare.\" href=\"https://pojavlauncherteam.github.io/INSTALL.html#ios\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
+document.write( '<a onclick=\"audio.play(); setTimeout(() => audio.pause(), 250);\" onclick=\"location.href = \'https://pojavlauncherteam.github.io/INSTALL.html#ios\';\" title=\"Clicca qui per scaricare.\" href=\"https://pojavlauncherteam.github.io/INSTALL.html#ios\" style=\"text-decoration:none\" onmouseover=\"style=\'text-decoration:underline\'\" onmouseout=\"style=\'text-decoration:none\'\">\n' );
 document.write( ' <div class=\"wrapper\" style=\"padding: 10px;\">\n' );
 document.write( ' <div class=\"button\" onclick=\"RedirectIOS()\">\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#610B0B\" noshade>\n' );
-document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #F5A9A9;\"><sub><b>&#127823; <strong>Scarica Minecraft</strong></sub> <i><sup>(IOS)</sup></i></b></font></span>\n' );
+document.write( ' <font class=\"newfonts\" size=\"128\"><span style=\"color: #F5A9A9;\"><sub><b>&#127823; <strong>Scarica gli Scripts</strong></sub> <i><sup>(IOS)</sup></i></b></font></span>\n' );
 document.write( ' <hr align=\"center\" size=\"8\" width=\"-1\" color=\"#610B0B\" noshade>\n' );
 document.write( ' </div>\n' );
 document.write( ' </div>\n' );
