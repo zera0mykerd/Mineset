@@ -2336,6 +2336,9 @@ function createTrafficCone() {
   trafficCone.style.zIndex = "9999";
   trafficCone.style.pointerEvents = "none";
   document.body.appendChild(trafficCone);
+  
+  // Variabile per tenere traccia dell'angolo di rotazione
+  let rotationAngle = 0;
 
   // Posiziona l'oggetto "TrafficCone" in una posizione casuale
   const coneSize = 32; // Dimensioni dell'oggetto TrafficCone
@@ -2369,10 +2372,18 @@ function createTrafficCone() {
       // Calcola il vettore di spostamento in base alla direzione dell'auto
       const moveX = Math.cos(carDirectionRad) * collisionOffset;
       const moveY = Math.sin(carDirectionRad) * collisionOffset;
+	  
+    // Incrementa l'angolo di rotazione
+    rotationAngle += 360;
+
 
       // Sposta l'oggetto "TrafficCone" in base alla direzione dell'auto
-      trafficCone.style.left = coneX + moveX + "px";
-      trafficCone.style.top = coneY + moveY + "px";
+      //trafficCone.style.left = coneX + moveX + "px";
+      //trafficCone.style.top = coneY + moveY + "px";
+	  //trafficCone.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    // Sposta l'oggetto "TrafficCone" in base alla direzione dell'auto
+    trafficCone.style.transition = "transform 0.5s ease"; // Aggiungi la transizione in JS
+    trafficCone.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${rotationAngle}deg)`;
 	  collisionSound.play();
     }
   }
