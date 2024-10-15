@@ -40,12 +40,22 @@ document.write( '<META http-equiv=\"Pragma\" content=\"no-cache\">' );
 
 
 <script type="text/javascript">
-//DISABLED FOR THIS
+(function() {
+  const isLocalhost = location.hostname === 'localhost';
+  const isLocalIP = location.hostname === '127.0.0.1';
+  const isFileProtocol = location.protocol === 'file:';
+  const isHttps = location.protocol === 'https:';
 
-//if (location.protocol != 'https:')
-//{
-// location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-//}
+  // Controlla se ci si trova in un ambiente non sicuro
+  if (!isHttps && !isLocalhost && !isLocalIP && !isFileProtocol) {
+    try {
+      const newUrl = 'https:' + window.location.href.substring(window.location.protocol.length);
+      location.href = newUrl; // Reindirizza a HTTPS
+    } catch (error) {
+      alert("Errore nel reindirizzamento: " + error);
+    }
+  }
+})();
 
 document.write( '<link rel=\"shortcut icon\" href=\"data:@file/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAB3RJTUUH5wQNEyYTmX8gVAAAAAlwSFlzAAAA6wAAAOsBK2zXwgAAAARnQU1BAACxjwv8YQUAAAOySURBVHjatVZLTFNREJ37Pv1QaEFEUGIUxcQfIn4DGvv8bDQh6soEojHxszAxMUZjcOVGE+M3LtQNiTFhZ9REV7oAXLkoqRp/gBUIGEUF1H7ee32f61xNySst5bWlk9w7d+ZOZ87MvXNfCeRANLBehLnea0DpQRgCH7jgDQjhJrKhJ5atLy4XABj8IgY/iatSMIFADOrB9Hbm4iprADS0rQ6Dn0rZiNBNtEc6UFAAlKI9R+7iUkxrEIN22glC4SowKB0HIE3T7mvggRLpXkEA0M87K5FdsuoCfeVw/+X8ZMMItNBg09oCVMC4hlOZVXP1wQpo7/Ymm7FLqTgezioAOrDdj25bbGOVoYYGdpyZFQC0f7cTZ3bxiP1qIcXMSzQoleZfAUFuw3l5VsEZ6dgpGjzKCwD2/DJk57IOnqAoSDS4bU/uFeC52zi7cgZAccS4jn/vR7YA6KDUig525Rw8QSo+14Htt6bbTnuxaGiXDzj9Ay7nQwYa+l4Mw69F2Fo7kRkET00opbWk/sXA1K30zyanX54pOKNF8yKwqNZGFQzCYWs+xdWqlFCp2fs34nzMTnWPXG+EnVdsNogMK2mPP8VvEgC8LAQ/NnfwZHL7TGciShiIm1PVSXeAfpJqgYf+rBwPZGWN/yBEiax73p22Ahg8gjDMWc9+Ml3sS0EbtaqSAJCarm843y8YABf0kTVdH62q1C5YXHEUhn4E8My24AHN/OfCTRttpG5gdV+Cp+JQalHK7fQRGo59KkhRkjLUTbNiPK62Ojk+5HM4nsi63hDWNX+JIHYj0GDCblxVW3VqVrD1kKb6/1WX477Webwnwoax9IumNJfxYrBSdHSPanH/hKE1VIuuJyU8H5qaUNIdiJtm9Ug0cuOnqhxhMgvOZMatdqNK7CzTs9EbV/ax0a/Kh9neL0OrC0TDN4bjyn4mM85kprf6SFQ+r36vLvKcXyo6n+X6ewYiLwBzXe47a4u9x/PxkRZATNc2h8J/Ho8p/4+CcSYzvV3HI5ra3BWeeMw4k9/K0TYmR0yjxmqXts0006z6HVf3JmTZ0FezUe503iuyCSBiGEvYSMhjuraJ8TVu8wJwfHoAbp7vXe4ra0jIE9gRo3LsTKW76GqZw9nh4vkZH94q0dm5x1c+6eO9Ej07qCot6z0lpysFR6ePF3qnrQAhRC4ShFeTWeiaxLjIcV+s+kwkEvJ7jiBO2roI94PxYo4fsOozHoFd+vBr/M07U1uQj4+8AOC7sVDLxwHSX+ZGbw2s028dAAAAAElFTkSuQmCC\" />\n' );
 function change_favicon(img) {
