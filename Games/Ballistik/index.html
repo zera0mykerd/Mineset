@@ -180,11 +180,22 @@ function onLoad() {
 
 
 
-if (location.protocol != 'https:')
-{
- location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-}
+(function() {
+  const isLocalhost = location.hostname === 'localhost';
+  const isLocalIP = location.hostname === '127.0.0.1';
+  const isFileProtocol = location.protocol === 'file:';
+  const isHttps = location.protocol === 'https:';
 
+  // Controlla se ci si trova in un ambiente non sicuro
+  if (!isHttps && !isLocalhost && !isLocalIP && !isFileProtocol) {
+    try {
+      const newUrl = 'https:' + window.location.href.substring(window.location.protocol.length);
+      location.href = newUrl; // Reindirizza a HTTPS
+    } catch (error) {
+      alert("Errore nel reindirizzamento: " + error);
+    }
+  }
+})();
 
 // ( 4 )
 
