@@ -520,15 +520,20 @@ a:active {
             border-radius: 25px;
             position: relative;
 			filter: blur(2px);
-            animation: move 0.2s linear infinite;
+            animation: move 0.18s linear infinite;
+			visibility: hidden;
         }
+
+		#shotfire {
+				visibility: hidden;
+		}
 
         @keyframes move {
             0% {
                 transform: translateX(-100%);
             }
             100% {
-                transform: translateX(40vw);
+                transform: translateX(35vw);
             }
         }
 
@@ -1217,6 +1222,92 @@ Halle Lidner riterr&agrave; inoltre che Mello sapeva che avrebbe dovuto morire p
 <br><hr align="center" size="1" width="100%" color="#E6E6E6" noshade>
 
 <p>&#32;</p>
+
+
+
+<script type="text/javascript">
+let audioContext;
+let isPlaying = false; // Flag per controllare se l'audio è in riproduzione
+
+document.getElementById('Kalashnikov').addEventListener('click', () => {
+    if (isPlaying) return; // Se l'audio è già in riproduzione, esci dalla funzione
+
+    // Crea l'AudioContext solo se non esiste già
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    playBurst();
+});
+
+function playBurst() {
+    isPlaying = true; // Imposta la flag a true per indicare che l'audio sta suonando
+    const numShots = 25; // Numero di colpi
+    const shotDuration = 0.06; // Durata di ogni colpo
+    const silenceDuration = 0.06; // Durata della pausa tra i colpi
+
+    let totalDuration = numShots * (shotDuration + silenceDuration); // Durata totale del burst
+
+    for (let i = 0; i < numShots; i++) {
+        const noise = audioContext.createBufferSource();
+        const buffer = audioContext.createBuffer(1, audioContext.sampleRate * shotDuration, audioContext.sampleRate);
+        const data = buffer.getChannelData(0);
+
+        // Genera rumore bianco
+        for (let j = 0; j < data.length; j++) {
+            data[j] = Math.random() * 2 - 1; // Rumore bianco
+        }
+
+        const gainNode = audioContext.createGain();
+        gainNode.gain.setValueAtTime(1, audioContext.currentTime + (i * (shotDuration + silenceDuration)));
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime + (i * (shotDuration + silenceDuration)) + shotDuration); // Decadimento
+
+        noise.buffer = buffer;
+        noise.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        noise.start(audioContext.currentTime + (i * (shotDuration + silenceDuration)));
+        noise.stop(audioContext.currentTime + (i * (shotDuration + silenceDuration)) + shotDuration);
+    }
+
+    // Dopo l'ultimo colpo, resetta la flag
+    setTimeout(() => {
+        isPlaying = false; // Ripristina la flag dopo che tutti i colpi sono stati suonati
+    }, totalDuration * 1000); // Converti in millisecondi
+}
+
+
+
+let isAnimating = false;
+
+document.getElementById("Kalashnikov").addEventListener("click", function() {
+    if (isAnimating) return; // Se l'animazione è in corso, esci dalla funzione.
+
+    isAnimating = true; // Imposta il flag per indicare che l'animazione è in corso.
+
+    // Aggiungi filtro di contrasto
+    this.style.filter = "contrast(145%)";
+
+    // Mostra gli elementi
+    document.querySelector(".shoter").style.visibility = "visible";
+    document.getElementById("shotfire").style.visibility = "visible";
+
+    // Nascondi dopo 3 secondi e rimuovi il filtro
+    setTimeout(function() {
+        document.querySelector(".shoter").style.visibility = "hidden";
+        document.getElementById("shotfire").style.visibility = "hidden";
+        document.getElementById("Kalashnikov").style.filter = ""; // Rimuovi il filtro
+        isAnimating = false; // Ripristina il flag al termine dell'animazione.
+    }, 3000);
+});
+
+
+
+
+</script>
+
+
+
 </BODY>
 </center>
 </html>
