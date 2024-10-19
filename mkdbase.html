@@ -496,9 +496,29 @@ Scarica JSON
 
 <script type="text/javascript">
 
-    document.getElementById('clearFields').addEventListener('click', function() {
-        document.getElementById('addRecordForm').reset();
-    });
+
+// Ottieni i riferimenti agli elementi HTML
+const paymentStatusSelect = document.getElementById('paymentStatus');
+const amountDueInput = document.getElementById('amountDue');
+
+// Funzione per aggiornare lo stato del pagamento
+function updatePaymentStatus() {
+  const amountDue = parseFloat(amountDueInput.value);
+
+  if (amountDue <= 0) {
+    paymentStatusSelect.value = 'Saldato';
+  } else {
+    paymentStatusSelect.value = 'Non saldato';
+  }
+}
+
+// Aggiungi un event listener all'input "amountDue" per rilevare i cambiamenti
+amountDueInput.addEventListener('input', updatePaymentStatus);
+
+// Controlla periodicamente il valore dell'input e aggiorna lo stato del pagamento
+setInterval(updatePaymentStatus, 1250); // Controlla ogni secondo
+
+
 
 const dataTableBody = document.getElementById('dataTableBody');
 const addRecordForm = document.getElementById('addRecordForm');
