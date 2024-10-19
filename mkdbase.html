@@ -496,7 +496,6 @@ Scarica JSON
 
 <script type="text/javascript">
 
-
 // Ottieni i riferimenti agli elementi HTML
 const paymentStatusSelect = document.getElementById('paymentStatus');
 const amountDueInput = document.getElementById('amountDue');
@@ -518,7 +517,9 @@ amountDueInput.addEventListener('input', updatePaymentStatus);
 // Controlla periodicamente il valore dell'input e aggiorna lo stato del pagamento
 setInterval(updatePaymentStatus, 1250); // Controlla ogni secondo
 
-
+    document.getElementById('clearFields').addEventListener('click', function() {
+        document.getElementById('addRecordForm').reset();
+    });
 
 const dataTableBody = document.getElementById('dataTableBody');
 const addRecordForm = document.getElementById('addRecordForm');
