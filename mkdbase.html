@@ -328,11 +328,38 @@ h1 {
     font-size: 18px;
     color: #aaa;
 	opacity: 0.7;
+    z-index: 2; /* Assicura che l'icona sia sopra l'input */
 }
 
 .input-container input[type="text"], .input-container input[type="date"], .input-container input[type="tel"], .input-container input[type="email"], .input-container input[type="number"], .input-container select {
     padding-left: 33px;
 }
+
+#datelabel {
+    position: absolute; /* Posizioniamo il label in modo assoluto */
+    left: 35px; /* Distanza dal bordo sinistro */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Centra il label esattamente */
+    transition: 0.2s; /* Transizione per il movimento */
+    color: gray; /* Colore iniziale */
+    pointer-events: none; /* Rende il label non interattivo */
+    z-index: 1; /* Assicura che il label sia sopra l'input */
+}
+
+#birthDate {
+    padding: 10px 10px 10px 256px; /* Aggiungi padding a sinistra per l'icona e un po' di spazio */
+    font-size: 16px; /* Dimensione del testo */
+    position: relative; /* Assicuriamoci che l'input sia il contenitore relativo */
+    z-index: 0; /* Mantenere l'input sotto il label */
+}
+
+#birthDate:focus + #datelabel,
+#birthDate:not(:placeholder-shown) + #datelabel {
+    top: -10px; /* Sposta il label verso l'alto quando in focus */
+    font-size: 12px; /* Riduce la dimensione del font */
+    color: blue; /* Cambia il colore quando attivo */
+}
+
 
     </style>
 
@@ -366,8 +393,23 @@ h1 {
         <input type="text" id="lastName" placeholder="Cognome" required>
     </div>
     <div class="input-container">
+        <span class="icon"><i class="fas fa-list"><svg width="24px" height="24px" viewBox="0 0 640 512"><path d="M160 0a64 64 0 1 1 0 128A64 64 0 1 1 160 0zM88 480l0-80-17.8 0c-10.9 0-18.6-10.7-15.2-21.1l31.1-93.4L57.5 323.3c-10.7 14.1-30.8 16.8-44.8 6.2s-16.8-30.7-6.2-44.8L65.4 207c22.4-29.6 57.5-47 94.6-47s72.2 17.4 94.6 47l58.9 77.7c10.7 14.1 7.9 34.2-6.2 44.8s-34.2 7.9-44.8-6.2l-28.6-37.8L265 378.9c3.5 10.4-4.3 21.1-15.2 21.1L232 400l0 80c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-80-16 0 0 80c0 17.7-14.3 32-32 32s-32-14.3-32-32zM480 0a64 64 0 1 1 0 128A64 64 0 1 1 480 0zm-8 384l0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-179.5L395.1 321c-9.4 15-29.2 19.4-44.1 10s-19.4-29.2-10-44.1l51.7-82.1c17.6-27.9 48.3-44.9 81.2-44.9l12.3 0c33 0 63.7 16.9 81.2 44.9L619.1 287c9.4 15 4.9 34.7-10 44.1s-34.7 4.9-44.1-10L552 300.5 552 480c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96-16 0z"/></svg></i></span>
+        <select id="Gender" required>
+            <option value="" disabled selected>Seleziona il sesso</option>
+            <option value="Maschio">Maschio</option>
+            <option value="Femmina">Femmina</option>
+            <option value="Non binario">Non binario</option>
+            <option value="Altro">Altro</option>
+        </select>
+    </div>
+    <div class="input-container">
         <span class="icon"><i class="fas fa-calendar-alt"><svg width="24px" height="24px" viewBox="0 0 448 512"><path d="M86.4 5.5L61.8 47.6C58 54.1 56 61.6 56 69.2L56 72c0 22.1 17.9 40 40 40s40-17.9 40-40l0-2.8c0-7.6-2-15-5.8-21.6L105.6 5.5C103.6 2.1 100 0 96 0s-7.6 2.1-9.6 5.5zm128 0L189.8 47.6c-3.8 6.5-5.8 14-5.8 21.6l0 2.8c0 22.1 17.9 40 40 40s40-17.9 40-40l0-2.8c0-7.6-2-15-5.8-21.6L233.6 5.5C231.6 2.1 228 0 224 0s-7.6 2.1-9.6 5.5zM317.8 47.6c-3.8 6.5-5.8 14-5.8 21.6l0 2.8c0 22.1 17.9 40 40 40s40-17.9 40-40l0-2.8c0-7.6-2-15-5.8-21.6L361.6 5.5C359.6 2.1 356 0 352 0s-7.6 2.1-9.6 5.5L317.8 47.6zM128 176c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 48c-35.3 0-64 28.7-64 64l0 71c8.3 5.2 18.1 9 28.8 9c13.5 0 27.2-6.1 38.4-13.4c5.4-3.5 9.9-7.1 13-9.7c1.5-1.3 2.7-2.4 3.5-3.1c.4-.4 .7-.6 .8-.8l.1-.1s0 0 0 0s0 0 0 0s0 0 0 0s0 0 0 0c3.1-3.2 7.4-4.9 11.9-4.8s8.6 2.1 11.6 5.4c0 0 0 0 0 0s0 0 0 0l.1 .1c.1 .1 .4 .4 .7 .7c.7 .7 1.7 1.7 3.1 3c2.8 2.6 6.8 6.1 11.8 9.5c10.2 7.1 23 13.1 36.3 13.1s26.1-6 36.3-13.1c5-3.5 9-6.9 11.8-9.5c1.4-1.3 2.4-2.3 3.1-3c.3-.3 .6-.6 .7-.7l.1-.1c3-3.5 7.4-5.4 12-5.4s9 2 12 5.4l.1 .1c.1 .1 .4 .4 .7 .7c.7 .7 1.7 1.7 3.1 3c2.8 2.6 6.8 6.1 11.8 9.5c10.2 7.1 23 13.1 36.3 13.1s26.1-6 36.3-13.1c5-3.5 9-6.9 11.8-9.5c1.4-1.3 2.4-2.3 3.1-3c.3-.3 .6-.6 .7-.7l.1-.1c2.9-3.4 7.1-5.3 11.6-5.4s8.7 1.6 11.9 4.8c0 0 0 0 0 0s0 0 0 0s0 0 0 0l.1 .1c.2 .2 .4 .4 .8 .8c.8 .7 1.9 1.8 3.5 3.1c3.1 2.6 7.5 6.2 13 9.7c11.2 7.3 24.9 13.4 38.4 13.4c10.7 0 20.5-3.9 28.8-9l0-71c0-35.3-28.7-64-64-64l0-48c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 48-64 0 0-48c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 48-64 0 0-48zM448 394.6c-8.5 3.3-18.2 5.4-28.8 5.4c-22.5 0-42.4-9.9-55.8-18.6c-4.1-2.7-7.8-5.4-10.9-7.8c-2.8 2.4-6.1 5-9.8 7.5C329.8 390 310.6 400 288 400s-41.8-10-54.6-18.9c-3.5-2.4-6.7-4.9-9.4-7.2c-2.7 2.3-5.9 4.7-9.4 7.2C201.8 390 182.6 400 160 400s-41.8-10-54.6-18.9c-3.7-2.6-7-5.2-9.8-7.5c-3.1 2.4-6.8 5.1-10.9 7.8C71.2 390.1 51.3 400 28.8 400c-10.6 0-20.3-2.2-28.8-5.4L0 480c0 17.7 14.3 32 32 32l384 0c17.7 0 32-14.3 32-32l0-85.4z"/></svg></i></span>
-        <input type="date" id="birthDate" placeholder="Data di nascita" required>
+        <label id="datelabel" for="birthDate">Data di nascita</label>
+	<input type="date" id="birthDate" placeholder="Data di nascita" required>
+    </div>
+    <div class="input-container">
+        <span class="icon"><i class="fas fa-calendar-alt"><svg width="24px" height="24px" viewBox="0 0 448 512"><path d="M152 88a72 72 0 1 1 144 0A72 72 0 1 1 152 88zM39.7 144.5c13-17.9 38-21.8 55.9-8.8L131.8 162c26.8 19.5 59.1 30 92.2 30s65.4-10.5 92.2-30l36.2-26.4c17.9-13 42.9-9 55.9 8.8s9 42.9-8.8 55.9l-36.2 26.4c-13.6 9.9-28.1 18.2-43.3 25l0 36.3-192 0 0-36.3c-15.2-6.7-29.7-15.1-43.3-25L48.5 200.3c-17.9-13-21.8-38-8.8-55.9zm89.8 184.8l60.6 53-26 37.2 24.3 24.3c15.6 15.6 15.6 40.9 0 56.6s-40.9 15.6-56.6 0l-48-48C70 438.6 68.1 417 79.2 401.1l50.2-71.8zm128.5 53l60.6-53 50.2 71.8c11.1 15.9 9.2 37.5-4.5 51.2l-48 48c-15.6 15.6-40.9 15.6-56.6 0s-15.6-40.9 0-56.6L284 419.4l-26-37.2z"/></svg></i></span>
+	<input type="text" id="placeOfBirth" placeholder="Luogo di nascita EX: (Napoli)" required>
     </div>
     <div class="input-container">
         <span class="icon"><i class="fas fa-home"><svg width="24px" height="24px" viewBox="0 0 576 512"><path d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg></i></span>
@@ -474,7 +516,9 @@ Scarica JSON
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Cognome</th>
+                <th>Sesso</th>
                 <th>Data di nascita</th>
+                <th>Luogo di nascita</th>
                 <th>Residenza</th>
                 <th>Numero di telefono</th>
                 <th>Email</th>
@@ -596,7 +640,9 @@ addRecordForm.addEventListener('submit', (e) => {
 
         const firstName = sanitizeInput(document.getElementById('firstName').value) || 'none';
         const lastName = sanitizeInput(document.getElementById('lastName').value) || 'none';
+        const Gender = sanitizeInput(document.getElementById('Gender').value) || 'none';
         const birthDate = sanitizeInput(document.getElementById('birthDate').value) || 'none';
+        const placeOfBirth = sanitizeInput(document.getElementById('placeOfBirth').value) || 'none';
         const residence = sanitizeInput(document.getElementById('residence').value) || 'none';
         const phone = sanitizeInput(document.getElementById('phone').value) || 'none';
         const email = sanitizeInput(document.getElementById('email').value) || 'none';
@@ -605,22 +651,25 @@ addRecordForm.addEventListener('submit', (e) => {
         const examResults = sanitizeInput(document.getElementById('examResults').value) || 'none';
         const paymentStatus = sanitizeInput(document.getElementById('paymentStatus').value) || 'none';
         const startDate = sanitizeInput(document.getElementById('startDate').value) || 'none';
-        const amountDue = sanitizeInput(document.getElementById('amountDue').value) || '0'; // Nuovo campo aggiunto
+        const amountDue = sanitizeInput(document.getElementById('amountDue').value) || '0';
 
         if (existingRow) {
             // Sovrascrivi il record esistente
+            //existingRow.cells[0].innerText = newId;
             existingRow.cells[1].innerText = firstName;
             existingRow.cells[2].innerText = lastName;
-            existingRow.cells[3].innerText = birthDate;
-            existingRow.cells[4].innerText = residence;
-            existingRow.cells[5].innerText = phone;
-            existingRow.cells[6].innerText = email;
-            existingRow.cells[7].innerText = licenseType;
-            existingRow.cells[8].innerText = courseStatus;
-            existingRow.cells[9].innerText = examResults;
-            existingRow.cells[10].innerText = paymentStatus;
-            existingRow.cells[11].innerText = startDate;
-            existingRow.cells[12].innerText = amountDue;
+            existingRow.cells[3].innerText = Gender;
+            existingRow.cells[4].innerText = birthDate;
+            existingRow.cells[5].innerText = placeOfBirth;
+            existingRow.cells[6].innerText = residence;
+            existingRow.cells[7].innerText = phone;
+            existingRow.cells[8].innerText = email;
+            existingRow.cells[9].innerText = licenseType;
+            existingRow.cells[10].innerText = courseStatus;
+            existingRow.cells[11].innerText = examResults;
+            existingRow.cells[12].innerText = paymentStatus;
+            existingRow.cells[13].innerText = startDate;
+            existingRow.cells[14].innerText = amountDue;
             console.log('Record esistente aggiornato.');
         } else {
             // Aggiungi la nuova riga alla tabella
@@ -628,7 +677,9 @@ addRecordForm.addEventListener('submit', (e) => {
                 '<td class="editable">' + newId + '</td>' +
                 '<td class="editable">' + firstName + '</td>' +
                 '<td class="editable">' + lastName + '</td>' +
+                '<td class="editable">' + Gender + '</td>' +
                 '<td class="editable">' + birthDate + '</td>' +
+                '<td class="editable">' + placeOfBirth + '</td>' +
                 '<td class="editable">' + residence + '</td>' +
                 '<td class="editable">' + phone + '</td>' +
                 '<td class="editable">' + email + '</td>' +
@@ -710,16 +761,18 @@ function addEditableFunctionality() {
 			document.getElementById('newId').value = cells[0].innerText; // ID
             document.getElementById('firstName').value = cells[1].innerText; // Nome
             document.getElementById('lastName').value = cells[2].innerText; // Cognome
-            document.getElementById('birthDate').value = cells[3].innerText; // Data di nascita
-            document.getElementById('residence').value = cells[4].innerText; // Residenza
-            document.getElementById('phone').value = cells[5].innerText; // Telefono
-            document.getElementById('email').value = cells[6].innerText; // Email
-            document.getElementById('licenseType').value = cells[7].innerText; // Tipo di patente
-            document.getElementById('courseStatus').value = cells[8].innerText; // Stato del corso
-            document.getElementById('examResults').value = cells[9].innerText; // Risultati esami
-            document.getElementById('paymentStatus').value = cells[10].innerText; // Stato pagamento
-            document.getElementById('startDate').value = cells[11].innerText; // Data di inizio
-            document.getElementById('amountDue').value = cells[12].innerText; // Da versare
+            document.getElementById('Gender').value = cells[3].innerText; // Sesso
+            document.getElementById('birthDate').value = cells[4].innerText; // Data di nascita
+            document.getElementById('placeOfBirth').value = cells[5].innerText; // Luogo di nascita
+            document.getElementById('residence').value = cells[6].innerText; // Residenza
+            document.getElementById('phone').value = cells[7].innerText; // Telefono
+            document.getElementById('email').value = cells[8].innerText; // Email
+            document.getElementById('licenseType').value = cells[9].innerText; // Tipo di patente
+            document.getElementById('courseStatus').value = cells[10].innerText; // Stato del corso
+            document.getElementById('examResults').value = cells[11].innerText; // Risultati esami
+            document.getElementById('paymentStatus').value = cells[12].innerText; // Stato pagamento
+            document.getElementById('startDate').value = cells[13].innerText; // Data di inizio
+            document.getElementById('amountDue').value = cells[14].innerText; // Da versare
         });
     });
 }
@@ -853,7 +906,9 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
                     '<td class="editable">' + sanitizeInput(record.id) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.firstName) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.lastName) + '</td>' +
+                    '<td class="editable">' + sanitizeInput(record.Gender) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.birthDate) + '</td>' +
+                    '<td class="editable">' + sanitizeInput(record.placeOfBirth) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.residence) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.phone) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.email) + '</td>' +
@@ -891,16 +946,18 @@ document.getElementById('downloadJsonButton').addEventListener('click', () => {
                 id: sanitizeInput(cells[0].innerText),
                 firstName: sanitizeInput(cells[1].innerText),
                 lastName: sanitizeInput(cells[2].innerText),
-                birthDate: sanitizeInput(cells[3].innerText),
-                residence: sanitizeInput(cells[4].innerText),
-                phone: sanitizeInput(cells[5].innerText),
-                email: sanitizeInput(cells[6].innerText),
-                licenseType: sanitizeInput(cells[7].innerText),
-                courseStatus: sanitizeInput(cells[8].innerText),
-                examResults: sanitizeInput(cells[9].innerText),
-                paymentStatus: sanitizeInput(cells[10].innerText),
-                startDate: sanitizeInput(cells[11].innerText),
-                amountDue: sanitizeInput(cells[12].innerText)
+                Gender: sanitizeInput(cells[3].innerText),
+                birthDate: sanitizeInput(cells[4].innerText),
+                placeOfBirth: sanitizeInput(cells[5].innerText),
+                residence: sanitizeInput(cells[6].innerText),
+                phone: sanitizeInput(cells[7].innerText),
+                email: sanitizeInput(cells[8].innerText),
+                licenseType: sanitizeInput(cells[9].innerText),
+                courseStatus: sanitizeInput(cells[10].innerText),
+                examResults: sanitizeInput(cells[11].innerText),
+                paymentStatus: sanitizeInput(cells[12].innerText),
+                startDate: sanitizeInput(cells[13].innerText),
+                amountDue: sanitizeInput(cells[14].innerText)
             };
             console.log('Record per il download:', record);
             return record;
