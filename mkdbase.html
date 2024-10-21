@@ -62,7 +62,7 @@ h1 {
 
 /* Form Styles */
 #addRecordForm {
-    background: white;
+    background: MintCream;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,17 @@ tbody tr:hover {
 
 td {
     background: PaleGreen;
+    transition: transform 0.2s ease, filter 0.2s ease;
+	font-style: oblique;
 }
+
+td:hover {
+    transform: translate(-2px, -2px);
+    background: SpringGreen;
+	font-style: normal;
+	font-weight: bold;
+}
+
 
 /* Responsive Styles */
 @media (max-width: 600px) {
@@ -299,7 +309,7 @@ h1 {
     padding: 10px 20px;
     border: 2px solid #2f6d56; /* Allinea con il resto del tuo design */
     border-radius: 5px;
-    background-color: white; /* Colore di sfondo */
+    background-color: HoneyDew; /* Colore di sfondo */
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
     text-align: center; /* Allinea il testo al centro */
@@ -359,6 +369,36 @@ h1 {
     font-size: 12px; /* Riduce la dimensione del font */
     color: blue; /* Cambia il colore quando attivo */
 }
+
+
+
+
+#signuplabel {
+    position: absolute; /* Posizioniamo il label in modo assoluto */
+    left: 35px; /* Distanza dal bordo sinistro */
+    top: 50%; /* Centra verticalmente */
+    transform: translateY(-50%); /* Centra il label esattamente */
+    transition: 0.2s; /* Transizione per il movimento */
+    color: gray; /* Colore iniziale */
+    pointer-events: none; /* Rende il label non interattivo */
+    z-index: 1; /* Assicura che il label sia sopra l'input */
+}
+
+#startDate {
+    padding: 10px 10px 10px 256px; /* Aggiungi padding a sinistra per l'icona e un po' di spazio */
+    font-size: 16px; /* Dimensione del testo */
+    position: relative; /* Assicuriamoci che l'input sia il contenitore relativo */
+    z-index: 0; /* Mantenere l'input sotto il label */
+}
+
+#startDate:focus + #signuplabel,
+#startDate:not(:placeholder-shown) + #signuplabel {
+    top: -10px; /* Sposta il label verso l'alto quando in focus */
+    font-size: 12px; /* Riduce la dimensione del font */
+    color: blue; /* Cambia il colore quando attivo */
+}
+
+
 
 
     </style>
@@ -454,7 +494,8 @@ h1 {
 
     <div class="input-container">
         <span class="icon"><i class="fas fa-calendar-check"><svg width="24px" height="24px" viewBox="0 0 448 512"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z"/></svg></i></span>
-        <input type="date" id="startDate" placeholder="Data di inizio" required>
+        <label id="signuplabel" for="startDate">Data di iscrizione</label>
+		<input type="date" id="startDate" placeholder="Data di inizio" required>
     </div>
 
     <div class="input-container">
@@ -540,6 +581,68 @@ Scarica JSON
 
 <script type="text/javascript">
 
+
+
+// Gestione display label data
+function toggleLabel() {
+    const birthDateInput = document.getElementById('birthDate');
+    const dateLabel = document.getElementById('datelabel');
+    
+    const startDateInput = document.getElementById('startDate');
+    const signUpLabel = document.getElementById('signuplabel');
+
+    // Mostra il label se il campo di nascita è vuoto
+    if (birthDateInput.value === '') {
+        dateLabel.style.display = 'block';
+        console.log('Label data mostrato!');
+        birthDateInput.style.paddingLeft = '256px';
+    } else {
+        dateLabel.style.display = 'none'; // Nasconde il label se il campo è compilato
+        birthDateInput.style.paddingLeft = '35px';
+        console.log('Label data nascosto!');
+    }
+
+    // Mostra il label se il campo di inizio è vuoto
+    if (startDateInput.value === '') {
+        signUpLabel.style.display = 'block';
+        console.log('Label iscrizione mostrato!');
+        startDateInput.style.paddingLeft = '256px';
+    } else {
+        signUpLabel.style.display = 'none'; // Nasconde il label se il campo è compilato
+        startDateInput.style.paddingLeft = '35px';
+        console.log('Label iscrizione nascosto!');
+    }
+}
+
+// Quando il DOM è pronto, aggiungi gli event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const birthDateInput = document.getElementById('birthDate');
+    const startDateInput = document.getElementById('startDate');
+
+    // Controlla all'inizio
+    toggleLabel();
+    
+    // Gestisce l'input e il cambiamento per il campo di nascita
+    birthDateInput.addEventListener('input', toggleLabel);
+    birthDateInput.addEventListener('change', toggleLabel);
+    
+    // Gestiamo anche il focus e il blur per il campo di nascita
+    birthDateInput.addEventListener('focus', toggleLabel);
+    birthDateInput.addEventListener('blur', toggleLabel);
+    
+    // Gestisce l'input e il cambiamento per il campo di inizio
+    startDateInput.addEventListener('input', toggleLabel);
+    startDateInput.addEventListener('change', toggleLabel);
+    
+    // Gestiamo anche il focus e il blur per il campo di inizio
+    startDateInput.addEventListener('focus', toggleLabel);
+    startDateInput.addEventListener('blur', toggleLabel);
+});
+
+
+
+
+
 // Ottieni i riferimenti agli elementi HTML
 const paymentStatusSelect = document.getElementById('paymentStatus');
 const amountDueInput = document.getElementById('amountDue');
@@ -561,9 +664,14 @@ amountDueInput.addEventListener('input', updatePaymentStatus);
 // Controlla periodicamente il valore dell'input e aggiorna lo stato del pagamento
 setInterval(updatePaymentStatus, 1250); // Controlla ogni secondo
 
+
+//Svuota caselle
     document.getElementById('clearFields').addEventListener('click', function() {
         document.getElementById('addRecordForm').reset();
+		console.log('Cancellati tutti i valori nelle caselle!');
+		toggleLabel();
     });
+
 
 const dataTableBody = document.getElementById('dataTableBody');
 const addRecordForm = document.getElementById('addRecordForm');
@@ -625,6 +733,7 @@ function validateInput() {
 addRecordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Modulo inviato.');
+	toggleLabel();
 
     // Validazione
     if (!validateInput()) {
@@ -700,6 +809,7 @@ addRecordForm.addEventListener('submit', (e) => {
         addDeleteFunctionality();
         addRecordForm.reset();
 		updateRecordCount();
+		toggleLabel();
         console.log('Modulo resettato dopo l\'aggiunta del record.');
     } catch (error) {
         console.error('Errore durante l\'aggiunta del record:', error);
@@ -734,6 +844,7 @@ function addEditableFunctionality() {
             cell.appendChild(input);
 			updateRecordCount();
             input.focus();
+			toggleLabel();
 
             let isEditing = true; // Flag per sapere se si sta modificando
 
@@ -773,6 +884,8 @@ function addEditableFunctionality() {
             document.getElementById('paymentStatus').value = cells[12].innerText; // Stato pagamento
             document.getElementById('startDate').value = cells[13].innerText; // Data di inizio
             document.getElementById('amountDue').value = cells[14].innerText; // Da versare
+			toggleLabel(); //Check label data
+			console.log('Caricato il modulo precompilato.');
         });
     });
 }
@@ -806,6 +919,7 @@ function addDeleteFunctionality() {
             row.remove();
             updateRowIds();
 			updateRecordCount();
+			toggleLabel();
         });
     });
 }
@@ -924,6 +1038,7 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
                 dataTableBody.insertAdjacentHTML('beforeend', newRow);
                 console.log('Nuova riga aggiunta dalla registrazione JSON:', record);
 				updateRecordCount();
+				toggleLabel();
             });
             addEditableFunctionality();
             addDeleteFunctionality();
