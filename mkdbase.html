@@ -915,7 +915,7 @@ addRecordForm.addEventListener('submit', (e) => {
             console.log('Nuova riga aggiunta alla tabella.');
         }
 
-        addEditableFunctionality();
+        //addEditableFunctionality();
         addDeleteFunctionality();
         addRecordForm.reset();
 		updateRecordCount();
@@ -1017,6 +1017,7 @@ function addEditableFunctionality() {
 }
 
 
+addEditableFunctionality();
 
 document.getElementById('addAmount').addEventListener('click', (e) => {
     e.preventDefault(); // Previene l'invio del modulo
