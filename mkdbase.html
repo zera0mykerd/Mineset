@@ -779,6 +779,7 @@ setInterval(updatePaymentStatus, 1250); // Controlla ogni secondo
     document.getElementById('clearFields').addEventListener('click', function() {
         document.getElementById('addRecordForm').reset();
 		console.log('Cancellati tutti i valori nelle caselle!');
+		updateRowIds();
 		toggleLabel();
     });
 
@@ -844,6 +845,7 @@ addRecordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Modulo inviato.');
 	toggleLabel();
+	addEditableFunctionality();
 
     // Validazione
     if (!validateInput()) {
@@ -915,12 +917,13 @@ addRecordForm.addEventListener('submit', (e) => {
             console.log('Nuova riga aggiunta alla tabella.');
         }
 
-        //addEditableFunctionality();
+        addEditableFunctionality();
         addDeleteFunctionality();
         addRecordForm.reset();
 		updateRecordCount();
 		toggleLabel();
         console.log('Modulo resettato dopo l\'aggiunta del record.');
+		updateRowIds();
     } catch (error) {
         console.error('Errore durante l\'aggiunta del record:', error);
         alert('Si è verificato un errore durante l\'aggiunta del record. Controlla la console per maggiori dettagli.');
@@ -1017,8 +1020,6 @@ function addEditableFunctionality() {
 }
 
 
-addEditableFunctionality();
-
 document.getElementById('addAmount').addEventListener('click', (e) => {
     e.preventDefault(); // Previene l'invio del modulo
     const amount = parseFloat(document.getElementById('amountToAddSubtract').value) || 0;
@@ -1095,7 +1096,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Aggiorna gli ID dopo l'eliminazione
 function updateRowIds() {
-    console.log('Aggiornamento ID righe dopo eliminazione...');
+    console.log('Aggiornamento ID righe...');
     const rows = dataTableBody.querySelectorAll('tr');
     rows.forEach((row, index) => {
         row.cells[0].innerText = index + 1; // Aggiorna ID
