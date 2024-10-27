@@ -589,7 +589,7 @@ a.no-underline {
     
     <div class="input-container">
         <span class="icon"><i class="fas fa-check"><svg width="24px" height="24px" viewBox="0 0 640 512"><path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z"/></svg></i></span>
-        <input type="text" id="examResults" placeholder="Risultati esami (0-99 Errori o X Errori)" required pattern="^(7[0]|[0-6]?[0-9]|1 Errore|X\sErrori|[2-9][0-9]\sErrori|[0-9]\sErrori)$">
+        <input type="text" id="examResults" placeholder="Risultati esami (0-99 Errori/Errore o X Errori)" required pattern="^(100|[0-9]{1,2})\s(Errori|Errore)|X\sErrori$">
     </div>
     
     <div class="input-container">
@@ -790,12 +790,49 @@ const fileInput = document.getElementById('fileInput');
 
 console.log('Inizializzazione del codice...');
 
+
 // Funzione di sanitizzazione
 function sanitizeInput(input) {
-    const element = document.createElement('div');
-    element.innerText = input; // Usa innerText per evitare XSS
-    return element.innerHTML; // Ritorna il valore sanitizzato
+    // Verifica se l'input è una stringa
+    if (typeof input !== 'string') {
+        throw new Error('Input deve essere una stringa');
+    }
+
+    // Rimuovi spazi bianchi all'inizio e alla fine
+    input = input.trim();
+
+    // Limita la lunghezza dell'input
+    const maxLength = 1000; // Imposta un limite di lunghezza
+    if (input.length > maxLength) {
+        input = input.substring(0, maxLength);
+    }
+
+    // Filtra solo i caratteri consentiti
+    input = input.replace(/[^a-zA-Z0-9èÉùòàì@., +\-]/g, '');
+
+    // Controlla se l'input è una data in formato yyyymmdd
+    if (/^\d{8}$/.test(input)) {
+        // Estrai anno, mese e giorno
+        const year = input.substring(0, 4);
+        const month = input.substring(4, 6);
+        const day = input.substring(6, 8);
+
+        // Restituisci la data nel formato yyyy-MM-dd
+        input = `${year}-${month}-${day}`;
+    }
+
+    // Esegui l'escaping dei caratteri speciali HTML
+    input = input
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+    // Restituisci il valore sanitizzato
+    return input; // Ritorna il valore sanitizzato
 }
+
 
 // Funzione di validazione
 function validateInput() {
@@ -837,7 +874,7 @@ function validateInput() {
         function updateRecordCount() {
             const tbody = document.getElementById('dataTableBody');
             const recordCount = tbody.rows.length;
-            document.getElementById('recordCount').innerText = `Numero totale di record: ${recordCount}`;
+            document.getElementById('recordCount').textContent = `Numero totale di record: ${recordCount}`;
         }
 
 // Aggiungi un record dal modulo
@@ -854,7 +891,7 @@ addRecordForm.addEventListener('submit', (e) => {
     }
 
     const newId = sanitizeInput(document.getElementById('newId').value); // Prendi l'ID dal campo
-    const existingRow = Array.from(dataTableBody.rows).find(row => row.cells[0].innerText === newId);
+    const existingRow = Array.from(dataTableBody.rows).find(row => row.cells[0].textContent === newId);
 
     try {
         console.log('Validazione superata, procedendo con l\'aggiunta del record...');
@@ -877,20 +914,20 @@ addRecordForm.addEventListener('submit', (e) => {
         if (existingRow) {
             // Sovrascrivi il record esistente
             //existingRow.cells[0].innerText = newId;
-            existingRow.cells[1].innerText = firstName;
-            existingRow.cells[2].innerText = lastName;
-            existingRow.cells[3].innerText = Gender;
-            existingRow.cells[4].innerText = birthDate;
-            existingRow.cells[5].innerText = placeOfBirth;
-            existingRow.cells[6].innerText = residence;
-            existingRow.cells[7].innerText = phone;
-            existingRow.cells[8].innerText = email;
-            existingRow.cells[9].innerText = licenseType;
-            existingRow.cells[10].innerText = courseStatus;
-            existingRow.cells[11].innerText = examResults;
-            existingRow.cells[12].innerText = paymentStatus;
-            existingRow.cells[13].innerText = startDate;
-            existingRow.cells[14].innerText = amountDue;
+            existingRow.cells[1].textContent = firstName;
+            existingRow.cells[2].textContent = lastName;
+            existingRow.cells[3].textContent = Gender;
+            existingRow.cells[4].textContent = birthDate;
+            existingRow.cells[5].textContent = placeOfBirth;
+            existingRow.cells[6].textContent = residence;
+            existingRow.cells[7].textContent = phone;
+            existingRow.cells[8].textContent = email;
+            existingRow.cells[9].textContent = licenseType;
+            existingRow.cells[10].textContent = courseStatus;
+            existingRow.cells[11].textContent = examResults;
+            existingRow.cells[12].textContent = paymentStatus;
+            existingRow.cells[13].textContent = startDate;
+            existingRow.cells[14].textContent = amountDue;
             console.log('Record esistente aggiornato.');
         } else {
             // Aggiungi la nuova riga alla tabella
@@ -942,7 +979,6 @@ document.getElementById('phone').addEventListener('input', (e) => {
 
 // Aggiungi la funzionalità di modifica
             //cell.innerHTML = '';    //RIMOSSO
-
 function addEditableFunctionality() {
     console.log('Aggiunta funzionalità di modifica...');
     const editableCells = document.querySelectorAll('.editable');
@@ -952,9 +988,10 @@ function addEditableFunctionality() {
     editableCells.forEach(cell => {
         cell.addEventListener('dblclick', () => {
             console.log('Cella modificabile doppio cliccata:', cell);
-            const originalText = cell.innerText;
+            const originalText = cell.textContent; // Usa textContent per evitare XSS
             const input = document.createElement('input');
             input.value = originalText;
+            //cell.innerHTML = ''; // Pulisci il contenuto della cella
             cell.appendChild(input);
             updateRecordCount();
             toggleLabel();
@@ -964,8 +1001,9 @@ function addEditableFunctionality() {
             const onBlurOrEnter = (e) => {
                 if (isEditing && (e.type === 'blur' || e.key === 'Enter')) {
                     isEditing = false; // Imposta il flag su false
-                    cell.innerHTML = sanitizeInput(input.value) || originalText;
-                    console.log('Valore della cella modificato:', cell.innerText);
+                    const sanitizedValue = sanitizeInput(input.value) || originalText; // Sanitizza l'input
+                    cell.textContent = sanitizedValue; // Usa textContent per evitare XSS
+                    console.log('Valore della cella modificato:', cell.textContent);
 
                     // Rimuovi gli eventi per evitare leak
                     input.removeEventListener('blur', onBlurOrEnter);
@@ -977,8 +1015,8 @@ function addEditableFunctionality() {
             const onKeyDown = (e) => {
                 if (isEditing && e.key === 'Escape') {
                     isEditing = false; // Imposta il flag su false
-                    cell.innerHTML = originalText; // Ripristina il valore originale
-                    console.log('Modifica annullata, valore ripristinato:', cell.innerText);
+                    cell.textContent = originalText; // Ripristina il valore originale
+                    console.log('Modifica annullata, valore ripristinato:', cell.textContent);
 
                     // Rimuovi gli eventi per evitare leak
                     input.removeEventListener('blur', onBlurOrEnter);
@@ -998,21 +1036,21 @@ function addEditableFunctionality() {
     rows.forEach(row => {
         row.addEventListener('click', () => {
             const cells = row.querySelectorAll('td');
-            document.getElementById('newId').value = cells[0].innerText; // ID
-            document.getElementById('firstName').value = cells[1].innerText; // Nome
-            document.getElementById('lastName').value = cells[2].innerText; // Cognome
-            document.getElementById('Gender').value = cells[3].innerText; // Sesso
-            document.getElementById('birthDate').value = cells[4].innerText; // Data di nascita
-            document.getElementById('placeOfBirth').value = cells[5].innerText; // Luogo di nascita
-            document.getElementById('residence').value = cells[6].innerText; // Residenza
-            document.getElementById('phone').value = cells[7].innerText; // Telefono
-            document.getElementById('email').value = cells[8].innerText; // Email
-            document.getElementById('licenseType').value = cells[9].innerText; // Tipo di patente
-            document.getElementById('courseStatus').value = cells[10].innerText; // Stato del corso
-            document.getElementById('examResults').value = cells[11].innerText; // Risultati esami
-            document.getElementById('paymentStatus').value = cells[12].innerText; // Stato pagamento
-            document.getElementById('startDate').value = cells[13].innerText; // Data di inizio
-            document.getElementById('amountDue').value = cells[14].innerText; // Da versare
+            document.getElementById('newId').value = cells[0].textContent; // ID
+            document.getElementById('firstName').value = cells[1].textContent; // Nome
+            document.getElementById('lastName').value = cells[2].textContent; // Cognome
+            document.getElementById('Gender').value = cells[3].textContent; // Sesso
+            document.getElementById('birthDate').value = cells[4].textContent; // Data di nascita
+            document.getElementById('placeOfBirth').value = cells[5].textContent; // Luogo di nascita
+            document.getElementById('residence').value = cells[6].textContent; // Residenza
+            document.getElementById('phone').value = cells[7].textContent; // Telefono
+            document.getElementById('email').value = cells[8].textContent; // Email
+            document.getElementById('licenseType').value = cells[9].textContent; // Tipo di patente
+            document.getElementById('courseStatus').value = cells[10].textContent; // Stato del corso
+            document.getElementById('examResults').value = cells[11].textContent; // Ris ultati esami
+            document.getElementById('paymentStatus').value = cells[12].textContent; // Stato pagamento
+            document.getElementById('startDate').value = cells[13].textContent; // Data di inizio
+            document.getElementById('amountDue').value = cells[14].textContent; // Da versare
             toggleLabel(); //Check label data
             console.log('Caricato il modulo precompilato.');
         });
@@ -1054,11 +1092,11 @@ function addDeleteFunctionality() {
             // Mostra un timer di 3 secondi
             let countdown = 3;
             const timerDisplay = document.getElementById('countelimin');
-            timerDisplay.innerText = `Eliminazione in ${countdown} secondi...`; // Aggiorna il contenuto dello span
+            timerDisplay.textContent = `Eliminazione in ${countdown} secondi...`; // Aggiorna il contenuto dello span
 
             const interval = setInterval(() => {
                 countdown--;
-                timerDisplay.innerText = `Eliminazione in ${countdown} secondi...`;
+                timerDisplay.textContent = `Eliminazione in ${countdown} secondi...`;
                 console.log(`Countdown: ${countdown} secondi rimasti`); // Log del countdown nella console
 
                 if (countdown <= 0) {
@@ -1067,7 +1105,7 @@ function addDeleteFunctionality() {
                     updateRowIds();
                     updateRecordCount();
                     toggleLabel();
-                    timerDisplay.innerText = ''; // Rimuovi il testo dallo span
+                    timerDisplay.textContent = ''; // Rimuovi il testo dallo span
                     button.style.filter = 'none'; // Rimuovi il filtro
                 }
             }, 1000);
@@ -1076,7 +1114,7 @@ function addDeleteFunctionality() {
             const escHandler = (event) => {
                 if (event.key === 'Escape') {
                     clearInterval(interval);
-                    timerDisplay.innerText = ''; // Rimuovi il testo dallo span
+                    timerDisplay.textContent = ''; // Rimuovi il testo dallo span
                     console.log('Eliminazione annullata.');
 
                     // Rimuovi il filtro
@@ -1099,7 +1137,7 @@ function updateRowIds() {
     console.log('Aggiornamento ID righe...');
     const rows = dataTableBody.querySelectorAll('tr');
     rows.forEach((row, index) => {
-        row.cells[0].innerText = index + 1; // Aggiorna ID
+        row.cells[0].textContent = index + 1; // Aggiorna ID
         console.log('ID aggiornato per riga:', index + 1);
     });
 }
@@ -1142,9 +1180,9 @@ function advancedFilterTable() {
 
                 // Controlla tutte le celle della riga
                 for (let j = 0; j < cells.length; j++) {
-                    if (cells[j].innerText.toLowerCase().includes(term)) {
+                    if (cells[j].textContent.toLowerCase().includes(term)) {
                         termMatch = true;
-                        console.log('Corrispondenza trovata nella cella:', cells[j].innerText);
+                        console.log('Corrispondenza trovata nella cella:', cells[j].textContent);
                         break; // Termina il ciclo se trovi una corrispondenza
                     }
                 }
@@ -1227,21 +1265,21 @@ document.getElementById('downloadJsonButton').addEventListener('click', () => {
         const data = rows.map(row => {
             const cells = row.querySelectorAll('td');
             const record = {
-                id: sanitizeInput(cells[0].innerText),
-                firstName: sanitizeInput(cells[1].innerText),
-                lastName: sanitizeInput(cells[2].innerText),
-                Gender: sanitizeInput(cells[3].innerText),
-                birthDate: sanitizeInput(cells[4].innerText),
-                placeOfBirth: sanitizeInput(cells[5].innerText),
-                residence: sanitizeInput(cells[6].innerText),
-                phone: sanitizeInput(cells[7].innerText),
-                email: sanitizeInput(cells[8].innerText),
-                licenseType: sanitizeInput(cells[9].innerText),
-                courseStatus: sanitizeInput(cells[10].innerText),
-                examResults: sanitizeInput(cells[11].innerText),
-                paymentStatus: sanitizeInput(cells[12].innerText),
-                startDate: sanitizeInput(cells[13].innerText),
-                amountDue: sanitizeInput(cells[14].innerText)
+                id: sanitizeInput(cells[0].textContent),
+                firstName: sanitizeInput(cells[1].textContent),
+                lastName: sanitizeInput(cells[2].textContent),
+                Gender: sanitizeInput(cells[3].textContent),
+                birthDate: sanitizeInput(cells[4].textContent),
+                placeOfBirth: sanitizeInput(cells[5].textContent),
+                residence: sanitizeInput(cells[6].textContent),
+                phone: sanitizeInput(cells[7].textContent),
+                email: sanitizeInput(cells[8].textContent),
+                licenseType: sanitizeInput(cells[9].textContent),
+                courseStatus: sanitizeInput(cells[10].textContent),
+                examResults: sanitizeInput(cells[11].textContent),
+                paymentStatus: sanitizeInput(cells[12].textContent),
+                startDate: sanitizeInput(cells[13].textContent),
+                amountDue: sanitizeInput(cells[14].textContent)
             };
             console.log('Record per il download:', record);
             return record;
@@ -1347,10 +1385,3 @@ function updateAmount(operation) {
 
 
 </html>
-
-
-<!--
-TRASH CODE
--->
-
-<!--    <form id="addRecordForm">       	    <input type="text" id="newId" placeholder="ID" required>         <input type="text" id="firstName" placeholder="Nome" required>         <input type="text" id="lastName" placeholder="Cognome" required>         <input type="date" id="birthDate" placeholder="Data di nascita" required>         <input type="text" id="residence" placeholder="Residenza" required>         <input type="tel" id="phone" placeholder="Numero di telefono" required pattern="[0-9]*">         <input type="email" id="email" placeholder="Email" required>         <input type="text" id="licenseType" placeholder="Tipo di patente" required>                  <select id="courseStatus" required>             <option value="" disabled selected>Seleziona stato del corso</option>             <option value="Superato">Superato</option>             <option value="Non superato">Non superato</option>             <option value="In frequentazione">In frequentazione</option>         </select>                  <input type="text" id="examResults" placeholder="Risultati esami (0-30 Errori)" required pattern="^(3[0]|[0-2]?[0-9])\sErrori$">                  <select id="paymentStatus" required>             <option value="" disabled selected>Seleziona stato pagamento</option>             <option value="Saldato">Saldato</option>             <option value="Non saldato">Non saldato</option>         </select>          <input type="date" id="startDate" placeholder="Data di inizio" required>                  <!-- Nuovo campo per "Da versare"           <input type="number" id="amountDue" placeholder="Da versare" step="0.01" required> 		<br> 	    <!-- Sezione per le operazioni di aggiunta/sottrazione       <div id="amountOperations">         <input type="number" id="amountToAddSubtract" step="0.01" placeholder="Importo">         <button id="addAmount">+</button>         <button id="subtractAmount">-</button>     </div>         <br>         <button type="submit">Aggiungi Cliente</button> 	    <button type="button" id="clearFields">Svuota caselle</button>     </form>  <script DISABLED> // Aggiungi la funzionalità di eliminazione function addDeleteFunctionality() {     console.log('Aggiunta funzionalità di eliminazione...');     const deleteButtons = document.querySelectorAll('.deleteButton');      deleteButtons.forEach(button => {         button.addEventListener('click', (e) => {             const row = e.target.closest('tr');             console.log('Eliminazione riga:', row);             row.remove();             updateRowIds(); 			updateRecordCount(); 			toggleLabel();         });     }); }  // Aggiorna gli ID dopo l'eliminazione function updateRowIds() {     console.log('Aggiornamento ID righe dopo eliminazione...');     const rows = dataTableBody.querySelectorAll('tr');     rows.forEach((row, index) => {         row.cells[0].innerText = index + 1; // Aggiorna ID         console.log('ID aggiornato per riga:', index + 1);     }); }  </script>-->
