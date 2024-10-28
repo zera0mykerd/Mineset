@@ -60,6 +60,14 @@ h1 {
     outline: none;
 }
 
+.strike-through {
+    text-decoration: line-through;
+    color: gray;
+    transition: all 0.3s;
+    filter: grayscale(50%);
+}
+
+
 /* Form Styles */
 #addRecordForm {
     background: MintCream;
@@ -204,6 +212,13 @@ td:active {
     display: block;
     margin: 10px auto;
 }
+
+
+#downlog {
+    display: block;
+    margin: 10px auto;
+}
+
 
 #loadFileButton {
     background: linear-gradient(135deg, #2ab0ff, #7ed957);
@@ -654,7 +669,8 @@ Carica JSON
 Scarica JSON
 <svg style="opacity: 0.5;" width="16px" height="16px" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
 </button>
-
+<br>
+<button id="downlog">&#128195; Scarica Logs &#x1F4C3;</button>
     <br><br>
 <input type="text" id="searchInput" placeholder="Cerca..." onkeyup="setTimeout(() => { if (this.value.length >= 4 || this.value.length === 0) advancedFilterTable(); }, 1250)">
     	<div style="pointer-events: none; position: relative; text-align: center; bottom: 52px; left: 172px;"><span style="pointer-events: none; position: relative; display: inline-block; opacity: 0.7;"><svg width="24px" height="24px" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></span></div>
@@ -878,11 +894,13 @@ function validateInput() {
         }
 
 // Aggiungi un record dal modulo
+const logs = []; // Array per memorizzare i log
+
 addRecordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Modulo inviato.');
-	toggleLabel();
-	addEditableFunctionality();
+    toggleLabel();
+    addEditableFunctionality();
 
     // Validazione
     if (!validateInput()) {
@@ -890,7 +908,7 @@ addRecordForm.addEventListener('submit', (e) => {
         return; // Se la validazione fallisce, esci
     }
 
-    const newId = sanitizeInput(document.getElementById('newId').value); // Prendi l'ID dal campo
+    const newId = sanitizeInput(document.getElementById('newId').value);
     const existingRow = Array.from(dataTableBody.rows).find(row => row.cells[0].textContent === newId);
 
     try {
@@ -911,9 +929,10 @@ addRecordForm.addEventListener('submit', (e) => {
         const startDate = sanitizeInput(document.getElementById('startDate').value) || 'none';
         const amountDue = sanitizeInput(document.getElementById('amountDue').value) || '0';
 
+        const timestamp = new Date().toLocaleString(); // Ottieni la data e l'ora correnti
+
         if (existingRow) {
             // Sovrascrivi il record esistente
-            //existingRow.cells[0].innerText = newId;
             existingRow.cells[1].textContent = firstName;
             existingRow.cells[2].textContent = lastName;
             existingRow.cells[3].textContent = Gender;
@@ -928,7 +947,11 @@ addRecordForm.addEventListener('submit', (e) => {
             existingRow.cells[12].textContent = paymentStatus;
             existingRow.cells[13].textContent = startDate;
             existingRow.cells[14].textContent = amountDue;
-            console.log('Record esistente aggiornato.');
+
+    // Logga ogni aggiornamento di amountDue
+    logs.push(`Record aggiornato: ID ${newId}, Nome: ${firstName}, Cognome: ${lastName}, Pagamento: ${amountDue}, il ${timestamp}`);
+
+    console.log('Record esistente aggiornato.');
         } else {
             // Aggiungi la nuova riga alla tabella
             const newRow = '<tr>' +
@@ -951,20 +974,32 @@ addRecordForm.addEventListener('submit', (e) => {
                 '</tr>';
 
             dataTableBody.insertAdjacentHTML('beforeend', newRow);
+            logs.push(`Nuovo record aggiunto: ID ${newId}, Nome: ${firstName}, Cognome: ${lastName}, Pagamento: ${amountDue}, il ${timestamp}`); // Aggiungi log
             console.log('Nuova riga aggiunta alla tabella.');
         }
 
         addEditableFunctionality();
         addDeleteFunctionality();
         addRecordForm.reset();
-		updateRecordCount();
-		toggleLabel();
+        updateRecordCount();
+        toggleLabel();
         console.log('Modulo resettato dopo l\'aggiunta del record.');
-		updateRowIds();
+        updateRowIds();
     } catch (error) {
         console.error('Errore durante l\'aggiunta del record:', error);
         alert('Si è verificato un errore durante l\'aggiunta del record. Controlla la console per maggiori dettagli.');
     }
+});
+
+// Funzione per scaricare il file di log
+document.getElementById('downlog').addEventListener('click', () => {
+    const blob = new Blob([logs.join('\n')], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'logs.txt'; // Nome del file di log
+    a.click();
+    URL.revokeObjectURL(url); // Rimuovi l'oggetto URL dopo il download
 });
 
 
@@ -1075,7 +1110,6 @@ document.getElementById('subtractAmount').addEventListener('click', (e) => {
 
 
 // Aggiungi la funzionalità di eliminazione con timer
-
 function addDeleteFunctionality() {
     console.log('Aggiunta funzionalità di eliminazione...');
     const deleteButtons = document.querySelectorAll('.deleteButton');
@@ -1088,6 +1122,12 @@ function addDeleteFunctionality() {
             // Applica il filtro al pulsante
             button.style.filter = 'grayscale(100%)';
             button.style.transition = 'filter 0.3s'; // Aggiungi una transizione per un effetto più fluido
+
+            // Sbarrare i valori nella riga
+            const cells = row.querySelectorAll('td');
+            cells.forEach(cell => {
+                cell.classList.add('strike-through'); // Aggiungi la classe per sbarramento
+            });
 
             // Mostra un timer di 3 secondi
             let countdown = 3;
@@ -1116,6 +1156,11 @@ function addDeleteFunctionality() {
                     clearInterval(interval);
                     timerDisplay.textContent = ''; // Rimuovi il testo dallo span
                     console.log('Eliminazione annullata.');
+
+                    // Rimuovi lo sbarramento dai valori
+                    cells.forEach(cell => {
+                        cell.classList.remove('strike-through'); // Rimuovi la classe
+                    });
 
                     // Rimuovi il filtro
                     button.style.filter = 'none';
