@@ -216,8 +216,29 @@ td:active {
 
 #downlog {
     display: block;
+    position: relative;
     margin: 10px auto;
+    top: 64px;
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
+
+#downlog:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#downlog:active {
+    transform: translateY(4px);
+    background-color: #388E3C;
+}
+
 
 
 #loadFileButton {
@@ -581,7 +602,7 @@ a.no-underline {
     </div>
     <div class="input-container">
         <span class="icon"><i class="fas fa-phone"><svg width="24px" height="24px" viewBox="0 0 512 512"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg></i></span>
-        <input type="tel" id="phone" placeholder="Numero di telefono" required pattern="[0-9]*">
+        <input type="tel" id="phone" placeholder="Numero di telefono" required pattern="[0-9+\-]*">
     </div>
     <div class="input-container">
         <span class="icon"><i class="fas fa-envelope"><svg width="24px" height="24px" viewBox="0 0 512 512"><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></i></span>
@@ -604,7 +625,7 @@ a.no-underline {
     
     <div class="input-container">
         <span class="icon"><i class="fas fa-check"><svg width="24px" height="24px" viewBox="0 0 640 512"><path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 384l0-128 16 0 0 128c0 17.7 14.3 32 32 32s32-14.3 32-32l0-288 56 0 64 0 16 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-16 0 0-64 192 0 0 192-192 0 0-32-64 0 0 48c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-224c0-26.5-21.5-48-48-48L368 0c-26.5 0-48 21.5-48 48l0 80-76.9 0-65.9 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 480c0 17.7 14.3 32 32 32s32-14.3 32-32z"/></svg></i></span>
-        <input type="text" id="examResults" placeholder="Risultati esami (0-99 Errori/Errore o X Errori)" required pattern="^(100|[0-9]{1,2})\s(Errori|Errore)|X\sErrori$">
+        <input type="text" id="examResults" placeholder="Risultati esami (0-100 Errori/Errore o X Errori)" required pattern="^(100|[0-9]{1,2})\s(Errori|Errore)|X\sErrori$">
     </div>
     
     <div class="input-container">
@@ -807,8 +828,10 @@ const fileInput = document.getElementById('fileInput');
 console.log('Inizializzazione del codice...');
 
 
-// Funzione di sanitizzazione
-function sanitizeInput(input) {
+
+
+// Funzione di sanitizzazione (Protezione XSS)
+function sanitizeInput(input, isDate = false) {
     // Verifica se l'input è una stringa
     if (typeof input !== 'string') {
         throw new Error('Input deve essere una stringa');
@@ -824,7 +847,12 @@ function sanitizeInput(input) {
     }
 
     // Filtra solo i caratteri consentiti
-    input = input.replace(/[^a-zA-Z0-9èÉùòàì@., +\-]/g, '');
+    if (!isDate) {
+        input = input.replace(/[^a-zA-Z0-9èÉùòàì@., +\-]/g, '');
+    } else {
+        // Se è una data, consenti anche i caratteri : e /
+        input = input.replace(/[^a-zA-Z0-9èÉùòàì@., +\-:/]/g, '');
+    }
 
     // Controlla se l'input è una data in formato yyyymmdd
     if (/^\d{8}$/.test(input)) {
@@ -848,6 +876,8 @@ function sanitizeInput(input) {
     // Restituisci il valore sanitizzato
     return input; // Ritorna il valore sanitizzato
 }
+
+
 
 
 // Funzione di validazione
@@ -893,9 +923,9 @@ function validateInput() {
             document.getElementById('recordCount').textContent = `Numero totale di record: ${recordCount}`;
         }
 
+
 // Aggiungi un record dal modulo
 const logs = []; // Array per memorizzare i log
-
 addRecordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log('Modulo inviato.');
@@ -929,7 +959,7 @@ addRecordForm.addEventListener('submit', (e) => {
         const startDate = sanitizeInput(document.getElementById('startDate').value) || 'none';
         const amountDue = sanitizeInput(document.getElementById('amountDue').value) || '0';
 
-        const timestamp = new Date().toLocaleString(); // Ottieni la data e l'ora correnti
+		const timestamp = sanitizeInput(new Date().toLocaleString(), true); // Ottieni la data e l'ora correnti e sanitizzale	
 
         if (existingRow) {
             // Sovrascrivi il record esistente
@@ -949,7 +979,7 @@ addRecordForm.addEventListener('submit', (e) => {
             existingRow.cells[14].textContent = amountDue;
 
     // Logga ogni aggiornamento di amountDue
-    logs.push(`Record aggiornato: ID ${newId}, Nome: ${firstName}, Cognome: ${lastName}, Pagamento: ${amountDue}, il ${timestamp}`);
+    logs.push(`Record aggiornato: ID ${sanitizeInput(newId)}, Nome: ${sanitizeInput(firstName)}, Cognome: ${sanitizeInput(lastName)}, Pagamento: ${sanitizeInput(amountDue)}, il ${timestamp}`);
 
     console.log('Record esistente aggiornato.');
         } else {
@@ -974,7 +1004,8 @@ addRecordForm.addEventListener('submit', (e) => {
                 '</tr>';
 
             dataTableBody.insertAdjacentHTML('beforeend', newRow);
-            logs.push(`Nuovo record aggiunto: ID ${newId}, Nome: ${firstName}, Cognome: ${lastName}, Pagamento: ${amountDue}, il ${timestamp}`); // Aggiungi log
+			//Aggiungi log
+            logs.push(`Nuovo record aggiunto: ID ${sanitizeInput(newId)}, Nome: ${sanitizeInput(firstName)}, Cognome: ${sanitizeInput(lastName)}, Pagamento: ${sanitizeInput(amountDue)}, il ${timestamp}`);
             console.log('Nuova riga aggiunta alla tabella.');
         }
 
@@ -990,23 +1021,22 @@ addRecordForm.addEventListener('submit', (e) => {
         alert('Si è verificato un errore durante l\'aggiunta del record. Controlla la console per maggiori dettagli.');
     }
 });
-
 // Funzione per scaricare il file di log
 document.getElementById('downlog').addEventListener('click', () => {
     const blob = new Blob([logs.join('\n')], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'logs.txt'; // Nome del file di log
+    a.download = 'logs.log'; // Nome del file di log
     a.click();
+	console.log('File di log scaricato!'); //Manda a schermo su console
     URL.revokeObjectURL(url); // Rimuovi l'oggetto URL dopo il download
 });
 
 
-
 // Funzione per il controllo input numerico
 document.getElementById('phone').addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/[^0-9+]/g, ''); // Permetti solo numeri e +
+    e.target.value = e.target.value.replace(/[^0-9+-]/g, ''); // Permetti solo numeri, + e -
     console.log('Input numero di telefono modificato:', e.target.value);
 });
 
@@ -1249,9 +1279,11 @@ function advancedFilterTable() {
 
 
 
-
 // Carica un file JSON
 document.getElementById('loadFileButton').addEventListener('click', () => {
+    const fileInput = document.getElementById('fileInput'); // Assicurati di avere un input di tipo file con questo ID
+    const dataTableBody = document.getElementById('dataTableBody'); // Assicurati di avere un corpo di tabella con questo ID
+
     const file = fileInput.files[0];
     if (!file) {
         alert('Seleziona un file JSON!');
@@ -1259,6 +1291,19 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
         return;
     }
 
+    // Controllo del tipo di file
+    if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+        alert('Seleziona un file JSON valido!');
+        console.log('File non valido:', file.name);
+        return;
+    }
+
+    // Limitazione della dimensione del file
+    const maxFileSize = 128 * 1024 * 1024; // 128 MB
+    if (file.size > maxFileSize) {
+        alert('Il file è troppo grande. Seleziona un file di dimensioni inferiori a 2 MB.');
+        return;
+    }
     console.log('File selezionato:', file.name);
     const reader = new FileReader();
     reader.onload = function(event) {
@@ -1267,7 +1312,15 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
             console.log('Dati JSON caricati:', data);
             dataTableBody.innerHTML = ''; // Pulisci la tabella
 
+            const requiredFields = ['id', 'firstName', 'lastName', 'Gender', 'birthDate', 'placeOfBirth', 'residence', 'phone', 'email', 'licenseType', 'courseStatus', 'examResults', 'paymentStatus', 'startDate', 'amountDue'];
+
             data.forEach(record => {
+                const isValid = requiredFields.every(field => field in record);
+                if (!isValid) {
+                    console.error('Record mancante di campi richiesti:', record);
+                    alert('Il file JSON contiene record non validi. Controlla la console per maggiori dettagli.');
+                    return;
+                }
                 const newRow = '<tr>' +
                     '<td class="editable">' + sanitizeInput(record.id) + '</td>' +
                     '<td class="editable">' + sanitizeInput(record.firstName) + '</td>' +
@@ -1286,11 +1339,10 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
                     '<td class="editable">' + sanitizeInput(record.amountDue) + '</td>' +
                     '<td><button class="deleteButton">\uD83D\uDDD1\uFE0F Elimina</button></td>' +
                     '</tr>';
-
                 dataTableBody.insertAdjacentHTML('beforeend', newRow);
                 console.log('Nuova riga aggiunta dalla registrazione JSON:', record);
-				updateRecordCount();
-				toggleLabel();
+                updateRecordCount();
+                toggleLabel();
             });
             addEditableFunctionality();
             addDeleteFunctionality();
@@ -1299,8 +1351,15 @@ document.getElementById('loadFileButton').addEventListener('click', () => {
             alert('Si è verificato un errore durante il caricamento del file JSON. Controlla la console per maggiori dettagli.');
         }
     };
+    reader.onerror = function(event) {
+        console.error('Errore durante la lettura del file:', event.target.error);
+        alert('Si è verificato un errore durante la lettura del file. Controlla la console per maggiori dettagli.');
+    };
+
     reader.readAsText(file);
 });
+
+
 
 // Scarica i dati come file JSON
 document.getElementById('downloadJsonButton').addEventListener('click', () => {
@@ -1347,6 +1406,7 @@ document.getElementById('downloadJsonButton').addEventListener('click', () => {
         alert('Si è verificato un errore durante il download del file JSON. Controlla la console per maggiori dettagli.');
     }
 });
+
 
 
 
