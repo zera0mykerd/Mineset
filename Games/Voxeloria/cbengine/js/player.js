@@ -341,3 +341,6 @@ Player.prototype.nodeCollision = function(node)
 	}
 	return false;
 }
+
+
+

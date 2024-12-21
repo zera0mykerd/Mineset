@@ -47,6 +47,9 @@
 </head>
 <body>
 
+<!--<div id="joystick" style="width: 100px; height: 100px; background: rgba(0, 0, 0, 0.3); border-radius: 50%;"></div>-->
+
+
 <div id="controls">
 	<h1>Cube Engine v1.0</h1>
     <ul>
@@ -160,7 +163,7 @@
 </div>
 
 <canvas id="canvas" tabindex="1"></canvas>
-<joystick id="joystick" style="display: none;"></joystick>
+<div id="joystick" style="display: none;"></div>
 <script type="text/javascript">
 
 var canvas = document.getElementById("canvas");
@@ -169,6 +172,7 @@ var world = new World(3);
 var player = new Player(world);
 var renderer = new Renderer(canvas, world, player);
 var save = new Save(world, player);
+
 
 </script>
 
