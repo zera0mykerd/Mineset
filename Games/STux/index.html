@@ -3886,7 +3886,6 @@ hideRuler();
 
 
 
-
 // Frequenze delle note
 const noteFrequencies = {
   'Do': 261.63,
@@ -3950,13 +3949,13 @@ function playNote(note) {
 function createWavFile() {
   const sampleRate = 44100; // Frequenza di campionamento (standard per audio CD)
   const numChannels = 1; // Mono
-  const noteDurationInSamples = sampleRate; // Ogni nota dura 1 secondo
 
   // Calcoliamo la durata totale del file WAV
   let totalSamples = 0;
   notes.forEach(noteData => {
-    totalSamples += noteDurationInSamples; // Aggiungi la durata della nota
-    totalSamples += (noteData.interval * sampleRate); // Aggiungi il silenzio tra le note (in millisecondi)
+    const noteDurationInSamples = noteData.duration * sampleRate; // Durata della nota in campioni
+    totalSamples += noteDurationInSamples; // Aggiungi la durata della nota in campioni
+    totalSamples += (noteData.interval * sampleRate); // Aggiungi il silenzio tra le note in campioni
   });
 
   // Creiamo il buffer per i dati audio
@@ -4054,7 +4053,7 @@ function downloadAudio() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'sinfonia.wav';
+  link.download = 'MkSymphony.wav';
   document.body.appendChild(link); // Aggiungi il link temporaneamente al body
   link.click();
   document.body.removeChild(link); // Rimuovi il link dopo il click
@@ -4081,7 +4080,6 @@ function createNotes() {
 
 // Inizializza le note al caricamento della pagina
 createNotes();
-
 
 
 
