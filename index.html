@@ -690,7 +690,13 @@ li { cursor: pointer; }
 }
 
 
+ @keyframes blink {
+        50% { opacity: 0; }
+    }
 
+    .blink {
+        animation: blink 1s step-start infinite;
+    }
 
 
 
@@ -883,7 +889,9 @@ function normalQR(x) {
 <p>&#10240;</p>
 
 <a class="NegaStar" onclick="location.href = '';" href="" title="-> | MINESET | <-">
+
 <script class="NegaStar" type="text/javascript">
+/*
 function rainbow(str){
   phase = 0;
   center = 128;
@@ -895,17 +903,79 @@ function rainbow(str){
     red   = Math.sin(frequency*i+2+phase) * width + center;
     green = Math.sin(frequency*i+0+phase) * width + center;
     blue  = Math.sin(frequency*i+4+phase) * width + center;
-    document.write( '<u class=\"NegaStar\"><big class=\"NegaStar\"><strong class=\"NegaStar\"><b class=\"NegaStar\"><font class=\"NegaStar\" size=\"256\" face=\"Segoe UI Black\" color="' + '#' +
+    document.write( '<u class=\"NegaStar\"><big class=\"NegaStar\"><strong class=\"NegaStar\"><b class=\"NegaStar\"><ll><font class=\"NegaStar\" size=\"256\" face=\"Segoe UI Black\" color="' + '#' +
       String(hexaStr.substr((red >> 4) & 0x0F,1)) + 
       hexaStr.substr(red & 0x0F,1) +
       String(hexaStr.substr((green >> 4) & 0x0F,1)) + 
       hexaStr.substr(green & 0x0F,1) + 
       String(hexaStr.substr((blue >> 4) & 0x0F,1)) + 
       hexaStr.substr(blue & 0x0F,1) + '">' + 
-      str.substr(i,1) + '</font></b></strong></big></u>');
+      str.substr(i,1) + '</font></ll></b></strong></big></u>');
   }
 } 
-rainbow('| Portale -> MINESET <- |',35);
+rainbow('\u221E | \u2605 Portale -> MINESET <- | \u221E',35);
+*/
+
+
+// Variabili globali per mantenerle accessibili
+let globalPhase = 0;
+let globalCenter = 128;
+let globalWidth = 128;
+let globalFrequency;
+let globalStr;
+let globalHexaStr = "0123456789ABCDEF";
+
+function rainbow(str) {
+    globalStr = str;
+    globalFrequency = Math.PI*2/str.length;
+    drawText(); // Prima esecuzione
+    
+    // Avvia l'animazione
+    setInterval(updateColors, 50);
+}
+
+function drawText() {
+    for (var i = 0; i < globalStr.length; ++i) {
+        var red   = Math.sin(globalFrequency*i+2+globalPhase) * globalWidth + globalCenter;
+        var green = Math.sin(globalFrequency*i+0+globalPhase) * globalWidth + globalCenter;
+        var blue  = Math.sin(globalFrequency*i+4+globalPhase) * globalWidth + globalCenter;
+        
+        document.write('<u class=\"NegaStar\"><big class=\"NegaStar\"><strong class=\"NegaStar\"><b class=\"NegaStar\"><ll><font class=\"NegaStar\" size=\"256\" face=\"Segoe UI Black\" color="' + '#' +
+            String(globalHexaStr.substr((red >> 4) & 0x0F,1)) + 
+            globalHexaStr.substr(red & 0x0F,1) +
+            String(globalHexaStr.substr((green >> 4) & 0x0F,1)) + 
+            globalHexaStr.substr(green & 0x0F,1) + 
+            String(globalHexaStr.substr((blue >> 4) & 0x0F,1)) + 
+            globalHexaStr.substr(blue & 0x0F,1) + '">' + 
+            globalStr.substr(i,1) + '</font></ll></b></strong></big></u>');
+    }
+}
+
+function updateColors() {
+    globalPhase += 0.1;
+    var fonts = document.getElementsByTagName('font');
+    
+    for (var i = 0; i < fonts.length; i++) {
+        if (fonts[i].className === 'NegaStar') {
+            var red   = Math.sin(globalFrequency*i+2+globalPhase) * globalWidth + globalCenter;
+            var green = Math.sin(globalFrequency*i+0+globalPhase) * globalWidth + globalCenter;
+            var blue  = Math.sin(globalFrequency*i+4+globalPhase) * globalWidth + globalCenter;
+            
+            fonts[i].setAttribute('color', '#' +
+                String(globalHexaStr.substr((red >> 4) & 0x0F,1)) + 
+                globalHexaStr.substr(red & 0x0F,1) +
+                String(globalHexaStr.substr((green >> 4) & 0x0F,1)) + 
+                globalHexaStr.substr(green & 0x0F,1) + 
+                String(globalHexaStr.substr((blue >> 4) & 0x0F,1)) + 
+                globalHexaStr.substr(blue & 0x0F,1));
+        }
+    }
+}
+
+// Uso:
+rainbow('\u221E | \u2605 Portale -> MINESET <- | \u221E');
+
+
 </script>
 
 </a>
@@ -999,6 +1069,20 @@ rainbow('| Portale -> MINESET <- |',35);
 <hr align="center" size="5" width="100%" color="#D7DF01" noshade>
 <br><br>
 
+
+    <font face="Arial, sans-serif" color="#000" size="4" id="rtext"
+          onload="this.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);" 
+          onclick="this.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);">
+        <i>Clicca per copiare il URL della pagina!</i> <br>
+		<marquee behavior="scroll" direction="down" scrollamount="7" hspace="50" vspace="50"><center>&darr; &darr; &darr;</center></marquee>
+    </font>
+
+    <script type="text/javascript">
+        document.getElementById('rtext').style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+    </script>
+
+
+<br>
 <button onmouseover="this.style.filter='invert(1)';" onmouseout="this.style.filter='none';" title="Condividi il portale web!" id="share" style="background-color: LightGreen; color: ForestGreen; border-radius: 64px; font-size: 48px; font-style: bold; padding: 24px; border-width: 8px; border-color: Chartreuse;">&#127760;</button>
 
 <br>
@@ -1073,13 +1157,21 @@ typewriter.typeString('<font size="7" color="#DBA901" face="Segoe UI">Clicca sui
 
 <p>&#32;</p>
 
-<center><font size="8" color="#FACC2E" face="Segoe UI Black">&#10240; &darr; &#10240; &darr; &#10240; &darr; &#10240;</font></center>
+<marquee behavior="scroll" direction="down" scrollamount="14" hspace="50" vspace="50"><center><font size="8" color="#FACC2E" face="Segoe UI Black"><center>&#10240; &darr; &#10240; &darr; &#10240; &darr; &#10240;</center></font></center></marquee>
 
 <p>&#32;</p>
 
 
 <hr align="center" size="5" width="100%" color="#D7DF01" noshade>
-<center><p>&#10240;</p></center>
+
+
+<!--<center><p>&#10240;</p></center>-->
+
+
+    <!-- Testo mozzafiato dal basso verso l'alto con font inline -->
+    <marquee behavior="scroll" direction="up" scrollamount="7" style="padding: 12px; font-family: 'Georgia', 'Arial', sans-serif; font-size: 24px; font-weight: bold; color: CornflowerBlue; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); width: 100%; height: 100px;">
+        &#128104;&#8205;&#127979; "Un sito che ti farà decollare nel mondo della conoscenza! Studia, esplora, e diventa protagonista del tuo apprendimento con ogni clic!" &#129489;&#8205;&#127979;
+    </marquee>
 
 <script type="text/javascript">
 
@@ -1087,7 +1179,7 @@ typewriter.typeString('<font size="7" color="#DBA901" face="Segoe UI">Clicca sui
 //document.write( '<p>&#10240;</p>' );
 
 
-document.write( '<p>&#10240;</p>' );
+//document.write( '<p>&#10240;</p>' );
 
 
 
@@ -1132,7 +1224,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 	
-<p>&#10240;</p>
 	
 <hr align="center" size="3" width="100%" color="DarkMagenta" noshade>
 
@@ -1141,8 +1232,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <hr align="center" size="3" width="100%" color="DarkMagenta" noshade>
 
 <br><br><br>
-<font face="Arial Black" color="DarkOrchid" size="6%"><strong>&#127979; Strumenti per la scuola &#127890;</strong></font><br>
-<font face="Arial Black" color="DarkMagenta" size="6%"><strong>&darr; &darr; &darr;</strong></font><br>
+<font face="Arial Black" color="DarkOrchid" size="6%"><strong>&#127979; <a class="blink"><blink><tt>Strumenti per la scuola</tt></blink></a> &#127890;</strong></font><br>
+<font face="Arial Black" color="DarkMagenta" size="6%"><strong><tt>&darr; &darr; &darr;</tt></strong></font><br>
 <br><br><font face="Arial Black" color="DarkMagenta" size="10%"><strong>
 
 <a onmouseover="bigTool(this)" onmouseout="normalTool(this)" href="Games/Alert#pwgen" title="Generatore di password" onclick="location.href = 'Games/Alert#pwgen';"> &#128273; </a>
@@ -1246,16 +1337,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <br></strong></font>
 <br><br><br>
-<font size="4%" color="DarkOrchid" face="Sans-serif">Nell&rsquo;era digitale, la pagina web rappresenta un faro di conoscenza, un ponte tra il sapere antico e le nuove generazioni. Gli strumenti inseriti non sono semplici applicazioni, sono le chiavi per aprire le porte dell&rsquo;immaginazione, per trasformare l&rsquo;informazione in sapere, il sapere in saggezza.<br>L&rsquo;apprendimento non &egrave; pi&ugrave; confinato tra le mura di una classe, ma si espande nell&rsquo;infinito spazio del web. Ogni strumento &egrave; un seme di curiosit&agrave; piantato nel fertile terreno della mente giovane, pronto a germogliare in idee, domande, soluzioni.<br>In questo giardino digitale, i ragazzi possono coltivare il loro intelletto, innaffiando ogni giorno la loro sete di conoscenza. L&rsquo;educazione si trasforma in un viaggio, non pi&ugrave; un obbligo ma un&rsquo;avventura entusiasmante, dove ogni risorsa &egrave; una tappa, ogni informazione un panorama da esplorare.<br>La creazione non &egrave; solo un sito, &egrave; una nave spaziale pronta a portare i giovani esploratori attraverso le galassie dell&rsquo;informazione. E in questo viaggio, l&rsquo;importante non &egrave; solo la destinazione, ma anche il percorso, perch&eacute; &egrave; nel processo di apprendimento che si forma il pensiero critico, si affina l&rsquo;intelletto e si forgia il carattere.<br><em>Si tratta di un inno all&rsquo;educazione, un promemoria che in un mondo in costante cambiamento, l&rsquo;unico vero strumento per navigarlo &egrave; l&rsquo;apprendimento continuo, la capacit&agrave; di adattarsi e di crescere. &Egrave; un tributo alla potenza dell&rsquo;istruzione, alla sua capacit&agrave; di elevare gli individui e, attraverso loro, l&rsquo;intera societ&agrave;.</em> <br> <strong>Nel tessuto dell&rsquo;istruzione moderna, le app inserite sono le fibre fondamentali che uniscono ogni istituto scolastico. Sono gli strumenti basilari, le risorse essenziali che ogni scuola richiede per garantire un apprendimento completo e inclusivo.</strong></font><br>
+<spacer type="vertical" size="30" height="50"><spacer type="horizontal" size="50" width="100">
+<spacer type="block" width="200" height="100"><font size="4%" color="DarkOrchid" face="Sans-serif">Nell&rsquo;era digitale, la pagina web rappresenta un faro di conoscenza, un ponte tra il sapere antico e le nuove generazioni. Gli strumenti inseriti non sono semplici applicazioni, sono le chiavi per aprire le porte dell&rsquo;immaginazione, per trasformare l&rsquo;informazione in sapere, il sapere in saggezza.<br>L&rsquo;apprendimento non &egrave; pi&ugrave; confinato tra le mura di una classe, ma si espande nell&rsquo;infinito spazio del web. Ogni strumento &egrave; un seme di curiosit&agrave; piantato nel fertile terreno della mente giovane, pronto a germogliare in idee, domande, soluzioni.<br>In questo giardino digitale, i ragazzi possono coltivare il loro intelletto, innaffiando ogni giorno la loro sete di conoscenza. L&rsquo;educazione si trasforma in un viaggio, non pi&ugrave; un <strike>obbligo</strike> ma un&rsquo;avventura entusiasmante, dove ogni risorsa &egrave; una tappa, ogni informazione un panorama da esplorare.<br>La creazione non &egrave; solo un sito, &egrave; una nave spaziale pronta a portare i giovani esploratori attraverso le galassie dell&rsquo;informazione. E in questo viaggio, l&rsquo;importante non &egrave; solo la destinazione, ma anche il percorso, perch&eacute; &egrave; nel processo di apprendimento che si forma il pensiero critico, si affina l&rsquo;intelletto e si forgia il carattere.<br><em>Si tratta di un inno all&rsquo;educazione, un promemoria che in un mondo in costante cambiamento, l&rsquo;unico vero strumento per navigarlo &egrave; l&rsquo;apprendimento continuo, la capacit&agrave; di adattarsi e di crescere. &Egrave; un tributo alla potenza dell&rsquo;istruzione, alla sua capacit&agrave; di elevare gli individui e, attraverso loro, l&rsquo;intera societ&agrave;.</em> <br> <strong>Nel tessuto dell&rsquo;istruzione moderna, le app inserite sono le fibre fondamentali che uniscono ogni istituto scolastico. Sono gli strumenti basilari, le risorse essenziali che ogni scuola richiede per garantire un apprendimento completo e inclusivo.</strong></font></spacer>
+</spacer></spacer>
+<br>
 <br><br><br>
 <hr align="center" size="3" width="100%" color="DarkMagenta" noshade>
 
 
 
-
-
 <p>&#10240;</p>
-<p>&#10240;</p>
+
+    <!-- Testo mozzafiato da sinistra a destra -->
+    <marquee behavior="scroll" direction="left" scrollamount="12" style="font-family: 'Georgia', serif; font-size: 48px; font-weight: bold; color: #1E90FF; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); width: 100%;">
+        &#127775; "Usa questo sito per la scuola, dove la conoscenza prende vita, l'innovazione è alla portata di tutti e ogni lezione diventa un'avventura mozzafiato!" &#128218;&#128640;
+    </marquee>
+
 <p>&#10240;</p>
 
 
@@ -1278,7 +1375,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>&#10240;</p>
 <hr align="center" size="3" width="100%" color="#31B404" noshade>
 
-<center><p>&#10240;</p></center>
+<!--<center><p>&#10240;</p></center>-->
+
+<p>&#10240;</p>
+    <!-- Testo mozzafiato da destra a sinistra -->
+    <marquee behavior="scroll" direction="right" scrollamount="12" style="font-family: 'Georgia', serif; font-size: 48px; font-weight: bold; color: #32CD32; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); width: 100%;">
+        &#128161; "Unisciti a noi in un viaggio educativo dove la creatività incontra la tecnologia, trasformando ogni giorno di scuola in un'opportunità unica per crescere!" &#127891;&#10024;
+    </marquee>
+<p>&#10240;</p>
 
 <hr align="center" size="4" width="100%" color="#642EFE" noshade>
 
@@ -1371,10 +1475,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<center><p>&#10240;</p></center>
+<!--<center><p>&#10240;</p></center>-->
+<br><br>
 
-<p>&#32;</p>
-<br>
+    <marquee behavior="alternate" direction="right" scrollamount="12" style="font-family: 'Georgia', serif; font-size: 22px; font-weight: bold; color: CadetBlue; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); width: 100%;">
+        &#127752; "Dove la magia dell'apprendimento incontra l'avventura! Ogni clic è un passo nel futuro, ogni lezione una nuova scoperta!" &#10024;
+    </marquee>
+
+
+<p>&#32;</p><br>
+
+
 <hr align="center" size="4" width="100%" color="#00FFBF" noshade>
 <br>
 <svg version="1.1" width="128pt" height="128pt" id="Patent" viewBox="0 0 512 512" xml:space="preserve"> <polygon style="fill:#FFBA00;" points="436.421,0 256.002,0 235.104,235.101 256.002,464.956 436.421,464.956 "/> <rect x="75.579" style="fill:#FDE09C;" width="180.423" height="464.959"/> <rect x="126.079" y="378.117" style="fill:#FF4F67;" width="110.864" height="31.347"/> <g>  <polygon style="fill:#FF8E00;" points="324.103,55.317 256.002,55.317 245.553,70.99 256.002,86.664 324.103,86.664  "/>  <polygon style="fill:#FF8E00;" points="385.922,110.019 256.002,110.019 245.553,125.693 256.002,141.366 385.922,141.366  "/>  <polygon style="fill:#FF8E00;" points="385.922,164.724 256.002,164.724 245.553,180.397 256.002,196.071 385.922,196.071  "/>  <polygon style="fill:#FF8E00;" points="385.922,219.428 256.002,219.428 245.553,235.101 256.002,250.774 385.922,250.774  "/>  <polygon style="fill:#FF8E00;" points="385.922,274.131 256.002,274.131 245.553,289.805 256.002,305.478 385.922,305.478  "/> </g> <g>  <rect x="126.079" y="274.129" style="fill:#FFBA00;" width="129.923" height="31.347"/>  <rect x="126.079" y="219.429" style="fill:#FFBA00;" width="129.923" height="31.347"/>  <rect x="126.079" y="164.728" style="fill:#FFBA00;" width="129.923" height="31.347"/>  <rect x="126.079" y="110.017" style="fill:#FFBA00;" width="129.923" height="31.347"/>  <rect x="187.895" y="55.317" style="fill:#FFBA00;" width="68.096" height="31.347"/> </g> <polygon style="fill:#FF4F67;" points="326.362,393.791 336.811,501.059 364.951,512 364.951,393.791 "/> <polygon style="fill:#FF6E7A;" points="308.671,393.791 308.671,512 336.811,501.059 336.811,393.791 "/> <path style="fill:#FF0F4D;" d="M336.811,344.507l-20.898,49.283l20.898,49.283c27.219,0,49.283-22.065,49.283-49.283  C386.093,366.572,364.029,344.507,336.811,344.507z"/> <path style="fill:#FF4F67;" d="M287.528,393.791c0,27.219,22.065,49.283,49.283,49.283v-98.566  C309.592,344.507,287.528,366.572,287.528,393.791z"/></svg>
@@ -1405,7 +1516,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <br><hr align="center" size="4" width="100%" color="#00FFBF" noshade>
 <br>
 
-<center><p>&#10240;</p></center>
+<br>
+    <marquee behavior="scroll" direction="down" scrollamount="3" style="font-family: 'Georgia', serif; font-size: 22px; font-weight: bold; color: DarkCyan; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); width: 100%;">
+        &#127744; "La conoscenza non è mai un arrivo, ma un eterno viaggio, ogni passo che compiamo è il riflesso di un'infinità di possibilità, un'odissea verso la verità." &#128214;
+    </marquee>
+<br><br>
+
+<!--<center><p>&#10240;</p></center>-->
 
 
 
