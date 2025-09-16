@@ -412,6 +412,134 @@ h1 {
 <!-- 
 a:link {text-decoration: none;}
 -->
+#Dictionary {
+    width: 100%;
+    max-width: 800px;
+    margin: 60px auto;
+    background: linear-gradient(135deg, #141E30, #243B55);
+    border-radius: 12px;
+    padding: 24px 32px;
+    color: #fff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    animation: fadeIn 0.8s ease;
+}
+
+/* Cornice libro */
+#Dictionary::before,
+#Dictionary::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 20px;
+    border-radius: 4px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #f9f9f9 0px,
+        #f9f9f9 2px,
+        #ececec 4px
+    );
+    box-shadow: inset -1px 0 2px rgba(0,0,0,0.2);
+    z-index: -1;
+}
+#Dictionary::before { left: -30px; transform: skewY(-1deg); }
+#Dictionary::after { right: -30px; transform: skewY(1deg); }
+
+/* Segnalibro rosso */
+#Dictionary header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(180deg, #ff2a2a, #b30000);
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Titolo */
+#Dictionary h1 {
+    font-size: 24px;
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Input ricerca */
+#Dictionary input[type="search"] {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Pulsanti */
+#Dictionary button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+#Dictionary button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Stato */
+#Dictionary .status { margin-top: 10px; color: #ddd; font-size: 14px; }
+#Dictionary .hint { color: #ff7b7b; font-size: 13px; }
+
+/* Risultati */
+#Dictionary ul#results {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+}
+#Dictionary li.item {
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+#Dictionary li.item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(20px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+
+#Dictionary #progress-container {
+  display:block;
+  height:10px;
+  background: rgba(255,255,255,0.1);
+  border-radius:8px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+#Dictionary #progress-bar {
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,#ff8a00,#e52e71);
+  transition: width 0.2s ease;
+}
+
+
 
 body, html{     
     -webkit-touch-callout: none;
@@ -1478,6 +1606,56 @@ document.write( '</a>' );
 </script>
 <p>&#10240;</p>
 
+<div id="Dictionary">
+  <header>
+  
+ <font size="8" style="font-size: 48px;">&#127470;&#127481;</font><br>
+  
+    <h1>&#128218; MKDictionary - Search &#128269;</h1>
+    <div style="font-size:13px;color:#ccc">
+      massimo 5 risultati — niente doppioni — sanitizzazione completa
+    </div>
+  </header>
+
+  <p class="small">
+    Carica "MKDictionary.txt" nella stessa cartella e premi 
+    <strong>Carica dal server</strong>, oppure carica il file dal tuo dispositivo con 
+    <strong>Scegli file</strong>.
+  </p>
+
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+    <input id="q" type="search" placeholder="Cerca... es. mac" autocomplete="off" disabled />
+    <button id="clearBtn" disabled>Pulisci</button>
+  </div>
+
+  <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+    <button id="loadServer">Carica dal server (./MKDictionary.txt)</button>
+    <input id="fileInput" type="file" accept=".txt" />
+  </div>
+
+  <div class="status" id="status">Nessun dizionario caricato.</div>
+  <div class="status hint" id="hint"></div>
+
+  <ul id="results" aria-live="polite"></ul>
+
+  <footer>
+    <div class="small">
+      Nota: la ricerca accetta solo lettere (inclusi caratteri latin-1/latin-ext con accenti),
+      numeri 0-9 e spazi. Altri caratteri verranno rifiutati per motivi di sicurezza.
+	  Gli apostrofi sono stati eliminati per protezione XSS.
+    </div>
+  </footer>
+  
+<div id="progress-container" style="width:100%;background:#444;border-radius:8px;overflow:hidden;margin:10px 0;display:none;">
+  <div id="progress-bar" style="width:0%;height:10px;background:#ff8a00;"></div>
+</div>
+
+  
+</div>
+
+
+<p>&#10240;</p>
+
 <!--<script type="text/javascript">
 /*
 function AlternateMirror() {
@@ -2029,6 +2207,359 @@ document.addEventListener('keyup', function(e) {
   if (e.repeat) return;
   stopLoop();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // ----- Configurazioni di sicurezza/search -----
+  // RegEx di validazione: solo lettere (ASCII + Latin-1/Latin-Extended), cifre e spazi
+  const VALID_QUERY_RE = /^[A-Za-z0-9\u00C0-\u017F ]+$/u;
+  // Massimo risultati mostrati
+  const MAX_RESULTS = 5;
+
+  // ----- Stato -----
+  let dictionarySet = null; // Set per deduplicare
+  let dictionaryLoaded = false;
+  let lastQuery = '';
+  let wordsArray = null; // array per ricerca più veloce
+
+  // ----- DOM -----
+  const qInput = document.getElementById('q');
+  const status = document.getElementById('status');
+  const hint = document.getElementById('hint');
+  const results = document.getElementById('results');
+  const loadServerBtn = document.getElementById('loadServer');
+  const fileInput = document.getElementById('fileInput');
+  const clearBtn = document.getElementById('clearBtn');
+
+  // ----- Utilities -----
+  function escapeHtml(s){
+    // Non usiamo mai innerHTML con input non trusted; teniamo comunque una funzione di escaping
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function enableSearch(){
+    qInput.disabled = false;
+    clearBtn.disabled = false;
+    qInput.focus();
+  }
+
+  function disableSearch(){
+    qInput.disabled = true;
+    clearBtn.disabled = true;
+  }
+
+  function showStatus(txt){ status.textContent = txt; }
+  function showHint(txt){ hint.textContent = txt; }
+
+  // Debounce helper
+  function debounce(fn, wait){
+    let t = null; return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn(...a), wait); };
+  }
+
+  // ----- Caricamento via fetch (streaming) -----
+  async function loadFromServer(){
+    try{
+      loadServerBtn.disabled = true;
+      showStatus('Connessione al server...');
+      const res = await fetch('./MKDictionary.txt');
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const contentLength = res.headers.get('Content-Length');
+      const total = contentLength ? Number(contentLength) : null;
+      showStatus('Download in corso' + (total? (' — ' + Math.round(total/1024) + ' KB attesi') : ''));
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let {value, done} = await reader.read();
+      let chunk = value ? decoder.decode(value, {stream:true}) : '';
+      let buffer = chunk;
+      dictionarySet = new Set();
+      let received = value ? value.length : 0;
+      while(!done){
+        ({value, done} = await reader.read());
+        if(value){
+          received += value.length;
+          chunk = decoder.decode(value, {stream:true});
+          buffer += chunk;
+
+          // Process lines in buffer
+          let lastNewline = buffer.lastIndexOf('\n');
+          if(lastNewline !== -1){
+            const lines = buffer.slice(0, lastNewline).split(/\r?\n/);
+            for(const line of lines){
+              const w = line.trim();
+              if(w) dictionarySet.add(w);
+            }
+            buffer = buffer.slice(lastNewline + 1);
+          }
+          if(total) showStatus('Scaricato ' + Math.round(received/1024) + ' KB di ' + Math.round(total/1024) + ' KB...');
+        }
+      }
+      // push remaining
+      if(buffer){
+        const lines = buffer.split(/\r?\n/);
+        for(const line of lines){ const w=line.trim(); if(w) dictionarySet.add(w); }
+      }
+
+      finalizeLoad();
+    }catch(err){
+      showStatus('Errore nel caricamento: ' + (err.message || err));
+      loadServerBtn.disabled = false;
+      dictionarySet = null;
+      dictionaryLoaded = false;
+      disableSearch();
+    }
+  }
+
+  // ----- Caricamento da file scelto (File input) -----
+  async function loadFromFile(file){
+  try{
+    showStatus('Lettura file: ' + file.name);
+    dictionarySet = new Set();
+    
+    // Controllo preventivo: verifica che il file sia di tipo testo
+    if (!file.type.startsWith('text/') && !file.name.endsWith('.txt')) {
+      throw new Error('Tipo file non supportato. Caricare solo file di testo (.txt)');
+    }
+
+    // Usa stream se disponibile
+    if(file.stream){
+      const reader = file.stream().getReader();
+      const decoder = new TextDecoder('utf-8');
+      let {value, done} = await reader.read();
+      let buffer = value ? decoder.decode(value, {stream:true}) : '';
+      while(!done){
+        ({value, done} = await reader.read());
+        if(value){
+          buffer += decoder.decode(value, {stream:true});
+          let lastNewline = buffer.lastIndexOf('\n');
+          if(lastNewline !== -1){
+            const lines = buffer.slice(0, lastNewline).split(/\r?\n/);
+            for(const line of lines){ 
+              const w = line.trim();
+              // Filtro principale: usa la stessa regex di validazione
+              if(w && VALID_QUERY_RE.test(w)) {
+                dictionarySet.add(w);
+              }
+            }
+            buffer = buffer.slice(lastNewline + 1);
+          }
+          showStatus('Caricamento in corso — dimensione: ' + Math.round(file.size/1024) + ' KB');
+        }
+      }
+      if(buffer){ 
+        const lines=buffer.split(/\r?\n/); 
+        for(const line of lines){ 
+          const w=line.trim(); 
+          if(w && VALID_QUERY_RE.test(w)) {
+            dictionarySet.add(w);
+          }
+        } 
+      }
+    }else{
+      // Fallback: read whole file
+      const text = await file.text();
+      const lines = text.split(/\r?\n/);
+      for(const line of lines){ 
+        const w=line.trim(); 
+        if(w && VALID_QUERY_RE.test(w)) {
+          dictionarySet.add(w);
+        }
+      } 
+    }
+
+    finalizeLoad();
+  }catch(err){
+    showStatus('Errore lettura file: ' + (err.message || err));
+    dictionarySet = null;
+    dictionaryLoaded = false;
+    disableSearch();
+    // Reset del file input
+    fileInput.value = '';
+  }
+}
+
+  function finalizeLoad(){
+    // Convert set to sorted array for faster prefix search (binary-friendly)
+    wordsArray = Array.from(dictionarySet);
+    // Normalizziamo: usiamo lowercase per confronto senza modificare l'originale
+    wordsArray.sort((a,b)=> a.localeCompare(b, 'it', {sensitivity:'base'}));
+    showStatus('Dizionario caricato: ' + wordsArray.length + ' voci (doppioni rimossi).');
+    dictionaryLoaded = true;
+    enableSearch();
+    loadServerBtn.disabled = false;
+  }
+
+  // ----- Search core -----
+  function searchPrefix(query){
+    // query è già validato e in lower
+    const q = query;
+    const resultsFound = [];
+    if(!q) return resultsFound;
+
+    // Usa ricerca lineare ma limitata a MAX_RESULTS. Con array ordinato e 28MB, è veloce.
+    // Alternativa: implementare binary search per primo indice che inizia con prefisso.
+
+    // Per performance su grandi dataset, implementiamo binary search per trovare il primo indice
+    let lo = 0, hi = wordsArray.length -1, first = -1;
+    while(lo <= hi){
+      const mid = (lo + hi) >> 1;
+      const val = wordsArray[mid].toLowerCase();
+      if(val.startsWith(q)){
+        first = mid; hi = mid -1; // cerca verso sinistra
+      }else if(val < q){
+        lo = mid +1;
+      }else{
+        hi = mid -1;
+      }
+    }
+    if(first === -1) return resultsFound;
+    // raccogli fino a MAX_RESULTS
+    for(let i = first; i < wordsArray.length && resultsFound.length < MAX_RESULTS; i++){
+      const val = wordsArray[i];
+      if(val.toLowerCase().startsWith(q)){
+        resultsFound.push(val);
+      }else break;
+    }
+    return resultsFound;
+  }
+
+  function renderResults(list, rawQuery){
+    // rawQuery usato solo per evidenziare la parte matching in modo sicuro
+    results.innerHTML = ''; // ok perchè non ci mettiamo HTML non-escaped
+    if(list.length === 0){
+      const li = document.createElement('li');
+      li.className = 'item';
+      li.textContent = 'Nessun risultato.';
+      results.appendChild(li);
+      return;
+    }
+
+    for(const word of list){
+      const li = document.createElement('li');
+      li.className = 'item';
+      // Per evitare XSS: NON usare innerHTML; costruiamo nodi Testuali.
+      const lower = word.toLowerCase();
+      const q = rawQuery.toLowerCase();
+      if(q && lower.startsWith(q)){
+        const matched = word.slice(0, q.length);
+        const rest = word.slice(q.length);
+        const strong = document.createElement('strong');
+        strong.textContent = matched; // textContent safe
+        li.appendChild(strong);
+        li.appendChild(document.createTextNode(rest));
+      }else{
+        li.textContent = word;
+      }
+      results.appendChild(li);
+    }
+  }
+
+
+  // ----- Event handlers -----
+  const doSearch = debounce(()=>{
+    const raw = qInput.value.trim();
+
+    // Controllo caratteri valido sempre, anche senza dizionario
+    if(!VALID_QUERY_RE.test(raw)){
+      const cleaned = raw.replace(/[^A-Za-z0-9\u00C0-\u017F ]+/gu, '');
+      qInput.value = cleaned;
+      showHint('Carattere non consentito. Usa solo lettere (inclusi accenti), numeri e spazi.');
+      results.innerHTML = '';
+      return;
+    }
+
+    if(raw === lastQuery) return; // evita ricerche duplicate
+    lastQuery = raw;
+
+    if(raw === ''){
+      renderResults([], ''); 
+      showHint(''); 
+      return; 
+    }
+
+    showHint('');
+    if(dictionaryLoaded){
+      const normalized = raw.toLowerCase();
+      const found = searchPrefix(normalized);
+      renderResults(found, raw);
+    }
+}, 150);
+
+
+
+  qInput.addEventListener('input', ()=>{ if(!dictionaryLoaded) return; doSearch(); });
+
+  loadServerBtn.addEventListener('click', ()=>{ disableSearch(); loadFromServer(); });
+  fileInput.addEventListener('change', (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(f){ disableSearch(); loadFromFile(f); }
+  });
+
+  clearBtn.addEventListener('click', ()=>{ qInput.value=''; results.innerHTML=''; showHint(''); qInput.focus(); });
+
+  // Disabilita ricerca finché non caricato
+  disableSearch();
+  
+  
+(function(){
+  const searchInput = document.querySelector("#Dictionary input[type='search']");
+  if(!searchInput) return;
+
+  // Blocca la propagazione degli eventi se ci sono altri sistemi di sicurezza
+  ["keydown","keypress","keyup","paste"].forEach(ev=>{
+    searchInput.addEventListener(ev, function(e){
+      e.stopImmediatePropagation();
+    }, true);
+  });
+
+  // Rimuove attributi che bloccano l'input
+  searchInput.removeAttribute("readonly");
+  searchInput.removeAttribute("disabled");
+
+  // --- Implementazione del controllo caratteri sempre attivo ---
+  const VALID_QUERY_RE = /^[A-Za-z0-9\u00C0-\u017F ]+$/u;
+
+  searchInput.addEventListener('input', function(){
+    const raw = searchInput.value;
+    if(!VALID_QUERY_RE.test(raw)){
+      const cleaned = raw.replace(/[^A-Za-z0-9\u00C0-\u017F ]+/gu, '');
+      searchInput.value = cleaned;
+      // Se vuoi, puoi mostrare un hint generico qui
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = 'Carattere non consentito. Usa solo lettere (inclusi accenti), numeri e spazi.';
+    } else {
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = '';
+    }
+  });
+})();
+
+  
+  
+  
+//SEPARATOR
+
+document.addEventListener('DOMContentLoaded', function() {
+    const targetElement = document.getElementById('Dictionary');
+    if (window.location.hash === '#Dictionary' && targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+
 </script>
 
 
