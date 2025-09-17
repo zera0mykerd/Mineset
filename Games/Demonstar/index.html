@@ -604,6 +604,249 @@ text-align: center;
 margin-bottom: 24px;
 }
 
+
+
+#MKCalendar_x7k9m2p {
+    font-family: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
+    max-width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    border-radius: 16px;
+    margin: 20px auto;
+    color: #e0e0ff;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.mkCal_header_q3n8v {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: radial-gradient(circle at top left, #1a1a40, #0f0c29);
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.6);
+    color: #e0e0ff;
+}
+
+.mkCal_nav_h5t2w {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.mkCal_btn_r8k4j {
+    background: linear-gradient(45deg, #6a0dad, #8a2be2);
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 0 0 4px #fff;
+    transition: 0.3s all ease;
+}
+
+.mkCal_btn_r8k4j:hover {
+    background: linear-gradient(45deg, #8a2be2, #da70d6);
+    box-shadow: 0 0 15px #da70d6, 0 0 25px #8a2be2;
+}
+
+.mkCal_btn_r8k4j:disabled {
+    background: #555;
+}
+
+.mkCal_month_y6p9s {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    min-width: 180px;
+    text-align: center;
+    text-shadow: 0 0 6px #8a2be2;
+}
+
+.mkCal_actions_v2m7n {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.mkCal_btn_secondary_w4x8z {
+    background: linear-gradient(45deg, #00ffff, #1e90ff);
+    color: #000;
+}
+
+.mkCal_btn_secondary_w4x8z:hover {
+    background: linear-gradient(45deg, #1e90ff, #00ffff);
+    box-shadow: 0 0 15px #00ffff, 0 0 25px #1e90ff;
+}
+
+.mkCal_table_k9n3p {
+    width: 100%;
+    border-collapse: collapse;
+    background: radial-gradient(circle at center, #1f1f2e, #0f0c29);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    color: #e0e0ff;
+}
+
+.mkCal_table_k9n3p th {
+    background: linear-gradient(90deg, #6a0dad, #8a2be2);
+    color: #fff;
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0 0 4px #fff;
+}
+
+.mkCal_table_k9n3p td {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 10px;
+    text-align: center;
+    height: 80px;
+    vertical-align: top;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.mkCal_table_k9n3p td:hover {
+    background: rgba(138, 43, 226, 0.2);
+    box-shadow: inset 0 0 10px rgba(138, 43, 226, 0.3);
+}
+
+.mkCal_day_num_t7w2q {
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.mkCal_note_p5k8m {
+    font-size: 11px;
+    color: #ffe0ff;
+    word-break: break-word;
+    padding: 3px;
+    background: rgba(138, 43, 226, 0.2);
+    border-radius: 5px;
+    margin-top: 4px;
+    text-shadow: 0 0 2px #fff;
+}
+
+.mkCal_today_x3v7n {
+    background: rgba(0, 255, 255, 0.2) !important;
+    box-shadow: 0 0 10px #00ffff !important;
+}
+
+.mkCal_other_month_j2n6w {
+    color: #888;
+    background: rgba(0,0,0,0.1);
+}
+
+.mkCal_modal_q8m4k {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+}
+
+.mkCal_modal_content_h7p3v {
+    background: linear-gradient(135deg, #1a1a40, #302b63);
+    margin: 15% auto;
+    padding: 25px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    color: #e0e0ff;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+}
+
+.mkCal_input_w9k2m {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #444;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.2);
+    color: #fff;
+}
+
+.mkCal_input_w9k2m:focus {
+    outline: none;
+    border-color: #00ffff;
+    box-shadow: 0 0 8px #00ffff;
+}
+
+.mkCal_modal_btns_v6n8j {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.mkCal_error_msg_t2w7p {
+    color: #ff3399;
+    font-size: 13px;
+    margin-top: 6px;
+    text-shadow: 0 0 2px #ff3399;
+}
+
+@media (max-width: 600px) {
+    .mkCal_table_k9n3p td {
+        height: 60px;
+        padding: 5px;
+        font-size: 12px;
+    }
+    
+    .mkCal_note_p5k8m {
+        font-size: 10px;
+    }
+    
+    .mkCal_btn_r8k4j {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .mkCal_month_y6p9s {
+        font-size: 16px;
+    }
+}
+
+@media print {
+    .mkCal_header_q3n8v {
+        background: none !important;
+        box-shadow: none !important;
+        color: black !important;
+        text-shadow: none !important;
+    }
+    
+    .mkCal_actions_v2m7n,
+    .mkCal_nav_h5t2w button {
+        display: none !important;
+    }
+    
+    .mkCal_table_k9n3p td {
+        height: 100px !important;
+    }
+    
+    #MKCalendar_x7k9m2p {
+        background: none !important;
+        color: black !important;
+    }
+}
+
+
+
 </style>
 
 <!-- Html Calc -->
@@ -719,6 +962,8 @@ text-align: center;
 	#noteblock {
 		transform: rotate(180deg);
 		/* transition: 1s; */
+		width: 100%;
+		height: auto;
 	}
 	
 	#noteblock:hover {
@@ -2554,22 +2799,18 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
 <svg version="1.1" width="128px" height="128px" id="BLackhole" x="0px" y="0px" viewBox="0 0 1667.917 1667.917" enable-background="new 0 0 1667.917 1667.917" xml:space="preserve"> <path d="M1279.377,694.375c-53.711,9.871-88.835,48.357-119.032,92.213c17.424-45.789,34.593-91.003,66.576-121.31  c33.395-30.123,85.9-41.197,139.328-10.758c92.016,56.957,146.041,193.018,267.709,168.685  c-166.696,16.835-199.67-268.894-385.587-204.056c-51.21,19.058-79.118,63.09-101.243,111.55  c9.198-48.118,18.255-95.642,44.531-131.096c27.369-35.095,76.96-55.66,135.344-34.789  c100.524,40.12,177.334,164.731,292.934,119.635c-161.271,45.531-243.293-230.148-415.163-133.999  c-47.108,27.653-66.948,75.852-80.326,127.409c0.707-48.987,1.374-97.357,21.082-136.81c21.154-39.869,66.815-68.06,127.246-57.762  c105.963,22.053,203.244,131.432,309.258,66.95c-150.887,72.826-279.594-184.383-432.124-59.871  c-41.612,35.432-52.774,86.369-56.989,139.488c-7.803-48.4-15.546-96.181-2.987-138.458c13.842-42.73,53.732-78.627,115.283-78.981  c108.105,3.314,223.007,94.122,316.185,12.231c-135.761,97.793-307.625-132.732-435.956,16.076  c-34.804,42.091-36.971,94.154-31.912,147.163c-16.083-46.298-31.995-91.981-26.975-135.734c6.154-44.068,38.81-86.68,99.817-97.8  c107.036-15.505,235.971,53.956,313.505-42.86c-116.886,120.049-325.786-77.646-426.541,91.535  c-26.969,47.502-20.052,99.165-5.859,150.505c-23.881-42.777-47.488-85-50.149-129.024c-1.592-44.468,23.168-92.102,81.318-113.647  c102.779-33.877,241.734,12.196,301.3-96.649c-94.266,138.523-334.326-19.899-404.166,164.212  c-18.31,51.46-2.531,101.133,20.359,149.224c-30.953-38.015-61.537-75.509-71.786-118.344  c-9.287-43.506,6.813-94.719,60.348-126.041c95.326-51.205,240.175-29.967,279.94-147.5  c-68.682,152.569-332.768,38.861-369.511,231.9c-9.097,53.865,15.066,100.04,45.959,143.422  c-37.069-32.027-73.688-63.627-91.242-104.081c-16.945-41.833-9.189-94.932,37.544-134.605  c84.905-66.921,231.33-71.269,250.073-193.871c-41.199,162.393-320.965,95.668-323.628,292.542  c0.393,54.322,31.859,95.447,69.537,132.643c-55.256-32.998-108.79-64.245-121.478-120.606c-2.485-10.712-2.702-23.123-2.711-22.708  c0.816-152.607,246.865-153.161,243.097-316.152c-11.013,148.038-224.82,145.799-264.258,277.333  c-14.516,49.467-4.464,102.767,42.134,148.745c13.677,13.411,29.404,25.457,45.921,36.844  c-60.217-22.93-118.465-44.397-140.77-97.753c-4.305-10.113-6.676-22.298-6.613-21.892  C613.012,237.067,855.228,193.823,823.205,33.958c14.867,147.684-196.09,182.64-212.085,319.008  c-5.719,51.355,13.547,102.047,67.323,139.168c15.8,10.833,33.38,19.966,51.624,28.311c-63.284-12.125-124.376-23.15-155.608-71.825  c-5.998-9.214-10.448-20.804-10.314-20.411c-51.48-143.846,179.651-228.222,120.306-380.23  c40.288,142.872-161.395,213.909-153.468,350.99c3.278,51.451,30.956,98.096,90.466,125.364  c17.441,7.925,36.34,13.866,55.756,18.916c-64.428-0.951-126.507-1.201-165.717-43.712c-7.507-8.033-13.902-18.674-13.702-18.31  c-75.671-132.722,137.29-255.95,52.452-395.344c64.489,133.715-121.801,238.675-90.188,372.307  c12.162,50.097,47.517,91.23,110.861,107.75c18.548,4.775,38.204,7.342,58.223,8.944c-63.625,10.251-124.817,20.792-170.819-14.269  c-8.787-6.607-16.933-15.976-16.673-15.653c-97.545-117.538,90.739-275.925-16.996-398.446  c86.707,120.462-78.495,256.222-24.167,382.312c20.675,47.22,62.634,81.593,127.887,86.862c19.099,1.482,38.892,0.601,58.866-1.295  c-60.869,21.142-119.289,42.141-170.676,15.603c-9.801-4.981-19.45-12.793-19.138-12.52  c-116.388-98.738,41.365-287.555-85.927-389.442c106.305,103.57-32.807,265.965,42.588,380.7  c28.561,42.913,75.85,69.477,141.028,63.335c19.064-1.857,38.411-6.166,57.765-11.505c-56.279,31.393-110.173,62.225-165.392,45.012  c-10.515-3.203-21.377-9.222-21.021-9.006c-131.787-77.042-9.179-290.357-152.247-368.604  c122.677,83.539,13.874,267.619,108.048,367.521c35.579,37.302,86.763,55.25,149.883,37.884c18.45-5.139,36.758-12.746,54.899-21.37  c-49.976,40.692-97.699,80.42-155.072,73.057c-10.911-1.328-22.653-5.369-22.266-5.219  c-143.151-52.985-59.47-284.357-213.942-336.567c135.323,60.97,60.131,261.143,170.226,343.175  c41.519,30.56,95.042,39.342,154.185,11.281c17.282-8.266,33.982-18.926,50.332-30.554c-42.143,48.744-82.237,96.14-140.008,98.85  c-10.978,0.587-23.241-1.354-22.834-1.273C197.349,837.409,239.841,595.058,78.526,570.447  c143.88,36.549,104.548,246.725,227.232,308.402c46.193,22.884,100.429,22.242,153.801-15.664  c15.58-11.139,30.18-24.544,44.273-38.846c-33.042,55.327-64.299,108.975-120.728,121.677c-10.708,2.484-23.124,2.702-22.708,2.711  C207.728,947.905,207.286,701.86,44.245,705.63c148.046,11.013,145.798,224.82,277.333,264.258  c49.47,14.517,102.768,4.462,148.745-42.134c13.409-13.675,25.459-29.412,36.854-45.943  c-22.934,60.224-44.401,118.484-97.764,140.792c-10.113,4.305-22.301,6.676-21.892,6.613  c-150.469,25.69-193.679-216.527-353.563-184.505c147.694-14.864,182.631,196.089,319.008,212.085  c51.236,5.706,101.98-13.449,139.168-67.323c10.834-15.801,19.968-33.385,28.314-51.631  c-12.126,63.286-23.151,124.381-71.828,155.616c-9.212,5.996-20.806,10.448-20.411,10.314  c-143.707,51.43-228.34-179.601-380.23-120.306c142.871-40.283,213.906,161.395,350.99,153.468  c51.452-3.278,98.097-30.956,125.364-90.466c7.923-17.437,13.865-36.345,18.918-55.777c-0.952,64.435-1.198,126.523-43.714,165.737  c-8.033,7.506-18.674,13.902-18.31,13.702c-132.586,75.59-256.072-137.213-395.345-52.452  c133.692-64.476,238.695,121.796,372.307,90.188c50.114-12.166,91.235-47.534,107.75-110.861  c4.775-18.546,7.343-38.184,8.946-58.176c10.255,63.602,20.792,124.768-14.27,170.772c-6.609,8.789-15.976,16.933-15.653,16.673  c-117.492,97.515-275.961-90.705-398.446,16.996c120.475-86.712,256.21,78.499,382.312,24.167  c47.225-20.677,81.593-62.638,86.862-127.887c1.482-19.102,0.6-38.897-1.295-58.873c21.142,60.871,42.141,119.295,15.603,170.683  c-4.985,9.809-12.792,19.449-12.52,19.138c-98.737,116.379-287.558-41.356-389.442,85.927  c103.585-106.321,265.948,32.819,380.7-42.588c42.935-28.575,69.474-75.875,63.335-141.028  c-1.857-19.064-6.166-38.411-11.506-57.766c31.393,56.28,62.224,110.175,45.012,165.392c-3.203,10.515-9.222,21.377-9.006,21.021  c-77.089,131.866-290.324,9.11-368.604,152.248c83.55-122.692,267.607-13.861,367.521-108.048  c37.375-35.649,55.223-86.862,37.884-149.883c-5.14-18.454-12.737-36.75-21.348-54.87c40.685,49.964,80.397,97.678,73.035,155.044  c-1.328,10.911-5.369,22.653-5.219,22.266c-52.974,143.137-284.359,59.483-336.567,213.942  c60.984-135.351,261.128-60.112,343.175-170.226c30.572-41.537,39.333-95.061,11.281-154.185  c-8.267-17.284-18.929-33.986-30.558-50.338c48.746,42.146,96.145,82.243,98.855,140.014c0.587,10.979-1.353,23.238-1.273,22.834  c-27.323,150.181-269.711,107.942-294.303,269.136c36.543-143.874,246.726-104.549,308.402-227.232  c22.884-46.191,22.243-100.427-15.664-153.801c-11.296-15.799-24.919-30.59-39.446-44.864  c42.144,25.168,83.785,49.956,108.099,86.749c23.953,38.258,25.537,91.889-13.6,139.08  c-72.03,80.676-215.443,110.348-212.609,234.35c12.368-167.054,299.469-149.98,267.912-344.295  c-9.874-53.729-48.384-88.86-92.261-119.064c45.793,17.418,91.021,34.589,121.357,66.608c30.232,33.515,41.1,86.059,10.758,139.328  c-56.958,92.017-193.02,146.039-168.685,267.709c-16.839-166.728,268.907-199.633,204.056-385.587  c-19.055-51.198-63.082-79.108-111.539-101.236c48.119,9.2,95.64,18.256,131.085,44.524c35.017,27.308,55.692,76.872,34.788,135.344  c-40.085,100.447-164.715,177.372-119.635,292.933c-45.511-161.201,230.106-243.367,133.999-415.163  c-27.659-47.117-75.874-66.957-127.445-80.335c48.992,0.706,97.372,1.372,136.846,21.091  c39.223,20.811,68.194,66.028,57.762,127.247c-22.032,105.861-131.405,203.289-66.95,309.258  c-72.836-150.889,184.394-279.592,59.871-432.124c-35.415-41.593-86.322-52.763-139.413-56.983  c48.363-7.81,96.11-15.55,138.384-2.993c42.339,13.715,78.622,53.277,78.981,115.283c-3.317,108.175-94.143,222.976-12.231,316.185  c-97.928-135.949,133.032-307.357-16.076-435.956c-42.103-34.814-94.177-36.973-147.196-31.907  c46.271-16.09,91.95-32.004,135.767-26.979c43.974,6.141,86.664,38.72,97.799,99.817c15.508,106.995-53.958,235.961,42.86,313.505  c-120.055-116.892,77.659-325.788-91.535-426.541c-47.494-26.966-99.141-20.059-150.465-5.872  c42.803-23.877,85.031-47.48,128.985-50.135c44.475-1.592,92.101,23.173,113.647,81.318c33.877,102.788-12.194,241.734,96.648,301.3  c-138.507-94.25,19.873-334.33-164.212-404.166c-51.475-18.315-101.158-2.524-149.259,20.376  c37.978-30.949,75.464-61.534,118.379-71.802c44.183-9.432,95.089,7.441,126.041,60.348c51.185,95.284,29.985,240.187,147.5,279.94  c-152.849-68.799-38.386-332.684-231.9-369.511c-53.862-9.097-100.044,15.073-143.434,45.971  c32.029-37.072,63.632-73.698,104.094-91.254c41.686-16.885,94.814-9.329,134.605,37.544  c66.963,84.961,71.233,231.324,193.871,250.074c-162.481-41.223-95.56-320.964-292.542-323.628  c-54.606,0.394-95.881,32.198-133.238,70.145c25.113-42.072,49.873-83.62,86.631-107.908c37.72-23.617,91.357-25.982,139.08,13.6  c80.623,71.971,110.378,215.446,234.35,212.609C1456.594,949.917,1473.719,662.813,1279.377,694.375z"/> </svg> 
 <br>
 
+  <!--</a>-->  <!--<a title="&#128221; | &#120016;&#120031;&#120031;&#120036;&#120029;&#120035;&#120024; | &#9997;&#65039;">-->
 
-<div id="writernote">
+<div id="writernote" style="width: 80%;">
 <details>
   <summary id="appunti">
-  <!--<a title="&#128221; | &#120016;&#120031;&#120031;&#120036;&#120029;&#120035;&#120024; | &#9997;&#65039;">-->
   <div id="noteblock"><svg class="noteblocker" height="96px" width="96px" viewBox="0 0 412.50284 524.99922"> <defs class="noteblocker" id="defs4"> <pattern class="noteblocker" id="Wavywhite" width="30.066020" patternUnits="userSpaceOnUse" height="5.1805778"> <path class="noteblocker" class="noteblocker" id="path5594" d="m7.597 0.061c-2.518-0.248-4.941 0.241-7.607 1.727v1.273c2.783-1.63 5.183-2.009 7.482-1.781 2.298 0.228 4.497 1.081 6.781 1.938 4.567 1.713 9.551 3.458 15.813-0.157l-0.004-1.273c-6.44 3.709-10.816 1.982-15.371 0.273-2.278-0.854-4.576-1.75-7.094-2z" fill="#fff"/> </pattern> </defs> <g class="noteblocker" id="layer1" transform="translate(-165.8 -263.68)"> <g class="noteblocker" id="g7669"> <g class="noteblocker" id="g6020" transform="translate(.0000059595)"> <g class="noteblocker" id="g5775" transform="matrix(1.0014 0 0 .99954 156.7 269.52)"> <g class="noteblocker" id="g4165" stroke="#000" stroke-width="2.9985" stroke-miterlimit="8" fill="none"> <path class="noteblocker" id="rect4136" d="m60.694 10.66c-19.465 0-35.135 15.46-35.135 34.663l0.0069 294.68 189.47 162.4 189.47-162.4c0.003-0.17982 0.007-294.68 0.007-294.68 0-19.204-15.67-34.663-35.135-34.663z"/> <path class="noteblocker" id="path4143" d="m25.84 47.925h378.4"/> <path class="noteblocker" id="path4145" d="m26.058 339.26 23.805-9.9634 21.573 11.565 30.004-15.479 24.301 15.301 28.268-14.233 24.301 11.387 32.731-13.166 28.268 11.031 23.309-11.387 36.203 11.743 14.382-11.387 16.366 5.6934 12.894-5.3375 19.837 8.5401 18.349-7.4726 21.821 13.878"/> <path class="noteblocker" id="path4149" d="m25.84 65.572h378.4"/> </g> <g class="noteblocker" id="g4171" fill-rule="evenodd"> <path class="noteblocker" id="path4200" fill="#b66860" d="m215.17 11.32c-51.265 0.07403-102.53-0.16185-153.8 0.21366-9.5356-0.48197-18.507 3.4433-23.959 8.8569-7.3425 7.0112-10.771 15.758-11.066 24.453-1.5023 2.809 2.1475 2.3658 4.8475 2.2905h372.26c0.78002-6.3964-1.1438-13.138-4.6579-19.115-4.0872-6.9057-11.356-13.345-21.473-15.862-10.592-0.99473-21.347-0.56228-32.006-0.76718-43.384-0.12645-86.77-0.05426-130.15-0.07097z"/> <path class="noteblocker" id="path4202" fill="#caccca" d="m26.268 48.641v16.022c7.6262 0.36801 15.647 0.0525 23.425 0.15769h353.77c0.51228-5.2627 0.0725-10.808 0.21977-16.179-7.6262-0.36802-15.647-0.0525-23.425-0.15769h-353.77l-0.21977 0.15769z"/> <path class="noteblocker" id="path4206" stroke="#000" stroke-width="2.9985" stroke-miterlimit="8" d="m152.03 448.49h126.53"/> <path class="noteblocker" id="path4208" d="m201.99 449.03c-15.75 0.10297-31.551-0.12877-47.271 0.31722 2.1766 2.607 5.6025 4.9423 8.2469 7.4404 17.278 14.811 34.41 29.719 52.009 44.333 2.516-1.4346 4.4336-3.6927 6.7288-5.4161 18.111-15.441 36.271-30.856 54.171-46.423-2.5245-0.59774-6.0253-0.0873-8.9269-0.25709-21.653 0.002-43.305-0.004-64.958 0.005z"/> <path class="noteblocker" id="path4210" fill="#efdaa8" d="m262.48 325.34c-7.947 3.3693-15.31 7.4938-23.211 10.888-9.6199-3.3444-18.667-7.5682-28.511-10.553-10.992 4.0017-21.585 8.6033-32.486 12.754-8.1458-3.4913-15.767-7.6952-24.193-10.803-9.8777 4.1034-18.902 9.2183-28.396 13.765-8.2119-4.9817-16.153-10.356-24.429-15.177-10.065 5.039-19.72 10.544-30.182 15.152-7.2333-3.6193-13.951-7.861-21.572-11.034-7.7321 2.8672-15.269 6.0915-22.588 9.4792 1.8428 2.2724 4.9019 4.3099 7.1941 6.4896 39.289 33.839 78.722 67.592 118.09 101.38 41.762 0.14191 83.599 0.0391 125.39 0.0865 38.401-32.713 76.633-65.599 114.89-98.426 3.3581-3.0374 7.1978-5.9207 10.281-9.0511-3.073-1.1415-5.8485-3.234-8.6456-4.8516-4.6227-2.7966-8.988-5.955-13.767-8.5373l-18.132 7.366c-6.5104-2.7233-12.849-5.7702-19.495-8.2692-4.7081 1.1569-8.7412 3.6061-13.283 4.8632-5.4347-1.5957-10.617-3.758-16.048-5.2682-5.0362 3.5508-9.4656 7.6734-14.679 11.016-12.084-3.6406-23.768-7.992-36.057-11.263-0.0562-0.008-0.114-0.01-0.17102-0.006z"/> <path class="noteblocker" id="path4173" fill="#fcc709" d="m26.185 66.008v272.3c8.2821-2.1674 15.739-7.0531 24.329-9.0708 7.1735 3.4398 13.95 7.555 21.052 11.023 10.038-5.0782 19.957-10.28 29.927-15.429 8.184 4.9053 15.786 10.493 24.5 14.855 9.6831-3.9764 18.45-9.431 27.979-13.329 8.4535 3.2701 16.295 7.4297 24.526 10.917 10.901-4.1911 21.45-9.0723 32.716-12.666 9.6807 3.1063 18.754 7.1959 28.196 10.564 7.728-3.7729 15.456-7.5458 23.184-11.319 12.068 3.7096 23.971 8.1344 36.197 11.358 5.1566-3.4433 9.5498-7.4287 14.315-11.144 5.5443 1.6951 10.807 4.4581 16.617 5.4789 4.6876-1.1567 8.9996-4.2801 13.46-4.6595 6.5039 2.4447 12.637 6.1215 19.482 7.7886 6.2202-1.9098 11.994-5.132 18.158-6.7382 7.4729 4.1503 14.055 9.0964 21.664 13.112 1.0808-6.2828 0.28209-13.224 0.63554-19.734 0.53402-84.434 0.25235-168.87 0.32518-253.31-59.035-0.36765-118.46-0.0525-177.65-0.15756h-199.39l-0.21959 0.15756z"/> <path class="noteblocker" id="path5769" fill="url(#Wavywhite)" d="m26.268 48.641v16.022c7.6262 0.36801 15.647 0.0525 23.425 0.15769h353.77c0.51228-5.2627 0.0725-10.808 0.21977-16.179-7.6262-0.36802-15.647-0.0525-23.425-0.15769h-353.77l-0.21977 0.15769z"/> </g> </g> <g class="noteblocker" id="flowRoot4954" transform="translate(149.3 244.04)" fill-rule="evenodd"> <path class="noteblocker" id="path5030" d="m57.751 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5032" d="m72.751 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5034" d="m87.751 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5036" d="m102.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5038" d="m117.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5040" d="m132.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5042" d="m147.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5044" d="m162.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5046" d="m177.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5048" d="m192.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5050" d="m207.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5052" d="m222.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5054" d="m237.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5056" d="m252.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5058" d="m267.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5060" d="m282.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5062" d="m297.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5064" d="m312.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5066" d="m327.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5068" d="m342.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5070" d="m357.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5072" d="m372.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5074" d="m387.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5076" d="m402.75 145.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5078" d="m57.751 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5080" d="m72.751 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5082" d="m87.751 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5084" d="m102.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5086" d="m117.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5088" d="m132.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5090" d="m147.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5092" d="m162.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5094" d="m177.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5096" d="m192.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5098" d="m207.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5100" d="m222.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5102" d="m237.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5104" d="m252.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5106" d="m267.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5108" d="m282.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5110" d="m297.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5112" d="m312.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5114" d="m327.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5116" d="m342.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5118" d="m357.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5120" d="m372.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5122" d="m387.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5124" d="m402.75 170.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5126" d="m57.751 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5128" d="m72.751 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5130" d="m87.751 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5132" d="m102.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5134" d="m117.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5136" d="m132.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5138" d="m147.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5140" d="m162.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5142" d="m177.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5144" d="m192.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5146" d="m207.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5148" d="m222.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5150" d="m237.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5152" d="m252.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5154" d="m267.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5156" d="m282.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5158" d="m297.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5160" d="m312.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5162" d="m327.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5164" d="m342.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5166" d="m357.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5168" d="m372.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5170" d="m387.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5172" d="m402.75 195.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5174" d="m57.751 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5176" d="m72.751 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5178" d="m87.751 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5180" d="m102.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5182" d="m117.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5184" d="m132.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5186" d="m147.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5188" d="m162.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5190" d="m177.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5192" d="m192.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5194" d="m207.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5196" d="m222.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5198" d="m237.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5200" d="m252.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5202" d="m267.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5204" d="m282.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5206" d="m297.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5208" d="m312.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5210" d="m327.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5212" d="m342.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5214" d="m357.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5216" d="m372.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5218" d="m387.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5220" d="m402.75 220.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5222" d="m57.751 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5224" d="m72.751 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5226" d="m87.751 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5228" d="m102.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5230" d="m117.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5232" d="m132.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5234" d="m147.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5236" d="m162.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5238" d="m177.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5240" d="m192.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5242" d="m207.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5244" d="m222.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5246" d="m237.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5248" d="m252.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5250" d="m267.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5252" d="m282.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5254" d="m297.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5256" d="m312.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5258" d="m327.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5260" d="m342.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5262" d="m357.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5264" d="m372.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5266" d="m387.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5268" d="m402.75 245.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5270" d="m57.751 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5272" d="m72.751 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5274" d="m87.751 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5276" d="m102.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5278" d="m117.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5280" d="m132.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5282" d="m147.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5284" d="m162.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5286" d="m177.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5288" d="m192.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5290" d="m207.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5292" d="m222.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5294" d="m237.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5296" d="m252.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5298" d="m267.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5300" d="m282.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5302" d="m297.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5304" d="m312.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5306" d="m327.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5308" d="m342.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5310" d="m357.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5312" d="m372.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5314" d="m387.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5316" d="m402.75 270.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5318" d="m57.751 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5320" d="m72.751 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5322" d="m87.751 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5324" d="m102.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5326" d="m117.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5328" d="m132.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5330" d="m147.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5332" d="m162.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5334" d="m177.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5336" d="m192.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5338" d="m207.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5340" d="m222.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5342" d="m237.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5344" d="m252.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5346" d="m267.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5348" d="m282.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5350" d="m297.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5352" d="m312.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5354" d="m327.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5356" d="m342.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5358" d="m357.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5360" d="m372.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5362" d="m387.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5364" d="m402.75 295.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5366" d="m57.751 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5368" d="m72.751 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5370" d="m87.751 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5372" d="m102.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5374" d="m117.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5376" d="m132.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5378" d="m147.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5380" d="m162.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5382" d="m177.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5384" d="m192.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5386" d="m207.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5388" d="m222.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5390" d="m237.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5392" d="m252.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5394" d="m267.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5396" d="m282.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5398" d="m297.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5400" d="m312.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5402" d="m327.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5404" d="m342.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5406" d="m357.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5408" d="m372.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5410" d="m387.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5412" d="m402.75 320.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5414" d="m57.751 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5416" d="m72.751 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5418" d="m87.751 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5420" d="m102.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5422" d="m117.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5424" d="m132.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5426" d="m147.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5428" d="m162.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5430" d="m177.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5432" d="m192.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5434" d="m207.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5436" d="m222.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5438" d="m237.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5440" d="m252.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5442" d="m267.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5444" d="m282.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5446" d="m297.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5448" d="m312.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5450" d="m327.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5452" d="m342.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5454" d="m357.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5456" d="m372.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5458" d="m387.75 345.29h-15v-1.6667h15v1.6667z"/> <path class="noteblocker" id="path5460" d="m402.75 345.29h-15v-1.6667h15v1.6667z"/> </g> </g> <g class="noteblocker" id="g4397" font-family="Arial" fill-rule="evenodd"> <flowRoot class="noteblocker" id="flowRoot4962" style="text-anchor:middle;text-align:center" xml:space="preserve" font-size="22.5px" line-height="125%"><flowRegion id="flowRegion4964"><rect id="rect4966" y="149.24" x="30.306" height="160.62" width="264.67"/></flowRegion><flowPara id="flowPara4968"/></flowRoot> <g class="noteblocker" id="g4403" font-size="20px"> <flowRoot class="noteblocker" id="flowRoot4970" style="text-anchor:middle;text-align:center" xml:space="preserve" line-height="125%"><flowRegion id="flowRegion4972"><rect id="rect4974" y="145.2" x="37.378" height="179.82" width="363.67"/></flowRegion><flowPara id="flowPara4976"/></flowRoot> <flowRoot class="noteblocker" id="flowRoot4978" style="text-anchor:middle;text-align:center" xml:space="preserve" line-height="125%"><flowRegion id="flowRegion4980"><rect id="rect4982" y="149.24" x="37.378" height="114.15" width="131.33"/></flowRegion><flowPara id="flowPara4984"/></flowRoot> <flowRoot class="noteblocker" id="flowRoot4986" style="text-anchor:middle;text-align:center" xml:space="preserve" line-height="125%"><flowRegion id="flowRegion4988"><rect id="rect4990" y="143.17" x="39.398" height="171.74" width="315.18"/></flowRegion><flowPara id="flowPara4992"/></flowRoot> <flowRoot class="noteblocker" id="flowRoot4994" style="text-anchor:middle;text-align:center" xml:space="preserve" line-height="125%"><flowRegion id="flowRegion4996"><rect id="rect4998" y="122.97" x="37.378" height="165.67" width="356.6"/></flowRegion><flowPara id="flowPara5000"/></flowRoot> </g> </g> <g class="noteblocker" id="text6016" fill-rule="evenodd"> <path class="noteblocker" id="path7661" style="" d="m310.76 368.26v-29.167h2.9167q5.3084 7.0584 8.4292 12.017 3.15 4.9292 4.6959 9.3042 1.5458-4.375 4.6667-9.3042 3.15-4.9584 8.4584-12.017h2.9167v29.167h-2.9167v-24.063q-4.6084 5.775-8.1376 12.833-3.5292 7.0292-3.5292 11.229h-2.9167q0-4.2-3.5292-11.229-3.5292-7.0584-8.1376-12.833v24.063h-2.9167z"/> <path class="noteblocker" id="path7663" style="" d="m363.29 365.35v2.9167h-14.583v-29.167h14.583v2.9167h-11.667v8.7501h8.7501v2.9167h-8.7501v11.667h11.667z"/> <path class="noteblocker" id="path7665" style="" d="m369.14 368.26v-29.167h2.9167q5.3084 7.0584 8.4292 12.017 3.15 4.9292 4.6959 9.3042 1.5458-4.375 4.6667-9.3042 3.15-4.9584 8.4584-12.017h2.9167v29.167h-2.9167v-24.063q-4.6084 5.775-8.1376 12.833-3.5292 7.0292-3.5292 11.229h-2.9167q0-4.2-3.5292-11.229-3.5292-7.0584-8.1376-12.833v24.063h-2.9167z"/> <path class="noteblocker" id="path7667" style="" d="m410 350.76v5.8334q0 0.70001 1.8667 2.8584 1.8958 2.1292 4.025 4.025 2.1584 1.8667 2.8584 1.8667h2.9167q0.7 0 2.8292-1.8667 2.1583-1.8958 4.025-4.025 1.8958-2.1584 1.8958-2.8584v-5.8334q0-0.70001-1.8958-2.8292-1.8667-2.1583-4.025-4.025-2.1292-1.8958-2.8292-1.8958h-2.9167q-0.7 0-2.8584 1.8958-2.1292 1.8667-4.025 4.025-1.8667 2.1292-1.8667 2.8292zm-2.9167 5.8334v-5.8334q0-1.05 1.4-3.0334 1.4292-2.0125 3.325-3.9084 1.8958-1.8958 3.8792-3.2959 2.0125-1.4292 3.0625-1.4292h2.9167q1.05 0 3.0334 1.4292 2.0125 1.4 3.9084 3.2959 1.8958 1.8958 3.2959 3.9084 1.4292 1.9833 1.4292 3.0334v5.8334q0 1.05-1.4292 3.0625-1.4 1.9834-3.2959 3.8792-1.8958 1.8958-3.9084 3.325-1.9833 1.4-3.0334 1.4h-2.9167q-1.05 0-3.0625-1.4-1.9833-1.4292-3.8792-3.325-1.8958-1.8958-3.325-3.8792-1.4-2.0125-1.4-3.0625z"/> </g> </g> </g> </svg> </div>
-  <!--</a>-->
   </summary>
   <textarea maxlength="2097152" style="background-color: PaleGoldenRod; font-size: 12px; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACVJREFUOE9j3NmdVs9AAWCkQC9Y66gBo2Ewmg4guYjyvEBpdgYAcB4EY4ly84QAAAAASUVORK5CYII=');" rows="16" cols="64" id="note" placeholder="Scrivi qui i tuoi bellissimi appunti... Ricorda che per&ograve; non &egrave; possibile inserire nell&apos;area di testo caratteri speciali UNICODE in alcun modo per motivi di sicurezza, la punteggiatura di base &egrave; possibile essere essere rispettata, inclusi caratteri accentati." autofocus></textarea><br>
   <br>
   <button class="notebutton" onclick="saveNote()">&#128190; - Salva appunti</button>
-  <!-- 
-  <font>| | |</font>
-  <button media="print" class="notebutton" onclick="printNote()">&#128424;&#65039; - Stampa appunti</button> 
-  XSS VULNERABLE
-  -->
+  <button class="notebutton" onclick="importNote()">&#128466;&#65039; - Importa Note</button>
+  <button class="notebutton" onclick="printNotes()">&#128424;&#65039; -Stampa Note</button>
   <br>
   <br><font size="4" color="#7FFF00" face="Arial">| <kbd>CTRL + C</kbd> = <mark>copia</mark> | <kbd>CTRL + V</kbd> = <mark>incolla</mark></font><br>
 <br><svg width="48px" height="48px" viewBox="0 0 24.00 24.00" fill="#00FF00" stroke="#00FF00" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><path d="M21.15,5.89A11,11,0,1,0,23,12,11,11,0,0,0,21.15,5.89ZM19.48,17A9,9,0,1,1,21,12,9,9,0,0,1,19.48,17ZM15,11V9A3,3,0,0,0,9,9v2a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V12a1,1,0,0,0-1-1Zm-1.5,0h-3V9a1.5,1.5,0,0,1,3,0Z"/><path d="M19.29,15.06a.93.93,0,0,0,.18-.26.78.78,0,0,0,.07-.31.78.78,0,0,0-.07-.3.93.93,0,0,0-.18-.26.76.76,0,0,0-.28-.15.8.8,0,0,0-.31,0,.7.7,0,0,0-.37.11.77.77,0,0,0-.26.28H16v.7h2.05a.69.69,0,0,0,.27.29.73.73,0,0,0,.38.11.8.8,0,0,0,.31,0A.76.76,0,0,0,19.29,15.06ZM19,14.49a.27.27,0,0,1-.28.28.22.22,0,0,1-.11,0,.28.28,0,0,1-.15-.15.22.22,0,0,1,0-.11.27.27,0,0,1,.28-.28.2.2,0,0,1,.11,0,.21.21,0,0,1,.1.06.18.18,0,0,1,.06.09.2.2,0,0,1,0,.11Zm.26-3.94,1.32-1.32q.12.39.21.78l-1.25,1.24H17.79V12h-.7v-1.4ZM9.8,19h.69v1.14l-.55.56c-.26-.06-.52-.13-.77-.21l.63-.63Zm2.56-.61V17h-.7v1.43a.8.8,0,0,0-.29.26.7.7,0,0,0-.11.37.75.75,0,0,0,.75.75.87.87,0,0,0,.28,0,.82.82,0,0,0,.25-.16.78.78,0,0,0,.16-.24.67.67,0,0,0,.06-.28.74.74,0,0,0-.4-.65Zm-.15.83a.28.28,0,0,1-.48-.2.27.27,0,0,1,.28-.28.28.28,0,0,1,.2.48ZM21,12a1.49,1.49,0,0,1,0,.21l-1,1H16v-.7h3.7L21,11.25C21,11.5,21,11.75,21,12ZM14.84,8.09l3-3a5.8,5.8,0,0,1,.52.47L15,8.93A2.65,2.65,0,0,0,14.84,8.09ZM5.3,13.75a.82.82,0,0,0-.31,0,.76.76,0,0,0-.28.15.93.93,0,0,0-.18.26.78.78,0,0,0-.07.3.78.78,0,0,0,.07.31.93.93,0,0,0,.18.26.76.76,0,0,0,.28.15.82.82,0,0,0,.31,0,.74.74,0,0,0,.65-.4H8v-.7H6a.76.76,0,0,0-.3-.29A.79.79,0,0,0,5.3,13.75Zm.18.92a.27.27,0,0,1-.19.08l-.1,0a.21.21,0,0,1-.1-.06A.18.18,0,0,1,5,14.58a.2.2,0,0,1,0-.11.43.43,0,0,1,0-.11l.06-.09.09-.06.11,0a.28.28,0,0,1,.2.48Zm11.61,1.76L18.69,18c-.16.17-.33.32-.5.48l-1.38-1.37H15.65v1.54l1,1c-.21.12-.43.22-.65.33L15,19V17.13H14v1.44h-.7V17H15a.92.92,0,0,0,.89-.57ZM12,4.1a.75.75,0,0,0-.53.22.71.71,0,0,0-.22.52.81.81,0,0,0,.12.38.78.78,0,0,0,.29.28V6L12,6a2.2,2.2,0,0,1,.36,0V5.5a.78.78,0,0,0,.29-.28.7.7,0,0,0,.11-.38.79.79,0,0,0-.24-.52A.82.82,0,0,0,12,4.1Zm.23.9a.29.29,0,0,1-.12.1.22.22,0,0,1-.16,0,.24.24,0,0,1-.22-.22.22.22,0,0,1,0-.16.29.29,0,0,1,.1-.12A.3.3,0,0,1,12,4.56l.11,0,.09.06.06.09a.43.43,0,0,1,0,.11A.3.3,0,0,1,12.23,5ZM9,17h.05v1.94L8,20c-.22-.11-.42-.23-.63-.35l1-1V17.52l-.81.82H5.93v.28a3.58,3.58,0,0,1-.29-.26c-.15-.14-.27-.31-.41-.47v-.25h2l1-1a.56.56,0,0,0,0,.08A1,1,0,0,0,9,17ZM4.18,13.21,3,12.05c0-.33,0-.65,0-1l1.44,1.43H8v.7Zm1-4.8a.73.73,0,0,0,.2.35.72.72,0,0,0,1,0,.75.75,0,0,0,0-1,.75.75,0,0,0-.72-.19l-.9-.93c-.14.18-.27.36-.39.55L5.23,8A.71.71,0,0,0,5.22,8.41ZM5.74,8a.29.29,0,0,1,.38,0,.28.28,0,0,1,.08.2.27.27,0,0,1-.08.19.29.29,0,0,1-.38,0,.35.35,0,0,1-.06-.19A.36.36,0,0,1,5.74,8Zm2.35,8.41H4.43l-.16.16c-.12-.21-.24-.41-.34-.63l.23-.23H8V16A1.16,1.16,0,0,0,8.09,16.41ZM14,19.25,15,20.3v.15c-.23.08-.46.17-.7.23V20.6l-.86-.86ZM17.67,8a.68.68,0,0,0-.35.17.75.75,0,0,0,0,1,.75.75,0,0,0,1,0,.79.79,0,0,0,.18-.72l1.15-1.15c-.12-.19-.24-.38-.37-.56L18.05,8A.7.7,0,0,0,17.67,8Zm.46.68a.22.22,0,0,1,0,.11.41.41,0,0,1-.05.09.24.24,0,0,1-.09.06.31.31,0,0,1-.22,0,.24.24,0,0,1-.09-.06.29.29,0,0,1,0-.38.32.32,0,0,1,.19-.07.31.31,0,0,1,.18.07.27.27,0,0,1,.07.08A.38.38,0,0,1,18.13,8.66Zm1.36,7.17.42.42c-.12.21-.23.43-.36.63L19,16.32ZM4.72,11,3.33,9.63c.07-.24.15-.49.24-.73L5,10.32H6.44V9.67h.7V11Zm9.62-6.71h-.7V3.16c.24,0,.47.1.7.16Zm.56,1.51a.53.53,0,0,0,.28.07.72.72,0,0,0,.32-.08.67.67,0,0,0,.26-.21.73.73,0,0,0,.14-.31.74.74,0,0,0,0-.33l.7-.7-.65-.35-.54.54a.74.74,0,0,0-.39,0,.63.63,0,0,0-.33.2.75.75,0,0,0,0,1A.58.58,0,0,0,14.9,5.82ZM15,5a.29.29,0,0,1,.38,0,.24.24,0,0,1,.06.09.31.31,0,0,1,0,.22.24.24,0,0,1-.06.09.29.29,0,0,1-.38,0A.29.29,0,0,1,15,5ZM9.36,3.4l1.46,1.47V6.25a3,3,0,0,0-.7.43V5.15L8.65,3.67A7.46,7.46,0,0,1,9.36,3.4ZM8.12,5.51l-1-1c.2-.13.41-.24.63-.36l.9.9ZM6.19,5.15l3,3A3.36,3.36,0,0,0,9,9L5.68,5.62C5.84,5.46,6,5.3,6.19,5.15Z" opacity="0.5"/><rect width="24" height="24" fill="none"/></g></svg><br>
@@ -2577,8 +2818,15 @@ document.write( '<a title\="Ricarica la pagina (Fare click qui).\" onclick=\"loc
 </details>
 </div>
 
+<br><br>
+<br><br>
+
+    <div id="MKCalendar_x7k9m2p">
+        <div id="MKCalendar"></div>
+    </div>
 
 
+<br><br>
 <br><br>
 
 
@@ -3583,102 +3831,233 @@ setInterval(draw, 33);
 // <button onclick="saveNote()">Salva</button>
 // <button onclick="printNote()">Stampa</button>
 
+
 function sanitizeHTML(text) {
-  var element = document.createElement("div");
-  element.innerHTML = text;
-  return element.textContent || element.innerText;
+    var element = document.createElement("div");
+    element.innerHTML = text;
+    return element.textContent || element.innerText;
 }
 
 function validateData(data) {
-  // Elenco dei caratteri consentiti (lettere, numeri, spazi, punteggiatura comune)
-  var allowedCharacters = /^[a-zA-ZàèéìòùÄÖÜäöüß0-9\s.,?!]+$/;
-
-  return allowedCharacters.test(data);
+    // Elenco dei caratteri consentiti (lettere, numeri, spazi, punteggiatura comune)
+    var allowedCharacters = /^[a-zA-ZàèéìòùÄÖÜäöüß0-9\s.,?!]+$/;
+    return allowedCharacters.test(data);
 }
 
+function escapeHtml(text) {
+    var map = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+        "/": "&#x2F;",
+        "`": "&#x60;",
+        "=": "&#x3D;"
+    };
+    return text.replace(/[&<>"'=\/`]/g, function(m) { return map[m]; });
+}
+
+// Protezione immediata per paste/copy nel textarea
+document.getElementById("note").addEventListener("input", function() {
+    if (this.value.length > 2097152) {
+        alert("⚠ Il contenuto supera il limite massimo di 2 MB e verrà troncato. ⚠");
+        this.value = this.value.substring(0, 2097152);
+    }
+});
 
 function saveNote() {
-  var noteContent = document.getElementById("note").value;
+    var noteContent = document.getElementById("note").value;
 
-  // Validazione dei dati
-  if (!validateData(noteContent)) {
-    alert("⚠ Dati non validi, ricorda che non si devono inserire caratteri speciali troppo fuorvianti, altrimenti scatta il sistema di sicurezza per evitare il Cross-Site Scripting (XSS)! ⚠");
-    return;
-  }
-
-  // Sanitizzazione del contenuto HTML
-  var sanitizedContent = sanitizeHTML(noteContent);
-
-  // Escape dei caratteri speciali HTML
-  var escapedContent = escapeHtml(sanitizedContent);
-
-  var textFile = null;
-
-  // Crea un oggetto File
-  try {
-    textFile = new Blob([escapedContent], { type: "text/plain" });
-  } catch (e) {
-    // Internet Explorer support
-    window.BlobBuilder =
-      window.BlobBuilder ||
-      window.WebKitBlobBuilder ||
-      window.MozBlobBuilder ||
-      window.MSBlobBuilder;
-
-    if (window.BlobBuilder) {
-      var bb = new BlobBuilder();
-      bb.append(escapedContent);
-      textFile = bb.getBlob("text/plain");
-    } else {
-      alert("Il tuo browser non supporta questa funzionalità.");
-      return;
+    // Doppia protezione: controllo lunghezza
+    if (noteContent.length > 2097152) {
+        alert("⚠ Il contenuto supera il limite massimo di 2 MB e verrà troncato. ⚠");
+        noteContent = noteContent.substring(0, 2097152);
+        document.getElementById("note").value = noteContent;
     }
-  }
 
-  // Crea un elemento <a> per il download del file
-  var downloadLink = document.createElement("a");
-  downloadLink.download = "appunti.txt";
-  downloadLink.innerHTML = "Scarica file";
+    if (!validateData(noteContent)) {
+        alert("⚠ Dati non validi, ricorda che non si devono inserire caratteri speciali troppo fuorvianti! ⚠");
+        return;
+    }
+    var sanitizedContent = sanitizeHTML(noteContent);
+    var escapedContent = escapeHtml(sanitizedContent);
+    var textFile = null;
 
-  // Aggiungi l'URL del file come attributo href invece di impostare innerHTML
-  downloadLink.href = window.URL.createObjectURL(textFile);
+    try {
+        textFile = new Blob([escapedContent], { type: "text/plain" });
+    } catch (e) {
+        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+        if (window.BlobBuilder) {
+            var bb = new BlobBuilder();
+            bb.append(escapedContent);
+            textFile = bb.getBlob("text/plain");
+        } else {
+            alert("Il tuo browser non supporta questa funzionalità.");
+            return;
+        }
+    }
 
-  // Rimuovi l'elemento dopo il download
-  downloadLink.onclick = function () {
-    setTimeout(function () {
-      window.URL.revokeObjectURL(textFile);
-      downloadLink.remove();
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "MKappunti.txt";
+    downloadLink.href = window.URL.createObjectURL(textFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    setTimeout(function() {
+        window.URL.revokeObjectURL(textFile);
+        downloadLink.remove();
     }, 100);
-  };
-
-  // Aggiungi l'elemento al DOM
-  downloadLink.style.display = "none";
-  document.body.appendChild(downloadLink);
-
-  // Simula il click sul link per avviare il download
-  downloadLink.click();
 }
 
-// Funzione per l'escape dei caratteri speciali HTML
+// Nuova funzione: importa note da file .txt
+function importNote() {
+    var fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".txt";
+    fileInput.onchange = function(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var content = e.target.result;
+
+            // Doppia protezione: controllo lunghezza
+            if ((document.getElementById("note").value.length + content.length) > 2097152) {
+                alert("⚠ Il file importato supera il limite massimo di 2 MB e verrà troncato. ⚠");
+                content = content.substring(0, 2097152 - document.getElementById("note").value.length);
+            }
+
+            // Sanitizzazione e validazione
+            var sanitized = sanitizeHTML(content);
+            if (!validateData(sanitized)) {
+                alert("⚠ Il file contiene dati non validi! ⚠");
+                return;
+            }
+            document.getElementById("note").value += (document.getElementById("note").value ? "\n" : "") + sanitized;
+        };
+        reader.readAsText(file, "UTF-8");
+    };
+    fileInput.click();
+}
+
+// Nuova funzione: stampa note
+function printNotes() {
+    var content = sanitizeHTML(document.getElementById("note").value);
+    if (!validateData(content)) {
+        alert("⚠ Alcuni dati non sono validi e non possono essere stampati! ⚠");
+        return;
+    }
+    var printWindow = window.open("", "", "width=600,height=400");
+    printWindow.document.write("<pre>" + escapeHtml(content) + "</pre>");
+    printWindow.document.close();
+    printWindow.print();
+}
+
+
+/*
+function sanitizeHTML(text) {
+    var element = document.createElement("div");
+    element.innerHTML = text;
+    return element.textContent || element.innerText;
+}
+
+function validateData(data) {
+    // Elenco dei caratteri consentiti (lettere, numeri, spazi, punteggiatura comune)
+    var allowedCharacters = /^[a-zA-ZàèéìòùÄÖÜäöüß0-9\s.,?!]+$/;
+    return allowedCharacters.test(data);
+}
+
 function escapeHtml(text) {
-  var map = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-    "/": "&#x2F;",
-    "`": "&#x60;",
-    "=": "&#x3D;",
-  };
-  return text.replace(/[&<>"'`=\/]/g, function (m) {
-    return map[m];
-  });
+    var map = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+        "/": "&#x2F;",
+        "`": "&#x60;",
+        "=": "&#x3D;"
+    };
+    return text.replace(/[&<>"'=\/`]/g, function(m) { return map[m]; });
 }
 
+function saveNote() {
+    var noteContent = document.getElementById("note").value;
+    if (!validateData(noteContent)) {
+        alert("⚠ Dati non validi, ricorda che non si devono inserire caratteri speciali troppo fuorvianti! ⚠");
+        return;
+    }
+    var sanitizedContent = sanitizeHTML(noteContent);
+    var escapedContent = escapeHtml(sanitizedContent);
+    var textFile = null;
 
+    try {
+        textFile = new Blob([escapedContent], { type: "text/plain" });
+    } catch (e) {
+        window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+        if (window.BlobBuilder) {
+            var bb = new BlobBuilder();
+            bb.append(escapedContent);
+            textFile = bb.getBlob("text/plain");
+        } else {
+            alert("Il tuo browser non supporta questa funzionalità.");
+            return;
+        }
+    }
 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "MKappunti.txt";
+    downloadLink.href = window.URL.createObjectURL(textFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    setTimeout(function() {
+        window.URL.revokeObjectURL(textFile);
+        downloadLink.remove();
+    }, 100);
+}
 
+// Nuova funzione: importa note da file .txt
+function importNote() {
+    var fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".txt";
+    fileInput.onchange = function(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var content = e.target.result;
+            // Sanitizzazione e validazione
+            var sanitized = sanitizeHTML(content);
+            if (!validateData(sanitized)) {
+                alert("⚠ Il file contiene dati non validi! ⚠");
+                return;
+            }
+            document.getElementById("note").value += (document.getElementById("note").value ? "\n" : "") + sanitized;
+        };
+        reader.readAsText(file, "UTF-8");
+    };
+    fileInput.click();
+}
+
+// Nuova funzione: stampa note
+function printNotes() {
+    var content = sanitizeHTML(document.getElementById("note").value);
+    if (!validateData(content)) {
+        alert("⚠ Alcuni dati non sono validi e non possono essere stampati! ⚠");
+        return;
+    }
+    var printWindow = window.open("", "", "width=600,height=400");
+    printWindow.document.write("<pre>" + escapeHtml(content) + "</pre>");
+    printWindow.document.close();
+    printWindow.print();
+}
+
+*/
 
 
 
@@ -4214,6 +4593,500 @@ function checkCollision(missile, object) {
     missileRect.bottom > objectRect.top
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+ (function() {
+        'use strict';
+        
+        // Funzioni di sicurezza XSS
+        const secUtils_h8k3m9p = {
+            escapeHtml: function(str) {
+                if (typeof str !== 'string') return '';
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            },
+            
+            sanitizeInput: function(input) {
+                if (typeof input !== 'string') return '';
+                // Rimuove caratteri pericolosi e tag HTML
+                return input.replace(/[<>\"\'&]/g, '')
+                           .substring(0, 32)
+                           .trim();
+            },
+            
+            validateNote: function(note) {
+                if (typeof note !== 'string') return false;
+                if (note.length > 32) return false;
+                // Controlla per pattern sospetti
+                if (/<script|javascript:|on\w+=/i.test(note)) return false;
+                return true;
+            },
+            
+            sanitizeJSON: function(jsonStr) {
+                try {
+                    const data = JSON.parse(jsonStr);
+                    const sanitized = {};
+                    for (let key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            const cleanKey = this.sanitizeInput(key);
+                            const cleanValue = this.sanitizeInput(data[key]);
+                            if (cleanKey && this.validateNote(cleanValue)) {
+                                sanitized[cleanKey] = cleanValue;
+                            }
+                        }
+                    }
+                    return sanitized;
+                } catch (e) {
+                    return {};
+                }
+            }
+        };
+        
+        // Variabili principali
+        let currentDate_w7k9m2x = new Date();
+        let calendarNotes_p3n8v5q = {};
+        let touchTimer_h5t2w9k = null;
+        let lastTap_r8k4j3m = 0;
+        
+        const monthNames_y6p9s2n = [
+            'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
+            'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
+        ];
+        
+        const dayNames_v2m7n8p = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+        
+        // Funzione per ottenere la chiave della data
+        function getDateKey_w4x8z9k(date) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+        
+        // Funzione per creare il calendario
+        function createCalendar_k9n3p7m() {
+            const container = document.getElementById('MKCalendar');
+            container.innerHTML = '';
+            
+            // Header
+            const header = document.createElement('div');
+            header.className = 'mkCal_header_q3n8v';
+            
+            // Navigazione
+            const nav = document.createElement('div');
+            nav.className = 'mkCal_nav_h5t2w';
+            
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'mkCal_btn_r8k4j';
+            prevBtn.textContent = '◀';
+            prevBtn.onclick = () => changeMonth_t7w2q3n(-1);
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'mkCal_btn_r8k4j';
+            nextBtn.textContent = '▶';
+            nextBtn.onclick = () => changeMonth_t7w2q3n(1);
+            
+            const monthLabel = document.createElement('div');
+            monthLabel.className = 'mkCal_month_y6p9s';
+            monthLabel.textContent = `${monthNames_y6p9s2n[currentDate_w7k9m2x.getMonth()]} ${currentDate_w7k9m2x.getFullYear()}`;
+            
+            nav.appendChild(prevBtn);
+            nav.appendChild(monthLabel);
+            nav.appendChild(nextBtn);
+            
+            // Azioni
+            const actions = document.createElement('div');
+            actions.className = 'mkCal_actions_v2m7n';
+            
+            const saveBtn = document.createElement('button');
+            saveBtn.className = 'mkCal_btn_r8k4j mkCal_btn_secondary_w4x8z';
+            saveBtn.textContent = '💾 Salva';
+            saveBtn.onclick = saveNotes_p5k8m9j;
+            saveBtn.style.display = 'none';
+			
+            const loadBtn = document.createElement('button');
+            loadBtn.className = 'mkCal_btn_r8k4j mkCal_btn_secondary_w4x8z';
+            loadBtn.textContent = '📁 Carica';
+            loadBtn.onclick = loadNotes_x3v7n2k;
+			loadBtn.style.display = 'none';
+            
+            const exportBtn = document.createElement('button');
+            exportBtn.className = 'mkCal_btn_r8k4j mkCal_btn_secondary_w4x8z';
+            exportBtn.textContent = '📤 Esporta';
+            exportBtn.onclick = exportNotes_j2n6w8m;
+            
+            const importBtn = document.createElement('button');
+            importBtn.className = 'mkCal_btn_r8k4j mkCal_btn_secondary_w4x8z';
+            importBtn.textContent = '📥 Importa';
+            importBtn.onclick = importNotes_q8m4k7p;
+            
+            const printBtn = document.createElement('button');
+            printBtn.className = 'mkCal_btn_r8k4j mkCal_btn_secondary_w4x8z';
+            printBtn.textContent = '🖨️ Stampa';
+            printBtn.onclick = printCalendar_h7p3v9n;
+            
+            actions.appendChild(saveBtn);
+            actions.appendChild(loadBtn);
+            actions.appendChild(exportBtn);
+            actions.appendChild(importBtn);
+            actions.appendChild(printBtn);
+            
+            header.appendChild(nav);
+            header.appendChild(actions);
+            container.appendChild(header);
+            
+            // Tabella calendario
+            const table = document.createElement('table');
+            table.className = 'mkCal_table_k9n3p';
+            
+            // Header giorni
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            dayNames_v2m7n8p.forEach(day => {
+                const th = document.createElement('th');
+                th.textContent = day;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Body calendario
+            const tbody = document.createElement('tbody');
+            const firstDay = new Date(currentDate_w7k9m2x.getFullYear(), currentDate_w7k9m2x.getMonth(), 1);
+            const lastDay = new Date(currentDate_w7k9m2x.getFullYear(), currentDate_w7k9m2x.getMonth() + 1, 0);
+            const prevLastDay = new Date(currentDate_w7k9m2x.getFullYear(), currentDate_w7k9m2x.getMonth(), 0);
+            
+            let startDate = firstDay.getDay();
+            let endDate = lastDay.getDate();
+            let prevEndDate = prevLastDay.getDate();
+            
+            const today = new Date();
+            let date = 1;
+            let nextDate = 1;
+            
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement('tr');
+                
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('td');
+                    
+                    if (i === 0 && j < startDate) {
+                        // Giorni del mese precedente
+                        const prevDate = prevEndDate - startDate + j + 1;
+                        cell.className = 'mkCal_other_month_j2n6w';
+                        cell.innerHTML = `<div class="mkCal_day_num_t7w2q">${prevDate}</div>`;
+                    } else if (date > endDate) {
+                        // Giorni del mese successivo
+                        cell.className = 'mkCal_other_month_j2n6w';
+                        cell.innerHTML = `<div class="mkCal_day_num_t7w2q">${nextDate}</div>`;
+                        nextDate++;
+                    } else {
+                        // Giorni del mese corrente
+                        const currentDateObj = new Date(currentDate_w7k9m2x.getFullYear(), currentDate_w7k9m2x.getMonth(), date);
+                        const dateKey = getDateKey_w4x8z9k(currentDateObj);
+                        
+                        if (today.getDate() === date && today.getMonth() === currentDate_w7k9m2x.getMonth() && 
+                            today.getFullYear() === currentDate_w7k9m2x.getFullYear()) {
+                            cell.className = 'mkCal_today_x3v7n';
+                        }
+                        
+                        let cellContent = `<div class="mkCal_day_num_t7w2q">${date}</div>`;
+                        if (calendarNotes_p3n8v5q[dateKey]) {
+                            const safeNote = secUtils_h8k3m9p.escapeHtml(calendarNotes_p3n8v5q[dateKey]);
+                            cellContent += `<div class="mkCal_note_p5k8m">${safeNote}</div>`;
+                        }
+                        cell.innerHTML = cellContent;
+                        
+                        // Event handlers
+                        cell.dataset.date = dateKey;
+                        
+                        // Desktop double click
+                        cell.addEventListener('dblclick', function(e) {
+                            e.preventDefault();
+                            showNoteModal_w9k2m7p(dateKey);
+                        });
+                        
+                        // Mobile double tap
+                        cell.addEventListener('touchend', function(e) {
+                            e.preventDefault();
+                            const currentTime = new Date().getTime();
+                            const tapLength = currentTime - lastTap_r8k4j3m;
+                            
+                            if (tapLength < 500 && tapLength > 0) {
+                                showNoteModal_w9k2m7p(dateKey);
+                            }
+                            lastTap_r8k4j3m = currentTime;
+                        });
+                        
+                        date++;
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                tbody.appendChild(row);
+                
+                if (date > endDate) {
+                    break;
+                }
+            }
+            
+            table.appendChild(tbody);
+            container.appendChild(table);
+			
+			
+	// Titolo principale in basso
+	const mainTitle = document.createElement('h1');
+	mainTitle.textContent = '\uD83D\uDDD3 MKCalendar \uD83D\uDDD3';
+	mainTitle.style.textAlign = 'center';
+	mainTitle.style.marginTop = '20px';
+	mainTitle.style.fontSize = '1.8em';
+	container.appendChild(mainTitle);
+
+            
+            // Modal
+            createModal_v6n8j3k();
+        }
+        
+        // Funzione per creare il modal
+        function createModal_v6n8j3k() {
+            const existingModal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            const modal = document.createElement('div');
+            modal.id = 'mkCal_modal_unique_t2w7p8n';
+            modal.className = 'mkCal_modal_q8m4k';
+            
+            const content = document.createElement('div');
+            content.className = 'mkCal_modal_content_h7p3v';
+            
+            content.innerHTML = `
+                <h3>Aggiungi/Modifica Nota</h3>
+                <input type="text" id="mkCal_note_input_h3n9k7m" class="mkCal_input_w9k2m" 
+                       placeholder="Inserisci nota (max 32 caratteri)" maxlength="32">
+                <div id="mkCal_error_v8m2k9p" class="mkCal_error_msg_t2w7p"></div>
+                <div class="mkCal_modal_btns_v6n8j">
+                    <button class="mkCal_btn_r8k4j" onclick="window.mkCalFuncs_p7n3k8m.cancelNote()">Annulla</button>
+                    <button class="mkCal_btn_r8k4j" onclick="window.mkCalFuncs_p7n3k8m.deleteNote()">Elimina</button>
+                    <button class="mkCal_btn_r8k4j" onclick="window.mkCalFuncs_p7n3k8m.saveNote()">Salva</button>
+                </div>
+            `;
+            
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+        }
+        
+        // Funzione per mostrare il modal
+        function showNoteModal_w9k2m7p(dateKey) {
+            const modal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+            const input = document.getElementById('mkCal_note_input_h3n9k7m');
+            const error = document.getElementById('mkCal_error_v8m2k9p');
+            
+            modal.style.display = 'block';
+            modal.dataset.dateKey = dateKey;
+            
+            if (calendarNotes_p3n8v5q[dateKey]) {
+                input.value = calendarNotes_p3n8v5q[dateKey];
+            } else {
+                input.value = '';
+            }
+            
+            error.textContent = '';
+            input.focus();
+        }
+        
+        // Funzioni globali per il modal
+        window.mkCalFuncs_p7n3k8m = {
+            saveNote: function() {
+                const modal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+                const input = document.getElementById('mkCal_note_input_h3n9k7m');
+                const error = document.getElementById('mkCal_error_v8m2k9p');
+                const dateKey = modal.dataset.dateKey;
+                
+                const note = secUtils_h8k3m9p.sanitizeInput(input.value);
+                
+                if (!secUtils_h8k3m9p.validateNote(note)) {
+                    error.textContent = 'Nota non valida. Usa solo testo semplice (max 32 caratteri).';
+                    return;
+                }
+                
+                if (note) {
+                    calendarNotes_p3n8v5q[dateKey] = note;
+                } else {
+                    delete calendarNotes_p3n8v5q[dateKey];
+                }
+                
+                modal.style.display = 'none';
+                createCalendar_k9n3p7m();
+            },
+            
+            deleteNote: function() {
+                const modal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+                const dateKey = modal.dataset.dateKey;
+                
+                delete calendarNotes_p3n8v5q[dateKey];
+                modal.style.display = 'none';
+                createCalendar_k9n3p7m();
+            },
+            
+            cancelNote: function() {
+                const modal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+                modal.style.display = 'none';
+            }
+        };
+        
+        // Funzione per cambiare mese
+        function changeMonth_t7w2q3n(direction) {
+            currentDate_w7k9m2x.setMonth(currentDate_w7k9m2x.getMonth() + direction);
+            createCalendar_k9n3p7m();
+        }
+        
+        // Funzione per salvare le note
+        function saveNotes_p5k8m9j() {
+            try {
+                const sanitizedNotes = {};
+                for (let key in calendarNotes_p3n8v5q) {
+                    const cleanKey = secUtils_h8k3m9p.sanitizeInput(key);
+                    const cleanValue = secUtils_h8k3m9p.sanitizeInput(calendarNotes_p3n8v5q[key]);
+                    if (cleanKey && secUtils_h8k3m9p.validateNote(cleanValue)) {
+                        sanitizedNotes[cleanKey] = cleanValue;
+                    }
+                }
+                
+                const dataStr = JSON.stringify(sanitizedNotes);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `calendar_notes_${new Date().getTime()}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                alert('Note salvate con successo!');
+            } catch (e) {
+                alert('Errore nel salvataggio delle note.');
+            }
+        }
+        
+        // Funzione per caricare le note
+        function loadNotes_x3v7n2k() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        const sanitizedData = secUtils_h8k3m9p.sanitizeJSON(event.target.result);
+                        calendarNotes_p3n8v5q = sanitizedData;
+                        createCalendar_k9n3p7m();
+                        alert('Note caricate con successo!');
+                    } catch (error) {
+                        alert('Errore nel caricamento del file. Assicurati che sia un file JSON valido.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+        
+        // Funzione per esportare le note
+        function exportNotes_j2n6w8m() {
+            saveNotes_p5k8m9j();
+        }
+        
+        // Funzione per importare le note
+        function importNotes_q8m4k7p() {
+            loadNotes_x3v7n2k();
+        }
+        
+        // Funzione per stampare il calendario
+       function printCalendar_h7p3v9n() {
+    const container = document.getElementById('MKCalendar');
+    if (!container) return;
+
+    // Crea una finestra temporanea per la stampa
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    if (!printWindow) return;
+
+    // Clona il contenuto del calendario
+    const safeContent = container.cloneNode(true);
+
+    // Rimuove elementi non necessari
+    safeContent.querySelectorAll('.mkCal_btn_secondary_w4x8z').forEach(btn => btn.remove());
+
+    // Doppia sanificazione: trasforma tutto il testo in HTML sicuro
+    function deepSanitize(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const div = document.createElement('div');
+            div.textContent = node.nodeValue;
+            node.nodeValue = div.innerHTML; // sostituisce testo con versione sicura
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            node.childNodes.forEach(child => deepSanitize(child));
+        }
+    }
+    deepSanitize(safeContent);
+
+    // Scrive nel nuovo documento
+    printWindow.document.open();
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Stampa Calendario</title>
+            <style type="text/css">
+                body { font-family: sans-serif; margin: 20px; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #ccc; padding: 5px; text-align: center; }
+                .mkCal_today_x3v7n { background-color: #ffeeba; }
+                .mkCal_other_month_j2n6w { color: #aaa; }
+                .mkCal_note_p5k8m { font-size: 0.85em; margin-top: 2px; }
+            </style>
+        </head>
+        <body>
+            ${safeContent.innerHTML}
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+
+    // Focus e stampa
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+}
+
+        
+        // Chiusura modal cliccando fuori
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('mkCal_modal_unique_t2w7p8n');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Inizializzazione
+        createCalendar_k9n3p7m();
+    })();
+
+
+
+
 
 
 
