@@ -1823,21 +1823,946 @@ document.write( '<p>&#10240;</p>' );
 </script>
 
 <br>
+<br>
+<br>
+
+
+
+
+<div style="text-align: center; display: flex; justify-content: center; align-items: center;" id="graphine"></div>
+
+<script type="text/javascript">
+
+
+(() => {
+
+  const container = document.getElementById('graphine');
+  if (!container) throw new Error('Elemento #graphine non trovato.');
+  const shadow = container.attachShadow({ mode: 'closed' });
+
+  const template = document.createElement('template');
+  template.innerHTML = `
+  <style type="text/css">
+    :host { all: initial; }
+
+    /* Animazione gradiente bianco-grigio */
+    @keyframes softGradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .graphine-root {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 1300px;
+      border-radius: 16px;
+      padding: 18px;
+      color: #222;
+      background: linear-gradient(-45deg, #ffffff, #f5f5f5, #ebebeb, #e0e0e0, #d6d6d6, #cccccc, #b0b0b0, #999999, #777777, #555555, #444444, #333333);
+      background-size: 800% 800%;
+      animation: softGradientShift 13s ease infinite;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15), inset 0 1px rgba(255,255,255,0.1);
+      transition: all 0.4s ease;
+    }
+
+    .graphine-controls {
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      margin-bottom:16px;
+    }
+
+    .graphine-select, .graphine-btn {
+      padding:12px 16px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.1);
+      background:rgba(255,255,255,0.85);
+      color:#222;
+      font-weight:500;
+      transition:all 0.25s ease;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .graphine-select:hover, .graphine-btn:hover {
+      background:rgba(255,255,255,0.95);
+      transform:translateY(-2px);
+      box-shadow:0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .graphine-inputs {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+
+    .graphine-data-list {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      max-height:260px;
+      overflow:auto;
+      padding:10px;
+      border:1px dashed rgba(0,0,0,0.1);
+      border-radius:10px;
+      background:rgba(255,255,255,0.8);
+      margin-right:12px;
+      min-width:250px;
+    }
+
+    .graphine-data-item input[type="text"], 
+    .graphine-data-item input[type="number"] {
+      padding:10px;
+      border-radius:6px;
+      border:1px solid rgba(0,0,0,0.1);
+      background:rgba(255,255,255,0.9);
+      color:#222;
+      transition:all .2s ease;
+    }
+
+    .graphine-data-item input:focus {
+      border-color:#4da3ff;
+      box-shadow:0 0 8px rgba(77,163,255,0.4);
+      outline:none;
+    }
+
+    .graphine-canvas-wrap {
+      position:relative;
+      flex:1 1 560px;
+      min-height:360px;
+      border-radius:12px;
+      overflow:hidden;
+      display:flex;
+      background:rgba(255,255,255,0.85);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    svg {
+      width:100%;
+      height:100%;
+      display:block;
+      user-select:none;
+    }
+
+    .graphine-tooltip {
+      position:absolute;
+      pointer-events:none;
+      padding:8px 12px;
+      background:rgba(34,34,34,0.9);
+      color:#fff;
+      border-radius:6px;
+      font-size:13px;
+      transform:translate(-50%,-120%);
+      white-space:nowrap;
+      z-index:10;
+      opacity:0;
+      transition:opacity .15s ease, transform .15s ease;
+      box-shadow:0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    .graphine-tooltip[aria-hidden="false"] {
+      opacity:1;
+      transform:translate(-50%,-140%);
+    }
+
+    .graphine-legend {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:14px;
+    }
+
+    .graphine-legend-item {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.85);
+      transition:all .25s ease;
+    }
+
+    .graphine-legend-item:hover {
+      background:rgba(255,255,255,0.95);
+      transform:scale(1.05);
+    }
+
+    .graphine-legend-swatch {
+      width:18px;
+      height:18px;
+      border-radius:4px;
+      border:1px solid rgba(0,0,0,0.1);
+    }
+
+    .graphine-small {
+      font-size:13px;
+      color:#555;
+    }
+
+    @media (max-width:640px){
+      .graphine-controls { flex-direction:column; align-items:stretch; }
+      .graphine-canvas-wrap { min-height:300px; }
+    }
+  </style>
+
+  <div class="graphine-root" role="application" aria-label="Graphine charting widget">
+  <h1>&#128200; MKGraphene &#128201;</h1>
+    <div class="graphine-controls" aria-hidden="false">
+      <label class="graphine-small" for="graphine-chart-type">Tipo grafico:</label>
+      <select id="graphine-chart-type" class="graphine-select" aria-label="Seleziona tipo di grafico">
+        <option value="bar">Grafico a barre (orizzontale)</option>
+        <option value="column">Grafico a colonne (verticale)</option>
+        <option value="pie">Grafico a torta</option>
+        <option value="donut">Grafico a ciambella</option>
+        <option value="line">Grafico a linee</option>
+        <option value="area">Grafico ad area</option>
+        <option value="scatter">Grafico a dispersione</option>
+        <option value="radar">Grafico radar</option>
+      </select>
+
+      <div class="graphine-inputs" aria-label="Dati del grafico">
+        <div class="graphine-data-list" id="graphine-data-list" role="list" aria-label="Lista di etichette e valori"></div>
+
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button id="graphine-add-row" class="graphine-btn" aria-label="Aggiungi riga">Aggiungi</button>
+          <button id="graphine-remove-row" class="graphine-btn" aria-label="Rimuovi ultima riga">Rimuovi</button>
+          <button id="graphine-import" class="graphine-btn" aria-label="Importa dati JSON">Importa</button>
+          <button id="graphine-export" class="graphine-btn" aria-label="Esporta dati JSON">Esporta</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="graphine-row" style="gap:12px;">
+      <div class="graphine-canvas-wrap" id="graphine-canvas-wrap" role="region" aria-label="Area grafico">
+        <svg id="graphine-svg" role="img" aria-label="Grafico principale" tabindex="0"></svg>
+        <div id="graphine-tooltip" class="graphine-tooltip" role="tooltip" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="graphine-legend" id="graphine-legend" aria-label="Legenda grafico"></div>
+  </div>
+`;
+
+  shadow.appendChild(template.content.cloneNode(true));
+
+  const state = {
+    data: [ { label: 'A', value: 30 }, { label: 'B', value: 70 }, { label: 'C', value: 45 } ],
+    chartType: 'bar',
+    colors: [],
+    hidden: new Set(),
+  };
+  
+  const VALID_RE = /^[A-Za-z0-9 èéòàùìÈÉÒÀÙÌ]+$/u;
+
+  const svg = shadow.getElementById('graphine-svg');
+  const dataList = shadow.getElementById('graphine-data-list');
+  const legendEl = shadow.getElementById('graphine-legend');
+  const tooltip = shadow.getElementById('graphine-tooltip');
+  const chartTypeSelect = shadow.getElementById('graphine-chart-type');
+  const addBtn = shadow.getElementById('graphine-add-row');
+  const removeBtn = shadow.getElementById('graphine-remove-row');
+  const importBtn = shadow.getElementById('graphine-import');
+  const exportBtn = shadow.getElementById('graphine-export');
+  const wrap = shadow.getElementById('graphine-canvas-wrap');
+
+  function sanitizeText(str) {
+    return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+  }
+
+  function validateText(str) {
+    if (str.length > 32) return false;
+    return VALID_RE.test(str);
+  }
+
+  function randomColor(previousColors = [], avoidNearby = true) {
+    function hslToRgb(h,s,l){
+      const c = (1 - Math.abs(2*l-1))*s;
+      const x = c*(1 - Math.abs((h/60)%2 -1));
+      const m = l - c/2;
+      let r=0,g=0,b=0;
+      if(h<60){ r=c; g=x; b=0; }
+      else if(h<120){ r=x; g=c; b=0; }
+      else if(h<180){ r=0; g=c; b=x; }
+      else if(h<240){ r=0; g=x; b=c; }
+      else if(h<300){ r=x; g=0; b=c; }
+      else { r=c; g=0; b=x; }
+      return {
+        r: Math.round((r+m)*255),
+        g: Math.round((g+m)*255),
+        b: Math.round((b+m)*255)
+      };
+    }
+
+    const priorHues = previousColors.map(col => {
+      const r = parseInt(col.slice(1,3),16);
+      const g = parseInt(col.slice(3,5),16);
+      const b = parseInt(col.slice(5,7),16);
+      const rn=r/255, gn=g/255, bn=b/255;
+      const max = Math.max(rn,gn,bn), min = Math.min(rn,gn,bn);
+      let h = 0;
+      if (max === min) h = 0;
+      else if (max === rn) h = (60 * ((gn - bn) / (max - min)) + 360) % 360;
+      else if (max === gn) h = (60 * ((bn - rn) / (max - min)) + 120) % 360;
+      else h = (60 * ((rn - gn) / (max - min)) + 240) % 360;
+      return h;
+    });
+
+    for (let tries=0; tries<30; tries++){
+      let hue = Math.floor(Math.random()*360);
+      if (avoidNearby && priorHues.length){
+        const nearest = Math.min(...priorHues.map(h=>Math.min(Math.abs(h-hue), 360-Math.abs(h-hue))));
+        if (nearest < 20) {
+          hue = (hue + (Math.random()>0.5 ? 30+Math.random()*60 : -(30+Math.random()*60)))%360;
+          if (hue<0) hue += 360;
+        }
+      }
+      const sat = 0.55 + Math.random()*0.3;
+      const light = 0.40 + Math.random()*0.25;
+      const rgb = hslToRgb(hue, sat, light);
+      const hex = '#'+[rgb.r, rgb.g, rgb.b].map(v => v.toString(16).padStart(2,'0')).join('');
+      if (!previousColors.includes(hex)) return hex;
+    }
+    const r = Math.floor(Math.random()*200)+20;
+    const g = Math.floor(Math.random()*200)+20;
+    const b = Math.floor(Math.random()*200)+20;
+    return '#'+[r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
+  }
+
+  function setData(newData) {
+    if (!Array.isArray(newData)) throw new Error('setData expects array');
+    state.data = newData.map(d => ({ label: String(d.label), value: Number(d.value) || 0 }));
+    const old = state.colors.slice();
+    state.colors = state.data.map((_,i) => old[i] || randomColor(old.slice(0,i)));
+    render();
+  }
+
+  function setChartType(type) {
+    state.chartType = String(type);
+    chartTypeSelect.value = state.chartType;
+    render();
+  }
+
+  function clearSvg() {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+  }
+
+  function ensureColors() {
+    if (state.colors.length < state.data.length) {
+      const prev = state.colors.slice();
+      for (let i = state.colors.length; i < state.data.length; i++) {
+        state.colors[i] = randomColor(prev);
+        prev.push(state.colors[i]);
+      }
+    } else if (state.colors.length > state.data.length) {
+      state.colors.length = state.data.length;
+    }
+  }
+
+  function cx(text) {
+    const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.textContent = text;
+    return t;
+  }
+
+  function createSVGElement(name, attrs = {}) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (const [k,v] of Object.entries(attrs)){
+      el.setAttribute(k, String(v));
+    }
+    return el;
+  }
+
+  function readableTextColor(hex) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    const srgb = [r,g,b].map(v => {
+      const s = v/255;
+      return s <= 0.03928 ? s/12.92 : Math.pow((s+0.055)/1.055, 2.4);
+    });
+    const L = 0.2126*srgb[0] + 0.7152*srgb[1] + 0.0722*srgb[2];
+    return L > 0.179 ? '#000' : '#fff';
+  }
+
+  function showTooltip(htmlText, x, y) {
+    tooltip.textContent = htmlText;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+    tooltip.style.opacity = '1';
+    tooltip.setAttribute('aria-hidden','false');
+  }
+  function hideTooltip() {
+    tooltip.style.opacity = '0';
+    tooltip.setAttribute('aria-hidden','true');
+  }
+
+  function resize() {
+    const rect = wrap.getBoundingClientRect();
+    const w = Math.max(300, Math.floor(rect.width));
+    const h = Math.max(220, Math.floor(rect.height));
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    render();
+  }
+
+  function render() {
+    ensureColors();
+    clearSvg();
+
+    const rect = wrap.getBoundingClientRect();
+    const W = Math.max(300, Math.floor(rect.width));
+    const H = Math.max(220, Math.floor(rect.height));
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+    const padding = 36;
+    const innerW = W - padding*2;
+    const innerH = H - padding*2;
+    const cxCenter = padding + innerW/2;
+    const cyCenter = padding + innerH/2;
+
+    const visible = state.data.map((d,i) => ({...d, color: state.colors[i], idx:i}))
+      .filter((d)=> !state.hidden.has(d.idx));
+
+    if (visible.length === 0) {
+      const txt = createSVGElement('text', { x: W/2, y: H/2, 'text-anchor': 'middle', 'dominant-baseline':'middle', 'font-size':16, fill:'#666' });
+      txt.textContent = 'Nessun dato visibile';
+      svg.appendChild(txt);
+      buildLegend();
+      return;
+    }
+
+    const values = visible.map(v=>v.value);
+    const maxVal = Math.max(...values,1);
+    const total = values.reduce((a,b)=>a+b,0) || 1;
+
+    if (state.chartType === 'bar' || state.chartType === 'column') {
+      const isHorizontal = state.chartType === 'bar';
+      const itemCount = visible.length;
+      const gap = 8;
+      if (isHorizontal) {
+        const barH = Math.max(16, Math.floor(innerH / itemCount) - gap);
+        visible.forEach((d,i) => {
+          const y = padding + i*(barH+gap);
+          const w = Math.max(2, Math.round((d.value / maxVal) * (innerW - 10)));
+          const rectEl = createSVGElement('rect', {
+            x: padding, y, width: w, height: barH, rx:4, ry:4, fill: d.color
+          });
+          svg.appendChild(rectEl);
+
+          const label = createSVGElement('text', { x: padding - 6, y: y + barH/2, 'text-anchor':'end', 'dominant-baseline':'middle', 'font-size':12, fill:'#111' });
+          label.textContent = d.label;
+          svg.appendChild(label);
+
+          const vc = readableTextColor(d.color);
+          const valText = createSVGElement('text', { x: padding + Math.min(w-6, Math.max(6, w+6)), y: y + barH/2, 'dominant-baseline':'middle', 'font-size':12, fill: vc });
+          if (w > 40) {
+            valText.setAttribute('x', padding + w - 6);
+            valText.setAttribute('text-anchor','end');
+            valText.textContent = String(d.value);
+          } else {
+            valText.setAttribute('x', padding + w + 8);
+            valText.setAttribute('text-anchor','start');
+            valText.textContent = String(d.value);
+          }
+          svg.appendChild(valText);
+          attachInteractions(rectEl, d);
+        });
+      } else {
+        const colW = Math.max(12, Math.floor(innerW / itemCount) - gap);
+        visible.forEach((d,i) => {
+          const x = padding + i*(colW + gap) + Math.floor((innerW - (colW+gap)*itemCount + gap)/2);
+          const h = Math.round((d.value / maxVal) * (innerH - 10));
+          const y = padding + innerH - h;
+          const rectEl = createSVGElement('rect', { x, y, width: colW, height: h, rx:4, ry:4, fill: d.color });
+          svg.appendChild(rectEl);
+          const label = createSVGElement('text', { x: x + colW/2, y: padding + innerH + 14, 'text-anchor':'middle', 'dominant-baseline':'hanging', 'font-size':12, fill:'#111' });
+          label.textContent = d.label;
+          svg.appendChild(label);
+          const vc = readableTextColor(d.color);
+          const valText = createSVGElement('text', { x: x + colW/2, y: y - 6, 'text-anchor':'middle', 'dominant-baseline':'baseline', 'font-size':12, fill:'#111' });
+          valText.textContent = String(d.value);
+          svg.appendChild(valText);
+          attachInteractions(rectEl, d);
+        });
+      }
+    } else if (state.chartType === 'pie' || state.chartType === 'donut') {
+      const radius = Math.min(innerW, innerH)/2 * 0.92;
+      let angleStart = -Math.PI/2; // start at top
+      visible.forEach((d) => {
+        const angle = (d.value / total) * Math.PI*2;
+	const angleEnd = angleStart + angle;
+	let path;
+	if (angle >= 2 * Math.PI) {
+	path = createSVGElement('circle', {
+		cx: cxCenter,
+		cy: cyCenter,
+		r: radius,
+		fill: d.color
+	});
+	} else {
+	const large = angle > Math.PI ? 1 : 0;
+	const x1 = cxCenter + Math.cos(angleStart) * radius;
+	const y1 = cyCenter + Math.sin(angleStart) * radius;
+	const x2 = cxCenter + Math.cos(angleEnd) * radius;
+	const y2 = cyCenter + Math.sin(angleEnd) * radius;
+	path = createSVGElement('path', {
+		d: `M ${cxCenter} ${cyCenter} L ${x1} ${y1} A ${radius} ${radius} 0 ${large} 1 ${x2} ${y2} Z`,
+		fill: d.color
+	});
+	}
+	svg.appendChild(path);
+        attachInteractions(path, d);
+        const mid = angleStart + angle/2;
+        const lx = cxCenter + Math.cos(mid) * (radius * 0.6);
+        const ly = cyCenter + Math.sin(mid) * (radius * 0.6);
+        const text = createSVGElement('text', { x: lx, y: ly, 'text-anchor':'middle', 'dominant-baseline':'middle', 'font-size':12, fill: readableTextColor(d.color) });
+        text.textContent = `${d.label}`;
+        svg.appendChild(text);
+        angleStart = angleEnd;
+      });
+      if (state.chartType === 'donut') {
+        const hole = createSVGElement('circle', { cx: cxCenter, cy: cyCenter, r: radius*0.45, fill: 'rgba(255, 255, 255, 1.0)' });
+        svg.appendChild(hole);
+      }
+    } else if (state.chartType === 'line' || state.chartType === 'area') {
+      const n = visible.length;
+      const gapX = innerW / (Math.max(1,n-1));
+      const points = visible.map((d,i) => {
+        const x = padding + i*gapX;
+        const y = padding + innerH - Math.round((d.value / maxVal) * innerH);
+        return { x, y, d };
+      });
+      if (state.chartType === 'area') {
+        const pathD = ['M', points[0].x, padding+innerH, 'L']
+          .concat(points.map(p=>`${p.x} ${p.y}`))
+          .concat([ 'L', points[points.length-1].x, padding+innerH, 'Z'])
+          .join(' ');
+        const area = createSVGElement('path', { d: pathD, fill: state.colors[0] || '#88a', opacity:0.35 });
+        svg.appendChild(area);
+      }
+      const poly = createSVGElement('polyline', {
+        points: points.map(p=>`${p.x},${p.y}`).join(' '),
+        fill: 'none', stroke: state.colors[0] || '#000', 'stroke-width':2
+      });
+      svg.appendChild(poly);
+      points.forEach(pt => {
+        const c = createSVGElement('circle', { cx: pt.x, cy: pt.y, r:4, fill: state.colors[pt.d.idx] || '#000' });
+        svg.appendChild(c);
+        attachInteractions(c, pt.d);
+      });
+      points.forEach(pt=>{
+        const tx = createSVGElement('text', { x: pt.x, y: padding + innerH + 14, 'text-anchor':'middle', 'dominant-baseline':'hanging', 'font-size':11 });
+        tx.textContent = pt.d.label;
+        svg.appendChild(tx);
+      });
+    } else if (state.chartType === 'scatter') {
+      const padLeft = padding + 20;
+      const padBottom = padding + 20;
+      const plotW = innerW - 40;
+      const plotH = innerH - 40;
+      const pts = visible.map((d,i)=>{
+        const parts = String(d.value).split(/[;,]/).map(s=>s.trim()).filter(Boolean);
+        let xVal, yVal;
+        if (parts.length >= 2 && !isNaN(Number(parts[0])) && !isNaN(Number(parts[1]))) {
+          xVal = Number(parts[0]); yVal = Number(parts[1]);
+        } else {
+          xVal = i;
+          yVal = Number(d.value);
+        }
+        return { xVal, yVal, d };
+      });
+      const xs = pts.map(p=>p.xVal);
+      const ys = pts.map(p=>p.yVal);
+      const minX = Math.min(...xs), maxX = Math.max(...xs);
+      const minY = Math.min(...ys), maxY = Math.max(...ys);
+      const rangeX = maxX - minX || 1;
+      const rangeY = maxY - minY || 1;
+      const axisX = createSVGElement('line', { x1: padLeft, y1: padding+innerH, x2: padLeft+plotW, y2: padding+innerH, stroke:'#ccc' });
+      const axisY = createSVGElement('line', { x1: padLeft, y1: padding, x2: padLeft, y2: padding+innerH, stroke:'#ccc' });
+      svg.appendChild(axisX); svg.appendChild(axisY);
+      pts.forEach(p=>{
+        const x = padLeft + ((p.xVal - minX)/rangeX) * plotW;
+        const y = padding + innerH - ((p.yVal - minY)/rangeY) * plotH;
+        const c = createSVGElement('circle', { cx: x, cy: y, r:6, fill: p.d.color });
+        svg.appendChild(c);
+        attachInteractions(c, p.d, `${p.xVal}, ${p.yVal}`);
+      });
+    } else if (state.chartType === 'radar') {
+      const n = visible.length;
+      const r = Math.min(innerW, innerH)/2 * 0.8;
+      const levels = 4;
+      const centerX = cxCenter;
+      const centerY = cyCenter;
+      for (let lvl=levels; lvl>=1; lvl--) {
+        const ratio = lvl/levels;
+        const pts = [];
+        for (let i=0;i<n;i++){
+          const ang = -Math.PI/2 + (i/(n))*Math.PI*2;
+          const x = centerX + Math.cos(ang) * r * ratio;
+          const y = centerY + Math.sin(ang) * r * ratio;
+          pts.push(`${x} ${y}`);
+        }
+        const poly = createSVGElement('polygon', { points: pts.join(' '), fill: 'none', stroke:'#ddd' });
+        svg.appendChild(poly);
+      }
+      const ptsData = [];
+      visible.forEach((d,i)=>{
+        const ang = -Math.PI/2 + (i/(n))*Math.PI*2;
+        const ratio = (d.value / maxVal) || 0;
+        const x = centerX + Math.cos(ang) * r * ratio;
+        const y = centerY + Math.sin(ang) * r * ratio;
+        ptsData.push(`${x} ${y}`);
+        const dot = createSVGElement('circle', { cx: x, cy: y, r:5, fill: d.color });
+        svg.appendChild(dot);
+        attachInteractions(dot, d);
+      });
+      const dataPoly = createSVGElement('polygon', { points: ptsData.join(' '), fill: state.colors[0] || '#88a', opacity:0.35, stroke: state.colors[0] || '#88a' });
+      svg.appendChild(dataPoly);
+      visible.forEach((d,i)=>{
+        const ang = -Math.PI/2 + (i/(n))*Math.PI*2;
+        const x = centerX + Math.cos(ang) * (r + 14);
+        const y = centerY + Math.sin(ang) * (r + 14);
+        const lbl = createSVGElement('text', { x, y, 'text-anchor':'middle', 'dominant-baseline':'middle', 'font-size':11 });
+        lbl.textContent = d.label;
+        svg.appendChild(lbl);
+      });
+    }
+
+    buildLegend();
+  }
+  function attachInteractions(element, dataObj, extraText) {
+    element.setAttribute('tabindex', '0');
+    const show = (clientX, clientY) => {
+      const valueText = extraText ? extraText : String(dataObj.value);
+      showTooltip(`${dataObj.label}: ${valueText}`, clientX, clientY);
+    };
+    element.addEventListener('pointerenter', (e) => {
+      show(e.clientX - wrap.getBoundingClientRect().left, e.clientY - wrap.getBoundingClientRect().top);
+    });
+    element.addEventListener('pointermove', (e) => {
+      show(e.clientX - wrap.getBoundingClientRect().left, e.clientY - wrap.getBoundingClientRect().top);
+    });
+    element.addEventListener('pointerleave', hideTooltip);
+    element.addEventListener('focus', (e) => {
+      const rect = element.getBoundingClientRect();
+      const x = rect.left + rect.width/2 - wrap.getBoundingClientRect().left;
+      const y = rect.top - wrap.getBoundingClientRect().top;
+      show(`${dataObj.label}`, x, y);
+    });
+    element.addEventListener('blur', hideTooltip);
+    addDoubleTapDoubleClick(element, () => {
+      const current = dataObj.label;
+      const res = window.prompt('Modifica etichetta:', current);
+      if (res === null) return;
+      const trimmed = res.trim();
+      if (!validateText(trimmed)) {
+        window.alert('Testo non valido. Usare solo lettere (incl. accentate), numeri e spazi.');
+        return;
+      }
+      const idx = dataObj.idx;
+      if (typeof idx === 'number' && state.data[idx]) {
+        state.data[idx].label = trimmed;
+        rebuildDataList(); render();
+      }
+    });
+  }
+  
+
+function addDoubleTapDoubleClick(element, cb) {
+  let lastTap = 0;
+  element.addEventListener('click', (e) => {
+    const now = Date.now();
+    if (now - lastTap < 350) {
+      cb(e);
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  });
+}
+
+  function buildLegend() {
+    while (legendEl.firstChild) legendEl.removeChild(legendEl.firstChild);
+
+    state.data.forEach((d,i) => {
+      const item = document.createElement('div');
+      item.className = 'graphine-legend-item';
+      item.setAttribute('role','button');
+      item.setAttribute('tabindex','0');
+      item.setAttribute('aria-pressed', state.hidden.has(i) ? 'true' : 'false');
+
+      const sw = document.createElement('div');
+      sw.className = 'graphine-legend-swatch';
+      sw.style.background = state.colors[i] || '#ccc';
+      sw.setAttribute('aria-hidden','true');
+
+      const label = document.createElement('div');
+      label.className = 'graphine-small';
+      label.textContent = d.label;
+
+      item.appendChild(sw);
+      item.appendChild(label);
+
+      item.addEventListener('click', () => {
+        if (state.hidden.has(i)) state.hidden.delete(i); else state.hidden.add(i);
+        item.setAttribute('aria-pressed', state.hidden.has(i) ? 'true' : 'false');
+        render();
+      });
+
+      addDoubleTapDoubleClick(item, () => {
+        const res = window.prompt('Modifica etichetta legenda:', d.label);
+        if (res === null) return;
+        const trimmed = res.trim();
+        if (!validateText(trimmed)) {
+          window.alert('Testo non valido. Usare solo lettere (incl. accentate), numeri e spazi.');
+          return;
+        }
+        state.data[i].label = trimmed;
+        rebuildDataList(); render();
+      });
+
+      item.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          if (state.hidden.has(i)) state.hidden.delete(i); else state.hidden.add(i);
+          item.setAttribute('aria-pressed', state.hidden.has(i) ? 'true' : 'false');
+          render();
+        }
+      });
+
+      legendEl.appendChild(item);
+    });
+  }
+
+  function rebuildDataList() {
+
+    while (dataList.firstChild) dataList.removeChild(dataList.firstChild);
+    state.data.forEach((d,i) => {
+      const row = document.createElement('div');
+      row.className = 'graphine-data-item';
+      row.setAttribute('role','listitem');
+
+      const labelInput = document.createElement('input');
+      labelInput.type = 'text';
+      labelInput.value = d.label;
+      labelInput.setAttribute('aria-label', `Etichetta ${i+1}`);
+      labelInput.addEventListener('change', (e) => {
+        const val = e.target.value.trim();
+        if (!validateText(val)) {
+          window.alert('Etichetta non valida. Usare solo lettere (incl. accentate), numeri e spazi.');
+          e.target.value = state.data[i].label;
+          return;
+        }
+        state.data[i].label = val;
+        render();
+      });
+
+      addDoubleTapDoubleClick(labelInput, () => {
+        const res = window.prompt('Modifica etichetta:', state.data[i].label);
+        if (res === null) return;
+        const trimmed = res.trim();
+        if (!validateText(trimmed)) {
+          window.alert('Testo non valido. Usare solo lettere (incl. accentate), numeri e spazi.');
+          return;
+        }
+        state.data[i].label = trimmed;
+        labelInput.value = trimmed;
+        render();
+      });
+
+      const valInput = document.createElement('input');
+      valInput.type = 'text';
+      valInput.value = String(d.value);
+      valInput.setAttribute('aria-label', `Valore ${i+1}`);
+	  
+	  
+      valInput.addEventListener('change', (e) => {
+    const raw = e.target.value.trim();
+
+    if (!/^[0-9\.\-;, ]+$/.test(raw)) {
+        window.alert('Valore non valido. Usare numeri o coppie "x,y" o "x;y".');
+        e.target.value = String(state.data[i].value);
+        return;
+    }
+
+    let numVal;
+    if (raw.includes(',') || raw.includes(';')) {
+        const parts = raw.split(/[;,]/).map(v => Number(v.trim()));
+        if (parts.some(isNaN)) {
+            window.alert('Valore non valido. Tutti i numeri devono essere validi.');
+            e.target.value = String(state.data[i].value);
+            return;
+        }
+        numVal = parts;
+    } else {
+        numVal = Number(raw);
+        if (isNaN(numVal)) {
+            window.alert('Valore non valido. Inserire un numero valido.');
+            e.target.value = String(state.data[i].value);
+            return;
+        }
+    }
+
+    state.data[i].value = numVal;
+    render();
+});
+
+      const colorPreview = document.createElement('div');
+      colorPreview.style.width = '18px';
+      colorPreview.style.height = '18px';
+      colorPreview.style.border = '1px solid #ccc';
+      colorPreview.style.borderRadius = '3px';
+      colorPreview.style.background = state.colors[i] || randomColor(state.colors);
+      colorPreview.setAttribute('aria-hidden','true');
+
+      const recolorBtn = document.createElement('button');
+      recolorBtn.textContent = '🎨';
+      recolorBtn.title = 'Cambia colore';
+      recolorBtn.className = 'graphine-btn';
+      recolorBtn.addEventListener('click', () => {
+        state.colors[i] = randomColor(state.colors.slice(0,i));
+        colorPreview.style.background = state.colors[i];
+        render();
+      });
+
+      const removeBtnRow = document.createElement('button');
+      removeBtnRow.textContent = '−';
+      removeBtnRow.className = 'graphine-btn';
+      removeBtnRow.title = 'Rimuovi riga';
+      removeBtnRow.addEventListener('click', () => {
+        state.data.splice(i,1);
+        state.colors.splice(i,1);
+        rebuildDataList();
+        render();
+      });
+
+      row.appendChild(labelInput);
+      row.appendChild(valInput);
+      row.appendChild(colorPreview);
+      row.appendChild(recolorBtn);
+      row.appendChild(removeBtnRow);
+      dataList.appendChild(row);
+    });
+  }
+
+  chartTypeSelect.addEventListener('change', (e) => {
+    setChartType(e.target.value);
+  });
+
+
+  function exportJSON() {
+    try {
+      const safeData = state.data.map(d => ({
+        label: sanitizeText(d.label),
+        value: d.value
+      }));
+      const jsonStr = JSON.stringify({
+        chartType: sanitizeText(state.chartType),
+        data: safeData
+      });
+      const blob = new Blob([jsonStr], { type: "application/json" });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = "MKgraph_data.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    } catch (err) {
+      window.alert('Errore durante l\'esportazione JSON: ' + err.message);
+    }
+  }
+
+  function importJSON() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json,application/json';
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (!parsed || !Array.isArray(parsed.data) || !parsed.chartType) throw new Error('Formato JSON non valido');
+
+          if (!VALID_RE.test(parsed.chartType)) throw new Error('Tipo grafico non valido');
+
+          parsed.data.forEach(d => {
+            if (!d.label || !validateText(d.label)) throw new Error('Etichetta non valida nel JSON');
+            if (typeof d.value !== 'number' && !Array.isArray(d.value)) throw new Error('Valore non valido nel JSON');
+          });
+
+          state.chartType = parsed.chartType;
+          state.data = parsed.data.map(d => ({ label: String(d.label), value: d.value }));
+          ensureColors();
+          rebuildDataList();
+          render();
+
+        } catch (err) {
+          window.alert('Impossibile importare JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+    input.click();
+  }
+
+  addBtn.addEventListener('click', () => {
+    const defaultLabel = `Nuovo ${state.data.length+1}`;
+    state.data.push({ label: defaultLabel, value: 10 });
+    state.colors.push(randomColor(state.colors));
+    rebuildDataList(); render();
+  });
+
+  removeBtn.addEventListener('click', () => {
+    state.data.pop();
+    state.colors.pop();
+    rebuildDataList(); render();
+  });
+
+  importBtn.addEventListener('click', () => importJSON());
+  exportBtn.addEventListener('click', () => exportJSON());
+
+  chartTypeSelect.addEventListener('change', (e) => {
+    setChartType(e.target.value);
+  });
+
+  ensureColors();
+  rebuildDataList();
+  render();
+
+  const ro = new ResizeObserver(() => {
+    resize();
+  });
+  ro.observe(wrap);
+
+  window.addEventListener('resize', () => resize());
+  document.addEventListener('pointerdown', (e) => {
+    const path = e.composedPath ? e.composedPath() : [];
+    if (!path.includes(shadow.host)) hideTooltip();
+  });
+
+  Object.defineProperty(container, '_graphine_setData', { value: setData, writable:false });
+  Object.defineProperty(container, '_graphine_setChartType', { value: setChartType, writable:false });
+
+  svg.setAttribute('role','img');
+  svg.setAttribute('aria-label','Grafico interattivo generato da MKGraphine');
+
+})();
+
+
+</script>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+<br>
+<br>
 <br>
 <svg id="Capa_1" enable-background="new 0 0 512 512" height="256pt" viewBox="0 0 512 512" width="256pt"><g><path d="m486.878 213.275h-461.756c-13.874 0-25.122 11.248-25.122 25.122v206.306c0 13.874 11.248 25.122 25.122 25.122h461.757c13.874 0 25.122-11.247 25.122-25.122v-206.306c-.001-13.874-11.248-25.122-25.123-25.122z" fill="#8eafe2"/><path d="m209.986 391.694h92.028v78.131h-92.028z" fill="#7c93dd"/><path d="m59.306 184.554c56.433-21.891 132.649-21.064 196.694 15.06v199.681c-72.97-41.158-161.737-36.496-219.046-4.62v-177.234c0-14.509 8.825-27.64 22.352-32.887z" fill="#fae0bd"/><path d="m452.694 184.554c-56.433-21.891-132.648-21.064-196.694 15.06v199.681c72.97-41.158 161.737-36.496 219.046-4.62v-177.234c0-14.509-8.825-27.64-22.352-32.887z" fill="#fbf1cf"/><path d="m256 399.295c-72.97-41.158-161.737-36.496-219.046-4.62v24.432c0 7.602 6.163 13.765 13.765 13.765h410.562c7.602 0 13.765-6.163 13.765-13.765v-24.432c-57.309-31.876-146.076-36.538-219.046 4.62z" fill="#e0b799"/><path d="m431.053 230.081h-22.821c0-83.952-68.29-152.242-152.232-152.242s-152.232 68.29-152.232 152.242h-22.821c-7.224 0-12.882-6.145-12.373-13.351 6.869-97.402 88.307-174.555 187.426-174.555s180.557 77.153 187.426 174.555c.509 7.205-5.15 13.351-12.373 13.351z" fill="#eda1ab"/><path d="m162.616 67.071c-52.794 30.366-89.527 85.637-94.043 149.659-.508 7.206 5.15 13.351 12.373 13.351h22.821c0-48.999 23.27-92.656 59.331-120.52-3.283-14.962-3.542-29.884-.482-42.49z" fill="#e58996"/><path d="m408.232 230.081h-35.663c0-64.286-52.293-116.579-116.569-116.579s-116.569 52.293-116.569 116.579h-35.664c0-83.952 68.291-152.242 152.232-152.242 83.943-.001 152.233 68.29 152.233 152.242z" fill="#f6ee86"/><path d="m372.569 230.081h-22.73c-6.855 0-12.793-4.965-13.78-11.749-5.689-39.123-39.367-69.167-80.059-69.167s-74.369 30.044-80.059 69.167c-.987 6.784-6.924 11.749-13.78 11.749h-22.73c0-64.286 52.293-116.579 116.569-116.579s116.569 52.293 116.569 116.579z" fill="#8ee2e1"/><g fill="#4e5660"><path d="m182.907 284.895h-86.952c-4.143 0-7.5-3.358-7.5-7.5s3.357-7.5 7.5-7.5h86.952c4.143 0 7.5 3.358 7.5 7.5s-3.357 7.5-7.5 7.5z"/><path d="m416.045 284.895h-86.952c-4.143 0-7.5-3.358-7.5-7.5s3.357-7.5 7.5-7.5h86.952c4.143 0 7.5 3.358 7.5 7.5s-3.357 7.5-7.5 7.5z"/><path d="m182.907 321.19h-86.952c-4.143 0-7.5-3.358-7.5-7.5s3.357-7.5 7.5-7.5h86.952c4.143 0 7.5 3.358 7.5 7.5s-3.357 7.5-7.5 7.5z"/></g><path d="m163.099 109.561c-36.061 27.865-59.331 71.521-59.331 120.52h35.664c0-33.723 14.396-64.141 37.357-85.445-6.415-10.901-11.038-22.991-13.69-35.075z" fill="#f2d98d"/><path d="m139.431 230.081h22.73c6.855 0 12.793-4.965 13.78-11.749 2.655-18.255 11.406-34.529 24.117-46.701-9.317-7.175-17.114-16.537-23.27-26.996-22.961 21.305-37.357 51.722-37.357 85.446z" fill="#6ad7be"/></g></svg>
 <br>
@@ -5536,6 +6461,21 @@ document.write( '<hr size=\"16\" color=\"#FF0000\" noshade>\n' );
 document.write( '<strong><font size=\"64\" face=\"Segoe UI\" color=\"#F78181\"> I computer a 32-bit non sono supportati </font></strong>\n' );
 document.write( '<hr size=\"16\" color=\"#FF0000\" noshade>\n' );
 document.write( '</a>' );
+
+
+
+//SEPARATOR
+
+document.addEventListener('DOMContentLoaded', function() {
+    const targetElement = document.getElementById('graphine');
+    if (window.location.hash === '#graphine' && targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+
+
 </script>
 
 
