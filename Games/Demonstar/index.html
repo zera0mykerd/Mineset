@@ -3416,9 +3416,821 @@ document.write("</table></p>");
 </div>
 
 
+<div id="calcnastr"></div>
+
+
+<script type="text/javascript">
+(() => {
+  'use strict';
+
+  // Config isolata
+  const CONFIG = {
+    storageKey: 'calcnastr:v1',            // namespace per localStorage
+    enableLocalStorage: true,              // metti a false per disabilitare
+    appName: 'MKCalculator',
+    version: '1.2.3',
+  };
+
+  // Recupera il nodo host
+  const host = document.getElementById('calcnastr');
+  if (!host) { console.error('[calcnastr] host non trovato'); return; }
+
+  // Crea Shadow DOM per isolamento completo
+  const root = host.attachShadow({ mode: 'open' });
+
+  // CSS isolato (solo nel shadow)
+const style = document.createElement('style');
+style.textContent = `
+  :host { all: initial; }
+  * {
+    box-sizing: border-box;
+    font-family: 'Orbitron', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans';
+    transition: all 0.25s ease-in-out;
+  }
+
+  /* Contenitore principale */
+  .wrap {
+    border: 1px solid rgba(0, 255, 128, 0.4);
+    border-radius: 12px;
+    padding: 14px;
+    background: radial-gradient(circle at top left, #0a0f0a, #020402);
+    color: #b6ffd9;
+    box-shadow: 0 0 20px rgba(0, 255, 128, 0.2), inset 0 0 15px rgba(0, 255, 128, 0.05);
+  }
+
+  .title {
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    font-size: 18px;
+    color: #00ff99;
+    text-shadow: 0 0 8px rgba(0, 255, 128, 0.8);
+    letter-spacing: 1px;
+  }
+
+  .row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .row > * { flex: none; }
+
+  /* Input */
+  .input {
+    flex: 1 1 auto;
+    padding: 8px 10px;
+    border: 1px solid rgba(0, 255, 128, 0.4);
+    border-radius: 6px;
+    font-size: 14px;
+    background: rgba(0, 20, 10, 0.8);
+    color: #b6ffd9;
+    outline: none;
+  }
+  .input:focus {
+    border-color: #00ff99;
+    box-shadow: 0 0 8px rgba(0, 255, 128, 0.6);
+  }
+
+  /* Pulsanti */
+  .btn {
+    padding: 8px 10px;
+    border: 1px solid rgba(0, 255, 128, 0.4);
+    background: linear-gradient(145deg, rgba(0, 40, 20, 0.9), rgba(0, 20, 10, 0.9));
+    color: #b6ffd9;
+    border-radius: 6px;
+    font-size: 13px;
+ /*   cursor: pointer; */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover {
+    background: linear-gradient(145deg, rgba(0, 60, 30, 0.9), rgba(0, 30, 15, 0.9));
+    box-shadow: 0 0 10px rgba(0, 255, 128, 0.5);
+  }
+  .btn.primary {
+    background: linear-gradient(145deg, #00ff99, #00cc77);
+    border-color: #00ff99;
+    color: #001a0d;
+    font-weight: bold;
+  }
+  .btn.primary:hover {
+    background: linear-gradient(145deg, #00ffaa, #00e68a);
+    box-shadow: 0 0 15px rgba(0, 255, 128, 0.8);
+  }
+  .btn.danger {
+    background: linear-gradient(145deg, #ff0044, #990022);
+    border-color: #ff0044;
+    color: #fff;
+  }
+  .btn.danger:hover {
+    background: linear-gradient(145deg, #ff3366, #cc0033);
+    box-shadow: 0 0 15px rgba(255, 0, 68, 0.8);
+  }
+  .btn.wide { min-width: 110px; }
+
+  /* Area log */
+  .tape {
+    border: 1px solid rgba(0, 255, 128, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    max-height: 280px;
+    overflow: auto;
+    background: rgba(0, 20, 10, 0.6);
+    box-shadow: inset 0 0 10px rgba(0, 255, 128, 0.1);
+  }
+
+  .line {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 6px 8px;
+    border-bottom: 1px dashed rgba(0, 255, 128, 0.2);
+    white-space: pre-wrap;
+  }
+  .line:last-child { border-bottom: 0; }
+
+  .expr { color: #66ffcc; }
+  .res.ok { color: #00ff99; font-weight: 600; text-shadow: 0 0 5px rgba(0, 255, 128, 0.8); }
+  .res.err { color: #ff3366; font-weight: 600; text-shadow: 0 0 5px rgba(255, 51, 102, 0.8); }
+  .time { color: #66aa88; font-size: 12px; }
+
+  /* Barra comandi */
+  .bar { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* Key-Value */
+  .kv {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    border: 1px solid rgba(0, 255, 128, 0.3);
+    border-radius: 6px;
+    padding: 8px;
+    background: rgba(0, 20, 10, 0.8);
+    max-height: 160px;
+    overflow: auto;
+  }
+  .kv-item { display: contents; }
+  .kv-key { font-weight: 600; color: #00ff99; }
+  .kv-val { color: #b6ffd9; text-align: right; }
+
+  .muted { color: #557766; font-size: 12px; }
+  .hr { height: 1px; background: rgba(0, 255, 128, 0.2); margin: 10px 0; }
+
+  @media print {
+    .no-print { display: none !important; }
+    .tape { max-height: none; overflow: visible; }
+    .wrap { border: none; background: #fff; color: #000; }
+  }
+`;
+root.appendChild(style);
+
+
+  // HTML struttura interna (inputmode="decimal" rimosso)
+  const container = document.createElement('div');
+  container.className = 'wrap';
+  container.innerHTML = `
+    <h2 class="title">${CONFIG.appName}</h2>
+    <div class="row">
+      <input class="input" type="text" autocomplete="off" placeholder="Es: 2+3, x=5*2, const PI=3.14159, (x+PI)/2" aria-label="Inserisci espressione" />
+      <button class="btn primary wide" data-act="eval">Calcola</button>
+    </div>
+    <div class="bar no-print">
+      <button class="btn" data-act="clear-last">Elimina ultima</button>
+      <button class="btn danger" data-act="clear-all">Pulisci nastro</button>
+      <button class="btn" data-act="export">Esporta</button>
+      <label class="btn" style="position: relative; overflow: hidden;">
+        Importa
+        <input type="file" accept="application/json" data-act="import" style="position:absolute; inset:0; opacity:0;" />
+      </label>
+      <label style="display: none;" id="sostfake" class="btn" title="Se attivo, l'import sostituisce interamente stato e nastro">
+        Sostituisci
+        <input type="checkbox" data-act="replace" style="margin-left:6px; transform: translateY(2px);" />
+      </label>
+      <button class="btn" data-act="print">Stampa nastro</button>
+    </div>
+    <div class="hr"></div>
+    <div class="tape" aria-live="polite" aria-label="Nastro operazioni"></div>
+    <div class="hr"></div>
+    <div class="muted">Variabili</div>
+    <div class="kv vars"></div>
+    <div class="hr"></div>
+    <div class="muted">Costanti</div>
+    <div class="kv consts"></div>
+    <div class="hr"></div>
+    <div class="muted">
+      Suggerimenti: usa x=3, y=2*x, const TAU=6.28318, comandi: "clear" (svuota nastro), "del" (elimina ultima), "help".
+    </div>
+  `;
+  root.appendChild(container);
 
 
 
+  // Riferimenti
+const ui = {
+  input: container.querySelector('.input'),
+  tape: container.querySelector('.tape'),
+  varsView: container.querySelector('.vars'),
+  constsView: container.querySelector('.consts'),
+  btnEval: container.querySelector('[data-act="eval"]'),
+  btnClearLast: container.querySelector('[data-act="clear-last"]'),
+  btnClearAll: container.querySelector('[data-act="clear-all"]'),
+  btnExport: container.querySelector('[data-act="export"]'),
+  fileImport: container.querySelector('[data-act="import"]'),
+  chkReplace: container.querySelector('[data-act="replace"]'),
+  btnPrint: container.querySelector('[data-act="print"]'),
+};
+
+// Stato interno isolato
+const State = {
+  tape: [],
+  vars: Object.create(null),
+  consts: Object.freeze({ PI: Math.PI, E: Math.E }),
+  Ans: 0,
+};
+
+// Utilità
+const nowISO = () => new Date().toLocaleString();
+const clone = (v) => JSON.parse(JSON.stringify(v));
+
+function escapeStr(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+// Persistenza
+function save() {
+  if (!CONFIG.enableLocalStorage) return;
+  try {
+    const payload = {
+      v: CONFIG.version,
+      tape: State.tape,
+      vars: State.vars,
+      consts: State.consts,
+    };
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(payload));
+  } catch {}
+}
+
+function load() {
+  if (!CONFIG.enableLocalStorage) return;
+  try {
+    const raw = localStorage.getItem(CONFIG.storageKey);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (!data || typeof data !== 'object') return;
+    if (Array.isArray(data.tape)) State.tape = data.tape.slice(-1000);
+    if (data.vars && typeof data.vars === 'object') State.vars = data.vars;
+    if (data.consts && typeof data.consts === 'object') {
+      State.consts = Object.freeze(Object.assign({}, data.consts));
+    }
+  } catch {}
+}
+
+// Parser sicuro
+const TOK = { NUM:'NUM', ID:'ID', OP:'OP', LP:'LP', RP:'RP', EQ:'EQ', KW_CONST:'KW_CONST' };
+const OPS = {
+  '+': { p: 1, a: 'L', f: (a,b)=>a+b },
+  '-': { p: 1, a: 'L', f: (a,b)=>a-b },
+  '*': { p: 2, a: 'L', f: (a,b)=>a*b },
+  '/': { p: 2, a: 'L', f: (a,b)=>a/b },
+  '%': { p: 2, a: 'L', f: (a,b)=>a%b },
+  '^': { p: 3, a: 'R', f: (a,b)=>Math.pow(a,b) },
+};
+
+// Funzioni matematiche avanzate
+const FUNCTIONS = {
+  sin: Math.sin, cos: Math.cos, tan: Math.tan,
+  asin: Math.asin, acos: Math.acos, atan: Math.atan,
+  sqrt: Math.sqrt, log: Math.log10, ln: Math.log,
+  exp: Math.exp, abs: Math.abs, floor: Math.floor,
+  ceil: Math.ceil, round: Math.round, min: Math.min,
+  max: Math.max, pow: Math.pow,
+  factorial: n => { if(n<0) throw new Error('Fattoriale negativo'); if(n===0) return 1; return n*FUNCTIONS.factorial(n-1); }
+};
+
+function tokenize(src) {
+  const s = (src || '').trim();
+  if (!s) return [];
+  const out = [];
+  let i = 0;
+  const isWS = c=>/\s/.test(c);
+  const isDigit = c=>/[0-9]/.test(c);
+  const isAlpha = c=>/[A-Za-z_]/.test(c);
+  const isAlnum = c=>/[A-Za-z0-9_]/.test(c);
+
+  while(i<s.length) {
+    const c = s[i];
+    if(isWS(c)) { i++; continue; }
+    if(['<','>','&'].includes(c)) throw new Error(`Carattere non consentito: ${c}`);
+    if(isDigit(c) || (c==='.' && isDigit(s[i+1]||''))) {
+      let j=i, hasDot=(c==='.'); 
+      while(j<s.length) {
+        const d=s[j];
+        if(d==='.'){ if(hasDot) break; hasDot=true; j++; continue;}
+        if(!isDigit(d)) break; j++;
+      }
+      const numStr=s.slice(i,j);
+      if(!/^(\d+(\.\d+)?|\.\d+)$/.test(numStr)) throw new Error('Numero non valido');
+      out.push({k:TOK.NUM,v:parseFloat(numStr)}); i=j; continue;
+    }
+    if(isAlpha(c)) {
+      let j=i+1;
+      while(j<s.length && isAlnum(s[j])) j++;
+      const ident=s.slice(i,j);
+      if(ident==='const') out.push({k:TOK.KW_CONST,v:'const'});
+      else out.push({k:TOK.ID,v:ident});
+      i=j; continue;
+    }
+    //if(c==='('){ out.push({k:TOK.LP,v:c}); i++; continue; }
+    //if(c===')'){ out.push({k:TOK.RP,v:c}); i++; continue; }
+	if(c==='(' || c==='[' || c==='{'){ out.push({k:TOK.LP,v:c}); i++; continue; }
+	if(c===')' || c===']' || c==='}'){ out.push({k:TOK.RP,v:c}); i++; continue; }
+    if(c==='='){ out.push({k:TOK.EQ,v:c}); i++; continue; }
+    if(OPS[c]){ out.push({k:TOK.OP,v:c}); i++; continue; }
+    throw new Error(`Carattere non consentito: ${c}`);
+  }
+  return out;
+}
+
+function parseAssignment(tokens){
+  if(!tokens.length) return null;
+  if(tokens[0].k===TOK.KW_CONST){
+    if(tokens[1]?.k!==TOK.ID || tokens[2]?.k!==TOK.EQ) throw new Error('Sintassi const: const NOME = espressione');
+    return { type:'const', name:tokens[1].v, expr:tokens.slice(3) };
+  }
+  let eqIndex=-1, depth=0;
+  for(let i=0;i<tokens.length;i++){
+    const t=tokens[i];
+    if(t.k===TOK.LP) depth++;
+    else if(t.k===TOK.RP) depth--;
+    else if(t.k===TOK.EQ && depth===0){ eqIndex=i; break;}
+  }
+  if(eqIndex>0 && tokens[0].k===TOK.ID) return { type:'var', name:tokens[0].v, expr:tokens.slice(eqIndex+1) };
+  return null;
+}
+
+function toRPN(tokens){
+  const out=[], stack=[];
+  for(const t of tokens){
+    if(t.k===TOK.NUM||t.k===TOK.ID){ out.push(t); }
+    else if(t.k===TOK.OP){
+      while(stack.length){
+        const top=stack[stack.length-1];
+        if(top.k===TOK.OP){
+          const o1=OPS[t.v], o2=OPS[top.v];
+          if((o1.a==='L'&&o1.p<=o2.p)||(o1.a==='R'&&o1.p<o2.p)){ out.push(stack.pop()); continue; }
+        }
+        break;
+      }
+      stack.push(t);
+    } else if(t.k===TOK.LP){ stack.push(t); }
+    else if(t.k===TOK.RP){
+      let found=false;
+      while(stack.length){
+        const top=stack.pop();
+        if(top.k===TOK.LP){ found=true; break; }
+        out.push(top);
+      }
+      if(!found) throw new Error('Parentesi non bilanciate');
+    } else if(t.k===TOK.EQ||t.k===TOK.KW_CONST){ throw new Error('Posizione non valida del token'); }
+    else throw new Error('Token sconosciuto');
+  }
+  while(stack.length){
+    const t=stack.pop();
+    if(t.k===TOK.LP||t.k===TOK.RP) throw new Error('Parentesi non bilanciate');
+    out.push(t);
+  }
+  return out;
+}
+
+function evalRPN(rpn, env){
+  const st=[];
+  for(const t of rpn){
+    if(t.k===TOK.NUM) st.push(t.v);
+    else if(t.k===TOK.ID){
+      const id=t.v;
+      if(id==='Ans'){ st.push(State.Ans); }
+      else if(Object.prototype.hasOwnProperty.call(env.vars,id)) st.push(env.vars[id]);
+      else if(Object.prototype.hasOwnProperty.call(env.consts,id)) st.push(env.consts[id]);
+      else if(Object.prototype.hasOwnProperty.call(FUNCTIONS,id)){
+        const arg=st.pop();
+        if(arg===undefined) throw new Error(`Funzione ${id} senza argomento`);
+        st.push(FUNCTIONS[id](arg));
+      } else throw new Error(`Variabile sconosciuta: ${id}`);
+    } else if(t.k===TOK.OP){
+      const b=st.pop(), a=st.pop();
+      if(typeof a!=='number'||typeof b!=='number') throw new Error('Operandi non numerici');
+      if(t.v==='/'&&b===0) throw new Error('Divisione per zero');
+      const res=OPS[t.v].f(a,b);
+      if(!Number.isFinite(res)) throw new Error('Risultato non finito');
+      st.push(res);
+    } else throw new Error('RPN non valida');
+  }
+  if(st.length!==1) throw new Error('Espressione non valida');
+  return st[0];
+}
+
+function evaluate(input){
+  const tokens=tokenize(input);
+  if(!tokens.length) throw new Error('Vuoto');
+  if(tokens.length===1&&tokens[0].k===TOK.ID){
+    const kw=tokens[0].v.toLowerCase();
+    if(kw==='clear') return { cmd:'clear' };
+    if(kw==='del') return { cmd:'del' };
+    if(kw==='help') return { cmd:'help' };
+  }
+  const asg=parseAssignment(tokens);
+  if(asg){
+    if(!/^[A-Za-z_][A-Za-z0-9_]*$/.test(asg.name)) throw new Error('Nome non valido');
+    const rpn=toRPN(asg.expr);
+    const val=evalRPN(rpn,{ vars:State.vars, consts:State.consts });
+    if(asg.type==='const'){
+      if(Object.prototype.hasOwnProperty.call(State.consts,asg.name)) throw new Error('Costante già definita');
+      State.consts=Object.freeze(Object.assign({},State.consts,{ [asg.name]: val }));
+      return { ok:true, kind:'const', name:asg.name, value:val };
+    } else {
+      State.vars[asg.name]=val;
+      return { ok:true, kind:'var', name:asg.name, value:val };
+    }
+  } else {
+    const rpn=toRPN(tokens);
+    const val=evalRPN(rpn,{ vars:State.vars, consts:State.consts });
+    State.Ans=val;
+    return { ok:true, kind:'expr', value:val };
+  }
+}
+
+  // Rendering sicuro (solo textContent)
+ function renderTape() {
+  ui.tape.textContent = '';
+  const frag = document.createDocumentFragment();
+  State.tape.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'line';
+    const left = document.createElement('div');
+    const right = document.createElement('div');
+    const expr = document.createElement('div');
+    expr.className = 'expr';
+    expr.textContent = escapeStr(item.expr);
+    const time = document.createElement('div');
+    time.className = 'time';
+    time.textContent = escapeStr(item.t);
+    left.appendChild(expr);
+    left.appendChild(time);
+    const res = document.createElement('div');
+    res.className = 'res ' + (item.ok ? 'ok' : 'err');
+    res.textContent = item.ok ? String(item.valOrErr) : String(escapeStr(item.valOrErr));
+    right.appendChild(res);
+    row.appendChild(left);
+    row.appendChild(right);
+    frag.appendChild(row);
+  });
+  ui.tape.appendChild(frag);
+}
+
+function renderKv(view, obj) {
+  view.textContent = '';
+  const keys = Object.keys(obj).sort();
+  if (!keys.length) {
+    const m = document.createElement('div');
+    m.className = 'muted';
+    m.textContent = 'Nessun elemento';
+    view.appendChild(m);
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  keys.forEach(k => {
+    const val = obj[k];
+    const item = document.createElement('div');
+    item.className = 'kv-item';
+    const kk = document.createElement('div');
+    kk.className = 'kv-key';
+    kk.textContent = escapeStr(k);
+    const vv = document.createElement('div');
+    vv.className = 'kv-val';
+    vv.textContent = String(val);
+    item.appendChild(kk);
+    item.appendChild(vv);
+    frag.appendChild(item);
+  });
+  view.appendChild(frag);
+}
+
+  // Push tape con escape
+function pushTape(expr, ok, valOrErr) {
+  State.tape.push({ t: nowISO(), expr: String(expr), ok: !!ok, valOrErr });
+  if (State.tape.length > 1000) State.tape.shift();
+  renderTape(); save();
+}
+
+  // Funzione di escaping sicuro per stringhe
+function escapeStr(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Export sicuro
+function doExport() {
+  // Clona e "sanitizza" i valori testuali
+  const safeTape = State.tape.map(it => ({
+    t: escapeStr(it.t),
+    expr: escapeStr(it.expr),
+    ok: !!it.ok,
+    valOrErr: it.ok ? it.valOrErr : escapeStr(it.valOrErr)
+  }));
+  const safeVars = {};
+  Object.keys(State.vars).forEach(k => {
+    safeVars[escapeStr(k)] = State.vars[k];
+  });
+  const safeConsts = {};
+  Object.keys(State.consts).forEach(k => {
+    safeConsts[escapeStr(k)] = State.consts[k];
+  });
+
+  const payload = {
+    meta: { name: CONFIG.appName, version: CONFIG.version, exportedAt: new Date().toISOString() },
+    state: { tape: safeTape, vars: safeVars, consts: safeConsts }
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'calcolatrice-nastro.json';
+  a.href = url;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+  // Import sicuro
+function validateImported(obj) {
+  if (!obj || typeof obj !== 'object') throw new Error('File non valido');
+  const { meta, state } = obj;
+  if (!meta || typeof meta !== 'object') throw new Error('Meta mancante');
+  if (!state || typeof state !== 'object') throw new Error('State mancante');
+  const { tape, vars, consts } = state;
+  if (!Array.isArray(tape)) throw new Error('Tape non valido');
+  tape.forEach(it => {
+    if (!it || typeof it !== 'object') throw new Error('Elemento tape non valido');
+    if (typeof it.t !== 'string' || typeof it.expr !== 'string' || typeof it.ok !== 'boolean') throw new Error('Campo tape mancante');
+    if (!('valOrErr' in it)) throw new Error('Campo tape mancante');
+    // coercizione sicura e sanitizzazione
+    it.t = escapeStr(it.t);
+    it.expr = escapeStr(it.expr);
+    it.valOrErr = it.ok ? Number(it.valOrErr) : escapeStr(it.valOrErr);
+    if (it.ok && !Number.isFinite(it.valOrErr)) throw new Error('Risultato non valido');
+  });
+  if (!vars || typeof vars !== 'object') throw new Error('Vars non valide');
+  Object.keys(vars).forEach(k => {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(k)) throw new Error('Nome variabile non valido');
+    const v = vars[k];
+    if (typeof v !== 'number' || !Number.isFinite(v)) throw new Error('Valore variabile non valido');
+  });
+  if (!consts || typeof consts !== 'object') throw new Error('Consts non valide');
+  Object.keys(consts).forEach(k => {
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(k)) throw new Error('Nome costante non valido');
+    const v = consts[k];
+    if (typeof v !== 'number' || !Number.isFinite(v)) throw new Error('Valore costante non valido');
+  });
+  return { tape, vars, consts };
+}
+
+  function doImport(file, replace) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        // blocca BOM/garbage
+        const txt = String(reader.result);
+        const parsed = JSON.parse(txt);
+        const { tape, vars, consts } = validateImported(parsed);
+        if (replace) {
+          State.tape = clone(tape).slice(-1000);
+          State.vars = clone(vars);
+          State.consts = Object.freeze(Object.assign({}, consts));
+        } else {
+          // merge sicuro
+          State.tape = State.tape.concat(clone(tape)).slice(-1000);
+          State.vars = Object.assign({}, State.vars, clone(vars));
+          State.consts = Object.freeze(Object.assign({}, State.consts, consts));
+        }
+        renderTape(); renderKv(ui.varsView, State.vars); renderKv(ui.constsView, State.consts); save();
+        alert('Import completato');
+      } catch (e) {
+        alert('Import fallito: ' + (e && e.message ? e.message : 'Errore'));
+      }
+    };
+    reader.onerror = () => alert('Lettura file fallita');
+    reader.readAsText(file, 'utf-8');
+  }
+
+
+
+
+
+ // Print sicuro
+function doPrint() {
+  const w = window.open('', '_blank', 'width=800,height=600');
+  if (!w) return alert('Impossibile aprire la finestra di stampa');
+
+  const doc = w.document;
+  doc.open();
+  doc.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Stampa Nastro Calcolatrice</title></head><body></body></html>');
+  doc.close();
+
+  const body = doc.body;
+
+  const h1 = doc.createElement('h1');
+  h1.textContent = 'Nastro Calcolatrice';
+  body.appendChild(h1);
+
+  // Funzione per rendere le entità visibili letteralmente
+  function escapeForPrint(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')   // prima & deve diventare &amp;
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Nastro
+  const tapeDiv = doc.createElement('div');
+  tapeDiv.id = 'tape';
+  State.tape.forEach(item => {
+    const line = doc.createElement('div');
+    line.className = 'line';
+
+    const left = doc.createElement('div');
+    const exprDiv = doc.createElement('div');
+    exprDiv.className = 'expr';
+    exprDiv.textContent = escapeForPrint(item.expr);
+    const timeDiv = doc.createElement('div');
+    timeDiv.className = 'time';
+    timeDiv.textContent = escapeForPrint(item.t);
+    left.appendChild(exprDiv);
+    left.appendChild(timeDiv);
+
+    const right = doc.createElement('div');
+    const resDiv = doc.createElement('div');
+    resDiv.className = 'res ' + (item.ok ? 'ok' : 'err');
+    resDiv.textContent = escapeForPrint(String(item.valOrErr));
+    right.appendChild(resDiv);
+
+    line.appendChild(left);
+    line.appendChild(right);
+    tapeDiv.appendChild(line);
+  });
+  body.appendChild(tapeDiv);
+
+  // Variabili
+  const varsH2 = doc.createElement('h2');
+  varsH2.textContent = 'Variabili';
+  body.appendChild(varsH2);
+  const varsDiv = doc.createElement('div');
+  varsDiv.className = 'vars';
+  if (Object.keys(State.vars).length === 0) {
+    const m = doc.createElement('div');
+    m.textContent = 'Nessuna variabile';
+    varsDiv.appendChild(m);
+  } else {
+    Object.keys(State.vars).sort().forEach(k => {
+      const item = doc.createElement('div');
+      item.className = 'kv-item';
+      const keyDiv = doc.createElement('div');
+      keyDiv.className = 'kv-key';
+      keyDiv.textContent = escapeForPrint(k);
+      const valDiv = doc.createElement('div');
+      valDiv.className = 'kv-val';
+      valDiv.textContent = escapeForPrint(String(State.vars[k]));
+      item.appendChild(keyDiv);
+      item.appendChild(valDiv);
+      varsDiv.appendChild(item);
+    });
+  }
+  body.appendChild(varsDiv);
+
+  // Costanti
+  const constsH2 = doc.createElement('h2');
+  constsH2.textContent = 'Costanti';
+  body.appendChild(constsH2);
+  const constsDiv = doc.createElement('div');
+  constsDiv.className = 'consts';
+  if (Object.keys(State.consts).length === 0) {
+    const m = doc.createElement('div');
+    m.textContent = 'Nessuna costante';
+    constsDiv.appendChild(m);
+  } else {
+    Object.keys(State.consts).sort().forEach(k => {
+      const item = doc.createElement('div');
+      item.className = 'kv-item';
+      const keyDiv = doc.createElement('div');
+      keyDiv.className = 'kv-key';
+      keyDiv.textContent = escapeForPrint(k);
+      const valDiv = doc.createElement('div');
+      valDiv.className = 'kv-val';
+      valDiv.textContent = escapeForPrint(String(State.consts[k]));
+      item.appendChild(keyDiv);
+      item.appendChild(valDiv);
+      constsDiv.appendChild(item);
+    });
+  }
+  body.appendChild(constsDiv);
+
+  // Stile
+  const style = doc.createElement('style');
+  style.textContent = `
+    body { font-family: monospace; padding: 20px; }
+    .line { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .expr { font-weight: bold; }
+    .res.ok { color: green; }
+    .res.err { color: red; }
+    .vars, .consts { margin-top: 20px; }
+    .kv-item { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  `;
+  doc.head.appendChild(style);
+
+  w.focus();
+  w.print();
+}
+
+
+
+  // Eventi UI
+  ui.btnEval.addEventListener('click', () => runEval());
+  ui.input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); runEval(); }
+    if (e.key === 'Escape') { ui.input.value = ''; }
+  });
+  ui.btnClearLast.addEventListener('click', () => {
+    if (State.tape.length) {
+      State.tape.pop();
+      renderTape(); save();
+    }
+  });
+  ui.btnClearAll.addEventListener('click', () => {
+    if (confirm('Sicuro di voler pulire tutto il nastro?')) {
+      State.tape = [];
+      renderTape(); save();
+    }
+  });
+  ui.btnExport.addEventListener('click', doExport);
+  ui.fileImport.addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    if (f.type !== 'application/json' && !/\.json$/i.test(f.name)) {
+      alert('Seleziona un file JSON');
+      e.target.value = '';
+      return;
+    }
+    doImport(f, !!ui.chkReplace.checked);
+    e.target.value = '';
+  });
+  ui.btnPrint.addEventListener('click', doPrint);
+
+  function runEval(){
+  const expr=(ui.input.value||'').trim();
+  if(!expr) return;
+  try{
+    const res=evaluate(expr);
+    if(res && res.cmd){
+      if(res.cmd==='clear'){ State.tape=[]; renderTape(); save(); pushTape('clear',true,'OK'); }
+      else if(res.cmd==='del'){ if(State.tape.length){ State.tape.pop(); renderTape(); save(); } }
+      else if(res.cmd==='help'){ pushTape('help',true,'Supporto: + - * / % ^ ( )\nFunzioni: sin cos tan asin acos atan sqrt log ln exp abs floor ceil round min max pow factorial\nAssegnazioni: x=2+3\nCostanti: const PI=3.14\nComandi: clear, del, help'); }
+    } else if(res && res.ok){
+      if(res.kind==='expr'){ pushTape(expr,true,res.value); }
+      else if(res.kind==='var'){ renderKv(ui.varsView,State.vars); save(); pushTape(`${res.name} =`,true,res.value); }
+      else if(res.kind==='const'){ renderKv(ui.constsView,State.consts); save(); pushTape(`const ${res.name} =`,true,res.value); }
+    }
+    ui.input.select();
+  } catch(e){
+    const msg=e && e.message ? e.message:'Errore';
+    pushTape(expr,false,msg);
+    ui.input.select();
+  }
+}
+
+  // Init
+  load();
+  renderTape();
+  renderKv(ui.varsView, State.vars);
+  renderKv(ui.constsView, State.consts);
+})();
+
+
+
+
+
+
+
+
+
+</script>
 
 
 

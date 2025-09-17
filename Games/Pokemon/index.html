@@ -2029,10 +2029,10 @@ document.write( '<p>&#10240;</p>' );
         <div class="graphine-data-list" id="graphine-data-list" role="list" aria-label="Lista di etichette e valori"></div>
 
         <div style="display:flex;flex-direction:column;gap:6px;">
-          <button id="graphine-add-row" class="graphine-btn" aria-label="Aggiungi riga">Aggiungi</button>
-          <button id="graphine-remove-row" class="graphine-btn" aria-label="Rimuovi ultima riga">Rimuovi</button>
-          <button id="graphine-import" class="graphine-btn" aria-label="Importa dati JSON">Importa</button>
-          <button id="graphine-export" class="graphine-btn" aria-label="Esporta dati JSON">Esporta</button>
+          <button id="graphine-add-row" class="graphine-btn" aria-label="Aggiungi riga">&#10133; Aggiungi</button>
+          <button id="graphine-remove-row" class="graphine-btn" aria-label="Rimuovi ultima riga">&#10134; Rimuovi</button>
+          <button id="graphine-import" class="graphine-btn" aria-label="Importa dati JSON">&#11015;&#65039; Importa</button>
+          <button id="graphine-export" class="graphine-btn" aria-label="Esporta dati JSON">&#11014;&#65039; Esporta</button>
         </div>
       </div>
     </div>
@@ -2069,6 +2069,43 @@ document.write( '<p>&#10240;</p>' );
   const importBtn = shadow.getElementById('graphine-import');
   const exportBtn = shadow.getElementById('graphine-export');
   const wrap = shadow.getElementById('graphine-canvas-wrap');
+
+// Dopo exportBtn
+const printBtn = document.createElement('button');
+printBtn.textContent = '🖨️ Stampa Grafico';
+printBtn.className = 'graphine-btn';
+printBtn.title = 'Stampa il grafico';
+exportBtn.insertAdjacentElement('afterend', printBtn); // lo posiziona subito sotto "Esporta"
+
+// Evento click
+printBtn.addEventListener('click', () => {
+  const svgClone = svg.cloneNode(true);
+  const w = svg.viewBox.baseVal.width;
+  const h = svg.viewBox.baseVal.height;
+  svgClone.setAttribute('width', w);
+  svgClone.setAttribute('height', h);
+
+  const printWin = window.open('', '_blank');
+  printWin.document.write(`
+    <html>
+      <head>
+        <title>Stampa Grafico</title>
+        <style type="text/css">
+          body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+          svg { max-width: 100%; max-height: 100%; }
+        </style>
+      </head>
+      <body>
+      </body>
+    </html>
+  `);
+  printWin.document.body.appendChild(svgClone);
+  printWin.document.close();
+  printWin.focus();
+  printWin.print();
+});
+
+
 
   function sanitizeText(str) {
     return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');

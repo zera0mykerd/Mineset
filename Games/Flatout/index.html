@@ -433,12 +433,12 @@ input[type=file] { display: none; }
 
 
 
-#btnConnect,#btnDelete,#Importer,#btnDisconnect,#btnExport,label[for="fileImport"]{
+#btnConnect,#btnPrint,#btnDelete,#Importer,#btnDisconnect,#btnExport,label[for="fileImport"]{
   display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;
   padding:8px 16px;font-size:16px;border-radius:8px;border:1px solid #888;background:#fff;transition:all 0.2s ease;
 }
 
-#btnConnect:hover,#btnDelete:hover,#Importer:hover,#btnDisconnect:hover,#btnExport:hover,label[for="fileImport"]:hover{
+#btnConnect:hover,#btnDelete:hover,#btnPrint:hover,#Importer:hover,#btnDisconnect:hover,#btnExport:hover,label[for="fileImport"]:hover{
   background:#f0f8ff;border-color:#2a9;
   box-shadow: 0 3px 6px rgba(0,0,0,0.6);
 }
@@ -446,6 +446,7 @@ input[type=file] { display: none; }
 @media (prefers-color-scheme: dark) {
   #btnConnect:hover,
   #btnDelete:hover,
+  #btnPrint:hover,
   #Importer:hover,
   #btnDisconnect:hover,
   #btnExport:hover,
@@ -459,8 +460,8 @@ input[type=file] { display: none; }
 
 #btnConnect.active{background:#2a9;color:#fff;border-color:#2a9;}
 @media(prefers-color-scheme:dark){
-  #btnConnect,#btnDelete,#Importer,#btnDisconnect,#btnExport,label[for="fileImport"]{background:#2c2c2c;border-color:#666;color:#eee;}
-  #btnConnect:hover,#btnDelete:hover,#btnDisconnect:hover,#btnExport:hover,label[for="fileImport"]:hover{background:#333;border-color:#2a9;}
+  #btnConnect,#btnDelete,#btnPrint,#Importer,#btnDisconnect,#btnExport,label[for="fileImport"]{background:#2c2c2c;border-color:#666;color:#eee;}
+  #btnConnect:hover,#btnDelete:hover,#btnPrint:hover,#btnDisconnect:hover,#btnExport:hover,label[for="fileImport"]:hover{background:#333;border-color:#2a9;}
   #btnConnect.active{background:#2a9;color:#fff;border-color:#2a9;}
 }
  
@@ -2117,9 +2118,10 @@ document.write( '</center>' );
 <div class="pal" data-type="hexagon">&#x1F527; Preparazione</div> <!-- 🔧 -->
 
 
+
     </div>
     <div style="margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-	
+	<button id="btnPrint">&#x1F5A8;&#xFE0F; Stampa</button>
       <button id="btnConnect">&#x1F517; Connetti</button>      <!-- 🔗 -->
 	  <button id="btnDisconnect">&#128268; Disconnetti</button> <!-- ✂️ -->
 <button id="btnDelete">&#x1F5D1; Elimina</button>       <!-- 🗑 -->
@@ -2139,6 +2141,7 @@ document.write( '</center>' );
   <div id="info">Doppio clic su una forma per cambiare il testo. Usa “Connetti” per collegare, “Elimina” per rimuovere la forma selezionata. Vai sui pulsanti e trascina per creare nuove forme. Compatibile sia in light che in dark mode e funziona anche col touch.</div>
 <!--<button id="btnPrintSafe">Stampa presentazione</button><br>-->
 </div>
+
 
 <center><canvas oncontextmenu="return false;"></canvas></center>
 
@@ -3344,6 +3347,82 @@ palette.forEach(p => {
   const btnExport=document.getElementById('btnExport');
   const fileImport=document.getElementById('fileImport');
   const btnDisconnect = document.getElementById('btnDisconnect');
+  
+  
+const btnPrint = document.getElementById('btnPrint');
+
+btnPrint.addEventListener('click', () => {
+  const printWindow = window.open('', '', 'width=1000,height=800');
+  if (!printWindow) return;
+
+  // Cloniamo i nodi in sicurezza (solo textContent)
+  function safeCloneNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) return document.createTextNode(node.textContent);
+    const clone = document.createElement(node.tagName);
+    if (node.className) clone.className = node.className;
+    if (node.style.cssText) clone.style.cssText = node.style.cssText;
+    node.childNodes.forEach(child => clone.appendChild(safeCloneNode(child)));
+    return clone;
+  }
+
+  const cloneWrap = safeCloneNode(wrap);
+
+  // Creiamo un nuovo SVG con le stesse linee, usando le posizioni già calcolate
+  const printSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  printSvg.setAttribute('width', wrap.offsetWidth);
+  printSvg.setAttribute('height', wrap.offsetHeight);
+
+  links.forEach(l => {
+    const a = nodes[l.from];
+    const b = nodes[l.to];
+    if (!a || !b) return;
+
+    const ra = a.getBoundingClientRect();
+    const rb = b.getBoundingClientRect();
+    const rw = wrap.getBoundingClientRect();
+    const x1 = ra.left - rw.left + ra.width / 2;
+    const y1 = ra.top - rw.top + ra.height / 2;
+    const x2 = rb.left - rw.left + rb.width / 2;
+    const y2 = rb.top - rw.top + rb.height / 2;
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', '#333');
+    line.setAttribute('stroke-width', '2');
+    printSvg.appendChild(line);
+  });
+
+  // Scriviamo HTML della finestra
+  printWindow.document.write('<!DOCTYPE html><html><head><title>Stampa Diagramma</title><style type="text/css">');
+  printWindow.document.write(`
+    body{margin:0;padding:0;position:relative;}
+    #canvasWrap{position:relative;width:${wrap.offsetWidth}px;height:${wrap.offsetHeight}px;}
+    .node{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;font-family:sans-serif;}
+    .oval{border-radius:50%;border:2px solid #000;background:#fff;}
+    .rect{border:2px solid #000;background:#fff;}
+    .diamond{width:80px;height:80px;transform:rotate(45deg);border:2px solid #000;background:#fff;display:flex;align-items:center;justify-content:center;}
+    .parallelogram{width:100px;height:50px;transform:skew(20deg);border:2px solid #000;background:#fff;display:flex;align-items:center;justify-content:center;}
+    .doc{width:60px;height:80px;border:2px solid #000;background:#fff;clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);display:flex;align-items:center;justify-content:center;}
+    .cylinder{width:60px;height:80px;border:2px solid #000;background:#fff;border-radius:50% / 10%;display:flex;align-items:center;justify-content:center;}
+    .hexagon{width:80px;height:46px;background:#fff;border-left:2px solid #000;border-right:2px solid #000;position:relative;}
+    .hexagon:before,.hexagon:after{content:"";position:absolute;width:0;border-left:40px solid transparent;border-right:40px solid transparent;}
+    .hexagon:before{bottom:100%;border-bottom:23px solid #fff;}
+    .hexagon:after{top:100%;border-top:23px solid #fff;}
+    svg{position:absolute;top:0;left:0;}
+  `);
+  printWindow.document.write('</style></head><body></body></html>');
+
+  printWindow.document.body.appendChild(cloneWrap);
+  printWindow.document.body.appendChild(printSvg);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+});
+
+
 
   let nodes={}, links=[], idCount=1, connectMode=false, connectFrom=null, selected=null;
 
