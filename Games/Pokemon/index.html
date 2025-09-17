@@ -2574,42 +2574,47 @@ function addDoubleTapDoubleClick(element, cb) {
         render();
       });
 
-      const valInput = document.createElement('input');
-      valInput.type = 'text';
-      valInput.value = String(d.value);
-      valInput.setAttribute('aria-label', `Valore ${i+1}`);
-	  
-	  
-      valInput.addEventListener('change', (e) => {
-    const raw = e.target.value.trim();
 
-    if (!/^[0-9\.\-;, ]+$/.test(raw)) {
-        window.alert('Valore non valido. Usare numeri o coppie "x,y" o "x;y".');
-        e.target.value = String(state.data[i].value);
-        return;
-    }
+const valInput = document.createElement('input');
+valInput.type = 'number';
+valInput.step = 'any';
+valInput.min = '0';
+valInput.max = '65535';
+valInput.value = String(d.value);
+valInput.setAttribute('aria-label', `Valore ${i+1}`);
 
-    let numVal;
-    if (raw.includes(',') || raw.includes(';')) {
-        const parts = raw.split(/[;,]/).map(v => Number(v.trim()));
-        if (parts.some(isNaN)) {
-            window.alert('Valore non valido. Tutti i numeri devono essere validi.');
-            e.target.value = String(state.data[i].value);
-            return;
-        }
-        numVal = parts;
-    } else {
-        numVal = Number(raw);
-        if (isNaN(numVal)) {
-            window.alert('Valore non valido. Inserire un numero valido.');
-            e.target.value = String(state.data[i].value);
-            return;
-        }
-    }
+valInput.addEventListener('change', (e) => {
+  const raw = e.target.value.trim();
 
-    state.data[i].value = numVal;
-    render();
+  // regex originale per sicurezza
+  if (!/^[0-9\.\-;, ]+$/.test(raw)) {
+      window.alert('Valore non valido. Usare numeri o coppie "x,y" o "x;y".');
+      e.target.value = String(state.data[i].value);
+      return;
+  }
+
+  let numVal;
+  if (raw.includes(',') || raw.includes(';')) {
+      const parts = raw.split(/[;,]/).map(v => Number(v.trim()));
+      if (parts.some(v => isNaN(v) || v < 0 || v > 65535)) {
+          window.alert('Valore non valido. Tutti i numeri devono essere tra 0 e 65535.');
+          e.target.value = String(state.data[i].value);
+          return;
+      }
+      numVal = parts;
+  } else {
+      numVal = Number(raw);
+      if (isNaN(numVal) || numVal < 0 || numVal > 65535) {
+          window.alert('Valore non valido. Inserire un numero tra 0 e 65535.');
+          e.target.value = String(state.data[i].value);
+          return;
+      }
+  }
+
+  state.data[i].value = numVal;
+  render();
 });
+
 
       const colorPreview = document.createElement('div');
       colorPreview.style.width = '18px';
