@@ -57,7 +57,6 @@ I want to bring good old Paint into the modern era.
 * **Extras > Themes** to change the look of the app.
   * Dark and light variants
   * Vector tool icons handcrafted to match the pixel art versions, for both Modern and Classic themes
-  * Occult theme, in the spirit of Halloween
   * Winter theme, with a special color palette including candy cane stripes, and advent calendar style flaps revealing pixel art for each tool
   * Bubblegum theme, featuring *Business Pink* color scheme and AI-generated icons
 * **Extras > Enlarge UI** to make buttons and menus bigger, for usage with an eye tracker, head tracker, or other course input devices. May also work well for a tablet, but not so much for a phone at the moment.
@@ -381,7 +380,7 @@ use `npm run dev` to start a live-reloading server.
 Make sure any layout-important styles go in `layout.css`.
 When updating `layout.css`, a right-to-left version of the stylesheet is generated, using [RTLCSS](https://rtlcss.com/).  
 You should test the RTL layout by changing the language to Arabic or Hebrew.
-Go to **Extras > Language > العربية** or **עברית**.  
+Go to **Extras > Language > العربية**.  
 See [Control Directives](https://rtlcss.com/learn/usage-guide/control-directives/) for how to control the RTL layout.
 
 There is a VS Code launch task for attaching to Chrome for debugging.
@@ -809,7 +808,6 @@ Arguments:
 	- `"dark.css"`: the Dark theme.
 	- `"modern.css"`: the Modern theme.
 	- `"winter.css"`: the festive Winter theme.
-	- `"occult.css"`: a Satanic theme.
 
 #### <a href="#set_language" id="set_language">function `set_language(language_code)`</a>
 [`set_language`]: #set_language
