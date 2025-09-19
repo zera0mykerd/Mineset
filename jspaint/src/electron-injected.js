@@ -43,7 +43,7 @@ ipcRenderer.on("open-file", (_event, file_path) => {
 		}
 	}, (error) => {
 		// this handler is not always called, sometimes error message is shown from readBlobFromHandle
-		show_error_message(`Failed to open file ${file_path}`, error);
+		show_error_message(`Fallito in aprire il file ${file_path}`, error);
 	});
 });
 
@@ -78,13 +78,13 @@ ipcRenderer.on("show-about-dialog", (_event) => {
 
 function show_save_error_message(responseCode, error) {
 	if (responseCode === "ACCESS_DENIED") {
-		return show_error_message(localize("Access denied."));
+		return show_error_message(localize("Accesso negato."));
 	}
 	if (responseCode === "INVALID_DATA") {
-		return show_error_message("Failed to save: Invalid data. This shouldn't happen!");
+		return show_error_message("Impossibile salvare: dati non validi. Questo non dovrebbe accadere!");
 	}
 	if (responseCode !== "SUCCESS") {
-		return show_error_message(localize("Failed to save document."), error);
+		return show_error_message(localize("Impossibile salvare il documento."), error);
 	}
 	// return show_save_error_message(localize("No error occurred."));
 }
@@ -113,14 +113,14 @@ window.systemHooks.showSaveFileDialog = async ({ formats, defaultFileName, defau
 		// This is not the Electron API directly, but it's similar
 		// fileName stuff is added so I don't need to do equivalent to path.basename() in the renderer
 		({ filePath, fileName, canceled } = await ipcRenderer.invoke("show-save-dialog", {
-			title: localize("Save As"),
+			title: localize("Salva In"),
 			// defaultPath: defaultPath || path.basename(defaultFileName),
 			defaultFileName,
 			defaultPath,
 			filters,
 		}));
 	} catch (error) {
-		show_error_message(localize("Failed to save document."), error);
+		show_error_message(localize("Impossibile salvare il documento."), error);
 	}
 	if (canceled) {
 		return;
@@ -130,15 +130,15 @@ window.systemHooks.showSaveFileDialog = async ({ formats, defaultFileName, defau
 	if (!extension) {
 		// @TODO: Linux/Unix?? you're not supposed to need file extensions
 		// should it use defaultFileFormatID?
-		return show_error_message("Missing file extension - Try adding .png to the end of the file name");
+		return show_error_message("Estensione file mancante: prova ad aggiungere .png alla fine del nome del file");
 	}
 	const format = get_format_from_extension(formats, filePath);
 	if (!format) {
-		return show_error_message(`Can't save as *.${extension} - Try adding .png to the end of the file name`);
+		return show_error_message(`Impossibile salvare *.${extension} - Prova ad aggiungere .png alla fine del nome del file`);
 	}
 	const blob = await getBlob(format.formatID);
 	const { responseCode, error } = await write_blob_to_file_path(filePath, blob);
-	if (responseCode !== "SUCCESS") {
+	if (responseCode !== "SUCCESSO!!!") {
 		return show_save_error_message(responseCode, error);
 	}
 	savedCallbackUnreliable?.({
@@ -160,7 +160,7 @@ window.systemHooks.showOpenFileDialog = async ({ formats, defaultPath }) => {
 		defaultPath,
 	});
 	if (canceled) {
-		throw new Error("user canceled");
+		throw new Error("Utente cancellato");
 	}
 	const filePath = filePaths[0];
 	const file = await window.systemHooks.readBlobFromHandle(filePath);
@@ -169,12 +169,12 @@ window.systemHooks.showOpenFileDialog = async ({ formats, defaultPath }) => {
 
 window.systemHooks.writeBlobToHandle = async (filePath, blob) => {
 	if (typeof filePath !== "string") {
-		show_error_message("writeBlobToHandle in Electron expects a file path, got " + filePath);
+		show_error_message("writeBlobToHandle in Electron si aspetta un percorso di file, ottenuto " + filePath);
 		// should it fall back to default writeBlobToHandle?
 		return false;
 	}
 	const { responseCode, error } = await write_blob_to_file_path(filePath, blob);
-	if (responseCode !== "SUCCESS") {
+	if (responseCode !== "SUCCESSO!!!") {
 		show_save_error_message(responseCode, error);
 		return false;
 	}
@@ -182,17 +182,17 @@ window.systemHooks.writeBlobToHandle = async (filePath, blob) => {
 };
 window.systemHooks.readBlobFromHandle = async (filePath) => {
 	if (typeof filePath !== "string") {
-		show_error_message("readBlobFromHandle in Electron expects a file path, got " + filePath);
+		show_error_message("readBlobFromHandle in Electron si aspetta un percorso di file, ottenuto " + filePath);
 		return;
 		// should it fall back to default readBlobFromHandle?
 	}
 	const { responseCode, error, data, fileName } = await ipcRenderer.invoke("read-file", filePath);
 	if (responseCode === "ACCESS_DENIED") {
-		show_error_message(localize("Access denied."));
+		show_error_message(localize("Accesso negato."));
 		return;
 	}
-	if (responseCode !== "SUCCESS") {
-		show_error_message(localize("Paint cannot open this file."), error);
+	if (responseCode !== "SUCCESSO!!!") {
+		show_error_message(localize("Paint non può aprire questo file."), error);
 		return;
 	}
 	const file = new File([new Uint8Array(data)], fileName);
@@ -222,25 +222,25 @@ window.systemHooks.setWallpaperCentered = (canvas) => {
 			blob.arrayBuffer().then((arrayBuffer) => {
 				ipcRenderer.invoke("set-wallpaper", arrayBuffer).then(({ responseCode, error }) => {
 					if (responseCode === "WRITE_TEMP_PNG_FAILED") {
-						return show_error_message("Failed to set wallpaper: Couldn't write temporary image file.", error);
+						return show_error_message("Impossibile impostare lo sfondo: impossibile scrivere il file immagine temporaneo.", error);
 					}
 					if (responseCode === "INVALID_DATA") {
-						return show_error_message("Failed to set wallpaper. Invalid data in IPC.", error);
+						return show_error_message("Impossibile impostare lo sfondo. Dati non validi in IPC.", error);
 					}
 					if (responseCode === "INVALID_PNG_DATA") {
-						return show_error_message(`Failed to set wallpaper.\n\n${localize("Unexpected file format.")}`, error);
+						return show_error_message(`Impossibile impostare lo sfondo.\n\n${localize("Formato file imprevisto.")}`, error);
 					}
 					if (responseCode === "XFCONF_FAILED") {
-						return show_error_message("Failed to set wallpaper (for Xfce).", error);
+						return show_error_message("Impossibile impostare lo sfondo (per Xfce).", error);
 					}
-					if (responseCode !== "SUCCESS") {
-						return show_error_message("Failed to set wallpaper.", error);
+					if (responseCode !== "SUCCESSO!!!") {
+						return show_error_message("Impossibile impostare lo sfondo.", error);
 					}
 				}).catch((error) => {
-					show_error_message("Failed to set wallpaper.", error);
+					show_error_message("Impossibile impostare lo sfondo.", error);
 				});
 			}, (error) => {
-				show_error_message("Failed to set wallpaper: Couldn't read blob as array buffer.", error);
+				show_error_message("Impossibile impostare lo sfondo: impossibile leggere il blob come buffer array.", error);
 			});
 		});
 	});

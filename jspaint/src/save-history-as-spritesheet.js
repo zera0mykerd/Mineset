@@ -37,7 +37,7 @@ for (const frame_history_node of frame_history_nodes) {
 write_image_file(sheet_canvas, "image/png", (blob) => {
 	const suggested_file_name = `${file_name.replace(/\.(bmp|dib|a?png|gif|jpe?g|jpe|jfif|tiff?|webp|raw)$/i, "")} history animation sheet.png`;
 	systemHooks.showSaveFileDialog({
-		dialogTitle: localize("Save As"), // localize("Save Animation As"),
+		dialogTitle: localize("Salva In"), // localize("Save Animation As"),
 		getBlob: () => blob,
 		defaultFileName: suggested_file_name,
 		defaultPath: typeof system_file_handle === "string" ? `${system_file_handle.replace(/[/\\][^/\\]*/, "")}/${suggested_file_name}` : null,

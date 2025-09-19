@@ -80,7 +80,7 @@ class OnCanvasSelection extends OnCanvasObject {
 				get_rect: () => ({ x: this.x, y: this.y, width: this.width, height: this.height }),
 				set_rect: ({ x, y, width, height }) => {
 					undoable({
-						name: "Resize Selection",
+						name: "Ridimensiona selezione",
 						icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 						soft: true,
 					}, () => {
@@ -102,7 +102,7 @@ class OnCanvasSelection extends OnCanvasObject {
 					match: (history_node) =>
 						(e.shiftKey && /^(Smear|Stamp|Move) Selection$/.test(history_node.name)) ||
 						(!e.shiftKey && /^Move Selection$/.test(history_node.name)),
-					name: e.shiftKey ? "Smear Selection" : "Move Selection",
+					name: e.shiftKey ? "Selezione della sbavatura" : "Sposta selezione",
 					update_name: true,
 					icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 					soft: true,
@@ -135,7 +135,7 @@ class OnCanvasSelection extends OnCanvasObject {
 				if (e.shiftKey) {
 					// Stamp or start to smear selection
 					undoable({
-						name: "Stamp Selection",
+						name: "Stampa Selezione",
 						icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 						soft: true,
 					}, () => {
@@ -144,7 +144,7 @@ class OnCanvasSelection extends OnCanvasObject {
 				} else if (e.ctrlKey) { // @TODO: how should this work for macOS? where ctrl+click = secondary click?
 					// Stamp selection
 					undoable({
-						name: "Stamp Selection",
+						name: "Stampa Selezione",
 						icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 						soft: true,
 					}, () => {

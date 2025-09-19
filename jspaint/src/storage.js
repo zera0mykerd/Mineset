@@ -62,7 +62,7 @@ const localStore = {
 				[key_or_pairs]: value_or_callback,
 			};
 		} else if (Array.isArray(key_or_pairs)) {
-			throw new TypeError("Cannot set an array of keys (to what?)");
+			throw new TypeError("Non è possibile impostare un array di chiavi (su cosa?)");
 		} else {
 			to_set = key_or_pairs;
 			callback = /** @type {(error: Error) => void} */ (value_or_callback);

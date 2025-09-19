@@ -153,7 +153,7 @@ exports.showMessageBox = window.showMessageBox || showMessageBox_implementation;
 // https://github.com/1j01/98/blob/361bd759a6d9b71d0fad9e479840598dc0128bb6/src/iframe-windows.js#L111
 // Any other default parameters need to be handled there (as it works now)
 
-window.defaultMessageBoxTitle = localize("Paint");
+window.defaultMessageBoxTitle = localize("MKPaint");
 
 // Don't override alert, because I only use it as a fallback for global error handling.
 // If make_window_supporting_scale is not defined, then alert is used instead,

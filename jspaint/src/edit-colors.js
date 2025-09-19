@@ -78,7 +78,7 @@ function show_edit_colors_window($swatch_to_edit, color_selection_slot_to_edit) 
 		// toggling vertical color box mode, or monochrome document mode.
 		$swatch_to_edit = $(/** @type {HTMLDivElement} */($palette.find(".swatch")[swatch_index]));
 		if (!$swatch_to_edit.length) {
-			show_error_message("Swatch no longer exists.");
+			show_error_message("Swatch non esiste più.");
 			return;
 		}
 
@@ -129,7 +129,7 @@ function show_edit_colors_window($swatch_to_edit, color_selection_slot_to_edit) 
 					ctx.putImageData(image_data, 0, 0);
 				};
 				undoable({
-					name: "Recolor",
+					name: "Ricolora",
 					icon: get_help_folder_icon("p_color.png"),
 				}, () => {
 					recolor(main_ctx, main_monochrome_info.presentNonTransparentRGBAs);
@@ -165,7 +165,7 @@ function choose_color(initial_color, callback) {
 	if ($edit_colors_window) {
 		$edit_colors_window.close();
 	}
-	const $w = $DialogWindow(localize("Edit Colors"));
+	const $w = $DialogWindow(localize("Modifica colori"));
 	$w.addClass("edit-colors-window");
 	$edit_colors_window = $w;
 
@@ -264,9 +264,9 @@ function choose_color(initial_color, callback) {
 	const $left_right_split = $(`<div class="left-right-split">`).appendTo($w.$main);
 	const $left = $(`<div class="left-side">`).appendTo($left_right_split);
 	const $right = $(`<div class="right-side">`).appendTo($left_right_split).hide();
-	$left.append(`<label for="basic-colors">${render_access_key("&Basic colors:")}</label>`);
+	$left.append(`<label for="basic-colors">${render_access_key("&Colori basilari:")}</label>`);
 	const $basic_colors_grid = make_color_grid(basic_colors, "basic-colors").appendTo($left);
-	$left.append(`<label for="custom-colors">${render_access_key("&Custom colors:")}</label>`);
+	$left.append(`<label for="custom-colors">${render_access_key("&Colori personalizzati:")}</label>`);
 	const custom_colors_dom_order = []; // (wanting) horizontal top to bottom
 	for (let list_index = 0; list_index < custom_colors.length; list_index++) {
 		const row = list_index % 2;
@@ -286,7 +286,7 @@ function choose_color(initial_color, callback) {
 	}
 
 	const $define_custom_colors_button = $(`<button class="define-custom-colors-button" type="button">`)
-		.html(render_access_key("&Define Custom Colors >>"))
+		.html(render_access_key("&Definisci colori >>"))
 		.appendTo($left)
 		.on("click", (e) => {
 			// prevent the form from submitting
@@ -313,7 +313,7 @@ function choose_color(initial_color, callback) {
 	};
 	$(window).on("resize", maybe_reenable_button_for_mobile_navigation);
 
-	const $color_solid_label = $(`<label for="color-solid-canvas">${render_access_key("Color|S&olid")}</label>`);
+	const $color_solid_label = $(`<label for="color-solid-canvas">${render_access_key("Colore|Solido")}</label>`);
 	$color_solid_label.css({
 		position: "absolute",
 		left: 10,
@@ -423,12 +423,12 @@ function choose_color(initial_color, callback) {
 	["hsl", "rgb"].forEach((color_model, color_model_index) => {
 		[...color_model].forEach((component_letter, component_index) => {
 			const text_with_hotkey = {
-				h: "Hu&e:",
-				s: "&Sat:",
-				l: "&Lum:",
-				r: "&Red:",
-				g: "&Green:",
-				b: "Bl&ue:",
+				h: "Tinta:",
+				s: "Sat:",
+				l: "Lum:",
+				r: "Rosso:",
+				g: "Verde:",
+				b: "Blu:",
 			}[component_letter];
 			const input = document.createElement("input");
 			// not doing type="number" because the inputs have no up/down buttons and they have special behavior with validation
@@ -613,7 +613,7 @@ function choose_color(initial_color, callback) {
 	$right.append(rainbow_canvas, luminosity_canvas, result_canvas, $color_solid_label, lum_arrow_canvas);
 
 	const $add_to_custom_colors_button = $(`<button class="add-to-custom-colors-button" type="button">`)
-		.html(render_access_key("&Add To Custom Colors"))
+		.html(render_access_key("&Aggiungi ai colori"))
 		.appendTo($right)
 		.on("click", (event) => {
 			// prevent the form from submitting
@@ -629,11 +629,11 @@ function choose_color(initial_color, callback) {
 			$w.removeClass("defining-custom-colors"); // for mobile layout
 		});
 
-	$w.$Button(localize("OK"), () => {
+	$w.$Button(localize("VAI"), () => {
 		callback(get_current_color());
 		$w.close();
 	}, { type: "submit" });
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 

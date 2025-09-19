@@ -35,7 +35,7 @@ window.onerror = function (message, source, lineno, colno, error) {
 		} else {
 			error_details = error;
 		}
-		show_error_message(localize("Internal application error."), error_details);
+		show_error_message(localize("Errore interno dell'applicazione."), error_details);
 	} catch (e) {
 		old_onerror(message, source, lineno, colno, error);
 		console.warn("Error in error handler:", e);
@@ -59,7 +59,7 @@ var new_onunhandledrejection = function (event) {
 	}, 0);
 
 	try {
-		show_error_message(localize("Internal application error.") + "\nUnhandled Rejection.", event.reason);
+		show_error_message(localize("Errore interno dell'applicazione.") + "\nRifiuto non gestito.", event.reason);
 	} catch (e) {
 		old_onunhandledrejection.call(window, event);
 		console.warn("Error in unhandledrejection handler:", e);

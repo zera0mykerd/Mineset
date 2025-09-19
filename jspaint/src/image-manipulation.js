@@ -526,7 +526,7 @@ function draw_fill(ctx, start_x, start_y, swatch) {
  */
 function draw_fill_separately(source_ctx, dest_ctx, start_x, start_y, fill_r, fill_g, fill_b, fill_a) {
 	if (fill_a === 0) {
-		throw new Error("Filling with alpha of zero is not supported. Zero alpha is used for detecting whether a pixel has been visited.");
+		throw new Error("Il riempimento con alfa pari a zero non è supportato. L'alfa pari a zero viene utilizzato per rilevare se un pixel è stato visitato.");
 	}
 	const c_width = main_canvas.width;
 	const c_height = main_canvas.height;
@@ -775,7 +775,7 @@ function apply_image_transformation(meta, fn) {
 
 	if (selection) {
 		undoable({
-			name: `${meta.name} (${localize("Selection")})`,
+			name: `${meta.name} (${localize("Selezione")})`,
 			icon: meta.icon,
 			soft: true,
 		}, () => {
@@ -801,7 +801,7 @@ function apply_image_transformation(meta, fn) {
 
 function flip_horizontal() {
 	apply_image_transformation({
-		name: localize("Flip horizontal"),
+		name: localize("Capovolgi orizzontalmente"),
 		icon: get_help_folder_icon("p_fliph.png"),
 	}, (original_canvas, _original_ctx, new_canvas, new_ctx) => {
 		new_ctx.translate(new_canvas.width, 0);
@@ -812,7 +812,7 @@ function flip_horizontal() {
 
 function flip_vertical() {
 	apply_image_transformation({
-		name: localize("Flip vertical"),
+		name: localize("Capovolgi verticalmente"),
 		icon: get_help_folder_icon("p_flipv.png"),
 	}, (original_canvas, _original_ctx, new_canvas, new_ctx) => {
 		new_ctx.translate(0, new_canvas.height);
@@ -828,7 +828,7 @@ function flip_vertical() {
  */
 function rotate(angle) {
 	apply_image_transformation({
-		name: `${localize("Rotate by angle")} ${angle / TAU * 360} ${localize("Degrees")}`,
+		name: `${localize("Ruota per angolo")} ${angle / TAU * 360} ${localize("Gradi")}`,
 		icon: get_help_folder_icon(`p_rotate_${angle >= 0 ? "cw" : "ccw"}.png`),
 	}, (original_canvas, _original_ctx, new_canvas, new_ctx) => {
 		new_ctx.save();
@@ -913,8 +913,8 @@ function stretch_and_skew(x_scale, y_scale, h_skew, v_skew) {
 	apply_image_transformation({
 		name:
 			(h_skew !== 0 || v_skew !== 0) ? (
-				(x_scale !== 1 || y_scale !== 1) ? localize("Stretch and Skew") : localize("Skew")
-			) : localize("Stretch"),
+				(x_scale !== 1 || y_scale !== 1) ? localize("Allunga e inclina") : localize("Inclinazione")
+			) : localize("Stirata"),
 		icon: get_help_folder_icon(
 			(h_skew !== 0) ? "p_skew_h.png" :
 				(v_skew !== 0) ? "p_skew_v.png" :
@@ -1406,13 +1406,13 @@ function initWebGL(canvas) {
 		gl = canvas.getContext("webgl", { antialias: false });
 	} catch (error) {
 		// TODO: reload button for Electron app
-		show_error_message("Failed to get WebGL context. You may need to refresh the web page, or restart your computer.", error);
+		show_error_message("Impossibile ottenere il contesto WebGL. Potrebbe essere necessario aggiornare la pagina web o riavviare il computer..", error);
 		return;
 	}
 
 	if (!gl) {
 		// TODO: reload button for Electron app
-		show_error_message("Failed to get WebGL context. You may need to refresh the web page, or restart your computer.");
+		show_error_message("Impossibile ottenere il contesto WebGL. Potrebbe essere necessario aggiornare la pagina web o riavviare il computer..");
 		return;
 	}
 
@@ -1500,7 +1500,7 @@ export function init_webgl_stuff() {
 
 		warning_tid = setTimeout(() => {
 			// TODO: reload button for Electron app
-			show_error_message("The WebGL context was lost. You may need to refresh the web page, or restart your computer.");
+			show_error_message("Il contesto WebGL è andato perso. Potrebbe essere necessario aggiornare la pagina web o riavviare il computer..");
 		}, 3000);
 	}, false);
 	op_canvas_webgl.addEventListener("webglcontextrestored", () => {
@@ -1523,15 +1523,15 @@ function clamp_brush_sizes() {
 	const max_size = 100;
 	if (brush_size > max_size) {
 		brush_size = max_size;
-		show_error_message(`Brush size clamped to ${max_size}`);
+		show_error_message(`Dimensione del pennello fissata a ${max_size}`);
 	}
 	if (pencil_size > max_size) {
 		pencil_size = max_size;
-		show_error_message(`Pencil size clamped to ${max_size}`);
+		show_error_message(`Dimensioni della matita fissate a ${max_size}`);
 	}
 	if (stroke_size > max_size) {
 		stroke_size = max_size;
-		show_error_message(`Stroke size clamped to ${max_size}`);
+		show_error_message(`Dimensione del tratto fissata a ${max_size}`);
 	}
 }
 
@@ -1564,7 +1564,7 @@ export function draw_polygon(ctx, points, stroke, fill) {
 function draw_polygon_or_line_strip(ctx, points, stroke, fill, close_path) {
 	if (!gl) {
 		// TODO: reload button for Electron app
-		show_error_message("Failed to get WebGL context. You may need to refresh the web page, or restart your computer.");
+		show_error_message("Impossibile ottenere il contesto WebGL. Potrebbe essere necessario aggiornare la pagina web o riavviare il computer..");
 		return; // @TODO: don't pollute brush cache with empty brushes (also maybe fallback to 2D canvas rendering)
 	}
 

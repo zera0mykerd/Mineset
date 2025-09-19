@@ -6,7 +6,7 @@ import { $choose_airbrush_size, $choose_brush } from "./tool-options.js";
 
 const extra_tools = [{
 	name: "Airbrushbrush",
-	description: "Draws randomly within a radius based on the selected Airbrush size, using a brush with the selected shape and size.",
+	description: "Disegna in modo casuale entro un raggio basato sulla dimensione dell'aerografo selezionata, utilizzando un pennello con la forma e la dimensione selezionate.",
 	cursor: ["precise-dotted", [16, 16], "crosshair"],
 	continuous: "time",
 	rendered_color: "",
@@ -48,7 +48,7 @@ const extra_tools = [{
 	$options: $choose_brush,
 }, {
 	name: "Spirobrush",
-	description: "Spirals chaotically using a brush with the selected shape and size.",
+	description: "Spirali caotiche utilizzando un pennello con la forma e la dimensione selezionate.",
 	cursor: ["precise-dotted", [16, 16], "crosshair"],
 	continuous: "time",
 	rendered_color: "",
@@ -108,7 +108,7 @@ const extra_tools = [{
 	$options: $choose_brush,
 }, {
 	name: "Airbrush Options",
-	description: "Lets you configure the Airbrushbrush. It uses this type of tool option as well.",
+	description: "Permette di configurare il pennello Airbrush. Utilizza anche questo tipo di opzione strumento.",
 	cursor: ["airbrush", [7, 22], "crosshair"],
 	continuous: "time",
 	paint(_ctx, _x, _y) {

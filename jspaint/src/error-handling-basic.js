@@ -15,13 +15,13 @@ window.onerror = function (msg, url, lineNo, columnNo, _error) {
 	var string = msg.toLowerCase();
 	var substring = "script error";
 	if (string.indexOf(substring) > -1) {
-		alert("Script Error: See Browser Console for Detail");
+		alert("Errore di script: vedere la console del browser per i dettagli");
 	} else {
 		// try {
 		// 	// try-catch in case of circular references or old browsers without JSON.stringify
 		// 	error = JSON.stringify(error);
 		// } catch (e) {}
-		alert("Internal application error: " + msg + "\n\n" + "URL: " + url + "\n" + "Line: " + lineNo + "\n" + "Column: " + columnNo);
+		alert("Errore applicazione interno: " + msg + "\n\n" + "URL: " + url + "\n" + "Linea: " + lineNo + "\n" + "Colonna: " + columnNo);
 	}
 	return false;
 };
@@ -30,7 +30,7 @@ window.onunhandledrejection = function (event) {
 	if (isIE) {
 		return false; // Don't need alerts postponing the "not supported" message.
 	}
-	alert("Unhandled Rejection: " + event.reason);
+	alert("Rifiuto non gestito: " + event.reason);
 };
 
 // Show a message for old Internet Explorer.
@@ -43,7 +43,7 @@ if (isIE) {
 		"</style>" +
 		'<div className="not-supported">' +
 		'	<h1><img src="images/icons/32x32.png" class="logo"> JS Paint</h1>' +
-		"	<h2>Internet Explorer is not supported!</h2>" +
+		"	<h2>Internet Explorer non supportato!</h2>" +
 		'	<p className="not-supported-details">' +
 		"		Try " +
 		'		<a href="https://www.mozilla.org/firefox/">Firefox</a>, ' +
@@ -53,7 +53,7 @@ if (isIE) {
 		"	</p>" +
 		"	<hr>" +
 		"	<p>" +
-		'		<a href="about.html">More about JS Paint</a>' +
+		'		<a href="about.html">Altri su JS Paint</a>' +
 		"	</p>" +
 		"</div>";
 	// Wait for body to exist.

@@ -299,7 +299,7 @@ function load_image_simple(src) {
 		const img = new Image();
 
 		img.onload = () => { resolve(img); };
-		img.onerror = () => { reject(new Error(`failed to load image from ${src}`)); };
+		img.onerror = () => { reject(new Error(`impossibile caricare l'immagine da ${src}`)); };
 
 		img.src = src;
 	});
@@ -396,7 +396,7 @@ function rgb_to_hsl(r, g, b) {
  */
 function to_canvas_coords({ clientX, clientY }) {
 	if (clientX === undefined || clientY === undefined) {
-		throw new TypeError("clientX and clientY must be defined (not {x, y} or x, y or [x, y])");
+		throw new TypeError("clientX e clientY devono essere definiti (no {x, y} oppure x, y oppure [x, y])");
 	}
 	const rect = window.canvas_bounding_client_rect;
 	return {

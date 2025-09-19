@@ -12,7 +12,7 @@ function show_help() {
 		return;
 	}
 	$help_window = open_help_viewer({
-		title: localize("Paint Help"),
+		title: localize("Aiuto per paint"),
 		root: "help",
 		contentsFile: "help/mspaint.hhc",
 	}).$help_window;
@@ -26,7 +26,7 @@ function show_help() {
 
 function open_help_viewer(options) {
 	const $help_window = $Window({
-		title: options.title || "Help Topics",
+		title: options.title || "Argomenti della guida",
 		icons: {
 			16: "images/chm-16x16.png",
 		},
@@ -66,7 +66,7 @@ function open_help_viewer(options) {
 		parseFloat(getComputedStyle($contents[0]).getPropertyValue("margin-left")) +
 		parseFloat(getComputedStyle($contents[0]).getPropertyValue("margin-right")) +
 		$resizer.outerWidth();
-	const $hide_button = add_toolbar_button("Hide", 0, () => {
+	const $hide_button = add_toolbar_button("Nascondi", 0, () => {
 		const toggling_width = measure_sidebar_width();
 		$contents.hide();
 		$resizer.hide();
@@ -76,7 +76,7 @@ function open_help_viewer(options) {
 		$help_window.css("left", $help_window.offset().left + toggling_width);
 		$help_window.bringTitleBarInBounds();
 	});
-	const $show_button = add_toolbar_button("Show", 5, () => {
+	const $show_button = add_toolbar_button("Mostra", 5, () => {
 		$contents.show();
 		$resizer.show();
 		$show_button.hide();
@@ -93,20 +93,20 @@ function open_help_viewer(options) {
 		}
 		$help_window.css("max-width", "");
 	}).hide();
-	add_toolbar_button("Back", 1, () => {
+	add_toolbar_button("Indietro", 1, () => {
 		$iframe[0].contentWindow.history.back();
 		ignore_one_load = true;
 		back_length -= 1;
 		forward_length += 1;
 	}, () => back_length > 0);
-	add_toolbar_button("Forward", 2, () => {
+	add_toolbar_button("Avanti", 2, () => {
 		$iframe[0].contentWindow.history.forward();
 		ignore_one_load = true;
 		forward_length -= 1;
 		back_length += 1;
 	}, () => forward_length > 0);
-	add_toolbar_button("Options", 3, () => { }, () => false); // @TODO: hotkey and underline on O
-	add_toolbar_button("Web Help", 4, () => {
+	add_toolbar_button("Opzioni", 3, () => { }, () => false); // @TODO: hotkey and underline on O
+	add_toolbar_button("Aiuto Web", 4, () => {
 		iframe.src = "help/online_support.htm";
 	});
 
@@ -219,7 +219,7 @@ function open_help_viewer(options) {
 	};
 
 	const $default_item_li = $(E("li")).addClass("page");
-	$default_item_li.append($Item("Welcome to Help").on("click", () => {
+	$default_item_li.append($Item("Benvenuti nella sezione aiuti").on("click", () => {
 		$iframe.attr({ src: "help/default.html" });
 	}));
 	$contents.append($default_item_li);
@@ -257,7 +257,7 @@ function open_help_viewer(options) {
 				renderItem(li, null);
 			});
 		}, (error) => {
-			show_error_message(`${localize("Failed to launch help.")} Failed to read ${options.contentsFile}.`, error);
+			show_error_message(`${localize("Impossibile avviare aiuto.")} Impossibile leggere ${options.contentsFile}.`, error);
 		});
 	}, (_error) => {
 		// access to error message is not allowed either, basically
@@ -270,13 +270,13 @@ function open_help_viewer(options) {
 				// https://gist.github.com/willurd/5720255 - impressive list, but not a tutorial
 				// https://attacomsian.com/blog/local-web-server - OK, good enough
 				messageHTML: `
-					<p>Help is not available when running from the <code>file:</code> protocol.</p>
-					<p>To use this feature, <a href="https://attacomsian.com/blog/local-web-server">start a web server</a>.</p>
+					<p>L'aiuto non è disponibile quando si esegue da <code>file:</code> protocollo.</p>
+					<p>Per utilizzare questa funzione, <a href="https://attacomsian.com/blog/local-web-server">e avvia un server web</a>.</p>
 				`,
 				iconID: "error",
 			});
 		} else {
-			show_error_message(`${localize("Failed to launch help.")} ${localize("Access to %1 was denied.", options.contentsFile)}`);
+			show_error_message(`${localize("Impossibile avviare la pagina di aiuto.")} ${localize("Accesso a %1 impedito.", options.contentsFile)}`);
 		}
 	});
 
@@ -385,7 +385,7 @@ function $Iframe(options) {
 				message.style.color = "#000";
 				message.style.padding = "50px";
 				iframe.contentDocument.body.appendChild(message);
-				message.innerHTML = `<a target="_blank">Save this url in the Wayback Machine</a>`;
+				message.innerHTML = `<a target="_blank">Salva questo URL nella Macchina del tempo</a>`;
 				message.querySelector("a").href =
 					"https://web.archive.org/save/https://98.js.org/" +
 					iframe.src.replace(/.*https:\/\/98.js.org\/?/, "");

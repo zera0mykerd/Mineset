@@ -127,7 +127,7 @@ let text_tool_font = {
 };
 
 /** @type {HistoryNode} */
-let root_history_node = window.make_history_node({ name: "App Not Loaded Properly - Please send a bug report." }); // will be replaced
+let root_history_node = window.make_history_node({ name: "App non caricata correttamente. Invia una segnalazione di bug." }); // will be replaced
 /** @type {HistoryNode} */
 let current_history_node = root_history_node;
 /** @type {HistoryNode | null} */

@@ -18,7 +18,7 @@ const { get_help_folder_icon } = await import("../src/helpers.js");
 
 function repack_spritesheet(tile_width, tile_height = tile_width, padding = tile_width) {
 	apply_image_transformation({
-		name: localize("Repack Spritesheet"),
+		name: localize("Riconfezionare il foglio sprite"),
 		icon: get_help_folder_icon("p_paste.png"),
 		// icon: get_help_folder_icon("p_stretch_both.png"),
 	}, (original_canvas, _original_ctx, new_canvas, new_ctx) => {

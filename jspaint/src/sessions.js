@@ -37,7 +37,7 @@ function show_recovery_window(no_longer_blank) {
 	$w.on("close", () => {
 		$recovery_window = null;
 	});
-	$w.title("Recover Document");
+	$w.title("Recupera documento");
 	let backup_impossible = false;
 	try { window.localStorage.getItem("bogus test key"); } catch (_error) { backup_impossible = true; }
 	// TODO: get rid of this invasive dialog https://github.com/1j01/jspaint/issues/325
@@ -46,33 +46,34 @@ function show_recovery_window(no_longer_blank) {
 	// That said, I've made it more compact and delineated the expanded section with a horizontal rule,
 	// so it doesn't feel as much like it's changed out from under you and you have to re-read it.
 	$w.$main.append($(`
-		<p>Woah! The canvas became empty.</p>
-		<p>If this was on purpose, please ignore this message.</p>
+		<p>Wow! La tela è diventata vuota.</p>
+		<p>Se questo era intenzionale, per favore ignora questo messaggio.</p>
 		<p>
-			If the canvas was cleared due to memory usage,<br>
-			click Undo to recover the document.
+			Se la tela è stata cancellata a causa dell'uso della memoria,<br>
+			clicca su Annulla per recuperare il documento.
 		</p>
-		<!--<p>Remember to save with <b>File > Save</b>!</p>-->
+		<!--<p>Ricorda di salvare con <b>File > Salva</b>!</p>-->
 		${backup_impossible ?
-			"<p><b>Note:</b> No automatic backup is possible unless you enable Cookies in your browser.</p>" :
+			"<p><b>Nota:</b> Nessun backup automatico è possibile a meno che tu non abiliti i cookie nel tuo browser.</p>" :
 			(
 				no_longer_blank ?
 					`<hr>
 					<p style="opacity: 0.8; font-size: 0.9em;">
-						Auto-save is paused while this dialog is open.
+						Il salvataggio automatico è in pausa mentre questo dialogo è aperto.
 					</p>
 					<p style="opacity: 0.8; font-size: 0.9em;">
-						(See <b>File &gt; Manage Storage</b> to view backups.)
+						(Guarda <b>File &gt; Gestisci Archiviazione</b> per visualizzare i backup.)
 					</p>` :
 					""
 			)
 		}
 	`));
 
-	const $undo = $w.$Button("Undo", () => {
+
+	const $undo = $w.$Button("Rifai", () => {
 		undo();
 	});
-	const $redo = $w.$Button("Redo", () => {
+	const $redo = $w.$Button("Ritorna", () => {
 		redo();
 	});
 	const update_buttons_disabled = () => {
@@ -82,7 +83,7 @@ function show_recovery_window(no_longer_blank) {
 	$G.on("session-update.session-hook", update_buttons_disabled);
 	update_buttons_disabled();
 
-	$w.$Button(localize("Close"), () => {
+	$w.$Button(localize("Chiudi"), () => {
 		$w.close();
 	});
 	$w.center();
@@ -138,18 +139,18 @@ class LocalSession {
 		localStore.get(ls_key, (err, uri) => {
 			if (err) {
 				if (localStorageAvailable) {
-					show_error_message("Failed to retrieve image from local storage.", err);
+					show_error_message("Impossibile recuperare l'immagine dall'archiviazione locale.", err);
 				} else {
 					// @TODO: DRY with storage manager message
 					showMessageBox({
-						message: "Please enable local storage in your browser's settings for local backup. It may be called Cookies, Storage, or Site Data.",
+						message: "Abilita l'archiviazione locale nelle impostazioni del tuo browser per il backup locale. Potrebbe chiamarsi Cookie, Archiviazione o Dati del sito..",
 					});
 				}
 			} else if (uri) {
 				load_image_from_uri(uri).then((info) => {
 					open_from_image_info(info, null, null, true, true);
 				}, (error) => {
-					show_error_message("Failed to open image from local storage.", error);
+					show_error_message("Impossibile aprire l'immagine dall'archivio locale.", error);
 				});
 			} else {
 				// no uri so lets save the blank canvas
@@ -238,7 +239,7 @@ class FirebaseSession {
 				on_firebase_loaded();
 			});
 			script.addEventListener("error", () => {
-				show_error_message("Failed to load Firebase; the document will not load, and changes will not be saved.");
+				show_error_message("Impossibile caricare Firebase; il documento non verrà caricato e le modifiche non verranno salvate.");
 				file_name = `[Failed to load ${this.id}]`;
 				update_title();
 			});
@@ -252,8 +253,8 @@ class FirebaseSession {
 		// @TODO: how do you actually detect if it's failing???
 		showMessageBox({
 			messageHTML: `
-				<p>The document may not load. Changes may not save.</p>
-				<p>Multiuser sessions are public. There is no security.</p>
+				<p>Il documento potrebbe non essere caricato. Le modifiche potrebbero non essere salvate..</p>
+				<p>Le sessioni multiutente sono pubbliche. Non c'è sicurezza..</p>
 			`,
 		});
 		// "<p>The document may not load. Changes may not save. If it does save, it's public. There is no security.</p>"// +
@@ -427,7 +428,7 @@ class FirebaseSession {
 				img.src = uri;
 			}
 		}, (error) => {
-			show_error_message("Failed to retrieve data from Firebase. The document will not load, and changes will not be saved.", error);
+			show_error_message("Impossibile recuperare i dati da Firebase. Il documento non verrà caricato e le modifiche non verranno salvate..", error);
 			file_name = `[Failed to load ${this.id}]`;
 			update_title();
 		});
@@ -827,7 +828,7 @@ class RESTSession {
 					received_image_data_uri = await response.text();
 				}
 			} catch (error) {
-				show_error_message("Failed to load image document from the server.", error);
+				show_error_message("Impossibile caricare il documento immagine dal server.", error);
 				file_name = `[Failed to load ${this.id}]`;
 				update_title();
 				return; // Uh, TODO: retry?
@@ -871,7 +872,7 @@ class RESTSession {
 				if (!image_data_match(image_data_remote, image_data_local, 5)) {
 					this._ignore_session_update = true;
 					undoable({
-						name: "Sync Session",
+						name: "Sessione sincronizzata",
 						icon: get_help_folder_icon("p_database.png"),
 					}, () => {
 						// Write the image data to the canvas
@@ -883,7 +884,7 @@ class RESTSession {
 			};
 			img.onerror = () => {
 				// uri is invalid, so it might be an error message or something; I'll include it in the expandible details.
-				show_error_message("Failed to load image document from the server. Invalid image data.", uri);
+				show_error_message("Impossibile caricare il documento immagine dal server. Dati immagine non validi.", uri);
 			};
 			img.src = uri;
 		}
@@ -956,7 +957,7 @@ const update_session_from_location_hash = () => {
 				log(`Starting a new FirebaseSession, ID: ${session_id}`);
 				current_session = new FirebaseSession(session_id);
 			} else {
-				show_error_message(`Invalid online session implementation '${online_session_implementation}'`);
+				show_error_message(`Implementazione della sessione online non valida '${online_session_implementation}'`);
 				current_session = new LocalSession(session_id);
 			}
 		}
@@ -965,7 +966,7 @@ const update_session_from_location_hash = () => {
 
 		const uris = get_uris(url);
 		if (uris.length === 0) {
-			show_error_message("Invalid URL to load (after #load: in the address bar). It must include a protocol (https:// or http://)");
+			show_error_message("URL non valido da caricare (dopo #load: nella barra degli indirizzi). Deve includere un protocollo (https:// o http://)");
 			return;
 		}
 
@@ -986,7 +987,7 @@ const update_session_from_location_hash = () => {
 		log("After replaceState:", location.hash);
 		if (old_hash === location.hash) {
 			// e.g. on Wayback Machine
-			show_error_message("Autosave is disabled. Failed to update URL to start session.");
+			show_error_message("Il salvataggio automatico è disabilitato. Impossibile aggiornare l'URL per avviare la sessione.");
 		} else {
 			update_session_from_location_hash();
 		}

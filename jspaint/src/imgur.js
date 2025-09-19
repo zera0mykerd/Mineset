@@ -16,7 +16,7 @@ function show_imgur_uploader(blob) {
 		$imgur_window.close();
 	}
 	$imgur_window = $DialogWindow();
-	$imgur_window.title("Upload To Imgur").addClass("horizontal-buttons");
+	$imgur_window.title("Carica su Imgur").addClass("horizontal-buttons");
 
 	const $preview_image_area = $(E("div")).appendTo($imgur_window.$main).addClass("inset-deep");
 	const $imgur_url_area = $(E("div")).appendTo($imgur_window.$main);
@@ -45,7 +45,7 @@ function show_imgur_uploader(blob) {
 		URL.revokeObjectURL(blob_url);
 	});
 
-	const $upload_button = $imgur_window.$Button("Upload", () => {
+	const $upload_button = $imgur_window.$Button("Carica", () => {
 
 		URL.revokeObjectURL(blob_url);
 		$preview_image_area.remove();
@@ -66,7 +66,7 @@ function show_imgur_uploader(blob) {
 			try {
 				return JSON.parse(responseJSON);
 			} catch (error) {
-				$imgur_status.text("Received an invalid JSON response from Imgur: ");
+				$imgur_status.text("Ricevuta una risposta JSON non valida da Imgur: ");
 				// .append($(E("pre")).text(responseJSON));
 
 				// show_error_message("Received an invalid JSON response from Imgur: ", responseJSON);
@@ -124,7 +124,7 @@ function show_imgur_uploader(blob) {
 				if (!response.success) {
 					//$imgur_status.text("Failed to upload image :(");
 					$imgur_window.close();
-					show_error_message("Failed to upload image.", req.responseText);
+					show_error_message("Impossibile caricare l'immagine.", req.responseText);
 					return;
 				}
 				const url = response.data.link;
@@ -142,7 +142,7 @@ function show_imgur_uploader(blob) {
 				// (also maybe put the URL in a readonly input)
 
 				let $ok_button;
-				const $delete_button = $imgur_window.$Button("Delete", () => {
+				const $delete_button = $imgur_window.$Button("Elimina", () => {
 					const req = new XMLHttpRequest();
 					$delete_button[0].disabled = true;
 					req.addEventListener("readystatechange", () => {
@@ -155,9 +155,9 @@ function show_imgur_uploader(blob) {
 
 							if (response.success) {
 								$imgur_url_area.remove();
-								$imgur_status.text("Deleted successfully");
+								$imgur_status.text("Eliminato con successo");
 							} else {
-								$imgur_status.text("Failed to delete image :(");
+								$imgur_status.text("Impossibile eliminare l'immagine :(");
 							}
 
 						} else if (req.readyState == 4) {
@@ -173,7 +173,7 @@ function show_imgur_uploader(blob) {
 					req.setRequestHeader("Accept", "application/json");
 					req.send(null);
 
-					$imgur_status.text("Deleting...");
+					$imgur_status.text("Elminando...");
 				});
 				$ok_button = $imgur_window.$Button(localize("OK"), () => {
 					$imgur_window.close();
@@ -184,7 +184,7 @@ function show_imgur_uploader(blob) {
 				$imgur_window.close();
 				if (is_discord_embed) {
 					// closest localized string: "An unsupported operation was attempted."
-					show_error_message("Uploading to Imgur is not currently supported in the Discord Activity.");
+					show_error_message("Il caricamento su Imgur non è attualmente supportato nell'attività Discord.");
 				} else {
 					let response;
 					try {
@@ -195,9 +195,9 @@ function show_imgur_uploader(blob) {
 						// Full response can be shown in the expandible details.
 					}
 					if (response && response.data && response.data.error) {
-						show_error_message(`Failed to upload image.\n\n${response.data.error}`, req.responseText);
+						show_error_message(`Impossibile caricare l'immagine.\n\n${response.data.error}`, req.responseText);
 					} else {
-						show_error_message(`Failed to upload image. HTTP ${req.status}`, req.responseText);
+						show_error_message(`Impossibile caricare l'immagine. HTTP ${req.status}`, req.responseText);
 					}
 				}
 			}
@@ -212,9 +212,9 @@ function show_imgur_uploader(blob) {
 		req.setRequestHeader("Accept", "application/json");
 		req.send(form_data);
 
-		$imgur_status.text("Uploading...");
+		$imgur_status.text("Caricando...");
 	}, { type: "submit" }).focus();
-	const $cancel_button = $imgur_window.$Button(localize("Cancel"), () => {
+	const $cancel_button = $imgur_window.$Button(localize("Annulla"), () => {
 		$imgur_window.close();
 	});
 	$imgur_window.$content.css({

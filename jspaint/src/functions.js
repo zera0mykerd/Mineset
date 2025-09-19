@@ -443,11 +443,11 @@ function show_custom_zoom_window() {
 	if ($custom_zoom_window) {
 		$custom_zoom_window.close();
 	}
-	const $w = $DialogWindow(localize("Custom Zoom"));
+	const $w = $DialogWindow(localize("Ingrandimento"));
 	$custom_zoom_window = $w;
 	$w.addClass("custom-zoom-window");
 
-	$w.$main.append(`<div class='current-zoom'>${localize("Current zoom:")} <bdi>${magnification * 100}%</bdi></div>`);
+	$w.$main.append(`<div class='current-zoom'>${localize("Ingrandimento corrente:")} <bdi>${magnification * 100}%</bdi></div>`);
 	// update when zoom changes
 	$G.on("magnification-changed", () => {
 		$w.$main.find(".current-zoom bdi").text(`${magnification * 100}%`);
@@ -455,7 +455,7 @@ function show_custom_zoom_window() {
 
 	const $fieldset = $(E("fieldset")).appendTo($w.$main);
 	$fieldset.append(`
-		<legend>${localize("Zoom to")}</legend>
+		<legend>${localize("Ingrandisci in")}</legend>
 		<div class="fieldset-body">
 			<div class="radio-field"><input type="radio" name="custom-zoom-radio" id="zoom-option-1" aria-keyshortcuts="Alt+1 1" value="1"/><label for="zoom-option-1">${render_access_key("&100%")}</label></div>
 			<div class="radio-field"><input type="radio" name="custom-zoom-radio" id="zoom-option-2" aria-keyshortcuts="Alt+2 2" value="2"/><label for="zoom-option-2">${render_access_key("&200%")}</label></div>
@@ -544,7 +544,7 @@ function show_custom_zoom_window() {
 
 		$w.close();
 	}, { type: "submit" });
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 
@@ -572,7 +572,7 @@ function toggle_thumbnail() {
 		}
 		if (!$thumbnail_window) {
 			$thumbnail_window = $Window({
-				title: localize("Thumbnail"),
+				title: localize("Miniatura"),
 				toolWindow: true,
 				resizable: true,
 				innerWidth: thumbnail_canvas.width + 4, // @TODO: should the border of $content be included in the definition of innerWidth/Height?
@@ -654,7 +654,7 @@ function reset_canvas_and_history() {
 	undos.length = 0;
 	redos.length = 0;
 	current_history_node = root_history_node = make_history_node({
-		name: localize("New"),
+		name: localize("Nuovo"),
 		icon: get_help_folder_icon("p_blank.png"),
 	});
 	history_node_to_cancel_to = null;
@@ -828,7 +828,7 @@ async function load_image_from_uri(uri) {
 	const is_localhost = uri.match(/^(http|https):\/\/((127\.0\.0\.1|localhost)|.*(\.(local|localdomain|domain|lan|home|host|corp|invalid)))\b/i);
 
 	if (is_blob_uri && uri.indexOf(`blob:${location.origin}`) === -1) {
-		const error = new Error("can't load blob: URI from another domain");
+		const error = new Error("impossibile caricare blob: URI da un altro dominio");
 		// @ts-ignore
 		error.code = "cross-origin-blob-uri";
 		throw error;
@@ -848,12 +848,12 @@ async function load_image_from_uri(uri) {
 		const uri_to_try = uris_to_try[index_to_try];
 		try {
 			if (is_download) {
-				$status_text.text("Downloading picture...");
+				$status_text.text("Scaricamento dell'immagine...");
 			}
 
 			const show_progress = ({ loaded, total }) => {
 				if (is_download) {
-					$status_text.text(`Downloading picture... (${Math.round(loaded / total * 100)}%)`);
+					$status_text.text(`Scaricamento dell'immagine... (${Math.round(loaded / total * 100)}%)`);
 				}
 			};
 
@@ -913,7 +913,7 @@ async function load_image_from_uri(uri) {
 			const blob = await response_to_read.blob();
 			if (is_download) {
 				console.log("Download complete.");
-				$status_text.text("Download complete.");
+				$status_text.text("Download completo.");
 			}
 			// @TODO: use headers to detect HTML, since a doctype is not guaranteed
 			// @TODO: fall back to WayBack Machine still for decode errors,
@@ -935,9 +935,9 @@ async function load_image_from_uri(uri) {
 		}
 	}
 	if (is_download) {
-		$status_text.text("Failed to download picture.");
+		$status_text.text("Impossibile scaricare l'immagine.");
 	}
-	const error = new Error(`failed to fetch image from any of ${uris_to_try.length} URI(s):\n  ${fails.map((fail) =>
+	const error = new Error(`Non è riuscito a recuperare l'immagine da nessuno dei ${uris_to_try.length} URI(s):\n  ${fails.map((fail) =>
 		(fail.statusText ? `${fail.status} ${fail.statusText} ` : "") + fail.url + (fail.error ? `\n    ${fail.error}` : "")
 	).join("\n  ")}`);
 	// @ts-ignore
@@ -974,7 +974,7 @@ function open_from_image_info(info, callback, canceled, into_existing_session, f
 		transparency = has_any_transparency(main_ctx);
 		$canvas_area.trigger("resize");
 
-		current_history_node.name = localize("Open");
+		current_history_node.name = localize("Apri");
 		current_history_node.image_data = main_ctx.getImageData(0, 0, main_canvas.width, main_canvas.height);
 		current_history_node.icon = get_help_folder_icon("p_open.png");
 
@@ -1020,7 +1020,7 @@ function open_from_file(file, source_file_handle) {
 
 	if (file instanceof File && file.name.match(/\.theme(pack)?$/i)) {
 		file.text().then(load_theme_from_text, (error) => {
-			show_error_message(localize("Paint cannot open this file."), error);
+			show_error_message(localize("Non riesco ad aprire il file."), error);
 		});
 		return;
 	}
@@ -1074,7 +1074,7 @@ function apply_file_format_and_palette_info(info) {
 function load_theme_from_text(fileText) {
 	var cssProperties = parseThemeFileString(fileText);
 	if (!cssProperties) {
-		show_error_message(localize("Paint cannot open this file."));
+		show_error_message(localize("Impossibile aprire il file."));
 		return;
 	}
 	applyCSSProperties(cssProperties, { recurseIntoIframes: true });
@@ -1114,17 +1114,17 @@ function file_load_from_url() {
 	}
 	const $w = $DialogWindow().addClass("horizontal-buttons");
 	$file_load_from_url_window = $w;
-	$w.title("Load from URL");
+	$w.title("Carica da un URL");
 	// @TODO: URL validation (input has to be in a form (and we don't want the form to submit))
 	$w.$main.html(`
 		<div style="padding: 10px;">
-			<label style="display: block; margin-bottom: 5px;" for="url-input">Paste or type the web address of an image:</label>
+			<label style="display: block; margin-bottom: 5px;" for="url-input">Incolla o digita l'indirizzo web di un'immagine:</label>
 			<input type="url" required value="" id="url-input" class="inset-deep" style="width: 300px;"/></label>
 		</div>
 	`);
 	const $input = $w.$main.find("#url-input");
 	// $w.$Button("Load", () => {
-	$w.$Button(localize("Open"), () => {
+	$w.$Button(localize("Apri"), () => {
 		const uris = get_uris(String($input.val()));
 		if (uris.length > 0) {
 			// @TODO: retry loading if same URL entered
@@ -1134,10 +1134,10 @@ function file_load_from_url() {
 			$w.close();
 			change_url_param("load", uris[0]);
 		} else {
-			show_error_message("Invalid URL. It must include a protocol (https:// or http://)");
+			show_error_message("URL non valido. Deve includere un protocollo (https:// or http://)");
 		}
 	}, { type: "submit" });
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 	$w.center();
@@ -1147,7 +1147,7 @@ function file_load_from_url() {
 // Native FS API / File Access API allows you to overwrite files, but people are not used to it.
 // So we ask them to confirm it the first time.
 let acknowledged_overwrite_capability = false;
-const confirmed_overwrite_key = "jspaint confirmed overwrite capable";
+const confirmed_overwrite_key = "jspaint ha confermato la capacità di sovrascrittura";
 try {
 	acknowledged_overwrite_capability = localStorage[confirmed_overwrite_key] === "true";
 } catch (_error) {
@@ -1162,16 +1162,16 @@ async function confirm_overwrite_capability() {
 	}
 	const { $window, promise } = showMessageBox({
 		messageHTML: `
-			<p>JS Paint can now save over existing files.</p>
-			<p>Do you want to overwrite the file?</p>
+			<p>JS Paint ora può salvare sopra i file esistenti.</p>
+			<p>Vuoi sovrascrivere il file?</p>
 			<p>
 				<input type="checkbox" id="do-not-ask-me-again-checkbox"/>
-				<label for="do-not-ask-me-again-checkbox">Don't ask me again</label>
+				<label for="do-not-ask-me-again-checkbox">Non chiedermelo più</label>
 			</p>
 		`,
 		buttons: [
-			{ label: localize("Yes"), value: "overwrite", default: true },
-			{ label: localize("Cancel"), value: "cancel" },
+			{ label: localize("Si"), value: "overwrite", default: true },
+			{ label: localize("Cancella"), value: "cancel" },
 		],
 	});
 	const result = await promise;
@@ -1221,7 +1221,7 @@ function file_save(maybe_saved_callback = () => { }, update_from_saved = true) {
 function file_save_as(maybe_saved_callback = () => { }, update_from_saved = true) {
 	deselect();
 	systemHooks.showSaveFileDialog({
-		dialogTitle: localize("Save As"),
+		dialogTitle: localize("Salva In"),
 		formats: image_formats,
 		defaultFileName: file_name,
 		defaultPath: typeof system_file_handle === "string" ? system_file_handle : null,
@@ -1250,7 +1250,7 @@ function file_save_as(maybe_saved_callback = () => { }, update_from_saved = true
 function file_print() {
 	if (is_discord_embed) {
 		// closest localized string: "Could not start print job."
-		show_error_message(localize("Printing is not supported in the Discord Activity."));
+		show_error_message(localize("La stampa non è supportata nell'attività."));
 		return;
 	}
 	print();
@@ -1274,11 +1274,11 @@ function are_you_sure(action, canceled, from_session_load) {
 		//   http://127.0.0.1:1999/#load:https://i.imgur.com/M5zcPuk.jpeg
 		// - click an Open link in the Manage Storage dialog in the Electron app
 		showMessageBox({
-			message: localize("You've modified the document while an existing document was loading.\nSave the new document?", file_name),
+			message: localize("Hai modificato il documento mentre era in corso il caricamento di un documento esistente.\nSalvare il nuovo documento?", file_name),
 			buttons: [
 				{
 					// label: localize("Save"),
-					label: localize("Yes"),
+					label: localize("Si"),
 					value: "save",
 					default: true,
 				},
@@ -1307,11 +1307,11 @@ function are_you_sure(action, canceled, from_session_load) {
 		});
 	} else {
 		showMessageBox({
-			message: localize("Save changes to %1?", file_name),
+			message: localize("Salva cambiamenti in %1?", file_name),
 			buttons: [
 				{
 					// label: localize("Save"),
-					label: localize("Yes"),
+					label: localize("Si"),
 					value: "save",
 					default: true,
 				},
@@ -1321,7 +1321,7 @@ function are_you_sure(action, canceled, from_session_load) {
 					value: "discard",
 				},
 				{
-					label: localize("Cancel"),
+					label: localize("Cancella"),
 					value: "cancel",
 				},
 			],
@@ -1342,7 +1342,7 @@ function are_you_sure(action, canceled, from_session_load) {
 function please_enter_a_number() {
 	showMessageBox({
 		// title: "Invalid Value",
-		message: localize("Please enter a number."),
+		message: localize("Per favore inserisci un valore numerico."),
 	});
 }
 
@@ -1367,7 +1367,7 @@ function show_error_message(message, error) {
 	});
 	// $message.css("max-width", "600px");
 	if (error) {
-		const $details = $("<details><summary><span>Details</span></summary></details>")
+		const $details = $("<details><summary><span>Dettagli</span></summary></details>")
 			.appendTo($message);
 
 		// Chrome includes the error message in the error.stack string, whereas Firefox doesn't.
@@ -1384,7 +1384,7 @@ function show_error_message(message, error) {
 				try {
 					error_string = JSON.stringify(error, null, 2);
 				} catch (e) {
-					error_string = "Error details could not be stringified: " + e;
+					error_string = "Errore i dettagli non sono stringati: " + e;
 				}
 			}
 		} else if (e.message && error_string.indexOf(e.message) === -1) {
@@ -1422,27 +1422,27 @@ function show_resource_load_error_message(error) {
 	// @TODO: copy & paste vs download & open, more specific guidance
 	if (error.code === "cross-origin-blob-uri") {
 		$message.html(`
-			<p>Can't load image from address starting with "blob:".</p>
+			<p>Impossibile caricare immagine con "blob:".</p>
 			${firefox ?
-				`<p>Try "Copy Image" instead of "Copy Image Location".</p>` :
-				`<p>Try "Copy image" instead of "Copy image address".</p>`
+				`<p>Prova "Copia Immagine" invece di "Copia Immagine Locazione".</p>` :
+				`<p>Prova "Copia Immagine" invece di "Copia Immagine Indirizzo".</p>`
 			}
 		`);
 	} else if (error.code === "html-not-image") {
 		$message.html(`
-			<p>Address points to a web page, not an image file.</p>
-			<p>Try copying and pasting an image instead of a URL.</p>
+			<p>L'Indirizzo punta a una pagina web, non a un file immagine.</p>
+			<p>Prova a copiare e incollare un'immagine invece di un URL.</p>
 		`);
 	} else if (error.code === "decoding-failure") {
 		$message.html(`
-			<p>Address doesn't point to an image file of a supported format.</p>
-			<p>Try copying and pasting an image instead of a URL.</p>
+			<p>L'indirizzo non punta a un file immagine di un formato supportato.</p>
+			<p>Prova a copiare e incollare un'immagine invece di un URL.</p>
 		`);
 	} else if (error.code === "access-failure") {
 		if (navigator.onLine) {
 			$message.html(`
-				<p>Failed to download image.</p>
-				<p>Try copying and pasting an image instead of a URL.</p>
+				<p>Impossibile scaricare l'immagine.</p>
+				<p>Prova a copiare e incollare un'immagine invece di un URL.</p>
 			`);
 			if (error.fails) {
 				$("<ul>").append(error.fails.map(({ status, statusText, url }) =>
@@ -1451,16 +1451,16 @@ function show_resource_load_error_message(error) {
 			}
 		} else {
 			$message.html(`
-				<p>Failed to download image.</p>
-				<p>You're offline. Connect to the internet and try again.</p>
-				<p>Or copy and paste an image instead of a URL, if possible.</p>
+				<p>Impossibile scaricare l'immagine.</p>
+				<p>Sei offline. Connettiti a Internet e riprova.</p>
+				<p>Oppure copia e incolla un'immagine invece di un URL, se possibile.</p>
 			`);
 		}
 	} else {
 		// TODO: what to do in Electron? also most users don't know how to check the console
 		$message.html(`
-			<p>Failed to load image from URL.</p>
-			<p>Check your browser's devtools for details.</p>
+			<p>Impossibile caricare l'immagine dall'URL.</p>
+			<p>Controlla gli strumenti di sviluppo del tuo browser per i dettagli.</p>
 		`);
 	}
 	$message.css({ maxWidth: "500px" });
@@ -1481,14 +1481,14 @@ function show_resource_load_error_message(error) {
  */
 function show_file_format_errors({ as_image_error, as_palette_error }) {
 	let html = `
-		<p>${localize("Paint cannot open this file.")}</p>
+		<p>${localize("Paint non riesce ad aprire il file.")}</p>
 	`;
 	if (as_image_error) {
 		// TODO: handle weird errors, only show invalid format error if that's what happened
 		html += `
 			<details>
-				<summary>${localize("Bitmap Image")}</summary>
-				<p>${localize("This is not a valid bitmap file, or its format is not currently supported.")}</p>
+				<summary>${localize("Immagine bitmap")}</summary>
+				<p>${localize("Questo non è un file bitmap valido o il suo formato non è attualmente supportato.")}</p>
 			</details>
 		`;
 	}
@@ -1524,8 +1524,8 @@ function show_file_format_errors({ as_image_error, as_palette_error }) {
 		}
 		html += `
 			<details>
-				<summary>${only_palette_error ? "Details" : localize("Palette|*.pal|").split("|")[0]}</summary>
-				<p>${localize("Unexpected file format.")}</p>
+				<summary>${only_palette_error ? "Dettagli" : localize("Palette|*.pal|").split("|")[0]}</summary>
+				<p>${localize("Formato file imprevisto.")}</p>
 				${details}
 			</details>
 		`;
@@ -1549,7 +1549,7 @@ let $latest_news = $this_version_news;
 // "Showing the news as of this version of JS Paint. For the latest, see <a href='https://jspaint.app'>jspaint.app</a>"
 if (location.origin !== "https://jspaint.app") {
 	$this_version_news.prepend(
-		$("<p>For the latest news, visit <a href='https://jspaint.app'>jspaint.app</a></p>")
+		$("<p>Per le ultime novità visita <a href='https://jspaint.app'>jspaint.app</a></p>")
 			.css({ padding: "8px 15px" })
 	);
 }
@@ -1643,7 +1643,7 @@ function show_about_paint() {
 
 			if (!$latest_entries.length) {
 				$latest_news = $this_version_news;
-				throw new Error(`No news found at fetched site (${url})`);
+				throw new Error(`Nessuna notizia trovata nel sito (${url})`);
 			}
 
 			function entries_contains_update($entries, id) {
@@ -1743,7 +1743,7 @@ function show_news() {
 		$news_window.close();
 	}
 	$news_window = $Window({
-		title: "Project News",
+		title: "Novità progetto",
 		maximizeButton: false,
 		minimizeButton: false,
 		resizable: false,
@@ -1810,7 +1810,7 @@ async function choose_file_to_paste() {
 		paste_image_from_file(file);
 		return;
 	}
-	show_error_message(localize("This is not a valid bitmap file, or its format is not currently supported."));
+	show_error_message(localize("Questo non è un file bitmap valido o il suo formato non è attualmente supportato."));
 }
 
 /**
@@ -1819,8 +1819,8 @@ async function choose_file_to_paste() {
 function paste(img_or_canvas) {
 
 	if (img_or_canvas.width > main_canvas.width || img_or_canvas.height > main_canvas.height) {
-		const message = localize("The image in the clipboard is larger than the bitmap.") + "\n" +
-			localize("Would you like the bitmap enlarged?");
+		const message = localize("L'immagine negli appunti è più grande della bitmap.") + "\n" +
+			localize("Vuoi che la bitmap venga ingrandita?");
 		showMessageBox({
 			message,
 			iconID: "question",
@@ -1833,7 +1833,7 @@ function paste(img_or_canvas) {
 			buttons: [
 				{
 					// label: "Enlarge",
-					label: localize("Yes"),
+					label: localize("Si"),
 					value: "enlarge",
 					default: true,
 				},
@@ -1843,7 +1843,7 @@ function paste(img_or_canvas) {
 					value: "crop",
 				},
 				{
-					label: localize("Cancel"),
+					label: localize("Cancella"),
 					value: "cancel",
 				},
 			],
@@ -1854,7 +1854,7 @@ function paste(img_or_canvas) {
 					Math.max(main_canvas.width, img_or_canvas.width),
 					Math.max(main_canvas.height, img_or_canvas.height),
 					{
-						name: "Enlarge Canvas For Paste",
+						name: "Allarga canvas per la copia",
 						icon: get_help_folder_icon("p_stretch_both.png"),
 					}
 				);
@@ -1885,7 +1885,7 @@ function paste(img_or_canvas) {
 		// }
 
 		undoable({
-			name: localize("Paste"),
+			name: localize("Copia"),
 			icon: get_help_folder_icon("p_paste.png"),
 			soft: true,
 		}, () => {
@@ -1896,7 +1896,7 @@ function paste(img_or_canvas) {
 
 function render_history_as_gif() {
 	const $win = $DialogWindow();
-	$win.title("Rendering GIF");
+	$win.title("Creando la GIF");
 
 	const $output = $win.$main;
 	const $progress = $(E("progress")).appendTo($output).addClass("inset-deep");
@@ -1907,7 +1907,7 @@ function render_history_as_gif() {
 	});
 	$win.$main.css({ padding: 5 });
 
-	const $cancel = $win.$Button("Cancel", () => {
+	const $cancel = $win.$Button("Cancella", () => {
 		$win.close();
 	}).focus();
 
@@ -1933,7 +1933,7 @@ function render_history_as_gif() {
 		});
 
 		gif.on("finished", (blob) => {
-			$win.title("Rendered GIF");
+			$win.title("GIF Creata");
 			const blob_url = URL.createObjectURL(blob);
 			$output.empty().append(
 				$(E("div")).addClass("inset-deep").append(
@@ -1954,18 +1954,18 @@ function render_history_as_gif() {
 				// revoking on image load(+error) breaks right click > "Save image as" and "Open image in new tab"
 				URL.revokeObjectURL(blob_url);
 			});
-			$win.$Button("Upload to Imgur", () => {
+			$win.$Button("Carica su Imgur", () => {
 				$win.close();
 				sanity_check_blob(blob, () => {
 					show_imgur_uploader(blob);
 				});
 			}).focus();
-			$win.$Button(localize("Save"), () => {
+			$win.$Button(localize("Salva"), () => {
 				$win.close();
 				sanity_check_blob(blob, () => {
 					const suggested_file_name = `${file_name.replace(/\.(bmp|dib|a?png|gif|jpe?g|jpe|jfif|tiff?|webp|raw)$/i, "")} history.gif`;
 					systemHooks.showSaveFileDialog({
-						dialogTitle: localize("Save As"), // localize("Save Animation As"),
+						dialogTitle: localize("Salva in"), // localize("Save Animation As"),
 						getBlob: () => blob,
 						defaultFileName: suggested_file_name,
 						defaultPath: typeof system_file_handle === "string" ? `${system_file_handle.replace(/[/\\][^/\\]*/, "")}/${suggested_file_name}` : null,
@@ -1973,8 +1973,8 @@ function render_history_as_gif() {
 						formats: [{
 							formatID: "image/gif",
 							mimeType: "image/gif",
-							name: localize("Animated GIF (*.gif)").replace(/\s+\([^(]+$/, ""),
-							nameWithExtensions: localize("Animated GIF (*.gif)"),
+							name: localize("GIF Animata (*.gif)").replace(/\s+\([^(]+$/, ""),
+							nameWithExtensions: localize("GIF Animata (*.gif)"),
 							extensions: ["gif"],
 						}],
 					});
@@ -1999,7 +1999,7 @@ function render_history_as_gif() {
 
 	} catch (err) {
 		$win.close();
-		show_error_message("Failed to render GIF.", err);
+		show_error_message("Impossibile creare la GIF.", err);
 	}
 }
 
@@ -2012,7 +2012,7 @@ function go_to_history_node(target_history_node, canceling) {
 
 	if (!target_history_node.image_data) {
 		if (!canceling) {
-			show_error_message("History entry has no image data.");
+			show_error_message("La voce della cronologia non contiene dati immagine.");
 			window.console?.log("Target history entry has no image data:", target_history_node);
 		}
 		return;
@@ -2141,7 +2141,7 @@ function undoable({ name, icon, use_loose_canvas_changes, soft, assume_saved }, 
 	const before_callback_history_node = current_history_node;
 	callback?.();
 	if (current_history_node !== before_callback_history_node) {
-		show_error_message(`History node switched during undoable callback for ${name}. This shouldn't happen.`);
+		show_error_message(`Il nodo storico è stato commutato durante il callback annullabile per ${name}. Questo non dovrebbe accadere.`);
 		window.console?.log(`History node switched during undoable callback for ${name}, from`, before_callback_history_node, "to", current_history_node);
 	}
 
@@ -2223,7 +2223,7 @@ function redo() {
 		if (!$document_history_window || $document_history_window.closed) {
 			$document_history_prompt_window = showMessageBox({
 				title: "Redo",
-				messageHTML: "To view all branches of the history tree, click <b>Edit > History</b>.",
+				messageHTML: "Per visualizzare tutti i rami dell'albero cronologico, click <b>Modifica > Cronologia</b>.",
 				iconID: "info",
 			}).$window;
 		}
@@ -2266,7 +2266,7 @@ function show_document_history() {
 		$document_history_window.close();
 	}
 	const $w = $document_history_window = $Window({
-		title: "Document History",
+		title: "Cronologia azioni",
 		resizable: false,
 		maximizeButton: false,
 		minimizeButton: false,
@@ -2276,8 +2276,8 @@ function show_document_history() {
 	$w.$content.html(`
 		<label>
 			<select id="history-view-mode" class="inset-deep">
-				<option value="linear">Linear timeline</option>
-				<option value="tree">Tree</option>
+				<option value="linear">Linea temporale lineare</option>
+				<option value="tree">Albero</option>
 			</select>
 		</label>
 		<div class="history-view" tabIndex="0"></div>
@@ -2447,7 +2447,7 @@ function cancel(going_to_history_node, discard_document_state) {
 		if (history_node_to_discard) {
 			const index = history_node_to_discard.parent.futures.indexOf(history_node_to_discard);
 			if (index === -1) {
-				show_error_message("History node not found. Please report this bug.");
+				show_error_message("Nodo cronologia non trovato. Segnala questo bug..");
 				console.log("history_node_to_discard", history_node_to_discard);
 				console.log("current_history_node", current_history_node);
 				console.log("history_node_to_discard.parent", history_node_to_discard.parent);
@@ -2470,7 +2470,7 @@ function meld_selection_into_canvas(going_to_history_node) {
 	selection = null;
 	if (!going_to_history_node) {
 		undoable({
-			name: "Deselect",
+			name: "Deselezione", //Deselect
 			icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 			use_loose_canvas_changes: true, // HACK; @TODO: make OnCanvasSelection not change the canvas outside undoable, same rules as tools
 		}, () => { });
@@ -2483,12 +2483,12 @@ function meld_textbox_into_canvas(going_to_history_node) {
 	const text = textbox.$editor.val();
 	if (text && !going_to_history_node) {
 		undoable({
-			name: localize("Text"),
+			name: localize("Testo"),
 			icon: get_icon_for_tool(get_tool_by_id(TOOL_TEXT)),
 			soft: true,
 		}, () => { });
 		undoable({
-			name: "Finish Text",
+			name: "Testo finito",
 			icon: get_icon_for_tool(get_tool_by_id(TOOL_TEXT)),
 		}, () => {
 			main_ctx.drawImage(textbox.canvas, textbox.x, textbox.y);
@@ -2521,7 +2521,7 @@ function deselect(going_to_history_node) {
 function delete_selection(meta = {}) {
 	if (selection) {
 		undoable({
-			name: meta.name || localize("Clear Selection"), //"Delete", (I feel like "Clear Selection" is unclear, could mean "Deselect")
+			name: meta.name || localize("Cancella selezione"), //"Delete", (I feel like "Clear Selection" is unclear, could mean "Deselect")
 			icon: meta.icon || get_help_folder_icon("p_delete.png"),
 			// soft: @TODO: conditionally soft?,
 		}, () => {
@@ -2535,7 +2535,7 @@ function select_all() {
 	select_tool(get_tool_by_id(TOOL_SELECT));
 
 	undoable({
-		name: localize("Select All"),
+		name: localize("Seleziona tutto"),
 		icon: get_icon_for_tool(get_tool_by_id(TOOL_SELECT)),
 		soft: true,
 	}, () => {
@@ -2544,7 +2544,7 @@ function select_all() {
 }
 
 const ctrlOrCmd = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl";
-const recommendationForClipboardAccess = `Please use the keyboard: ${ctrlOrCmd}+C to copy, ${ctrlOrCmd}+X to cut, ${ctrlOrCmd}+V to paste. If keyboard is not an option, try using Chrome version 76 or higher.`;
+const recommendationForClipboardAccess = `Per favore sulla tastiera: ${ctrlOrCmd}+C per copiare, ${ctrlOrCmd}+X per tagliare, ${ctrlOrCmd}+V per incollare.`;
 /**
  * @param {string} commandId
  */
@@ -2552,10 +2552,10 @@ function try_exec_command(commandId) {
 	if (document.queryCommandEnabled(commandId)) { // not a reliable source for whether it'll work, if I recall
 		document.execCommand(commandId);
 		if (!navigator.userAgent.includes("Firefox") || commandId === "paste") {
-			return show_error_message(`That ${commandId} probably didn't work. ${recommendationForClipboardAccess}`);
+			return show_error_message(`Questo ${commandId} probabilmente non funziona. ${recommendationForClipboardAccess}`);
 		}
 	} else {
-		return show_error_message(`Cannot perform ${commandId}. ${recommendationForClipboardAccess}`);
+		return show_error_message(`Non è possibile eseguire ${commandId}. ${recommendationForClipboardAccess}`);
 	}
 }
 
@@ -2591,7 +2591,7 @@ function edit_copy(execCommandFallback) {
 			if (execCommandFallback) {
 				return try_exec_command("copy");
 			} else {
-				show_error_message(`${localize("Error getting the Clipboard Data!")} ${recommendationForClipboardAccess}`);
+				show_error_message(`${localize("Errore durante il recupero dei dati negli Appunti!")} ${recommendationForClipboardAccess}`);
 				// show_error_message(`The Async Clipboard API is not supported by this browser. ${browserRecommendationForClipboardAccess}`);
 				return;
 			}
@@ -2602,7 +2602,7 @@ function edit_copy(execCommandFallback) {
 			if (execCommandFallback) {
 				return try_exec_command("copy");
 			} else {
-				show_error_message(`${localize("Error getting the Clipboard Data!")} ${recommendationForClipboardAccess}`);
+				show_error_message(`${localize("Errore durante il recupero dei dati negli Appunti!")} ${recommendationForClipboardAccess}`);
 				// show_error_message(`The Async Clipboard API is not supported by this browser. ${browserRecommendationForClipboardAccess}`);
 				return;
 			}
@@ -2617,7 +2617,7 @@ function edit_copy(execCommandFallback) {
 				]).then(() => {
 					window.console?.log("Copied image to the clipboard.");
 				}, (error) => {
-					show_error_message("Failed to copy to the Clipboard.", error);
+					show_error_message("Impossibile copiare negli appunti.", error);
 				});
 			});
 		});
@@ -2631,14 +2631,14 @@ function edit_cut(execCommandFallback) {
 		if (execCommandFallback) {
 			return try_exec_command("cut");
 		} else {
-			show_error_message(`${localize("Error getting the Clipboard Data!")} ${recommendationForClipboardAccess}`);
+			show_error_message(`${localize("Impossibile ottenere dati appunti!")} ${recommendationForClipboardAccess}`);
 			// show_error_message(`The Async Clipboard API is not supported by this browser. ${browserRecommendationForClipboardAccess}`);
 			return;
 		}
 	}
 	edit_copy();
 	delete_selection({
-		name: localize("Cut"),
+		name: localize("Taglia"),
 		icon: get_help_folder_icon("p_cut.png"),
 	});
 }
@@ -2654,7 +2654,7 @@ async function edit_paste(execCommandFallback) {
 			if (execCommandFallback) {
 				return try_exec_command("paste");
 			} else {
-				show_error_message(`${localize("Error getting the Clipboard Data!")} ${recommendationForClipboardAccess}`);
+				show_error_message(`${localize("Errore durante il recupero dei dati degli Appunti!")} ${recommendationForClipboardAccess}`);
 				// show_error_message(`The Async Clipboard API is not supported by this browser. ${browserRecommendationForClipboardAccess}`);
 				return;
 			}
@@ -2667,7 +2667,7 @@ async function edit_paste(execCommandFallback) {
 		if (execCommandFallback) {
 			return try_exec_command("paste");
 		} else {
-			show_error_message(`${localize("Error getting the Clipboard Data!")} ${recommendationForClipboardAccess}`);
+			show_error_message(`${localize("Errore durante il recupero dei dati degli Appunti!")} ${recommendationForClipboardAccess}`);
 			// show_error_message(`The Async Clipboard API is not supported by this browser. ${browserRecommendationForClipboardAccess}`);
 			return;
 		}
@@ -2690,23 +2690,23 @@ async function edit_paste(execCommandFallback) {
 						});
 					} else {
 						// @TODO: should I just make a textbox instead?
-						show_error_message("The information on the Clipboard can't be inserted into Paint.");
+						show_error_message("Le informazioni negli Appunti non possono essere inserite in Paint.");
 					}
 				} else {
-					show_error_message("The information on the Clipboard can't be inserted into Paint.");
+					show_error_message("Le informazioni negli Appunti non possono essere inserite in Paint.");
 				}
 			} catch (error) {
-				show_error_message(localize("Error getting the Clipboard Data!"), error);
+				show_error_message(localize("Errore durante il recupero dei dati degli Appunti!"), error);
 			}
 		} else {
-			show_error_message(localize("Error getting the Clipboard Data!"), error);
+			show_error_message(localize("Errore durante il recupero dei dati degli Appunti!"), error);
 		}
 	}
 }
 
 function image_invert_colors() {
 	apply_image_transformation({
-		name: localize("Invert Colors"),
+		name: localize("Inverti i colori"),
 		icon: get_help_folder_icon("p_invert.png"),
 	}, (_original_canvas, original_ctx, _new_canvas, new_ctx) => {
 		const monochrome_info = monochrome && detect_monochrome(original_ctx);
@@ -2722,7 +2722,7 @@ function clear() {
 	deselect();
 	cancel();
 	undoable({
-		name: localize("Clear Image"),
+		name: localize("Cancella immagine"),
 		icon: get_help_folder_icon("p_blank.png"),
 	}, () => {
 		saved = false;
@@ -3096,7 +3096,7 @@ function switch_to_polychrome_palette() {
 
 function make_opaque() {
 	undoable({
-		name: "Make Opaque",
+		name: "Rendi opaco",
 		icon: get_help_folder_icon("p_make_opaque.png"),
 	}, () => {
 		main_ctx.save();
@@ -3125,7 +3125,7 @@ function resize_canvas_without_saving_dimensions(unclamped_width, unclamped_heig
 	const new_height = Math.max(1, unclamped_height);
 	if (main_canvas.width !== new_width || main_canvas.height !== new_height) {
 		undoable({
-			name: undoable_meta.name || "Resize Canvas",
+			name: undoable_meta.name || "Ridimensiona il Canvas",
 			icon: undoable_meta.icon || get_help_folder_icon("p_stretch_both.png"),
 		}, () => {
 			try {
@@ -3144,9 +3144,9 @@ function resize_canvas_without_saving_dimensions(unclamped_width, unclamped_heig
 			} catch (exception) {
 				if (exception.name === "NS_ERROR_FAILURE") {
 					// or localize("There is not enough memory or resources to complete operation.")
-					show_error_message(localize("Insufficient memory to perform operation."), exception);
+					show_error_message(localize("Memoria insufficiente per eseguire l'operazione."), exception);
 				} else {
-					show_error_message(localize("An unknown error has occurred."), exception);
+					show_error_message(localize("Si è verificato un errore sconosciuto."), exception);
 				}
 				// @TODO: undo and clean up undoable
 				// maybe even keep Attributes dialog open if that's what's triggering the resize
@@ -3179,7 +3179,7 @@ function image_attributes() {
 	if (image_attributes.$window) {
 		image_attributes.$window.close();
 	}
-	const $w = image_attributes.$window = $DialogWindow(localize("Attributes"));
+	const $w = image_attributes.$window = $DialogWindow(localize("Attributi"));
 	$w.addClass("attributes-window");
 
 	const $main = $w.$main;
@@ -3187,9 +3187,9 @@ function image_attributes() {
 	// Information
 
 	const table = {
-		[localize("File last saved:")]: localize("Not Available"), // @TODO: make available?
-		[localize("Size on disk:")]: localize("Not Available"), // @TODO: make available?
-		[localize("Resolution:")]: "72 x 72 dots per inch", // if localizing this, remove "direction" setting below
+		[localize("Ultimo file salvato:")]: localize("Non disponibile"), // @TODO: make available?
+		[localize("Dimensione sul disco:")]: localize("Non disponibile"), // @TODO: make available?
+		[localize("Risoluzione:")]: "72 x 72 punti per pollice", // if localizing this, remove "direction" setting below
 	};
 	const $table = $(E("table")).appendTo($main);
 	for (const k in table) {
@@ -3208,8 +3208,8 @@ function image_attributes() {
 	let width_in_px = main_canvas.width;
 	let height_in_px = main_canvas.height;
 
-	const $width_label = $(E("label")).appendTo($main).html(render_access_key(localize("&Width:")));
-	const $height_label = $(E("label")).appendTo($main).html(render_access_key(localize("&Height:")));
+	const $width_label = $(E("label")).appendTo($main).html(render_access_key(localize("&Larghezza:")));
+	const $height_label = $(E("label")).appendTo($main).html(render_access_key(localize("&Altezza:")));
 	const $width = $(E("input")).attr({ type: "number", min: 1, "aria-keyshortcuts": "Alt+W W W" }).addClass("no-spinner inset-deep").appendTo($width_label);
 	const $height = $(E("input")).attr({ type: "number", min: 1, "aria-keyshortcuts": "Alt+H H H" }).addClass("no-spinner inset-deep").appendTo($height_label);
 
@@ -3223,9 +3223,9 @@ function image_attributes() {
 	// Fieldsets
 
 	const $units = $(E("fieldset")).appendTo($main).append(`
-		<legend>${localize("Units")}</legend>
+		<legend>${localize("Unità")}</legend>
 		<div class="fieldset-body">
-			<div class="radio-field"><input type="radio" name="units" id="unit-in" value="in" aria-keyshortcuts="Alt+I I"><label for="unit-in">${render_access_key(localize("&Inches"))}</label></div>
+			<div class="radio-field"><input type="radio" name="units" id="unit-in" value="in" aria-keyshortcuts="Alt+I I"><label for="unit-in">${render_access_key(localize("&Pollici"))}</label></div>
 			<div class="radio-field"><input type="radio" name="units" id="unit-cm" value="cm" aria-keyshortcuts="Alt+M M"><label for="unit-cm">${render_access_key(localize("C&m"))}</label></div>
 			<div class="radio-field"><input type="radio" name="units" id="unit-px" value="px" aria-keyshortcuts="Alt+P P"><label for="unit-px">${render_access_key(localize("&Pixels"))}</label></div>
 		</div>
@@ -3239,19 +3239,19 @@ function image_attributes() {
 	}).triggerHandler("change");
 
 	const $colors = $(E("fieldset")).appendTo($main).append(`
-		<legend>${localize("Colors")}</legend>
+		<legend>${localize("Colori")}</legend>
 		<div class="fieldset-body">
-			<div class="radio-field"><input type="radio" name="colors" id="attribute-monochrome" value="monochrome" aria-keyshortcuts="Alt+B B"><label for="attribute-monochrome">${render_access_key(localize("&Black and white"))}</label></div>
-			<div class="radio-field"><input type="radio" name="colors" id="attribute-polychrome" value="polychrome" aria-keyshortcuts="Alt+L L"><label for="attribute-polychrome">${render_access_key(localize("Co&lors"))}</label></div>
+			<div class="radio-field"><input type="radio" name="colors" id="attribute-monochrome" value="monochrome" aria-keyshortcuts="Alt+B B"><label for="attribute-monochrome">${render_access_key(localize("&Scala di grigi"))}</label></div>
+			<div class="radio-field"><input type="radio" name="colors" id="attribute-polychrome" value="polychrome" aria-keyshortcuts="Alt+L L"><label for="attribute-polychrome">${render_access_key(localize("Co&lori"))}</label></div>
 		</div>
 	`);
 	$colors.find(`[value=${monochrome ? "monochrome" : "polychrome"}]`).attr({ checked: true });
 
 	const $transparency = $(E("fieldset")).appendTo($main).append(`
-		<legend>${localize("Transparency")}</legend>
+		<legend>${localize("Trasparenza")}</legend>
 		<div class="fieldset-body">
-			<div class="radio-field"><input type="radio" name="transparency" id="attribute-transparent" value="transparent"><label for="attribute-transparent">${localize("Transparent")}</label></div>
-			<div class="radio-field"><input type="radio" name="transparency" id="attribute-opaque" value="opaque"><label for="attribute-opaque">${localize("Opaque")}</label></div>
+			<div class="radio-field"><input type="radio" name="transparency" id="attribute-transparent" value="transparent"><label for="attribute-transparent">${localize("Trasparente")}</label></div>
+			<div class="radio-field"><input type="radio" name="transparency" id="attribute-opaque" value="opaque"><label for="attribute-opaque">${localize("Opaco")}</label></div>
 		</div>
 	`);
 	$transparency.find(`[value=${transparency ? "transparent" : "opaque"}]`).attr({ checked: true });
@@ -3318,12 +3318,12 @@ function image_attributes() {
 		image_attributes.$window.close();
 	}, { type: "submit" });
 
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		image_attributes.$window.close();
 	});
 
 	// Parsing HTML with jQuery; $Button takes text (not HTML) or Node/DocumentFragment
-	$w.$Button($.parseHTML(render_access_key(localize("&Default")))[0], () => {
+	$w.$Button($.parseHTML(render_access_key(localize("&Predefinito")))[0], () => {
 		width_in_px = default_canvas_width;
 		height_in_px = default_canvas_height;
 		$width.val(width_in_px / unit_sizes_in_px[current_unit]);
@@ -3354,16 +3354,16 @@ image_attributes.$window = null;
 image_attributes.unit = "px";
 
 function show_convert_to_black_and_white() {
-	const $w = $DialogWindow("Convert to Black and White");
+	const $w = $DialogWindow("Converti in bianco e nero");
 	$w.addClass("convert-to-black-and-white");
-	$w.$main.append("<fieldset><legend>Threshold:</legend><input type='range' min='0' max='1' step='0.01' value='0.5'></fieldset>");
+	$w.$main.append("<fieldset><legend>Soglia:</legend><input type='range' min='0' max='1' step='0.01' value='0.5'></fieldset>");
 	const $slider = $w.$main.find("input[type='range']");
 	const original_canvas = make_canvas(main_canvas);
 	let threshold;
 	const update_threshold = () => {
 		make_or_update_undoable({
-			name: "Make Monochrome",
-			match: (history_node) => history_node.name === "Make Monochrome",
+			name: "Rendi monocromatico",
+			match: (history_node) => history_node.name === "Rendi monocromatico",
 			icon: get_help_folder_icon("p_monochrome.png"),
 		}, () => {
 			threshold = Number($slider.val());
@@ -3378,12 +3378,12 @@ function show_convert_to_black_and_white() {
 	$w.$Button(localize("OK"), () => {
 		$w.close();
 	}, { type: "submit" }).focus();
-	$w.$Button(localize("Cancel"), () => {
-		if (current_history_node.name === "Make Monochrome") {
+	$w.$Button(localize("Cancella"), () => {
+		if (current_history_node.name === "Rendi monocromatico") {
 			undo();
 		} else {
 			undoable({
-				name: "Cancel Make Monochrome",
+				name: "Cancella monocromatico",
 				icon: get_help_folder_icon("p_color.png"),
 			}, () => {
 				main_ctx.copy(original_canvas);
@@ -3395,12 +3395,12 @@ function show_convert_to_black_and_white() {
 }
 
 function image_flip_and_rotate() {
-	const $w = $DialogWindow(localize("Flip and Rotate"));
+	const $w = $DialogWindow(localize("Capovolgi e ruota"));
 	$w.addClass("flip-and-rotate");
 
 	const $fieldset = $(E("fieldset")).appendTo($w.$main);
 	$fieldset.append(`
-		<legend>${localize("Flip or rotate")}</legend>
+		<legend>${localize("Capovolgi e ruota")}</legend>
 		<div class="radio-wrapper">
 			<input
 				type="radio"
@@ -3409,7 +3409,7 @@ function image_flip_and_rotate() {
 				value="flip-horizontal"
 				aria-keyshortcuts="Alt+F"
 				checked
-			/><label for="flip-horizontal">${render_access_key(localize("&Flip horizontal"))}</label>
+			/><label for="flip-horizontal">${render_access_key(localize("&Ruota in orizzontale"))}</label>
 		</div>
 		<div class="radio-wrapper">
 			<input
@@ -3418,7 +3418,7 @@ function image_flip_and_rotate() {
 				id="flip-vertical"
 				value="flip-vertical"
 				aria-keyshortcuts="Alt+V"
-			/><label for="flip-vertical">${render_access_key(localize("Flip &vertical"))}</label>
+			/><label for="flip-vertical">${render_access_key(localize("Ruota in &verticale"))}</label>
 		</div>
 		<div class="radio-wrapper">
 			<input
@@ -3427,7 +3427,7 @@ function image_flip_and_rotate() {
 				id="rotate-by-angle"
 				value="rotate-by-angle"
 				aria-keyshortcuts="Alt+R"
-			/><label for="rotate-by-angle">${render_access_key(localize("&Rotate by angle"))}</label>
+			/><label for="rotate-by-angle">${render_access_key(localize("&Rotazione da angolo"))}</label>
 		</div>
 	`);
 
@@ -3469,7 +3469,7 @@ function image_flip_and_rotate() {
 				class="no-spinner inset-deep"
 				style="width: 50px"
 			/>
-			<label for="custom-degrees">${localize("Degrees")}</label>
+			<label for="custom-degrees">${localize("Gradi")}</label>
 		</div>
 	`);
 	$rotate_by_angle.find("#rotate-90").attr({ checked: true });
@@ -3530,7 +3530,7 @@ function image_flip_and_rotate() {
 
 		$w.close();
 	}, { type: "submit" });
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 
@@ -3542,13 +3542,13 @@ function image_flip_and_rotate() {
 }
 
 function image_stretch_and_skew() {
-	const $w = $DialogWindow(localize("Stretch and Skew"));
+	const $w = $DialogWindow(localize("Allunga e inclina"));
 	$w.addClass("stretch-and-skew");
 
 	const $fieldset_stretch = $(E("fieldset")).appendTo($w.$main);
-	$fieldset_stretch.append(`<legend>${localize("Stretch")}</legend><table></table>`);
+	$fieldset_stretch.append(`<legend>${localize("Stirata")}</legend><table></table>`);
 	const $fieldset_skew = $(E("fieldset")).appendTo($w.$main);
-	$fieldset_skew.append(`<legend>${localize("Skew")}</legend><table></table>`);
+	$fieldset_skew.append(`<legend>${localize("Inclinazione")}</legend><table></table>`);
 
 	const $RowInput = ($table, img_src, label_with_hotkey, default_value, label_unit, min, max) => {
 		const $tr = $(E("tr")).appendTo($table);
@@ -3578,10 +3578,10 @@ function image_stretch_and_skew() {
 		return $input;
 	};
 
-	const stretch_x = $RowInput($fieldset_stretch.find("table"), "stretch-x", localize("&Horizontal:"), 100, "%", 1, 5000);
-	const stretch_y = $RowInput($fieldset_stretch.find("table"), "stretch-y", localize("&Vertical:"), 100, "%", 1, 5000);
-	const skew_x = $RowInput($fieldset_skew.find("table"), "skew-x", localize("H&orizontal:"), 0, localize("Degrees"), -90, 90);
-	const skew_y = $RowInput($fieldset_skew.find("table"), "skew-y", localize("V&ertical:"), 0, localize("Degrees"), -90, 90);
+	const stretch_x = $RowInput($fieldset_stretch.find("table"), "stretch-x", localize("&Orizzontale:"), 100, "%", 1, 5000);
+	const stretch_y = $RowInput($fieldset_stretch.find("table"), "stretch-y", localize("&Verticale:"), 100, "%", 1, 5000);
+	const skew_x = $RowInput($fieldset_skew.find("table"), "skew-x", localize("O&rizzontale:"), 0, localize("Gradi"), -90, 90);
+	const skew_y = $RowInput($fieldset_skew.find("table"), "skew-y", localize("V&erticale:"), 0, localize("Gradi"), -90, 90);
 
 	$w.$Button(localize("OK"), () => {
 		const x_scale = parseFloat(stretch_x.val()) / 100;
@@ -3597,9 +3597,9 @@ function image_stretch_and_skew() {
 		} catch (exception) {
 			if (exception.name === "NS_ERROR_FAILURE") {
 				// or localize("There is not enough memory or resources to complete operation.")
-				show_error_message(localize("Insufficient memory to perform operation."), exception);
+				show_error_message(localize("Memoria insufficiente per eseguire l'operazione."), exception);
 			} else {
-				show_error_message(localize("An unknown error has occurred."), exception);
+				show_error_message(localize("Si è verificato un errore sconosciuto."), exception);
 			}
 			// @TODO: undo and clean up undoable
 			return;
@@ -3607,7 +3607,7 @@ function image_stretch_and_skew() {
 		$w.close();
 	}, { type: "submit" });
 
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 
@@ -3699,7 +3699,7 @@ function handle_keyshortcuts($container) {
  * @returns {Promise<{newFileName: string, newFileFormatID: string}>} - A promise that resolves with the new file name and format ID.
  */
 function save_as_prompt({
-	dialogTitle = localize("Save As"),
+	dialogTitle = localize("Salva in"),
 	defaultFileName = "",
 	defaultFileFormatID,
 	formats,
@@ -3718,14 +3718,14 @@ function save_as_prompt({
 		if (promptForName) {
 			$w.$main.append(`
 				<label>
-					File name:
+					Nome file:
 					<input type="text" class="file-name inset-deep"/>
 				</label>
 			`);
 		}
 		$w.$main.append(`
 			<label>
-				Save as type:
+				Salva come tipo:
 				<select class="file-type-select inset-deep"></select>
 			</label>
 		`);
@@ -3807,7 +3807,7 @@ function save_as_prompt({
 		// and initially
 		update_extension_from_file_type(false);
 
-		const $save = $w.$Button(localize("Save"), () => {
+		const $save = $w.$Button(localize("Salva"), () => {
 			$w.close();
 			update_extension_from_file_type(true);
 			resolve({
@@ -3815,7 +3815,7 @@ function save_as_prompt({
 				newFileFormatID: String($file_type.val()),
 			});
 		}, { type: "submit" });
-		$w.$Button(localize("Cancel"), () => {
+		$w.$Button(localize("Cancella"), () => {
 			$w.close();
 		});
 
@@ -4036,7 +4036,7 @@ function read_image_file(blob, callback) {
 					});
 				});
 			}, (reason) => {
-				callback(new Error(`Failed to load PDF. ${reason}`));
+				callback(new Error(`Fallito a caricare il PDF. ${reason}`));
 			});
 		} else {
 			monochrome = false;
@@ -4059,12 +4059,12 @@ function read_image_file(blob, callback) {
 			const handle_decode_fail = () => {
 				URL.revokeObjectURL(blob_uri);
 				blob.text().then((file_text) => {
-					const error = new Error("failed to decode blob as an image");
+					const error = new Error("impossibile decodificare il blob come immagine");
 					// @ts-ignore
 					error.code = file_text.match(/^\s*<!doctype\s+html/i) ? "html-not-image" : "decoding-failure";
 					callback(error);
 				}, (_err) => {
-					const error = new Error("failed to decode blob as image or text");
+					const error = new Error("impossibile decodificare il blob come immagine o testo");
 					// @ts-ignore
 					error.code = "decoding-failure";
 					callback(error);
@@ -4093,13 +4093,13 @@ function read_image_file(blob, callback) {
 function update_from_saved_file(blob) {
 	read_image_file(blob, (error, info) => {
 		if (error) {
-			show_error_message("The file has been saved, however... " + localize("Paint cannot read this file."), error);
+			show_error_message("Il file è stato salvato, tuttavia... " + localize("Paint non può leggere questo file."), error);
 			return;
 		}
 		apply_file_format_and_palette_info(info);
 		const format = image_formats.find(({ mimeType }) => mimeType === info.file_format);
 		undoable({
-			name: `${localize("Save As")} ${format ? format.name : info.file_format}`,
+			name: `${localize("Salva in")} ${format ? format.name : info.file_format}`,
 			icon: get_help_folder_icon("p_save.png"),
 			assume_saved: true, // prevent setting saved to false
 		}, () => {
@@ -4111,7 +4111,7 @@ function update_from_saved_file(blob) {
 function save_selection_to_file() {
 	if (selection && selection.canvas) {
 		systemHooks.showSaveFileDialog({
-			dialogTitle: localize("Save As"),
+			dialogTitle: localize("Salva in"),
 			defaultFileName: "selection.png",
 			defaultFileFormatID: "image/png",
 			formats: image_formats,
@@ -4151,19 +4151,19 @@ function sanity_check_blob(blob, okay_callback, magic_number_bytes, magic_wanted
 						// `,
 						message:
 							window.is_electron_app ?
-								"Writing images in this file format is not supported." :
-								"Your browser does not support writing images in this file format.",
+								"La scrittura di immagini in questo formato di file non è supportata." :
+								"Il tuo browser non supporta la scrittura di immagini in questo formato di file.",
 						iconID: "error",
 					});
 				}
 			}, (error) => {
-				show_error_message(localize("An unknown error has occurred."), error);
+				show_error_message(localize("Si è verificato un errore sconosciuto."), error);
 			});
 		} else {
 			okay_callback();
 		}
 	} else {
-		show_error_message(localize("Failed to save document."));
+		show_error_message(localize("Impossibile salvare il documento."));
 	}
 }
 
@@ -4174,10 +4174,10 @@ function show_multi_user_setup_dialog(from_current_document) {
 	const $w = $DialogWindow();
 	$w.title("Multi-User Setup").addClass("horizontal-buttons");
 	$w.$main.html(`
-		${from_current_document ? "<p>This will make the current document public.</p>" : ""}
+		${from_current_document ? "<p>Ciò renderà pubblico il documento corrente.</p>" : ""}
 		<p>
 			<!-- Choose a name for the multi-user session, included in the URL for sharing: -->
-			Enter the session name that will be used in the URL for sharing:
+			Inserisci il nome della sessione nell'URL per la condivisione:
 		</p>
 		<p>
 			<label>
@@ -4187,7 +4187,7 @@ function show_multi_user_setup_dialog(from_current_document) {
 					id="session-name"
 					aria-label="session name"
 					pattern="[-0-9A-Za-z\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u02af\\u1d00-\\u1d25\\u1d62-\\u1d65\\u1d6b-\\u1d77\\u1d79-\\u1d9a\\u1e00-\\u1eff\\u2090-\\u2094\\u2184-\\u2184\\u2488-\\u2490\\u271d-\\u271d\\u2c60-\\u2c7c\\u2c7e-\\u2c7f\\ua722-\\ua76f\\ua771-\\ua787\\ua78b-\\ua78c\\ua7fb-\\ua7ff\\ufb00-\\ufb06]+"
-					title="Numbers, letters, and hyphens are allowed."
+					title="Sono consentiti numeri, lettere e trattini."
 					class="inset-deep"
 				>
 			</label>
@@ -4199,9 +4199,9 @@ function show_multi_user_setup_dialog(from_current_document) {
 		let name = String($session_name.val()).trim();
 
 		if (name == "") {
-			show_error_message("The session name cannot be empty.");
+			show_error_message("Il nome della sessione non può essere vuoto.");
 		} else if ($session_name.is(":invalid")) {
-			show_error_message("The session name must be made from only numbers, letters, and hyphens.");
+			show_error_message("Il nome della sessione deve essere composto solo da numeri, lettere e trattini.");
 		} else {
 			if (from_current_document) {
 				change_url_param("session", name);
@@ -4213,7 +4213,7 @@ function show_multi_user_setup_dialog(from_current_document) {
 			$w.close();
 		}
 	}, { type: "submit" });
-	$w.$Button(localize("Cancel"), () => {
+	$w.$Button(localize("Cancella"), () => {
 		$w.close();
 	});
 	$w.center();

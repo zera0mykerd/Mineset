@@ -104,20 +104,20 @@ window.systemHookDefaults = {
 				const newFileExtension = get_file_extension(newFileName);
 				const doItAgain = async (message) => {
 					const button_value = await showMessageBox({
-						message: `${message}\n\nTry adding .${new_format.extensions[0]} to the name. Sorry about this.`,
+						message: `${message}\n\nProvando ad aggiungere .${new_format.extensions[0]} al nome. Mi dispiace per questo.`,
 						iconID: "error",
 						buttons: [
 							{
-								label: localize("Save As"), // or "Retry"
+								label: localize("Salva in"), // or "Retry"
 								value: "show-save-as-dialog-again",
 								default: true,
 							},
 							{
-								label: localize("Save"), // or "Ignore"
+								label: localize("Salva"), // or "Ignore"
 								value: "save-without-extension",
 							},
 							{
-								label: localize("Cancel"), // or "Abort"
+								label: localize("Cancella"), // or "Abort"
 								value: "cancel",
 							},
 						],
@@ -149,12 +149,12 @@ window.systemHookDefaults = {
 				};
 				if (!newFileExtension) {
 					// return await doItAgain(`Missing file extension.`);
-					return await doItAgain(`'${newFileName}' doesn't have an extension.`);
+					return await doItAgain(`'${newFileName}' non ha un'estensione.`);
 				}
 				if (!new_format.extensions.includes(newFileExtension)) {
 					// Closest translation: "Paint cannot save to the same filename with a different file type."
 					// return await doItAgain(`Wrong file extension for selected file type.`);
-					return await doItAgain(`File extension '.${newFileExtension}' does not match the selected file type ${new_format.name}.`);
+					return await doItAgain(`La estensione '.${newFileExtension}' non corrisponde al tipo di file selezionato ${new_format.name}.`);
 				}
 				// const new_format =
 				// 	get_format_from_extension(formats, newHandle.name) ||
@@ -175,10 +175,10 @@ window.systemHookDefaults = {
 				// saveAs(blob, newFileName);
 				if (error.message.match(/gesture|activation/)) {
 					// show_error_message("Your browser blocked the file from being saved, because you didn't use the mouse or keyboard directly to save. Try looking for a Downloads Blocked icon and say Always Allow, or save again with the keyboard or mouse.", error);
-					show_error_message("Sorry, due to browser security measures, you must use the keyboard or mouse directly to save.");
+					show_error_message("Spiacenti, a causa delle misure di sicurezza del browser, è necessario utilizzare direttamente la tastiera o il mouse per salvare.");
 					return;
 				}
-				show_error_message(localize("Failed to save document."), error);
+				show_error_message(localize("Impossibile salvare il documento."), error);
 				return;
 			}
 			savedCallbackUnreliable?.({
@@ -204,8 +204,8 @@ window.systemHookDefaults = {
 		if (window.untrusted_gesture) {
 			// We can't show a file picker RELIABLY.
 			// FIXME: double error message
-			show_error_message("Sorry, a file picker cannot be shown when using Speech Recognition or Dwell Clicker. You must click File > Open directly with the mouse, or press Ctrl+O on the keyboard.");
-			throw new Error("can't show file picker reliably");
+			show_error_message("Spiacenti, non è possibile visualizzare un selettore di file quando si utilizza il riconoscimento vocale o Dwell Clicker.");
+			throw new Error("non è possibile mostrare il selettore file in modo affidabile");
 		}
 		if (window.showOpenFilePicker && enable_fs_access_api) {
 			const [fileHandle] = await window.showOpenFilePicker({
@@ -254,7 +254,7 @@ window.systemHookDefaults = {
 				if (error.name === "NotAllowedError") {
 					// use didn't give permission to save
 					// is this too much of a warning?
-					show_error_message(localize("Save was interrupted, so your file has not been saved."), error);
+					show_error_message(localize("Il salvataggio è stato interrotto, quindi il file non è stato salvato."), error);
 					return false;
 				}
 				if (error.name === "SecurityError") {
@@ -274,7 +274,7 @@ window.systemHookDefaults = {
 			const file = await file_handle.getFile();
 			return file;
 		} else {
-			throw new Error(`Unknown file handle (${file_handle})`);
+			throw new Error(`Handle di file sconosciuto (${file_handle})`);
 			// show_error_message(`${localize("Failed to open document.")}\n${localize("An unsupported operation was attempted.")}`, error);
 		}
 	},
@@ -638,7 +638,7 @@ if ($news_indicator.text().includes("Bubblegum")) {
 // #endregion
 
 $status_text.default = () => {
-	$status_text.text(localize("For Help, click Help Topics on the Help Menu."));
+	$status_text.text(localize("Per assistenza, fare clic su Argomenti della guida nel menu Guida."));
 };
 $status_text.default();
 
@@ -852,7 +852,7 @@ $("body").on("dragover dragenter", (/** @type {JQuery.DragOverEvent | JQuery.Dra
 					} catch (error) {
 						// I'm not sure when this happens.
 						// should this use "An invalid file handle was associated with %1." message?
-						show_error_message(localize("File not found."), error);
+						show_error_message(localize("File non trovato."), error);
 						return;
 					}
 					if (!handle || handle.kind === "file") {
@@ -867,7 +867,7 @@ $("body").on("dragover dragenter", (/** @type {JQuery.DragOverEvent | JQuery.Dra
 						} catch (error) {
 							// NotFoundError can happen when the file was moved or deleted,
 							// then dragged and dropped via the browser's downloads bar, or some other outdated file listing.
-							show_error_message(localize("File not found."), error);
+							show_error_message(localize("File non trovato."), error);
 							return;
 						}
 						open_from_file(file, handle);
@@ -1277,7 +1277,7 @@ $G.on("cut copy paste", (e) => {
 							show_resource_load_error_message(error);
 						});
 					} else {
-						show_error_message("The information on the Clipboard can't be inserted into Paint.");
+						show_error_message("Le informazioni negli Appunti non possono essere inserite in Paint.");
 					}
 				});
 				break;
@@ -1309,8 +1309,8 @@ localStore.get({
 	my_canvas_height = Number(stored_values.height);
 
 	make_or_update_undoable({
-		match: (history_node) => history_node.name === localize("New"),
-		name: "Resize Canvas For New Document",
+		match: (history_node) => history_node.name === localize("Nuovo"),
+		name: "Ridimensiona Canvas per il nuovo documento",
 		icon: get_help_folder_icon("p_stretch_both.png"),
 	}, () => {
 		main_canvas.width = Math.max(1, my_canvas_width);
@@ -1331,7 +1331,7 @@ if (window.initial_system_file_handle) {
 		}
 	}, (error) => {
 		// this handler is not always called, sometimes error message is shown from readBlobFromHandle
-		show_error_message(`Failed to open file ${window.initial_system_file_handle}`, error);
+		show_error_message(`Fallito nell aprire il file ${window.initial_system_file_handle}`, error);
 	});
 }
 // #endregion
