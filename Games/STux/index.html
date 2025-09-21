@@ -3917,8 +3917,16 @@ let noteInterval = 1000; // Imposta l'intervallo di default tra le note (in mill
 let noteDuration = 1000; // Durata della nota di default (in millisecondi)
 let lastNoteTime = 0; // Per memorizzare l'ultimo momento in cui una nota è stata suonata
 
+const MAX_NOTES = 128; // Limite massimo di note
+
 // Funzione per suonare una nota con durata dinamica
 function playNote(note) {
+
+  if (notes.length >= MAX_NOTES) {
+    alert(`Hai superato il limite massimo di ${MAX_NOTES} note!`);
+    return; // Blocca l'aggiunta di nuove note
+  }
+
   const frequency = noteFrequencies[note];
   if (!frequency) return;
 

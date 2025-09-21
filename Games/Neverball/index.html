@@ -3332,6 +3332,8 @@ document.write( '</a>' );
   </script>
 
 <script type="text/javascript">
+
+
 function Ballerer(x, y, radius, e, mass, colour) {
     this.position = { x: x, y: y };
     this.velocity = { x: 0, y: 0 };
@@ -3355,6 +3357,27 @@ let width = 0;
 let height = 0;
 let Ballerers = [];
 
+let maxBalls = 96; //Numero massimo di palline che si possono generare
+let lastBallTime = 0;
+let ballCreationRate = 100; // millisecondi tra creazioni
+let creationAttempts = 0;
+let integrityCheckTime = 0;
+
+let checkIntegrity = function() {
+    let now = Date.now();
+    if (now - integrityCheckTime > 1000) {
+        if (Ballerers.length > maxBalls) {
+            alert('Manipolazione rilevata');
+            Ballerers = Ballerers.slice(0, maxBalls).filter(b => b._id && b._created);
+        }
+        let validBalls = Ballerers.filter(b => b._id && b._created && typeof b._created === 'number');
+        if (validBalls.length !== Ballerers.length) {
+            Ballerers = validBalls;
+        }
+        integrityCheckTime = now;
+    }
+};
+
 let setup = function () {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
@@ -3376,12 +3399,28 @@ let mouseDown = function (e) {
     if (e.button === 0) {
         getMousePosition(e);
         mouse.isDown = true;
+        let now = Date.now();
+        
+        if (Ballerers.length >= maxBalls || now - lastBallTime < ballCreationRate) {
+            creationAttempts++;
+            if (creationAttempts > 20) {
+                alert('Troppi tentativi rilevati');
+                return;
+            }
+            return;
+        }
+        
         let max = 255;
         let min = 20;
         let r = 75 + Math.floor(Math.random() * (max - min) - min);
         let g = 75 + Math.floor(Math.random() * (max - min) - min);
         let b = 75 + Math.floor(Math.random() * (max - min) - min);
-        Ballerers.push(new Ballerer(mouse.x, mouse.y, 10, 0.7, 10, "rgb(" + r + "," + g + "," + b + ")"));
+        let ball = new Ballerer(mouse.x, mouse.y, 10, 0.7, 10, "rgb(" + r + "," + g + "," + b + ")");
+        ball._created = now;
+        ball._id = Math.random().toString(36).substr(2, 9);
+        Ballerers.push(ball);
+        lastBallTime = now;
+        creationAttempts = Math.max(0, creationAttempts - 1);
     }
 };
 
@@ -3403,12 +3442,28 @@ let touchStart = function (e) {
     getTouchPosition(e);
     e.preventDefault();
     mouse.isDown = true;
+    let now = Date.now();
+    
+    if (Ballerers.length >= maxBalls || now - lastBallTime < ballCreationRate) {
+        creationAttempts++;
+        if (creationAttempts > 20) {
+            alert('Troppi tentativi rilevati');
+            return;
+        }
+        return;
+    }
+    
     let max = 255;
     let min = 20;
     let r = 75 + Math.floor(Math.random() * (max - min) - min);
     let g = 75 + Math.floor(Math.random() * (max - min) - min);
     let b = 75 + Math.floor(Math.random() * (max - min) - min);
-    Ballerers.push(new Ballerer(mouse.x, mouse.y, 10, 0.7, 10, "rgb(" + r + "," + g + "," + b + ")"));
+    let ball = new Ballerer(mouse.x, mouse.y, 10, 0.7, 10, "rgb(" + r + "," + g + "," + b + ")");
+    ball._created = now;
+    ball._id = Math.random().toString(36).substr(2, 9);
+    Ballerers.push(ball);
+    lastBallTime = now;
+    creationAttempts = Math.max(0, creationAttempts - 1);
 };
 
 let touchEnd = function (e) {
@@ -3429,6 +3484,7 @@ let getTouchPosition = function (e) {
 };
 
 let loop = function () {
+	checkIntegrity();
     let gravity = document.getElementById("gravity");
     let density = document.getElementById("density");
     let drag = document.getElementById("drag");
@@ -3539,6 +3595,9 @@ let resolveCollision = function (ballererA, ballererB) {
 };
 
 setup();
+
+
+
 </script>
 
 

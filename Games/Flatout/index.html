@@ -3348,6 +3348,39 @@ palette.forEach(p => {
   const fileImport=document.getElementById('fileImport');
   const btnDisconnect = document.getElementById('btnDisconnect');
   
+ // var NODE_LIMITS = 48;
+ 
+ Object.defineProperty(window, 'NODE_LIMITS', {
+  value: 48,
+  writable: false,
+  configurable: false,
+  enumerable: true
+});
+  
+
+// Controllo totale antimanipolazione della costante di limite
+const observer = new MutationObserver(muts => {
+  const nodesInDOM = wrap.querySelectorAll('.node').length;
+  if (nodesInDOM > NODE_LIMITS) {
+    // rimuove i nodi extra (i più recenti)
+    const all = Array.from(wrap.querySelectorAll('.node'));
+    const extras = all.slice(NODE_LIMITS);
+    extras.forEach(n => {
+      const id = n.dataset.id;
+      if (id && nodes[id]) {
+        // rimuovi in modo "pulito" usando la funzione esistente
+        removeNode(id);
+      } else {
+        n.remove();
+      }
+    });
+    updateLinks();
+    alert("Rilevate aggiunte sospette: superato il limite di " + NODE_LIMITS);
+  }
+});
+observer.observe(wrap, { childList: true, subtree: false });
+
+
   
 const btnPrint = document.getElementById('btnPrint');
 
@@ -3457,6 +3490,14 @@ btnPrint.addEventListener('click', () => {
 
   // --- CREA NODO ---
   function createNode(type,x,y,text,id){
+  
+  
+  //Limite creazione nodi
+  if(Object.keys(nodes).length >= NODE_LIMITS){
+    alert("Limite massimo di " + NODE_LIMITS + " elementi raggiunto");
+    return null;
+  }
+  
     id=id||uid();
     const el=document.createElement('div');
     el.className='node '+type;
@@ -3529,6 +3570,9 @@ btnPrint.addEventListener('click', () => {
       const x = (e.clientX || (e.touches ? e.touches[0].clientX : 0)) - r.left;
       const y = (e.clientY || (e.touches ? e.touches[0].clientY : 0)) - r.top;
       const ghost = createNode(type, x, y);
+	  
+	    // 🔒 blocco se createNode ha restituito null
+		if (!ghost) return;
 
       ghost.style.opacity = '0.9';
       ghost.style.pointerEvents = 'none';
@@ -3678,6 +3722,12 @@ function sanitizeAndValidateNode(n) {
     };
     return sanitizeAndValidateNode(n);
   });
+  
+    // 🔒 controllo limite nodi in export
+  if (nds.length > NODE_LIMITS) {
+    alert("Il modello supera il limite di " + NODE_LIMITS + " elementi");
+    return {nodes: [], links: []};
+  }
 
   const lks = links.map(l => ({from:l.from,to:l.to}));
   return {nodes: nds, links: lks};
@@ -3730,6 +3780,12 @@ fileImport.addEventListener('change', e => {
 
       // ✅ controllo completo del modello
       if (!validateModel(d)) throw new Error("JSON non conforme");
+	  
+	        // 🔒 controllo limite nodi in import
+      if (d.nodes.length > NODE_LIMITS) {
+        alert("Il file contiene più di " + NODE_LIMITS + " elementi");
+        return; // blocca subito l'import
+      }
 
       Object.keys(nodes).forEach(removeNode);
 
@@ -3784,8 +3840,6 @@ fileImport.addEventListener('change', e => {
 
 
 
-
-
 //SEPARATOR
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -3826,7 +3880,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const ROWS_INIT = 10;
   const COLS_INIT = 10;
   const MAX_LENGTH = 32;
-  const MAX_ROWS = 64;
+  const MAX_ROWS = 128;
   const MAX_COLS = 64;
 
 
@@ -4062,7 +4116,12 @@ function importJSON(e){
   reader.readAsText(file);
 }
 
+
 function exportJSON(){
+  if(tableData.length > MAX_ROWS || tableData[0].length > MAX_COLS){
+    alert(`Impossibile esportare: la tabella supera i limiti (${MAX_ROWS} righe, ${MAX_COLS} colonne)`);
+    return;
+  }
   const safeData = tableData.map(r=>r.map(v=>sanitizeInput(v).substring(0, MAX_LENGTH)));
   const blob = new Blob([JSON.stringify(safeData,null,2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);

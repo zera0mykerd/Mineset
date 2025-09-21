@@ -2072,6 +2072,7 @@ for (var i = 0; i < elementi.length; i++) {
 </script>
 
 <script type="text/javascript">
+/*
   let count = 0;
   const counterElement = document.getElementById('counter');
 
@@ -2152,9 +2153,6 @@ function updateCounter() {
 }
 
 
-
-
-
 let audioEnabled = true;
 const audtoggle = document.getElementById('audtoggle');
 const audioElements = document.querySelectorAll('Audio');
@@ -2172,6 +2170,217 @@ function toggleAudio() {
 
 audtoggle.addEventListener('click', toggleAudio);
 
+*/
+
+
+/*
+let count = 0;
+const counterElement = document.getElementById('counter');
+let audioEnabled = true;
+const audtoggle = document.getElementById('audtoggle');
+
+// Creazione unica degli oggetti audio
+const incrementAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAHAAADYABVVVVVVVVVVVVVVVVVVXFxcXFxcXFxcXFxcXFxjo6Ojo6Ojo6Ojo6Ojo6qqqqqqqqqqqqqqqqqqqrHx8fHx8fHx8fHx8fHx+Pj4+Pj4+Pj4+Pj4+Pj//////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAQgAAAAAAAAA2DreBT/AAAAAAAAAAAAAAAAAAAA//NEZAAExQ6IAaCUAASwiMZBRTgAgAAAA/////////////////UhCEITkIQhCBwOAQAwDAMAw+Hw+LuAG4xIP+c55BAAA4RG/88bg/Ae9y+4B6n/TLBOf47Dc0Kn/rc+//NEZBIHUSsUAMFEAAWgnZmJk5gAib//m9NJE3//yfMECcW5///9ZuT6TDgDIYWngSf///46QurBRiEICrBCACAAIHlw96ZQ8JXP/rUh/1BLX//qxWs1Gk2Aw1ogwGAA//NEZAwHJPN7L8MIAAUwEnDhgxAAAAsoHClSM4BuGbKP/SdAoSgZudG//f+r+JDHMuub/p//8YDRfhUOX/iy4E6lgQAAp9RT4lPICuoJe2viOtjfty3RL7FIPYbpeq3Z//NEZAkGNPdWAMeUAAYADmgBgxAAMEcauvnC34iFSoocV/bKf//6f/f////KVlKx9W6UrWq2aLQpyzTvXGqPEDx48MUt9NN1lvp/cv6P//JHv6fWGFIDHzZEADE9Mmtu//NEZAoGSENMZce8AAYBlnCxgRAAPUq9sEJ7Kw2/8Ija9uavhWTE/81qNjfpvf6xmv8SxdQrWW/eH/s5WgMAAYP5mABBX/////////////7MFbV+uqpBCAC6HOtsTwuK//NEZAoGgPssCMaUAAWABkVxgBAAVkIsqw6Yn4CiDl/0Wi/+VBIokA3/4dMUqOv/+odAUgeKJAOP///KQokPgAAEECADqmS3T1u/Z9v+e/5GKI/9ykxBTUUzLjEwMKqq//NEZAsAAAGkAOAAAAAAA0gBwAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+incrementAudio.volume = 0.9;
+
+const decrementAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAGAAADQwBfX19fX19fX19fX19fX19ff39/f39/f39/f39/f39/f3+fn5+fn5+fn5+fn5+fn5+fv7+/v7+/v7+/v7+/v7+/v7/f39/f39/f39/f39/f39/f3/////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAL0AAAAAAAAA0NHWuDiAAAAAAAAAAAAAAAAAAAAAP/7EGQAAAB0D0gFBGAADuIY8KCMAEJgQ1YYJAAAPgfqAwIgAP//k7/u7wDA3B/BD//if//AAC67u710TdwMPHYAH+rHVGwwj5xe8+2trAPHvLO3Q5/lJ5mAGezdcAHdUp8E/9TL/GAJ//sSZAIAAJARVQYMQAAMwAqgwAgAAoCZZBgRAAA8hiuDBCAAVYKSJ1kblYEj+PDv/5LUScwiWgrovus6v9mzzH8f/sf850/yHRv/ELYJ/+IACCPQnsI/+E4IO6FHPLh/+lez+CWvVvgo//sQZAOAAJwXXoYEoAAPAAugwAgAAmwdbJwxAAA3AG1jgDACtMeWOZyt/FXqYngqvr2YpiR0XnUAm6ky4Qvequx21kaqCcFTMwx47gKWXYw8ptJVJQABESwGY4/iym4rQg7LbbBQxBz/+xJkA4EwggvaIAMQMBDAmxQAIwBCMB1ngAxBIDwCatQBiAoxlU7TMrQr32rEbdshA0igRhEDheRH5u/d2gr7/qnAEEgMYVNnhmBit/IB51iCHiwSXyWHkDCIdM/QugJiQADghTvNa2v/+xBkBQEwpg7UwEAagBIgqqgAQwICODFTFBEAAEAF6tKKIATGr+2DGMCEbFfXpN7MAADBBWoGd2Ia3E0tcYq0VlBBIjQSFnJ/1qPedIJSp7dvWJIZJANIIZFO6o2trMDagDUhxYKP/v/7EmQCgACJD1QGBGAAD8G6cMEIAEHgOPwcMQAIPAKgQ4YwAc1+hWw1lWBp2WRt9SA4qUq5cvxLPlEs8zx8k03GZjoUBNVX/+pSzATBR03GZuhQEwVw3/8VkMChvRRMQU1FMy4xMDCqqg==');
+decrementAudio.volume = 0.5;
+
+const resetAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAFAAAC2gBtbW1tbW1tbW1tbW1tbW1tbW1tkpKSkpKSkpKSkpKSkpKSkpKSkpK2tra2tra2tra2tra2tra2tra2ttvb29vb29vb29vb29vb29vb29vb//////////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAMGAAAAAAAAAtqP8R7HAAAAAAAAAAAAAAAAAAAAAP/7EGQAAABaAK8NAEAMAcAQAKwAAQR8mTwYKQAANI7cgwDQACA///9YPvE4OAgGD1j3J8R/5iTX44BCgjH/CysAvyGEX/8XOM8IAA2IHT/+MmGM3L////49B2iV/+BJk40Q8f///X5l//sSZAMD8JQSXwcEQAIOoxmQ4LQAQgwle8EEYCA6jCWAA8VxYNL+3Wp9KEm/9S4lX/8b////9jM4NQEwF43IvDxDPDGEdCDbEu3DkgUeNqEIs/5k9/8wn9B5IA/LSyp7ba6MOKokLAYF//sQZAUDsKkD2yBjGAAOgwooACJYAkgHaIEIQAgfhiigAImKDxcwKIIRX79NH/QAAYiAGoKPcc3/oP+tRLqO22oxhAU6uWFokZyK7zf58XpCU6Dhr+pnpjIWHEBnhJ/X+v7BHmtzTyn/+xJkCAGQpxFVgGERwA9gCjkAIjgCbAthFCEAAC2IZ1KAIADxNUebNgAGsGgAf62V301O8o//ar7//mDChMOLKS8nH33u2P6iNX9AAb+K/Uf/Dn+XARANLBPOy2jiEVnOL85K5nMH1zD/+xBkCQAA+yNThixAAA8gObDBgAABgAkEHDAAAC4AHEOCAAC3jkRfup5qG/QSJ6OMhsDYsXPS59PVd/bW7yp2lQEBEljwb/rO8GlB0Shoss7////WdJYlTEFNRTMuMTAwqqqqqqqqqg==');
+resetAudio.volume = 1.0;
+
+// Funzione per aggiornare il contatore nel DOM
+function updateCounter() {
+  // Sanitizzazione dell'input: estraiamo un numero intero
+  const sanitizedCount = count.toString().match(/-?\d+/);
+  if (sanitizedCount && sanitizedCount.length > 0) {
+    const validCount = parseInt(sanitizedCount[0], 10);
+
+    // Controllo aggiuntivo: assicuriamoci che sia un numero intero
+    if (Number.isInteger(validCount)) {
+      counterElement.textContent = validCount;
+      count = validCount;
+    } else {
+      count = 0;
+      counterElement.textContent = count;
+    }
+  } else {
+    count = 0;
+    counterElement.textContent = count;
+  }
+}
+
+
+// Funzione per gestire il suono senza creare nuovi oggetti
+function playSound(audio) {
+  if (audioEnabled) {
+    audio.currentTime = 0; // Riavvia il suono
+    audio.play();
+  }
+}
+
+// Funzioni del contatore
+function increment() {
+  if (count < 65535) {
+    count++;
+    updateCounter();
+    playSound(incrementAudio);
+  }
+}
+
+function decrement() {
+  if (count > -65535) {
+    count--;
+    updateCounter();
+    playSound(decrementAudio);
+  }
+}
+
+function reset() {
+  count = 0;
+  updateCounter();
+  playSound(resetAudio);
+}
+
+// Toggle audio
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  if (audioEnabled) {
+    audtoggle.textContent = '️\uD83D\uDD08';
+  } else {
+    audtoggle.textContent = '\uD83D\uDD07';
+  }
+}
+
+audtoggle.addEventListener('click', toggleAudio);
+*/
+
+
+        let count = 0;
+        const counterElement = document.getElementById('counter');
+        let audioEnabled = true;
+        const audtoggle = document.getElementById('audtoggle');
+
+        // Creazione unica degli oggetti audio con dati validi
+        const incrementAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAHAAADYABVVVVVVVVVVVVVVVVVVXFxcXFxcXFxcXFxcXFxjo6Ojo6Ojo6Ojo6Ojo6qqqqqqqqqqqqqqqqqqqrHx8fHx8fHx8fHx8fHx+Pj4+Pj4+Pj4+Pj4+Pj//////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAQgAAAAAAAAA2DreBT/AAAAAAAAAAAAAAAAAAAA//NEZAAExQ6IAaCUAASwiMZBRTgAgAAAA/////////////////UhCEITkIQhCBwOAQAwDAMAw+Hw+LuAG4xIP+c55BAAA4RG/88bg/Ae9y+4B6n/TLBOf47Dc0Kn/rc+//NEZBIHUSsUAMFEAAWgnZmJk5gAib//m9NJE3//yfMECcW5///9ZuT6TDgDIYWngSf///46QurBRiEICrBCACAAIHlw96ZQ8JXP/rUh/1BLX//qxWs1Gk2Aw1ogwGAA//NEZAwHJPN7L8MIAAUwEnDhgxAAAAsoHClSM4BuGbKP/SdAoSgZudG//f+r+JDHMuub/p//8YDRfhUOX/iy4E6lgQAAp9RT4lPICuoJe2viOtjfty3RL7FIPYbpeq3Z//NEZAkGNPdWAMeUAAYADmgBgxAAMEcauvnC34iFSoocV/bKf//6f/f////KVlKx9W6UrWq2aLQpyzTvXGqPEDx48MUt9NN1lvp/cv6P//JHv6fWGFIDHzZEADE9Mmtu//NEZAoGSENMZce8AAYBlnCxgRAAPUq9sEJ7Kw2/8Ija9uavhWTE/81qNjfpvf6xmv8SxdQrWW/eH/s5WgMAAYP5mABBX/////////////7MFbV+uqpBCAC6HOtsTwuK//NEZAoGgPssCMaUAAWABkVxgBAAVkIsqw6Yn4CiDl/0Wi/+VBIokA3/4dMUqOv/+odAUgeKJAOP///KQokPgAAEECADqmS3T1u/Z9v+e/5GKI/9ykxBTUUzLjEwMKqq//NEZAsAAAGkAOAAAAAAA0gBwAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+        const decrementAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAGAAADQwBfX19fX19fX19fX19fX19ff39/f39/f39/f39/f39/f3+fn5+fn5+fn5+fn5+fn5+fv7+/v7+/v7+/v7+/v7+/v7/f39/f39/f39/f39/f39/f3/////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAL0AAAAAAAAA0NHWuDiAAAAAAAAAAAAAAAAAAAAAP/7EGQAAAB0D0gFBGAADuIY8KCMAEJgQ1YYJAAAPgfqAwIgAP//k7/u7wDA3B/BD//if//AAC67u710TdwMPHYAH+rHVGwwj5xe8+2trAPHvLO3Q5/lJ5mAGezdcAHdUp8E/9TL/GAJ//sSZAIAAJARVQYMQAAMwAqgwAgAAoCZZBgRAAA8hiuDBCAAVYKSJ1kblYEj+PDv/5LUScwiWgrovus6v9mzzH8f/sf850/yHRv/ELYJ/+IACCPQnsI/+E4IO6FHPLh/+lez+CWvVvgo//sQZAOAAJwXXoYEoAAPAAugwAgAAmwdbJwxAAA3AG1jgDACtMeWOZyt/FXqYngqvr2YpiR0XnUAm6ky4Qvequx21kaqCcFTMwx47gKWXYw8ptJVJQABESwGY4/iym4rQg7LbbBQxBz/+xJkA4EwggvaIAMQMBDAmxQAIwBCMB1ngAxBIDwCatQBiAoxlU7TMrQr32rEbdshA0igRhEDheRH5u/d2gr7/qnAEEgMYVNnhmBit/IB51iCHiwSXyWHkDCIdM/QugJiQADghTvNa2v/+xBkBQEwpg7UwEAagBIgqqgAQwICODFTFBEAAEAF6tKKIATGr+2DGMCEbFfXpN7MAADBBWoGd2Ia3E0tcYq0VlBBIjQSFnJ/1qPedIJSp7dvWJIZJANIIZFO6o2trMDagDUhxYKP/v/7EmQCgACJD1QGBGAAD8G6cMEIAEHgOPwcMQAIPAKgQ4YwAc1+hWw1lWBp2WRt9SA4qUq5cvxLPlEs8zx8k03GZjoUBNVX/+pSzATBR03GZuhQEwVw3/8VkMChvRRMQU1FMy4xMDCqqg==');
+        const resetAudio = new Audio('data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYwLjE1LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAFAAAC2gBtbW1tbW1tbW1tbW1tbW1tbW1tkpKSkpKSkpKSkpKSkpKSkpKSkpK2tra2tra2tra2tra2tra2tra2ttvb29vb29vb29vb29vb29vb29vb//////////////////////////8AAAAATGF2YzYwLjMwAAAAAAAAAAAAAAAAJAMGAAAAAAAAAtqP8R7HAAAAAAAAAAAAAAAAAAAAAP/7EGQAAABaAK8NAEAMAcAQAKwAAQR8mTwYKQAANI7cgwDQACA///9YPvE4OAgGD1j3J8R/5iTX44BCgjH/CysAvyGEX/8XOM8IAA2IHT/+MmGM3L////49B2iV/+BJk40Q8f///X5l//sSZAMD8JQSXwcEQAIOoxmQ4LQAQgwle8EEYCA6jCWAA8VxYNL+3Wp9KEm/9S4lX/8b////9jM4NQEwF43IvDxDPDGEdCDbEu3DkgUeNqEIs/5k9/8wn9B5IA/LSyp7ba6MOKokLAYF//sQZAUDsKkD2yBjGAAOgwooACJYAkgHaIEIQAgfhiigAImKDxcwKIIRX79NH/QAAYiAGoKPcc3/oP+tRLqO22oxhAU6uWFokZyK7zf58XpCU6Dhr+pnpjIWHEBnhJ/X+v7BHmtzTyn/+xJkCAGQpxFVgGERwA9gCjkAIjgCbAthFCEAAC2IZ1KAIADxNUebNgAGsGgAf62V301O8o//ar7//mDChMOLKS8nH33u2P6iNX9AAb+K/Uf/Dn+XARANLBPOy2jiEVnOL85K5nMH1zD/+xBkCQAA+yNThixAAA8gObDBgAABgAkEHDAAAC4AHEOCAAC3jkRfup5qG/QSJ6OMhsDYsXPS59PVd/bW7yp2lQEBEljwb/rO8GlB0Shoss7////WdJYlTEFNRTMuMTAwqqqqqqqqqg==');
+        
+        // Imposta volumi
+        incrementAudio.volume = 0.9;
+        decrementAudio.volume = 0.5;
+        resetAudio.volume = 1.0;
+
+        // Pre-carica gli audio per evitare lag al primo utilizzo
+        incrementAudio.load();
+        decrementAudio.load();
+        resetAudio.load();
+
+        // Funzione per aggiornare il contatore nel DOM - STESSA LOGICA DI PRIMA
+        function updateCounter() {
+            // Sanitizzazione dell'input: estraiamo un numero intero
+            const sanitizedCount = count.toString().match(/-?\d+/);
+            if (sanitizedCount && sanitizedCount.length > 0) {
+                const validCount = parseInt(sanitizedCount[0], 10);
+                // Controllo aggiuntivo: assicuriamoci che sia un numero intero
+                if (Number.isInteger(validCount)) {
+                    counterElement.textContent = validCount;
+                    count = validCount;
+                } else {
+                    count = 0;
+                    counterElement.textContent = count;
+                }
+            } else {
+                count = 0;
+                counterElement.textContent = count;
+            }
+        }
+
+        // Throttling per prevenire lag da spam click
+        let lastActionTime = 0;
+        const THROTTLE_DELAY = 16; // ~60fps
+
+        // Funzione per gestire il suono OTTIMIZZATA per evitare lag
+        function playSound(audio) {
+            if (audioEnabled) {
+                // Controlla se è passato abbastanza tempo dall'ultima azione
+                const now = performance.now();
+                if (now - lastActionTime >= THROTTLE_DELAY) {
+                    lastActionTime = now;
+                    
+                    // Resetta il tempo senza aspettare che finisca
+                    audio.currentTime = 0;
+                    
+                    // Play con gestione errori silenziosa per evitare accumulo di errori
+                    const playPromise = audio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {
+                            // Gestione silenziosa degli errori per evitare lag
+                        });
+                    }
+                }
+            }
+        }
+
+        // Funzioni del contatore - STESSA LOGICA DI PRIMA ma con throttling
+        function increment() {
+            const now = performance.now();
+            if (now - lastActionTime >= THROTTLE_DELAY) {
+                if (count < 8196) {
+                    count++;
+                    updateCounter();
+                    playSound(incrementAudio);
+                }
+            }
+        }
+
+        function decrement() {
+            const now = performance.now();
+            if (now - lastActionTime >= THROTTLE_DELAY) {
+                if (count > -8196) {
+                    count--;
+                    updateCounter();
+                    playSound(decrementAudio);
+                }
+            }
+        }
+
+        function reset() {
+            const now = performance.now();
+            if (now - lastActionTime >= THROTTLE_DELAY) {
+                count = 0;
+                updateCounter();
+                playSound(resetAudio);
+            }
+        }
+
+        // Toggle audio - STESSA LOGICA DI PRIMA
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            if (audioEnabled) {
+                audtoggle.textContent = '\uD83D\uDD0A';
+            } else {
+                audtoggle.textContent = '\uD83D\uDD07';
+            }
+        }
+
+        audtoggle.addEventListener('click', toggleAudio);
+
+        // Pulizia preventiva per evitare memory leak
+        let cleanupInterval = setInterval(() => {
+            // Forza garbage collection degli audio contexts inutilizzati
+            if (typeof window.gc === 'function') {
+                window.gc();
+            }
+        }, 1000); // Ogni TOT secondi
+
+        // Cleanup quando la pagina viene chiusa
+        window.addEventListener('beforeunload', () => {
+            clearInterval(cleanupInterval);
+            incrementAudio.pause();
+            decrementAudio.pause();
+            resetAudio.pause();
+        });
 
 
 document.addEventListener('DOMContentLoaded', function() {

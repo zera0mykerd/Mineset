@@ -3590,7 +3590,7 @@ root.appendChild(style);
   container.innerHTML = `
     <h2 class="title">${CONFIG.appName}</h2>
     <div class="row">
-      <input class="input" type="text" autocomplete="off" placeholder="Es: 2+3, x=5*2, const PI=3.14159, (x+PI)/2" aria-label="Inserisci espressione" />
+      <input class="input" type="text" maxlength="2048" autocomplete="off" placeholder="Es: 2+3, x=5*2, const PI=3.14159, (x+PI)/2" aria-label="Inserisci espressione" />
       <button class="btn primary wide" data-act="eval">Calcola</button>
     </div>
     <div class="bar no-print">
@@ -3621,8 +3621,6 @@ root.appendChild(style);
     </div>
   `;
   root.appendChild(container);
-
-
 
   // Riferimenti
 const ui = {
@@ -3922,9 +3920,10 @@ function renderKv(view, obj) {
   // Push tape con escape
 function pushTape(expr, ok, valOrErr) {
   State.tape.push({ t: nowISO(), expr: String(expr), ok: !!ok, valOrErr });
-  if (State.tape.length > 1000) State.tape.shift();
+  if (State.tape.length >= 256) State.tape.shift();
   renderTape(); save();
 }
+
 
   // Funzione di escaping sicuro per stringhe
 function escapeStr(s) {
@@ -3936,12 +3935,17 @@ function escapeStr(s) {
     .replace(/'/g, '&#39;');
 }
 
-// Export sicuro
+
+// Export sicuro con limite massimo di 256 elementi
 function doExport() {
-  // Clona e "sanitizza" i valori testuali
-  const safeTape = State.tape.map(it => ({
+
+	const MAX_EXPR_LENGTH = 2048;
+
+  // Clona e "sanitizza" i valori testuali, prendendo solo gli ultimi 256 elementi
+  const safeTape = State.tape.slice(-256).map(it => ({
     t: escapeStr(it.t),
-    expr: escapeStr(it.expr),
+    //expr: escapeStr(it.expr),
+	expr: escapeStr(it.expr.length > MAX_EXPR_LENGTH ? it.expr.slice(0, MAX_EXPR_LENGTH) + '…' : it.expr),
     ok: !!it.ok,
     valOrErr: it.ok ? it.valOrErr : escapeStr(it.valOrErr)
   }));
@@ -3961,7 +3965,7 @@ function doExport() {
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.download = 'calcolatrice-nastro.json';
+  a.download = 'MKcalcolatrice-nastro.json';
   a.href = url;
   a.click();
   URL.revokeObjectURL(url);
@@ -3983,6 +3987,13 @@ function validateImported(obj) {
     // coercizione sicura e sanitizzazione
     it.t = escapeStr(it.t);
     it.expr = escapeStr(it.expr);
+	
+	  // ✅ Controllo lunghezza massima espressione
+  const MAX_EXPR_LENGTH = 2048;
+  if (it.expr.length > MAX_EXPR_LENGTH) {
+    throw new Error(`Espressione importata troppo lunga (max ${MAX_EXPR_LENGTH} caratteri)`);
+  }
+	
     it.valOrErr = it.ok ? Number(it.valOrErr) : escapeStr(it.valOrErr);
     if (it.ok && !Number.isFinite(it.valOrErr)) throw new Error('Risultato non valido');
   });
@@ -4001,21 +4012,34 @@ function validateImported(obj) {
   return { tape, vars, consts };
 }
 
+
   function doImport(file, replace) {
+  
+  const MAX_EXPR_LENGTH = 2048;
+  
     const reader = new FileReader();
     reader.onload = () => {
       try {
         // blocca BOM/garbage
         const txt = String(reader.result);
         const parsed = JSON.parse(txt);
+		
         const { tape, vars, consts } = validateImported(parsed);
+		
+		 // ✅ Controllo lunghezza espressioni importate
+      tape.forEach(it => {
+        if (it.expr.length > MAX_EXPR_LENGTH) {
+          throw new Error(`Espressione importata troppo lunga (max ${MAX_EXPR_LENGTH} caratteri)`);
+        }
+      });
+		
         if (replace) {
-          State.tape = clone(tape).slice(-1000);
+          State.tape = clone(tape).slice(-256);
           State.vars = clone(vars);
           State.consts = Object.freeze(Object.assign({}, consts));
         } else {
           // merge sicuro
-          State.tape = State.tape.concat(clone(tape)).slice(-1000);
+          State.tape = State.tape.concat(clone(tape)).slice(-256);
           State.vars = Object.assign({}, State.vars, clone(vars));
           State.consts = Object.freeze(Object.assign({}, State.consts, consts));
         }
@@ -4028,7 +4052,6 @@ function validateImported(obj) {
     reader.onerror = () => alert('Lettura file fallita');
     reader.readAsText(file, 'utf-8');
   }
-
 
 
 
@@ -4196,6 +4219,15 @@ function doPrint() {
   function runEval(){
   const expr=(ui.input.value||'').trim();
   if(!expr) return;
+  
+    // ✅ Controllo lunghezza massima dei caratteri nel nastro
+  const MAX_EXPR_LENGTH = 2048; // puoi regolare questo valore
+  if (expr.length > MAX_EXPR_LENGTH) {
+    pushTape(expr, false, `Espressione troppo lunga (max ${MAX_EXPR_LENGTH} caratteri)`);
+    ui.input.select();
+    return;
+  }
+  
   try{
     const res=evaluate(expr);
     if(res && res.cmd){
@@ -4586,6 +4618,8 @@ function isValidExpression(expression) {
 */
 
 
+
+
 // Initialising the canvas
 var canvas = document.querySelector('canvas'),
     ctx = canvas.getContext('2d');
@@ -4642,6 +4676,8 @@ setInterval(draw, 33);
 // <textarea id="note"></textarea>
 // <button onclick="saveNote()">Salva</button>
 // <button onclick="printNote()">Stampa</button>
+
+
 
 
 function sanitizeHTML(text) {
@@ -4766,6 +4802,8 @@ function printNotes() {
     printWindow.document.close();
     printWindow.print();
 }
+
+
 
 
 /*

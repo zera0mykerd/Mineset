@@ -2531,6 +2531,9 @@ function addDoubleTapDoubleClick(element, cb) {
       item.setAttribute('role','button');
       item.setAttribute('tabindex','0');
       item.setAttribute('aria-pressed', state.hidden.has(i) ? 'true' : 'false');
+	 item.style.opacity = state.hidden.has(i) ? '0.5' : '1';
+	 item.style.filter = state.hidden.has(i) ? 'grayscale(100%)' : 'none';
+
 
       const sw = document.createElement('div');
       sw.className = 'graphine-legend-swatch';
@@ -2549,6 +2552,7 @@ function addDoubleTapDoubleClick(element, cb) {
         item.setAttribute('aria-pressed', state.hidden.has(i) ? 'true' : 'false');
         render();
       });
+	  
 
       addDoubleTapDoubleClick(item, () => {
         const res = window.prompt('Modifica etichetta legenda:', d.label);
@@ -2574,6 +2578,7 @@ function addDoubleTapDoubleClick(element, cb) {
       legendEl.appendChild(item);
     });
   }
+
 
   function rebuildDataList() {
 
@@ -2696,68 +2701,79 @@ valInput.addEventListener('change', (e) => {
   });
 
 
+  var MAX_MELEMENTS = 32;
+  
   function exportJSON() {
-    try {
-      const safeData = state.data.map(d => ({
-        label: sanitizeText(d.label),
-        value: d.value
-      }));
-      const jsonStr = JSON.stringify({
-        chartType: sanitizeText(state.chartType),
-        data: safeData
-      });
-      const blob = new Blob([jsonStr], { type: "application/json" });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = "MKgraph_data.json";
-      a.click();
-      URL.revokeObjectURL(a.href);
-    } catch (err) {
-      window.alert('Errore durante l\'esportazione JSON: ' + err.message);
+  try {
+    if (state.data.length > MAX_MELEMENTS) {
+      window.alert(`Impossibile esportare: il JSON contiene più di ${MAX_MELEMENTS} elementi.`);
+      return;
     }
-  }
-
-  function importJSON() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json,application/json';
-    input.addEventListener('change', () => {
-      const file = input.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const parsed = JSON.parse(reader.result);
-          if (!parsed || !Array.isArray(parsed.data) || !parsed.chartType) throw new Error('Formato JSON non valido');
-
-          if (!VALID_RE.test(parsed.chartType)) throw new Error('Tipo grafico non valido');
-
-          parsed.data.forEach(d => {
-            if (!d.label || !validateText(d.label)) throw new Error('Etichetta non valida nel JSON');
-            if (typeof d.value !== 'number' && !Array.isArray(d.value)) throw new Error('Valore non valido nel JSON');
-          });
-
-          state.chartType = parsed.chartType;
-          state.data = parsed.data.map(d => ({ label: String(d.label), value: d.value }));
-          ensureColors();
-          rebuildDataList();
-          render();
-
-        } catch (err) {
-          window.alert('Impossibile importare JSON: ' + err.message);
-        }
-      };
-      reader.readAsText(file);
+    const safeData = state.data.map(d => ({
+      label: sanitizeText(d.label),
+      value: d.value
+    }));
+    const jsonStr = JSON.stringify({
+      chartType: sanitizeText(state.chartType),
+      data: safeData
     });
-    input.click();
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "MKgraph_data.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (err) {
+    window.alert('Errore durante l\'esportazione JSON: ' + err.message);
   }
+}
 
-  addBtn.addEventListener('click', () => {
-    const defaultLabel = `Nuovo ${state.data.length+1}`;
-    state.data.push({ label: defaultLabel, value: 10 });
-    state.colors.push(randomColor(state.colors));
-    rebuildDataList(); render();
+  
+  function importJSON() {
+	const input = document.createElement('input');
+	input.type = 'file';
+	input.accept = '.json,application/json';
+	input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (!parsed || !Array.isArray(parsed.data) || !parsed.chartType) throw new Error('Formato JSON non valido');
+        if (parsed.data.length > MAX_MELEMENTS) throw new Error('Il JSON contiene più di ' + MAX_MELEMENTS + ' elementi');
+        if (!VALID_RE.test(parsed.chartType)) throw new Error('Tipo grafico non valido');
+        parsed.data.forEach(d => {
+          if (!d.label || !validateText(d.label)) throw new Error('Etichetta non valida nel JSON');
+          if (typeof d.value !== 'number' && !Array.isArray(d.value)) throw new Error('Valore non valido nel JSON');
+        });
+        state.chartType = parsed.chartType;
+        state.data = parsed.data.map(d => ({ label: String(d.label), value: d.value }));
+        ensureColors();
+        rebuildDataList();
+        render();
+      } catch (err) {
+        window.alert('Impossibile importare JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
   });
+  input.click();
+}
+
+  
+  addBtn.addEventListener('click', () => {
+  if (state.data.length >= MAX_MELEMENTS) {
+    window.alert(`Limite massimo di ${MAX_MELEMENTS} elementi raggiunto. Non è possibile aggiungerne altri.`);
+    return;
+  }
+  const defaultLabel = `Nuovo ${state.data.length+1}`;
+  state.data.push({ label: defaultLabel, value: 10 });
+  state.colors.push(randomColor(state.colors));
+  rebuildDataList(); render();
+});
+
+
 
   removeBtn.addEventListener('click', () => {
     state.data.pop();
