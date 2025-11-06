@@ -756,6 +756,368 @@ Le seguenti modifiche sono fatte a dei tessuti per migliorare il movimento della
 <br><br>
 </div>
 <br>
+<br><br>
+<br>
+
+  <div id="Cesare"
+       style="
+         --pad: 22px;
+         --radius: 14px;
+         --glass: rgba(255,255,255,0.08);
+         --glass2: rgba(255,255,255,0.03);
+         --accentA: rgba(176, 0, 95, 0.15);
+         --accentB: rgba(118, 0, 255, 0.12);
+         box-sizing: border-box;
+         font-family: ui-sans-serif, system-ui, -apple-system, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+         color: #2a002d;
+         max-width: 980px;
+         margin: 36px auto;
+         padding: calc(var(--pad) + 6px);
+         border-radius: var(--radius);
+         background-image: linear-gradient(135deg, rgba(255, 215, 255, 0.02), rgba(255, 240, 255, 0.08)), radial-gradient(circle at top left, var(--accentA), transparent 70%);
+         background-color: rgba(255, 245, 255, 0.5);
+         box-shadow: 0 10px 30px rgba(84, 0, 77, 0.18), inset 0 1px 0 rgba(255,255,255,0.05);
+         backdrop-filter: blur(8px) saturate(130%);
+         border: 1px solid rgba(120, 0, 100, 0.1);
+         display: grid;
+         grid-template-columns: 1fr;
+         gap: 14px;
+         ">
+    <!-- Header -->
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;">
+      <div style="display:flex;gap:12px;align-items:baseline;">
+        <h1 style="margin:0;font-weight:700;letter-spacing:-0.02em;font-size:1.25rem;color:#400042;">
+          &#128272; MKCifrario di Cesare &#128737;&#65039;
+        </h1>
+        <div style="font-size:0.85rem;color:#692b74;opacity:0.9;font-style: italic;">(Click sui titoli per copiare)</div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;">
+        <label style="display:flex;flex-direction:column;font-size:0.78rem;color:#5a005e;align-items:flex-end;">
+          Salti
+          <input id="ces_shift" type="number" min="0" max="26" step="1"
+                 value="3"
+                 style="width:86px;padding:6px 8px;border-radius:8px;border:1px solid rgba(90,0,94,0.15);
+                        background:linear-gradient(180deg, rgba(255,230,255,0.2), rgba(255,255,255,0.05));
+                        font-size:0.95rem;color:#420046;">
+        </label>
+
+        <label style="display:flex;flex-direction:column;font-size:0.78rem;color:#5a005e;align-items:flex-end;">
+          Direzione
+          <select id="ces_dir"
+                  style="width:120px;padding:6px 8px;border-radius:8px;border:1px solid rgba(90,0,94,0.15);
+                         background:linear-gradient(180deg, rgba(255,230,255,0.2), rgba(255,255,255,0.05));
+                         font-size:0.95rem;color:#420046;">
+            <option value="right">Destra →</option>
+            <option value="left">Sinistra ←</option>
+          </select>
+        </label>
+
+        <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;color:#5e005f;">
+          <input id="ces_rev" type="checkbox" style="width:16px;height:16px;accent-color:#cc00aa;">
+          Inverso
+        </label>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div style="display:grid;grid-template-columns:1fr;gap:12px;">
+      <div style="display:grid;grid-template-columns:1fr;gap:8px;">
+        <label id="OriginalCopy" for="ces_orig" style="font-size:0.92rem;color:#3a003f;font-weight:600;">Originale</label>
+        <textarea id="ces_orig" rows="6" maxlength="1024"
+                  placeholder="Inserisci il testo originale (max 1024 caratteri)"
+                  style="
+                    width:100%;
+                    min-height:110px;
+                    resize:vertical;
+                    padding:14px;
+                    border-radius:12px;
+                    border:1px solid rgba(90,0,94,0.15);
+                    box-shadow: 0 6px 18px rgba(84,0,77,0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+                    background: linear-gradient(180deg, rgba(255,230,255,0.25), rgba(255,255,255,0.1));
+                    font-family: inherit;
+                    font-size:0.98rem;
+                    line-height:1.5;
+                    color:#400042;
+                  "></textarea>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:8px;">
+        <label id="Resultcopy" for="ces_res" style="font-size:0.92rem;color:#3a003f;font-weight:600;">Risultato</label>
+        <textarea id="ces_res" rows="6" maxlength="1024"
+                  placeholder="Il risultato apparirà qui"
+                  style="
+                    width:100%;
+                    min-height:110px;
+                    resize:vertical;
+                    padding:14px;
+                    border-radius:12px;
+                    border:1px solid rgba(90,0,94,0.15);
+                    box-shadow: 0 6px 18px rgba(84,0,77,0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+                    background: linear-gradient(180deg, rgba(255,240,255,0.25), rgba(255,255,255,0.1));
+                    font-family: inherit;
+                    font-size:0.98rem;
+                    line-height:1.5;
+                    color:#400042;
+                  "></textarea>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:0.82rem;color:#8a4a8a;">
+      <div>Lettere A–Z / a–z shiftate, altri caratteri intatti. Limit 65565 chars.</div>
+      <div style="font-style:italic;">Sicurezza elevata.</div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+ (function(){
+  // Nomi volutamente strani / unici per minimizzare collisioni
+  const _xqZeta17 = document.getElementById('Cesare');
+  const _elOrig_aZ = document.getElementById('ces_orig');
+  const _elRes_bY = document.getElementById('ces_res');
+  const _elShift_q9 = document.getElementById('ces_shift');
+  const _elDir_r8 = document.getElementById('ces_dir');
+  const _elRev_v1 = document.getElementById('ces_rev');
+
+  // Nuovi riferimenti per le label di copia
+  const _lblCopyOrig = document.getElementById('OriginalCopy');
+  const _lblCopyRes = document.getElementById('Resultcopy');
+
+  // Costanti di vincolo
+  const s__maxL = 65565;
+  const s__maxShift = 32;
+
+  // Stato: quale campo è stato modificato per ultimo (orig | res)
+  let _lastEd_w = 'orig';
+
+  // Debounce helper con nome unico
+  let _debTimer_z = null;
+  function fnNebulaDebounce(fn, ms){
+    return function(ev){
+      const ctx = this, args = arguments;
+      if(_debTimer_z) clearTimeout(_debTimer_z);
+      _debTimer_z = setTimeout(function(){
+        _debTimer_z = null;
+        fn.apply(ctx, args);
+      }, ms);
+    };
+  }
+
+  // Validazione e normalizzazione dello shift: accetta solo interi 0..32
+  function fnNebulaClampShift(v){
+    let n = Number(v);
+    if(!Number.isFinite(n) || Number.isNaN(n)) n = 0;
+    n = Math.trunc(n);
+    if(n < 0) n = 0;
+    if(n > s__maxShift) n = s__maxShift;
+    return n;
+  }
+
+  // Regex: accetta solo lettere (A-Z, a-z) e spazi
+  const _rgxAllowedNebula = /^[A-Za-z ]*$/;
+
+  // Escaping dei caratteri speciali
+  function fnNebulaEscape(str){
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Filtra istantaneamente input non validi
+  function fnNebulaFilterChars(str){
+    return str.replace(/[^A-Za-z ]/g, '');
+  }
+
+  // Funzione di cifratura Cesare
+  function fnNebulaShift(text, shift, directionRight){
+    if(typeof text !== 'string') text = String(text);
+    if(text.length > s__maxL) text = text.slice(0, s__maxL);
+
+    const s = ((shift % 26) + 26) % 26;
+    const sign = directionRight ? 1 : -1;
+    if(s === 0) return text;
+
+    function shiftChar(c){
+      const code = c.charCodeAt(0);
+      if(code >= 65 && code <= 90){
+        const base = 65;
+        const idx = code - base;
+        return String.fromCharCode(base + ((idx + sign * s + 26) % 26));
+      }
+      if(code >= 97 && code <= 122){
+        const base = 97;
+        const idx = code - base;
+        return String.fromCharCode(base + ((idx + sign * s + 26) % 26));
+      }
+      return c; // altri caratteri inalterati
+    }
+
+    let out = '';
+    for(let i=0;i<text.length;i++){
+      out += shiftChar(text[i]);
+    }
+    return out;
+  }
+
+  // Direzione effettiva basata su reverse
+  function fnComputeEffectiveDirection(directionVal, reverseFlag){
+    const baseRight = (directionVal === 'right');
+    return reverseFlag ? !baseRight : baseRight;
+  }
+
+  // Trasformazione Originale -> Risultato
+  function fnTransformFromOriginalToResult(origText, shiftVal, dirVal, revFlag){
+    const effRight = fnComputeEffectiveDirection(dirVal, revFlag);
+    return fnNebulaShift(origText, shiftVal, effRight);
+  }
+
+  // Trasformazione inversa
+  function fnTransformFromResultToOriginal(resultText, shiftVal, dirVal, revFlag){
+    const effRight = fnComputeEffectiveDirection(dirVal, revFlag);
+    return fnNebulaShift(resultText, shiftVal, !effRight);
+  }
+
+  // Gestori di input (debounced)
+  const _onOrig_in = fnNebulaDebounce(function(ev){
+    _lastEd_w = 'orig';
+    let v = _elOrig_aZ.value;
+    if(typeof v !== 'string') v = String(v);
+    if(v.length > s__maxL){ v = v.slice(0, s__maxL); _elOrig_aZ.value = v; }
+
+    v = fnNebulaFilterChars(v);
+    v = fnNebulaEscape(v);
+    _elOrig_aZ.value = v;
+
+    let sV = fnNebulaClampShift(_elShift_q9.value);
+    _elShift_q9.value = String(sV);
+    const dirV = (_elDir_r8.value === 'left') ? 'left' : 'right';
+    const revV = !!_elRev_v1.checked;
+
+    const out = fnTransformFromOriginalToResult(v, sV, dirV, revV);
+    if(_elRes_bY.value !== out) _elRes_bY.value = out;
+  }, 70);
+
+  const _onRes_in = fnNebulaDebounce(function(ev){
+    _lastEd_w = 'res';
+    let v = _elRes_bY.value;
+    if(typeof v !== 'string') v = String(v);
+    if(v.length > s__maxL){ v = v.slice(0, s__maxL); _elRes_bY.value = v; }
+
+    v = fnNebulaFilterChars(v);
+    v = fnNebulaEscape(v);
+    _elRes_bY.value = v;
+
+    let sV = fnNebulaClampShift(_elShift_q9.value);
+    _elShift_q9.value = String(sV);
+    const dirV = (_elDir_r8.value === 'left') ? 'left' : 'right';
+    const revV = !!_elRev_v1.checked;
+
+    const out = fnTransformFromResultToOriginal(v, sV, dirV, revV);
+    if(_elOrig_aZ.value !== out) _elOrig_aZ.value = out;
+  }, 70);
+
+  // Quando cambiano parametri (shift, direction, reverse)
+  function _onParamsChanged(){
+    const sV = fnNebulaClampShift(_elShift_q9.value);
+    _elShift_q9.value = String(sV);
+    const dirV = (_elDir_r8.value === 'left') ? 'left' : 'right';
+    const revV = !!_elRev_v1.checked;
+
+    if(_lastEd_w === 'orig'){
+      let v = _elOrig_aZ.value;
+      if(typeof v !== 'string') v = String(v);
+      if(v.length > s__maxL){ v = v.slice(0, s__maxL); _elOrig_aZ.value = v; }
+      v = fnNebulaFilterChars(v);
+      v = fnNebulaEscape(v);
+      _elOrig_aZ.value = v;
+      const out = fnTransformFromOriginalToResult(v, sV, dirV, revV);
+      if(_elRes_bY.value !== out) _elRes_bY.value = out;
+    } else {
+      let v = _elRes_bY.value;
+      if(typeof v !== 'string') v = String(v);
+      if(v.length > s__maxL){ v = v.slice(0, s__maxL); _elRes_bY.value = v; }
+      v = fnNebulaFilterChars(v);
+      v = fnNebulaEscape(v);
+      _elRes_bY.value = v;
+      const out = fnTransformFromResultToOriginal(v, sV, dirV, revV);
+      if(_elOrig_aZ.value !== out) _elOrig_aZ.value = out;
+    }
+  }
+
+  // --- BLOCCO PREVENTIVO: prima che il carattere venga inserito ---
+  function _preventInvalidInput(e){
+    if(e.data && !_rgxAllowedNebula.test(e.data)){
+      e.preventDefault();
+      return;
+    }
+    if(e.inputType === 'insertFromPaste'){
+      const pasted = (e.clipboardData || window.clipboardData).getData('text');
+      if(!_rgxAllowedNebula.test(pasted)){
+        e.preventDefault();
+        return;
+      }
+    }
+  }
+
+  // Collegamento eventi
+  [_elOrig_aZ, _elRes_bY].forEach(el => {
+    el.addEventListener('beforeinput', _preventInvalidInput);
+    el.addEventListener('input', el === _elOrig_aZ ? _onOrig_in : _onRes_in, {passive:true});
+    el.addEventListener('paste', e => {
+      const pasted = (e.clipboardData || window.clipboardData).getData('text');
+      if(!_rgxAllowedNebula.test(pasted)){
+        e.preventDefault();
+      }
+    });
+    el.addEventListener('drop', e => e.preventDefault());
+  });
+
+  _elShift_q9.addEventListener('input', fnNebulaDebounce(function(){ _onParamsChanged(); }, 80), {passive:true});
+  _elDir_r8.addEventListener('change', function(){ _onParamsChanged(); }, {passive:true});
+  _elRev_v1.addEventListener('change', function(){ _onParamsChanged(); }, {passive:true});
+
+  // Inizializza
+  (function _init_w(){
+    _lastEd_w = 'orig';
+    const sV = fnNebulaClampShift(_elShift_q9.value);
+    const dirV = (_elDir_r8.value === 'left') ? 'left' : 'right';
+    const revV = !!_elRev_v1.checked;
+    let v = _elOrig_aZ.value || '';
+    v = fnNebulaFilterChars(v);
+    v = fnNebulaEscape(v);
+    _elOrig_aZ.value = v;
+    _elRes_bY.value = fnTransformFromOriginalToResult(v, sV, dirV, revV);
+  })();
+
+  // --- Gestione copia al click su label ---
+  async function _fnCopyNebula(el){
+    try {
+      await navigator.clipboard.writeText(el.value);
+    } catch {
+      el.select();
+      document.execCommand('copy');
+    }
+  }
+
+  if(_lblCopyOrig) _lblCopyOrig.addEventListener('click', () => _fnCopyNebula(_elOrig_aZ));
+  if(_lblCopyRes) _lblCopyRes.addEventListener('click',  () => _fnCopyNebula(_elRes_bY));
+
+  // --- Brevi note di sicurezza ---
+  // 1) Nessun innerHTML, eval o inserimento HTML dinamico.
+  // 2) beforeinput previene in modo immediato caratteri non ammessi.
+  // 3) Regex limita input a lettere e spazi; niente numeri o simboli.
+  // 4) Escaping garantisce output sicuro anche con < e >.
+  // 5) Disabilitati drag&drop e paste di testo non conforme.
+  // 6) Tutti i valori gestiti solo via .value.
+  // 7) Click su label copia in modo sicuro il testo (compatibile mobile/desktop).
+})();
+</script>
+
+<br>
+<br><br>
 <br>
 
 <hr align="center" size="6" width="100%" color="#B4045F" noshade>
