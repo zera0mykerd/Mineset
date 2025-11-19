@@ -1618,7 +1618,7 @@ document.write( '</a>' );
   </header>
 
   <p class="small">
-    Carica "MKDictionary.txt" nella stessa cartella e premi 
+    Carica "MKDictionary.gz" nella stessa cartella e premi 
     <strong>Carica dal server</strong>, oppure carica il file dal tuo dispositivo con 
     <strong>Scegli file</strong>.
   </p>
@@ -1629,8 +1629,8 @@ document.write( '</a>' );
   </div>
 
   <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-    <button id="loadServer">Carica dal server (./MKDictionary.txt)</button>
-    <input id="fileInput" type="file" accept=".txt" />
+    <button id="loadServer">Carica dal server (./MKDictionary.gz)</button>
+    <input id="fileInput" type="file" accept=".gz" />
   </div>
 
   <div class="status" id="status">Nessun dizionario caricato.</div>
@@ -2212,14 +2212,345 @@ document.addEventListener('keyup', function(e) {
 
 
 
+// DIZIONARIO ITALIANO
+
+  // ----- Configurazioni di sicurezza/search -----
+  // RegEx di validazione: solo lettere (ASCII + Latin-1/Latin-Extended), cifre e spazi
+  const VALID_QUERY_RE = /^[A-Za-z0-9\u00C0-\u017F ]+$/u;
+  // Massimo risultati mostrati
+  const MAX_RESULTS = 5;
+
+  // ----- Stato -----
+  let dictionarySet = null; // Set per deduplicare
+  let dictionaryLoaded = false;
+  let lastQuery = '';
+  let wordsArray = null; // array per ricerca più veloce
+
+  // ----- DOM -----
+  const qInput = document.getElementById('q');
+  const status = document.getElementById('status');
+  const hint = document.getElementById('hint');
+  const results = document.getElementById('results');
+  const loadServerBtn = document.getElementById('loadServer');
+  const fileInput = document.getElementById('fileInput');
+  const clearBtn = document.getElementById('clearBtn');
+
+  // ----- Utilities -----
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function enableSearch(){
+    qInput.disabled = false;
+    clearBtn.disabled = false;
+    qInput.focus();
+  }
+
+  function disableSearch(){
+    qInput.disabled = true;
+    clearBtn.disabled = true;
+  }
+
+  function showStatus(txt){ status.textContent = txt; }
+  function showHint(txt){ hint.textContent = txt; }
+
+  function debounce(fn, wait){
+    let t = null; return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn(...a), wait); };
+  }
+
+  // ----- Caricamento via fetch (streaming) -----
+  async function loadFromServer(){
+    try{
+      loadServerBtn.disabled = true;
+      showStatus('Connessione al server...');
+      
+      // Puntiamo al file compresso
+      const res = await fetch('./MKDictionary.gz');
+      
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      
+      const contentLength = res.headers.get('Content-Length');
+      const total = contentLength ? Number(contentLength) : null;
+      showStatus('Download in corso' + (total? (' — ' + Math.round(total/1024) + ' KB attesi') : ''));
+
+      // --- FIX "INCORRECT HEADER CHECK" ---
+      // Controlliamo se il browser ha già decompresso il file automaticamente.
+      // Se 'Content-Encoding' contiene 'gzip', il body è già testo puro.
+      const contentEncoding = res.headers.get('Content-Encoding');
+      const isAlreadyDecompressed = contentEncoding && contentEncoding.toLowerCase().includes('gzip');
+
+      let streamToRead;
+
+      if (isAlreadyDecompressed) {
+        // Il browser ha già decompresso. Leggiamo direttamente.
+        console.log("Browser ha già gestito la decompressione.");
+        streamToRead = res.body;
+      } else {
+        // Il browser ci ha dato il file binario grezzo. Decomprimiamo noi.
+        console.log("Decompressione manuale via JavaScript.");
+        const ds = new DecompressionStream('gzip');
+        streamToRead = res.body.pipeThrough(ds);
+      }
+      // ------------------------------------
+
+      const reader = streamToRead.getReader();
+      const decoder = new TextDecoder('utf-8');
+      
+      let {value, done} = await reader.read();
+      let chunk = value ? decoder.decode(value, {stream:true}) : '';
+      let buffer = chunk;
+      dictionarySet = new Set();
+      let received = value ? value.length : 0;
+      
+      while(!done){
+        ({value, done} = await reader.read());
+        if(value){
+          received += value.length;
+          chunk = decoder.decode(value, {stream:true});
+          buffer += chunk;
+
+          // Process lines in buffer
+          let lastNewline = buffer.lastIndexOf('\n');
+          if(lastNewline !== -1){
+            const lines = buffer.slice(0, lastNewline).split(/\r?\n/);
+            for(const line of lines){
+              const w = line.trim();
+              if(w) dictionarySet.add(w);
+            }
+            buffer = buffer.slice(lastNewline + 1);
+          }
+          
+          // Aggiornamento stato
+          if(total) showStatus('Elaborazione... ' + Math.round(received/1024) + ' KB');
+        }
+      }
+      
+      // push remaining
+      if(buffer){
+        const lines = buffer.split(/\r?\n/);
+        for(const line of lines){ const w=line.trim(); if(w) dictionarySet.add(w); }
+      }
+
+      finalizeLoad();
+    }catch(err){
+      console.error(err);
+      showStatus('Errore nel caricamento: ' + (err.message || err));
+      loadServerBtn.disabled = false;
+      dictionarySet = null;
+      dictionaryLoaded = false;
+      disableSearch();
+    }
+  }
+
+  // ----- Caricamento da file scelto (File input) -----
+  async function loadFromFile(file){
+  try{
+    showStatus('Lettura file: ' + file.name);
+    dictionarySet = new Set();
+    
+    // Nota: Rimosso controllo mimetype troppo rigido per permettere file custom
+    // ma manteniamo un controllo base sulle estensioni se necessario o try/catch
+
+    if(file.stream){
+      // Se l'utente carica manualmente un .gz, qui servirebbe logica extra,
+      // ma per ora assumiamo carichi txt o gestiamo come testo.
+      // Se vuoi supportare upload manuale di .gz, serve un check sull'estensione qui.
+      
+      let inputStream = file.stream();
+      
+      // Rilevamento GZ manuale su file upload
+      if(file.name.endsWith('.gz')){
+         const ds = new DecompressionStream('gzip');
+         inputStream = inputStream.pipeThrough(ds);
+      }
+
+      const reader = inputStream.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let {value, done} = await reader.read();
+      let buffer = value ? decoder.decode(value, {stream:true}) : '';
+      
+      while(!done){
+        ({value, done} = await reader.read());
+        if(value){
+          buffer += decoder.decode(value, {stream:true});
+          let lastNewline = buffer.lastIndexOf('\n');
+          if(lastNewline !== -1){
+            const lines = buffer.slice(0, lastNewline).split(/\r?\n/);
+            for(const line of lines){ 
+              const w = line.trim();
+              if(w && VALID_QUERY_RE.test(w)) dictionarySet.add(w);
+            }
+            buffer = buffer.slice(lastNewline + 1);
+          }
+          showStatus('Caricamento... ' + Math.round(file.size/1024) + ' KB');
+        }
+      }
+      if(buffer){ 
+        const lines=buffer.split(/\r?\n/); 
+        for(const line of lines){ 
+          const w=line.trim(); 
+          if(w && VALID_QUERY_RE.test(w)) dictionarySet.add(w);
+        } 
+      }
+    }else{
+      // Fallback
+      const text = await file.text();
+      const lines = text.split(/\r?\n/);
+      for(const line of lines){ 
+        const w=line.trim(); 
+        if(w && VALID_QUERY_RE.test(w)) dictionarySet.add(w);
+      } 
+    }
+
+    finalizeLoad();
+  }catch(err){
+    showStatus('Errore lettura file: ' + (err.message || err));
+    dictionarySet = null;
+    dictionaryLoaded = false;
+    disableSearch();
+    fileInput.value = '';
+  }
+}
+
+  function finalizeLoad(){
+    wordsArray = Array.from(dictionarySet);
+    wordsArray.sort((a,b)=> a.localeCompare(b, 'it', {sensitivity:'base'}));
+    showStatus('Dizionario caricato: ' + wordsArray.length + ' voci.');
+    dictionaryLoaded = true;
+    enableSearch();
+    loadServerBtn.disabled = false;
+  }
+
+  // ----- Search core -----
+  function searchPrefix(query){
+    const q = query;
+    const resultsFound = [];
+    if(!q) return resultsFound;
+
+    let lo = 0, hi = wordsArray.length -1, first = -1;
+    while(lo <= hi){
+      const mid = (lo + hi) >> 1;
+      const val = wordsArray[mid].toLowerCase();
+      if(val.startsWith(q)){
+        first = mid; hi = mid -1; 
+      }else if(val < q){
+        lo = mid +1;
+      }else{
+        hi = mid -1;
+      }
+    }
+    if(first === -1) return resultsFound;
+    
+    for(let i = first; i < wordsArray.length && resultsFound.length < MAX_RESULTS; i++){
+      const val = wordsArray[i];
+      if(val.toLowerCase().startsWith(q)){
+        resultsFound.push(val);
+      }else break;
+    }
+    return resultsFound;
+  }
+
+  function renderResults(list, rawQuery){
+    results.innerHTML = '';
+    if(list.length === 0){
+      const li = document.createElement('li');
+      li.className = 'item';
+      li.textContent = 'Nessun risultato.';
+      results.appendChild(li);
+      return;
+    }
+
+    for(const word of list){
+      const li = document.createElement('li');
+      li.className = 'item';
+      const lower = word.toLowerCase();
+      const q = rawQuery.toLowerCase();
+      if(q && lower.startsWith(q)){
+        const matched = word.slice(0, q.length);
+        const rest = word.slice(q.length);
+        const strong = document.createElement('strong');
+        strong.textContent = matched; 
+        li.appendChild(strong);
+        li.appendChild(document.createTextNode(rest));
+      }else{
+        li.textContent = word;
+      }
+      results.appendChild(li);
+    }
+  }
+
+  // ----- Event handlers -----
+  const doSearch = debounce(()=>{
+    const raw = qInput.value.trim();
+
+    if(!VALID_QUERY_RE.test(raw)){
+      const cleaned = raw.replace(/[^A-Za-z0-9\u00C0-\u017F ]+/gu, '');
+      qInput.value = cleaned;
+      showHint('Carattere non consentito. Usa solo lettere (inclusi accenti), numeri e spazi.');
+      results.innerHTML = '';
+      return;
+    }
+
+    if(raw === lastQuery) return; 
+    lastQuery = raw;
+
+    if(raw === ''){
+      renderResults([], ''); 
+      showHint(''); 
+      return; 
+    }
+
+    showHint('');
+    if(dictionaryLoaded){
+      const normalized = raw.toLowerCase();
+      const found = searchPrefix(normalized);
+      renderResults(found, raw);
+    }
+}, 150);
+
+  qInput.addEventListener('input', ()=>{ if(!dictionaryLoaded) return; doSearch(); });
+  loadServerBtn.addEventListener('click', ()=>{ disableSearch(); loadFromServer(); });
+  fileInput.addEventListener('change', (e)=>{
+    const f = e.target.files && e.target.files[0];
+    if(f){ disableSearch(); loadFromFile(f); }
+  });
+  clearBtn.addEventListener('click', ()=>{ qInput.value=''; results.innerHTML=''; showHint(''); qInput.focus(); });
+
+  disableSearch();
+  
+(function(){
+  const searchInput = document.querySelector("#Dictionary input[type='search']");
+  if(!searchInput) return;
+
+  ["keydown","keypress","keyup","paste"].forEach(ev=>{
+    searchInput.addEventListener(ev, function(e){
+      e.stopImmediatePropagation();
+    }, true);
+  });
+
+  searchInput.removeAttribute("readonly");
+  searchInput.removeAttribute("disabled");
+
+  const VALID_QUERY_RE = /^[A-Za-z0-9\u00C0-\u017F ]+$/u;
+
+  searchInput.addEventListener('input', function(){
+    const raw = searchInput.value;
+    if(!VALID_QUERY_RE.test(raw)){
+      const cleaned = raw.replace(/[^A-Za-z0-9\u00C0-\u017F ]+/gu, '');
+      searchInput.value = cleaned;
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = 'Carattere non consentito. Usa solo lettere (inclusi accenti), numeri e spazi.';
+    } else {
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = '';
+    }
+  });
+})();
 
 
 
-
-
-
-
-
+/*
+//DIZIONARIO ITALIANO
 
  // ----- Configurazioni di sicurezza/search -----
   // RegEx di validazione: solo lettere (ASCII + Latin-1/Latin-Extended), cifre e spazi
@@ -2545,7 +2876,7 @@ document.addEventListener('keyup', function(e) {
   });
 })();
 
-  
+  */
   
   
 //SEPARATOR
