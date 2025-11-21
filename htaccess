@@ -1,0 +1,535 @@
+#Forza utf-8 + lang
+AddDefaultCharset utf-8
+AddCharset utf-8 .html .css .js
+DefaultLanguage it-IT
+
+# Abilita rewrite engine
+RewriteEngine on
+
+## Forza https
+RewriteCond %{HTTPS} !on
+RewriteCond %{SERVER_PORT} !^443$
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]  
+
+
+#togli sottodomini
+
+# Se l'host NON è già il dominio principale
+RewriteCond %{HTTP_HOST} !^([^.]+\.altervista\.org)$ [NC]
+
+# Se l'host contiene un sottodominio davanti a NOME.altervista.org
+RewriteCond %{HTTP_HOST} ^([^.]+)\.([^.]+\.altervista\.org)$ [NC]
+
+# Reindirizza al dominio principale mantenendo percorso e query string
+RewriteRule ^(.*)$ https://%2/$1 [L,R=301]
+
+
+# Normalizza slash multipli (riduce // a /)
+RewriteCond %{THE_REQUEST} \s//+ [NC]
+RewriteRule ^(.*)$ /$1 [R=301,L]
+
+# Rimuovi trailing slash se non è una directory reale
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+?)/+$
+RewriteRule ^ %1 [R=301,L]
+
+
+
+#Previene risoluzioni ambigue
+Options -MultiViews
+
+#Normalizza trailing slash
+# Rimuovi trailing slash salvo directory reali
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} .+/$
+RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+
+# TN START ABILITA KEEP ALIVE
+<ifModule mod_headers.c>
+Header set Connection keep-alive
+</ifModule>
+# TN END ABILITA KEEP ALIVE
+
+
+
+#Imposta gli errori in pagina di default
+ErrorDocument 404 /not_found.html
+ErrorDocument 403 /access_denied.html
+ErrorDocument 401 /access_denied.html
+
+ErrorDocument 400 /error.html?code=400
+ErrorDocument 405 /error.html?code=405
+ErrorDocument 408 /error.html?code=408
+ErrorDocument 410 /error.html?code=410
+ErrorDocument 413 /error.html?code=413
+ErrorDocument 414 /error.html?code=414
+ErrorDocument 429 /error.html?code=429
+ErrorDocument 500 /error.html?code=500
+ErrorDocument 501 /error.html?code=501
+ErrorDocument 502 /error.html?code=502
+ErrorDocument 503 /error.html?code=503
+ErrorDocument 504 /error.html?code=504
+
+
+#Test di restricted access
+<Files "restricted">
+  Order allow,deny
+  Deny from all
+</Files>
+
+
+#Riduzione overhead in caching + precaricamento
+FileETag None
+
+
+
+# av:AntiHotlink
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_URI} \.(gif|jpe?g|png)$ [NC]
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]*)mineset\.altervista\.org
+RewriteCond %{REQUEST_URI} !^\/_altervista_ht\/
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]+)google\.
+RewriteRule .*$ http://hl.altervista.org/split.php?http://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+# AntiHotlink
+
+
+
+# TN ABILITA MOD PAGESPEED START
+# COMBINA CSS, COMPRESS IMAGES, RIMUOVE HTML SPAZI BIANCHI E COMMENTI
+<IfModule pagespeed_module>
+ModPagespeed on
+ModPagespeedEnableFilters rewrite_css,combine_css
+ModPagespeedEnableFilters recompress_images
+# convert_png_to_jpeg,convert_jpeg_to_webp
+# Questi filtri cambiano il formato delle immagini. Se un gioco/app si aspetta un PNG,
+# ma riceve un JPEG o WebP, può rompersi. Meglio disabilitarli.
+ModPagespeedEnableFilters convert_png_to_jpeg,convert_jpeg_to_webp
+ModPagespeedEnableFilters collapse_whitespace,remove_comments
+#altro
+ModPagespeedEnableFilters inline_javascript,inline_css
+ModPagespeedEnableFilters defer_javascript
+# lazyload_images
+# Il lazyload può impedire il caricamento immediato di sprite/icone usate da giochi HTML5,
+# causando bug o risorse mancanti. Meglio disabilitarlo.
+ModPagespeedEnableFilters lazyload_images
+ModPagespeedFileCacheSizeKb 102400
+ModPagespeedDisableFilters rewrite_images
+</IfModule>
+# TN ABILITA MOD PAGESPEED END
+
+
+
+
+
+
+##Opzioni di sicurezza
+
+#Rate limiting prevenzione
+
+
+# Direttive di blocco troppe richieste
+<IfModule mod_evasive20.c>
+  DOSHashTableSize 3097
+  DOSPageCount 50         # max richieste alla stessa pagina
+  DOSSiteCount 150        # max richieste totali al sito
+  DOSPageInterval 2       # intervallo in secondi (più permissivo)
+  DOSSiteInterval 2
+  DOSBlockingPeriod 10    # blocco IP per 10 secondi (molto più breve)
+</IfModule>
+
+
+#Protezione anti directory traversal
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Blocca sequenze di traversal evidenti
+  RewriteCond %{REQUEST_URI} \.\./ [OR]
+  RewriteCond %{QUERY_STRING} \.\./
+  RewriteRule ^ - [F,L]
+  # Blocca solo codifiche comuni di ".."
+  RewriteCond %{REQUEST_URI} (%2e%2e|%252e%252e) [NC,OR]
+  RewriteCond %{QUERY_STRING} (%2e%2e|%252e%252e) [NC]
+  RewriteRule ^ - [F,L]
+</IfModule>
+
+
+
+
+
+#XSS Prevenzione
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+
+# In .htaccess dentro /uploads
+# Disattiva esecuzione di script
+Options -ExecCGI
+AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .phps .shtml .cgi .pl
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps .shtml .cgi .pl
+
+# Se consentito in htaccess: spegne il motore PHP in questa directory
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+
+# Impedisci esecuzione via handler/SetHandler
+<FilesMatch "\.(php|phtml|php\d?|phps|cgi|pl|jsp|asp|aspx)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Consenti solo estensioni sicure (adatta l’elenco alle tue necessità)
+<FilesMatch "\.(jpe?g|png|gif|webp|svg|pdf|txt|zip)$">
+  Order allow,deny
+  Allow from all
+</FilesMatch>
+
+
+#CORS per API e Font
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:woff2?|ttf|otf)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  # Per endpoint API JSON (se necessario)
+  <FilesMatch "\.json$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+  </FilesMatch>
+</IfModule>
+
+
+
+#####################################################    
+# Script: htaccess Security                                                                 
+#
+# Versione: 1.0                                                                                     
+# 
+#  ### Changelog ###                                                                        
+#
+# v1.0 - 2012-02-14                                                                            
+#
+#####################################################
+
+# Nessuna versione di webserver in index
+ServerSignature Off
+Options -Indexes
+
+# Bloccca metodi di richieste sospette
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+
+RewriteRule ^(.*)$ - [F,L]
+
+# Blocca WP timthumb hack
+RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+
+RewriteRule . - [S=1]
+
+# Blocca richieste sospette di user agent
+RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
+RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
+RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
+RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
+
+# Blocca MySQL injections, RFI, base64, etc.
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC,OR]
+RewriteCond %{QUERY_STRING} \=PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC,OR]
+RewriteCond %{QUERY_STRING} (\.\./|\.\.) [OR]
+RewriteCond %{QUERY_STRING} ftp\: [NC,OR]
+RewriteCond %{QUERY_STRING} http\: [NC,OR]
+RewriteCond %{QUERY_STRING} https\: [NC,OR]
+RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)/self/(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)cPath=http://(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*iframe.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^i]*i)+frame.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
+RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
+RewriteCond %{QUERY_STRING} (localhost|loopback|127\.0\.0\.1) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+
+RewriteRule ^(.*)$ - [F,L]
+
+#Aggiornato
+
+RewriteCond %{QUERY_STRING} DECLARE [NC]
+RewriteRule !403\.html$ - [F]
+RewriteCond %{QUERY_STRING} SELECT [NC]
+RewriteRule !403\.html$ - [F]
+RewriteCond %{QUERY_STRING} UPDATE [NC]
+RewriteRule !403\.html$ - [F]
+RewriteCond %{QUERY_STRING} DELETE [NC]
+RewriteRule !403\.html$ - [F]
+RewriteCond %{QUERY_STRING} TRUNCATE [NC]
+RewriteRule !403\.html$ - [F]
+RewriteCond %{QUERY_STRING} DROP [NC]
+RewriteRule !403\.html$ - [F]
+
+#V2
+
+RewriteCond %{REQUEST_URI} KEYWORD
+RewriteRule ^(.*)$ - [F,L]
+
+
+
+
+#MEGA-COMPRESSION
+
+# Attiva Brotli se disponibile
+<IfModule mod_brotli.c>
+  # Livello di compressione (da 1 a 11, 6 sarebbe un buon compromesso)
+  BrotliCompressionQuality 10
+  # Applica Brotli a tutti i contenuti
+  AddOutputFilterByType BROTLI_COMPRESS application/octet-stream
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Attiva Gzip come fallback
+<IfModule mod_deflate.c>
+  # Applica Gzip a tutti i contenuti
+  AddOutputFilterByType DEFLATE application/octet-stream
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Evita doppia compressione
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|mp4|avi|mov|zip|gz|bz2|rar|7z)$ no-gzip dont-vary
+
+# Header per negoziazione con il browser
+<IfModule mod_headers.c>
+  Header append Vary Accept-Encoding
+</IfModule>
+
+# Attiva il modulo headers (deve essere abilitato su Apache)
+<IfModule mod_headers.c>
+
+  # Content Security Policy (CSP)
+  # Permette script e CSS inline per evitare problemi con il tuo setup attuale
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';"
+
+  # HTTP Strict Transport Security (HSTS)
+  # Forza HTTPS e impedisce downgrade a HTTP
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Cross-Origin-Opener-Policy (COOP)
+  # Isola la tua pagina da altre per ridurre attacchi cross-origin
+  Header set Cross-Origin-Opener-Policy "same-origin"
+
+  # Clickjacking protection
+  # Impedisce che la tua pagina venga caricata in iframe malevoli
+  Header set X-Frame-Options "DENY"
+
+  # Cross-Origin-Resource-Policy (CORP) - opzionale ma utile
+  Header set Cross-Origin-Resource-Policy "same-origin"
+
+  # X-Content-Type-Options
+  # Evita che il browser interpreti file con MIME type sbagliato
+  Header set X-Content-Type-Options "nosniff"
+
+  # Referrer-Policy
+  # Controlla quali informazioni di referrer vengono inviate
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions-Policy (ex Feature-Policy)
+  # Limita API e feature del browser
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+</IfModule>
+
+
+
+#_____________________________________________________
+# TRASH CODE
+#_____________________________________________________
+# av:AntiHotlink
+#RewriteBase /
+#RewriteCond %{REQUEST_URI} \.(?:gif|jpe?g|png|webp|svg)$ [NC]
+#RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^https?://([^.]+\.)?%{HTTP_HOST} [NC]
+#RewriteCond %{REQUEST_URI} !^\/_altervista_ht\/
+#RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]+)google\.
+#RewriteRule .*$ http://hl.altervista.org/split.php?http://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+#_____________________________________________________
+# AntiHotlink
+# Adatta il limite (in bytes)
+#LimitRequestBody 10485760
+#Limida intestazioni sospette
+#<LimitExcept GET POST HEAD>
+#  Order allow,deny
+#  Deny from all
+#</LimitExcept>
+#Blocca query lunghe
+#RewriteCond %{QUERY_STRING} .{2048,}
+#RewriteRule ^ - [F,L]
+#_____________________________________________________
+# Anti-bruteforce for /login
+#<IfModule mod_rewrite.c>
+#  RewriteEngine On
+#
+#  # Blocca troppi tentativi POST su /login dallo stesso IP
+#  RewriteCond %{REQUEST_METHOD} POST
+#  RewriteCond %{REQUEST_URI} ^/login [NC]
+#  RewriteCond %{ENV:bad_login_count} >5
+#  RewriteRule ^ - [F,L]
+#</IfModule>
+#_____________________________________________________
+#RemoveFtpSubdomainAndAll
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} ^ftp\.mineset\.altervista\.org$ [OR]
+#RewriteCond %{HTTP_HOST} ^.mineset\.altervista\.org$
+#RewriteRule ^(.*)$ "https\:\/\/www\.mineset\.altervista\.org\/$1" [R=301,L]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+#_____________________________________________________
+#Force WWW on Domain
+#RewriteEngine on
+#RewriteCond %{HTTP_HOST} ^([a-z.]+)?mineset\.altervista\.org$ [NC]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule .? http://www.%1mineset.altervista.org%{REQUEST_URI} [R=301,L]
+#RewriteEngine On
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+#_____________________________________________________
+#Add slashBottomUrls
+#_____________________________________________________
+# Ensure all directory URLs have a trailing slash.
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_URI} !\/$
+#RewriteCond %{REQUEST_URI} !\/[^\/]*\.[^\/]+$
+#RewriteRule .* http://%{HTTP_HOST}%{REQUEST_URI}/ [L,R=301]
+# Same for HTTPS:
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_URI} !\/$
+#RewriteCond %{REQUEST_URI} !\/[^\/]*\.[^\/]+$
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI}/ [L,R=301]
+#_____________________________________________________
+###OPTIMIZE RULES
+#_____________________________________________________
+# Compress text, html, javascript, css, xml:
+#AddOutputFilterByType DEFLATE text/plain
+#AddOutputFilterByType DEFLATE text/html
+#AddOutputFilterByType DEFLATE text/xml
+#AddOutputFilterByType DEFLATE text/css
+#AddOutputFilterByType DEFLATE application/xml
+#AddOutputFilterByType DEFLATE application/xhtml+xml
+#AddOutputFilterByType DEFLATE application/rss+xml
+#AddOutputFilterByType DEFLATE application/javascript
+#AddOutputFilterByType DEFLATE application/x-javascript
+# TN START GZIP COMPRESSION
+#<IfModule mod_gzip.c>
+#mod_gzip_on Yes
+#mod_gzip_dechunk Yes
+#mod_gzip_item_include file \.(html?|txt|css|js|php|pl)$
+#mod_gzip_item_include handler ^cgi-script$
+#mod_gzip_item_include mime ^text/.*
+#mod_gzip_item_include mime ^application/x-javascript.*
+#mod_gzip_item_exclude mime ^image/.*
+#mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+#</IfModule>
+# TN END GZIP COMPRESSION
+# TN START DEFLATE COMPRESSION
+#<IfModule mod_deflate.c>
+#AddOutputFilterByType DEFLATE "application/atom+xml" \
+#"application/javascript" \
+#"application/json" \
+#"application/ld+json" \
+#"application/manifest+json" \
+#"application/rdf+xml" \
+#"application/rss+xml" \
+#"application/schema+json" \
+#"application/vnd.geo+json" \
+#"application/vnd.ms-fontobject" \
+#"application/x-font" \
+#"application/x-font-opentype" \
+#"application/x-font-otf" \
+#"application/x-font-truetype" \
+#"application/x-font-ttf" \
+#"application/x-javascript" \
+#"application/x-web-app-manifest+json" \
+#"application/xhtml+xml" \
+#"application/xml" \
+#"font/eot" \
+#"font/otf" \
+#"font/ttf" \
+#"font/opentype" \
+#"image/bmp" \
+#"image/svg+xml" \
+#"image/vnd.microsoft.icon" \
+#"image/x-icon" \
+#"text/cache-manifest" \
+#"text/css" \
+#"text/html" \
+#"text/javascript" \
+#"text/plain" \
+#"text/vcard" \
+#"text/vnd.rim.location.xloc" \
+#"text/vtt" \
+#"text/x-component" \
+#"text/x-cross-domain-policy" \
+#"text/xml"
+#</IfModule>
+# END DEFLATE COMPRESSION
+#_____________________________________________________
+####ADDONS RULES OPTIONAL
+#REMOVED
+#Prevent directory browsing
+#Options All -Indexes
+#Prevent Hotlink access
+#RewriteEngine On
+#RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^https://(www.)?mineset.altervista.org/.*$ [NC]
+#RewriteRule .(jpeg|JPEG|jpe|JPE|jpg|JPG|gif|GIF|png|PNG)$ https://www.mineset.altervista.org/no-hotlinking.png [R,L]
+#Cross-Origin Resource Sharing Tweaks
+#Header set Access-Control-Allow-Origin https://www.mineset.altervista.org/
+#Disable HTTP TRACK AND TRACE
+#RewriteEngine on
+#RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+#RewriteRule .* - [F]
+#_____________________________________________________
+#<Files "/Private/pagina_tutituti24.html">
+#    AuthType Basic
+#    AuthName "Area Riservata"
+#    AuthUserFile /.htpasswd
+#    Require valid-user
+#</Files>
+
+
+#<Files "access_denied.html">
+#    AuthType Basic
+#    AuthName "Area Riservata"
+#    AuthUserFile /.htpasswd
+#    Require valid-user
+#</Files>
+#_____________________________________________________
+#
+#RewriteCond %{HTTP_HOST} ^ftp\.mineset\.altervista\.org$ [OR]
+#RewriteCond %{HTTP_HOST} ^.mineset\.altervista\.org$
+#RewriteRule ^(.*)$ "https\:\/\/www\.mineset\.altervista\.org\/$1" [R=301,L]
+#RewriteEngine on
+#RewriteCond %{HTTP_HOST} ^([a-z.]+)?mineset\.altervista\.org$ [NC]
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule .? http://www.%1mineset.altervista.org%{REQUEST_URI} [R=301,L]
+#RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9\-\.]*)mineset\.altervista\.org
+#
+#_____________________________________________________
