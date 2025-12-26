@@ -6,6 +6,29 @@ DefaultLanguage it-IT
 # Abilita rewrite engine
 RewriteEngine on
 
+
+
+
+# Imposta variabile "tracker" se l'URL richiesto contiene uno dei domini noti
+SetEnvIf Referer "connect\.facebook\.net" tracker
+SetEnvIf Referer "google-analytics\.com" tracker
+SetEnvIf Referer "googletagmanager\.com" tracker
+SetEnvIf Referer "doubleclick\.net" tracker
+SetEnvIf Referer "googlesyndication\.com" tracker
+SetEnvIf Referer "static\.cloudflareinsights\.com" tracker
+SetEnvIf Referer "hotjar\.com" tracker
+SetEnvIf Referer "addthis\.com" tracker
+SetEnvIf Referer "quantserve\.com" tracker
+
+# Blocca tutte le richieste marcate come "tracker"
+Order Allow,Deny
+Allow from all
+Deny from env=tracker
+
+
+
+
+
 ## Forza https
 RewriteCond %{HTTPS} !on
 RewriteCond %{SERVER_PORT} !^443$
@@ -296,6 +319,9 @@ RewriteRule ^(.*)$ - [F,L]
 
 
 #MEGA-COMPRESSION
+
+#Compressione PDF
+AddOutputFilterByType DEFLATE application/pdf
 
 # Attiva Brotli se disponibile
 <IfModule mod_brotli.c>
