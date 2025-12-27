@@ -204,12 +204,14 @@ function image_data_match(a, b, threshold) {
  * @overload
  * @returns {PixelCanvas}  a new canvas element, augmented with `ctx` property, which is also augmented
  */
+ 
 function make_canvas(width, height) {
 	const image = width;
 
 
 	const new_canvas = /** @type {PixelCanvas} */ (E("canvas"));
-	const new_ctx = /** @type {PixelContext} */ (new_canvas.getContext("2d"));
+	//const new_ctx = /** @type {PixelContext} */ (new_canvas.getContext("2d"));
+	const new_ctx = /** @type {PixelContext} */ (new_canvas.getContext("2d", { willReadFrequently: true }));
 
 	new_canvas.ctx = new_ctx;
 

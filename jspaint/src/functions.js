@@ -1628,9 +1628,9 @@ function show_about_paint() {
 	// Maybe I could even include the news in an iframe, just for old versions of the app, within the latest `.news-entry`...
 	// as long as it doesn't have the same problem as images, of loading in the background.
 	const url =
-		// ".";
+		 ".";
 		// "test-news-newer.html";
-		"https://jspaint.app/?news";
+		//"https://jspaint.app/?news";
 	fetch(url)
 		.then((response) => response.text())
 		.then((text) => {

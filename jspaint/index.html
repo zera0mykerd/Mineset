@@ -29,7 +29,7 @@
 	<!-- <link href="lib/os-gui/build/windows-98.css" rel="stylesheet" type="text/css"> -->
 	<!-- <link href="lib/os-gui/build/windows-default.css" rel="stylesheet" type="text/css" title="Windows Default"> -->
 	<!-- <link href="lib/os-gui/build/peggys-pastels.css" rel="alternate stylesheet" type="text/css" title="Peggy's Pastels"> -->
-	<link href="lib/tracky-mouse/core/tracky-mouse.css" rel="stylesheet" type="text/css">
+	<!-- <link href="lib/tracky-mouse/core/tracky-mouse.css" rel="stylesheet" type="text/css"> -->
 	<!--
 		@TODO: bring these styles into OS-GUI.
 		This is a custom build of 98.css https://github.com/jdan/98.css
@@ -80,7 +80,7 @@
 <body>
 	<div id="about-paint" style="display: none">
 		<div id="about-paint-header">
-			<img src="images/icons/128x128.png" width="128" height="128" id="about-paint-icon" alt="" />
+			<img src="images/icons/128x128.png" width="128" height="128" id="about-paint-icon" />
 			<div id="about-paint-beside-icon">
 				<h1 id="jspaint-project-name">MKJS Painter</h1>
 				<div id="jspaint-version" title="About time to increment the version number, don't you think?">
@@ -161,7 +161,7 @@
 		<!-- <article class="news-entry" id="news-2024-textual-paint">
 			<h1>Paint... in the Terminal!?</h1>
 			<time datetime=""></time>
-			<img width="" height="" style="max-width: 100%; height: auto; image-rendering: auto;" alt="" src="" />
+			<img width="" height="" style="max-width: 100%; height: auto; image-rendering: auto;" src="" />
 			<p>
 				I have created an entirely new MS Paint clone, called <a target="_blank" href="https://github.com/1j01/textual-paint">Textual Paint</a>.
 			</p>
@@ -188,694 +188,879 @@
 		-->
 		
 		
+		
+		
+		
+		
 <article class="news-entry" id="news-2024-split-eye-gaze-mode">
 <h1>Più opzioni di accessibilità e nuovo Discord Server</h1>
 <time datetime="2024-12-23">2024-12-23</time>
-&lt;img width="" Height="" style="max-width: 100%; altezza: auto; rendering delle immagini: auto;" alt="" src="" /&gt;
+<img width="" height="" style="max-width: 100%; height: auto; image-rendering: auto;" src="" />
+
 <h2>Funzionalità di accessibilità separate</h2>
-<p>Ho suddiviso la "Modalità Eye Gaze" in diverse funzionalità discrete:</p>
+<p>Ho suddiviso la “Modalità Eye Gaze” in diverse funzionalità distinte:</p>
+
 <ul>
-<li>
-<strong>↩️Pulsante di annullamento rapido</strong>: aggiunge un pulsante di annullamento mobile sempre visibile.</li>
-<li>
-<strong>🔍Ingrandisci l'interfaccia utente</strong>: Ingrandisce menu, pulsanti e finestre.</li>
-<li>
-<strong>⏱️Clicker di permanenza</strong>: fa clic automaticamente passando il mouse sopra i controlli per un certo periodo.</li>
-<li>
-<strong>↕️Casella dei colori verticale</strong>: rende la casella Colori alta anziché larga.
-					(Questo era già suddiviso.)</li>
+<li><strong>↩️ Pulsante di annullamento rapido</strong>: aggiunge un pulsante mobile di annullamento sempre visibile.</li>
+<li><strong>🔍 Ingrandisci l'interfaccia utente</strong>: ingrandisce menu, pulsanti e finestre.</li>
+<li><strong>⏱️ Clicker di permanenza</strong>: fa clic automaticamente passando il mouse sopra i controlli per un certo periodo.</li>
+<li><strong>↕️ Casella dei colori verticale</strong>: rende la casella Colori alta anziché larga. (Questa era già separata.)</li>
 </ul>
+
 <p>Ho anche aggiunto una nuovissima funzionalità:</p>
+
 <ul>
-<li>
-<strong>🧑Localizzatore di testa</strong>: consente di spostare il cursore con la testa.
-					(Guarda il video dimostrativo qui sotto!)</li>
+<li><strong>🧑 Localizzatore di testa</strong>: consente di spostare il cursore con la testa. (Guarda il video dimostrativo qui sotto!)</li>
 </ul>
-<h2>↩️Pulsante di annullamento rapido</h2>
-<p><b>Extra &gt; Pulsante Annulla rapido</b>rappresenta un enorme progresso per l'usabilità sui dispositivi touchscreen.</p>
-<p>Commettere errori non è più un compito ingrato. Basta toccare, toccare, toccare per annullare. Facile così.</p>
-<h2>🔍Ingrandisci l'interfaccia utente</h2>
-<p><b>Extra &gt; Ingrandisci l'interfaccia utente</b>aumenta la dimensione di menu, pulsanti e finestre.</p>
-<p>Il ridimensionamento delle barre degli strumenti e dei menu sarà limitato
-				allo spazio disponibile sullo schermo, rendendolo più utile sui dispositivi mobili,
-				rispetto al ridimensionamento dell'interfaccia utente di base esistente nella modalità Eye Gaze.</p>
-<h2>⏱️Clicker di permanenza</h2>
-<p><b>Extra &gt; Dwell Clicker</b>fa clic automaticamente passando il mouse.</p>
-<p>È destinato all'uso con un eye tracker o un head tracker—software (e facoltativamente
-				hardware specializzato) che consente di spostare il mouse senza usare le mani.</p>
-<p>Questa era la caratteristica principale della modalità Eye Gaze, ma ora può essere utilizzata in qualsiasi configurazione dell'interfaccia utente: con any
-				tema, con o senza interfaccia utente ingrandita, con una casella di colori orizzontale o verticale.</p>
-<h2>🧑Head Tracker (funzione tutta nuova!)</h2>
-<p>
-<b>Extra &gt; Tracciamento della testa</b>la modalità utilizza la tua webcam per
-				traccia i movimenti della testa e sposta il cursore del mouse di conseguenza.</p>
-<p>È alimentato da<a href="https://trackymouse.js.org" target="_blank"><img alt="" src="images/tracky-mouse-16x16.png"/>Tracky Mouse</a></p>
-<p>Ho registrato un breve video dimostrativo, disegnando il logo Tracky Mouse utilizzando Tracky Mouse:</p>
+
+<h2>↩️ Pulsante di annullamento rapido</h2>
+<p><b>Extra > Pulsante Annulla rapido</b> rappresenta un enorme passo avanti per l’usabilità sui dispositivi touchscreen.</p>
+<p>Commettere errori non è più un problema: basta toccare, toccare, toccare per annullare. Così semplice.</p>
+
+<h2>🔍 Ingrandisci l'interfaccia utente</h2>
+<p><b>Extra > Ingrandisci l'interfaccia utente</b> aumenta la dimensione di menu, pulsanti e finestre.</p>
+<p>Il ridimensionamento delle barre degli strumenti e dei menu sarà limitato allo spazio disponibile sullo schermo, rendendolo più utile sui dispositivi mobili rispetto al ridimensionamento dell’interfaccia utente di base presente nella modalità Eye Gaze.</p>
+
+<h2>⏱️ Clicker di permanenza</h2>
+<p><b>Extra > Dwell Clicker</b> fa clic automaticamente passando il mouse.</p>
+<p>È pensato per l’uso con un eye tracker o un head tracker — software (e, facoltativamente, hardware specializzato) che consente di spostare il mouse senza usare le mani.</p>
+<p>Questa era la funzionalità principale della modalità Eye Gaze, ma ora può essere utilizzata con qualsiasi configurazione dell’interfaccia utente: con qualsiasi tema, con o senza interfaccia ingrandita, con casella dei colori orizzontale o verticale.</p>
+
+<h2>🧑 Head Tracker (funzione tutta nuova!)</h2>
+<p><b>Extra > Tracciamento della testa</b> utilizza la tua webcam per tracciare i movimenti della testa e spostare il cursore del mouse di conseguenza.</p>
+
+<p>È alimentato da <a href="https://trackymouse.js.org" target="_blank"><img src="images/tracky-mouse-16x16.png" /> Tracky Mouse</a>.</p>
+
+<p>Ho registrato un breve video dimostrativo, disegnando il logo Tracky Mouse utilizzando Tracky Mouse:</p>
+
 <figure>
 <video autoplay="" controls="" loop="" muted="" playsinline="" style="width: 100%; height: auto;">
-<source src="images/tracky-mouse-jspaint-demo.mp4" type="video/mp4"/>Il tuo browser non supporta il tag video.</video>
+<source src="images/tracky-mouse-jspaint-demo.mp4" type="video/mp4" />
+Il tuo browser non supporta il tag video.
+</video>
 <figcaption>
-Disegnare il logo Tracky Mouse utilizzando Tracky Mouse.Mi sono assicurato di inclinare la webcam verso il basso in modo che tu possa vedere che non sto usando le braccia.</figcaption>
-</figure>
-<a href="https://trackymouse.js.org" target="_blank">
-<img alt="Tracky Mouse logo" height="128" src="lib/tracky-mouse/images/tracky-mouse-logo-512.png" style="float: right" width="128"/>
-</a>
-<p>Per provarlo:</p>
-<ul>
-<li>Abilitare<b>Extra &gt; Tracciamento della testa</b></li>
-<li>Clic<b>Inizio</b>e consenti l'accesso alla tua fotocamera.</li>
-<li>Assicurati che il tuo viso sia ben illuminato e centrato nel campo visivo della fotocamera.</li>
-<li>Regola le impostazioni di sensibilità e fluidità a tuo piacimento.</li>
-<li>Muovi la testa per spostare il punto rosso sulla pagina, che funge da cursore, e passa il mouse sopra gli elementi
-					per fare clic su di essi.</li>
-</ul>
-<p>Suggerimenti:</p>
-<ul>
-<li>Puoi mettere in pausa il clic prolungato passando il mouse sul pulsante Pausa
-					(<img alt="an eye with three zees" src="images/classic/eye-gaze-pause.svg" style="vertical-align: middle; width: 1em; height: 1em;"/>)
-					nell'angolo in basso a sinistra.</li>
-<li>Quando si passa il mouse sulla barra del titolo di una finestra o si utilizzano determinati strumenti nell'area di disegno,
-					come il pennello, sa che è necessario tenere premuto il pulsante del mouse per trascinare o disegnare.
-					La sosta successiva verrà rilasciata invece di fare clic.</li>
-<li>Se riduci a icona la finestra di Tracky Mouse, questa verrà ridotta a icona in un pulsante nella barra dei menu,
-					su cui è possibile fare clic per ripristinare la finestra.
-					Se chiudi la finestra, la funzione verrà disabilitata.</li>
-</ul>
-<p>Al momento funziona solo con il clic prolungato e abilita automaticamente il clic automatico,
-				ma in futuro potrebbe funzionare con altri modi di fare clic, come sbattere le palpebre o sorridere.</p>
-<p>Puoi anche scaricare il<a href="https://trackymouse.js.org" target="_blank">Tracky Mouse</a>app desktop per controllare l'intero computer con la testa.</p>
-<h2>Server Discordia</h2>
-<figure>
-<a href="https://discord.gg/jxQBK3k8tx" target="_blank">
-<img alt="Animation of Discord logo blinking its eyes" height="470" src="https://flipanim.com/gif/b/h/BhZWtwfg.gif" width="470"/>
-</a>
-<figcaption>Crediti per l'animazione:<a href="https://flipanim.com/profile?name=Wolfie-le-Wolf" target="_blank">Wolfie-le-Wolf</a>
+Disegnare il logo Tracky Mouse utilizzando Tracky Mouse. Mi sono assicurato di inclinare la webcam verso il basso in modo che tu possa vedere che non sto usando le braccia.
 </figcaption>
 </figure>
-<p>Unisciti al nuovo<a href="https://discord.gg/jxQBK3k8tx" target="_blank">Server Discord 98.JS.org</a>per discutere di queste funzionalità e condividere i tuoi disegni JS Paint!</p>
+
+<ul>
+<li>Abilita <b>Extra > Tracciamento della testa</b>.</li>
+<li>Clicca <b>Inizio</b> e consenti l’accesso alla fotocamera.</li>
+<li>Assicurati che il tuo viso sia ben illuminato e centrato nel campo visivo della fotocamera.</li>
+<li>Regola le impostazioni di sensibilità e fluidità come preferisci.</li>
+<li>Muovi la testa per spostare il punto rosso sulla pagina, che funge da cursore, e passa il mouse sopra gli elementi per fare clic.</li>
+</ul>
+
+<p>Suggerimenti:</p>
+
+<ul>
+<li>Puoi mettere in pausa il clic prolungato passando il mouse sul pulsante Pausa (<img src="images/classic/eye-gaze-pause.svg" style="vertical-align: middle; width: 1em; height: 1em;" />) nell’angolo in basso a sinistra.</li>
+<li>Quando passi il mouse sulla barra del titolo di una finestra o utilizzi determinati strumenti nell’area di disegno, come il pennello, il sistema capisce che devi tenere premuto il pulsante del mouse per trascinare o disegnare. La sosta successiva rilascerà invece di fare clic.</li>
+<li>Se riduci a icona la finestra di Tracky Mouse, verrà ridotta a un pulsante nella barra dei menu, su cui puoi fare clic per ripristinarla. Se chiudi la finestra, la funzione verrà disabilitata.</li>
+</ul>
+
+<p>Al momento funziona solo con il clic prolungato e abilita automaticamente il clic automatico, ma in futuro potrebbe supportare altri metodi di clic, come sbattere le palpebre o sorridere.</p>
+
+<p>Puoi anche scaricare l’app desktop <a href="https://trackymouse.js.org" target="_blank">Tracky Mouse</a> per controllare l’intero computer con la testa.</p>
+
+<h2>Server Discord</h2>
+<figure>
+<a href="https://discord.gg/jxQBK3k8tx" target="_blank">
+<img height="470" src="https://flipanim.com/gif/b/h/BhZWtwfg.gif" width="470" />
+</a>
+<figcaption>
+Crediti per l'animazione: <a href="https://flipanim.com/profile?name=Wolfie-le-Wolf" target="_blank">Wolfie-le-Wolf</a>
+</figcaption>
+</figure>
+
+<p>Unisciti al nuovo <a href="https://discord.gg/jxQBK3k8tx" target="_blank">Server Discord 98.JS.org</a> per discutere di queste funzionalità e condividere i tuoi disegni JS Paint!</p>
+
 <h2>Finestra Informazioni migliorata</h2>
-<p>Sono riuscito a realizzare il<b>Aiuto &gt; Informazioni su Paint</b>finestra molto più compatta includendo di più
-				informazioni.</p>
-<p>Vedi A<a href="https://github.com/1j01/jspaint/commit/da994966ec2231743867f232d8e1fb334071b512" target="_blank">visivo
-					confronto qui</a>.
-				Puoi passare alla modalità scorrimento o buccia di cipolla e spostare il cursore per confrontare le immagini prima e dopo.</p>
+<p>Sono riuscito a rendere la finestra <b>Aiuto > Informazioni su Paint</b> molto più compatta, includendo più informazioni.</p>
+
+<p>Vedi un <a href="https://github.com/1j01/jspaint/commit/da994966ec2231743867f232d8e1fb334071b512" target="_blank">confronto visivo qui</a>. Puoi passare alla modalità scorrimento o buccia di cipolla e spostare il cursore per confrontare le immagini prima e dopo.</p>
+
 <p>Ecco le novità:</p>
+
 <ul>
-<li>Riformulato tutto in modo che sia più conciso, utilizzando etichette brevi invece di frasi complete.
-					(<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a></li>
-<li>Sostituito<a href="https://github.com/1j01/jspaint#readme" target="_blank">leggimi</a>collegamento
-					con un collegamento a<a href="https://jspaint.app/about.html" target="_blank">home page</a><a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a></li>
-<li>Aggiunto un collegamento al server Discord.
-					(<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a></li>
-<li>Assicurati che tutti i collegamenti si aprano in una nuova scheda.
-					(<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a></li>
-<li>Gli è stato fatto utilizzare un'icona dell'app più grande
-					(<a href="https://github.com/1j01/jspaint/commit/3dd5ee94ba123a053c7fee64a112914902d825ae" target="_blank">⟜</a>);
-					ha anche creato una versione più grande della variante dell'icona del gay pride per il mese dell'orgoglio
-					(<a href="https://github.com/1j01/jspaint/commit/be03638fad35a51cacef5c4f524c81581c2be587" target="_blank">⟜</a></li>
-<li>Aggiunto un numero di versione nella finestra Informazioni
-					(<a href="https://github.com/1j01/jspaint/commit/224cc37bfa022b912c9b48e70d0e7a412c0f3ec6" target="_blank">⟜</a>)
-					e lo ho spostato su una nuova riga
-					(<a href="https://github.com/1j01/jspaint/commit/aaed9a78945aeec13b15d74dca0502474e268c1e" target="_blank">⟜</a></li>
-<li>Spostato l'indicatore dello stato del controllo degli aggiornamenti accanto all'icona
-					(<a href="https://github.com/1j01/jspaint/commit/c1b407d9134af75533adb3fd3938a82d3a2d71dd" target="_blank">⟜</a></li>
-<li>Risolto il problema con il centraggio della finestra Informazioni su schermi piccoli
-					(<a href="https://github.com/1j01/jspaint/commit/2aa2e66b8ba5927ee833b68480342f1d62477940" target="_blank">⟜</a></li>
+<li>Riformulato tutto in modo più conciso, usando etichette brevi invece di frasi complete. (<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a>)</li>
+
+<li>Sostituito il collegamento al <a href="https://github.com/1j01/jspaint#readme" target="_blank">leggimi</a> con un collegamento alla <a href="https://jspaint.app/about.html" target="_blank">home page</a>. (<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a>)</li>
+
+<li>Aggiunto un collegamento al server Discord. (<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a>)</li>
+
+<li>Assicurato che tutti i collegamenti si aprano in una nuova scheda. (<a href="https://github.com/1j01/jspaint/commit/7bc134226f9994cd68fd69d78fb0343f5c873d53" target="_blank">⟜</a>)</li>
+
+<li>Utilizzata un’icona dell’app più grande (<a href="https://github.com/1j01/jspaint/commit/3dd5ee94ba123a053c7fee64a112914902d825ae" target="_blank">⟜</a>); creata anche una versione più grande della variante dell’icona pride per il mese dell’orgoglio (<a href="https://github.com/1j01/jspaint/commit/be03638fad35a51cacef5c4f524c81581c2be587" target="_blank">⟜</a>).</li>
+
+<li>Aggiunto un numero di versione nella finestra Informazioni (<a href="https://github.com/1j01/jspaint/commit/224cc37bfa022b912c9b48e70d0e7a412c0f3ec6" target="_blank">⟜</a>) e spostato su una nuova riga (<a href="https://github.com/1j01/jspaint/commit/aaed9a78945aeec13b15d74dca0502474e268c1e" target="_blank">⟜</a>).</li>
+
+<li>Spostato l’indicatore dello stato del controllo aggiornamenti accanto all’icona (<a href="https://github.com/1j01/jspaint/commit/c1b407d9134af75533adb3fd3938a82d3a2d71dd" target="_blank">⟜</a>).</li>
+
+<li>Risolto il problema del centraggio della finestra Informazioni su schermi piccoli (<a href="https://github.com/1j01/jspaint/commit/2aa2e66b8ba5927ee833b68480342f1d62477940" target="_blank">⟜</a>).</li>
 </ul>
-<h2>Varie Cambiamenti</h2>
+
+<h2>Vari cambiamenti</h2>
+
 <ul>
-<li>Ho aggiornato JS Paint all'interno<a href="https://98.js.org/" target="_blank">98.js.org</a>recentemente, anche se potrebbe non avere ancora le ultime modifiche.</li>
-<li>Se un'immagine viene rilasciata nella finestra Notizie sul progetto, non tenterà più di aprirla come documento.
-					È stato facile farlo accidentalmente facendo clic e trascinando pigramente durante la lettura delle notizie.
-					(<a href="https://github.com/1j01/jspaint/commit/77d341378f9a8d84f0f922ab6545e4cab5fca038" target="_blank">⟜</a></li>
-<li>Risolte le voci del menu delle caselle di controllo che mostravano una griglia di piccoli segni di spunta invece di un singolo segno di spunta
-					nell'app Electron con la modalità Ingrandisci interfaccia utente abilitata.
-					(<a href="https://github.com/1j01/jspaint/commit/f367ce043a81c7fdea2c506fcf5aee1ac18b56e3" target="_blank">⟜</a></li>
-<li>Il Dwell Clicker ora può attivare/disattivare i dettagli compressi nelle finestre di dialogo di errore.
-					(<a href="https://github.com/1j01/jspaint/commit/2637467762753234af4d40d097af7f1c2b6aea35" target="_blank">⟜</a></li>
-<li>Abilitato il trascinamento delle barre degli strumenti con il mouse in Dwell Clicker
-					(ma non con il clicker fisso stesso).
-					(<a href="https://github.com/1j01/jspaint/commit/7094171b1644391f4ea3b3467865952c39427a4e" target="_blank">⟜</a></li>
-<li>Corretta la dimensione della barra del titolo per le finestre degli strumenti in modalità Ingrandimento dell'interfaccia utente.
-					(<a href="https://github.com/1j01/jspaint/commit/a2691ec7c953c3eca7b56f4831c47855044fff6d" target="_blank">⟜</a></li>
-<li>Tutte le icone degli strumenti a tema ora funzionano in modalità Ingrandimento dell'interfaccia utente.
-					(<a href="https://github.com/1j01/jspaint/commit/068c61d20c907925a140677eecd5513e03397fbc" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/9e6a19c9aa6434a354f067357487946ea92a1670" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/8dc1286dd0d4dc219f043b7e2199e47b8cb52f48" target="_blank">⟜</a></li>
-<li>Ho implementato l'indicatore di stato delle dimensioni per tutti gli strumenti.
-					(<a href="https://github.com/1j01/jspaint/commit/3500496b0801a52e05d5ae69f6f98bb09e477e86" target="_blank">⟜</a></li>
-<li>Risolte le etichette di larghezza/altezza mancanti<b>Immagine &gt; Attributi</b>dialogo.
-					(<a href="https://github.com/1j01/jspaint/commit/af94876a4ffef95c2d00c0022d89a452034793b7" target="_blank">⟜</a></li>
-<li>Risolto il problema con il nome file predefinito durante il salvataggio di uno sfondo<b>File &gt; Imposta come sfondo
-						(Affiancato/Centrato)</b><a href="https://github.com/1j01/jspaint/commit/8f89d874a77cc8cf00e4731e3979ceaac070aad7" target="_blank">⟜</a></li>
-<li>Risolto il problema con il nome file predefinito durante il salvataggio della selezione<b>Modifica &gt; Copia in</b>,
-					e un errore che si è verificato con<b>Modifica &gt; Copia in</b>nell'app Electron.
-					(<a href="https://github.com/1j01/jspaint/commit/fc59a369fd306bedc31611e6729f4fc2ae9e2cc0" target="_blank">⟜</a></li>
-<li>Risolto il problema con l'ignoramento della scelta del formato file durante il salvataggio di una tavolozza<b>Colori &gt; Salva colori</b>nell'app Electron
-					(<a href="https://github.com/1j01/jspaint/commit/2f8f4e7c51a0c1b2d2d26828855d888e8ed641f9" target="_blank">⟜</a></li>
-<li>Risolto il problema relativo alla gestione degli errori per l'accesso agli appunti
-					(<a href="https://github.com/1j01/jspaint/commit/193404199b384532a945f382a56fa2deca679950" target="_blank">⟜</a></li>
-<li>Fisso<kbd>Maiusc+Inserisci</kbd><kbd>Ctrl+Inserisci</kbd>, E<kbd>Ctrl+Canc</kbd>scorciatoie
-					(<a href="https://github.com/1j01/jspaint/commit/e3ef424d61e0621e36adeeaa37070d07cf7f5d29" target="_blank">⟜</a></li>
-<li>Finestre di dialogo dei messaggi di errore migliorate per gli errori di caricamento di Imgur
-					(<a href="https://github.com/1j01/jspaint/commit/cbfc9cad47b3aa3c6a8acc6ce525b2b426608dca" target="_blank">⟜</a></li>
-<li>Aggiunto un<a href="https://jspaint.app/privacy" target="_blank">politica sulla riservatezza</a><b>tl; dott</b>: jspaint non tenta di tracciarti, a differenza della maggior parte di Internet)
-					(<a href="https://github.com/1j01/jspaint/commit/9d2d4040c0b20532e3819aa662e39b9fd8f3f543" target="_blank">⟜</a></li>
+<li>Ho aggiornato JS Paint all’interno di <a href="https://98.js.org/" target="_blank">98.js.org</a> recentemente, anche se potrebbe non includere ancora le ultime modifiche.</li>
+
+<li>Se un’immagine viene rilasciata nella finestra Notizie del progetto, non tenterà più di aprirla come documento. Era facile farlo accidentalmente trascinando mentre si leggeva. (<a href="https://github.com/1j01/jspaint/commit/77d341378f9a8d84f0f922ab6545e4cab5fca038" target="_blank">⟜</a>)</li>
+
+<li>Risolto un problema nelle voci del menu con caselle di controllo che mostravano una griglia di piccoli segni di spunta invece di un singolo segno nell’app Electron con la modalità Ingrandisci interfaccia utente attiva. (<a href="https://github.com/1j01/jspaint/commit/f367ce043a81c7fdea2c506fcf5aee1ac18b56e3" target="_blank">⟜</a>)</li>
+
+<li>Il Dwell Clicker ora può attivare/disattivare i dettagli compressi nelle finestre di dialogo degli errori. (<a href="https://github.com/1j01/jspaint/commit/2637467762753234af4d40d097af7f1c2b6aea35" target="_blank">⟜</a>)</li>
+
+<li>Abilitato il trascinamento delle barre degli strumenti con il mouse in Dwell Clicker (ma non con il clicker stesso). (<a href="https://github.com/1j01/jspaint/commit/7094171b1644391f4ea3b3467865952c39427a4e" target="_blank">⟜</a>)</li>
+
+<li>Corretta la dimensione della barra del titolo per le finestre degli strumenti in modalità Ingrandimento dell’interfaccia utente. (<a href="https://github.com/1j01/jspaint/commit/a2691ec7c953c3eca7b56f4831c47855044fff6d" target="_blank">⟜</a>)</li>
+
+<li>Tutte le icone degli strumenti a tema ora funzionano in modalità Ingrandimento dell’interfaccia utente. (<a href="https://github.com/1j01/jspaint/commit/068c61d20c907925a140677eecd5513e03397fbc" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/9e6a19c9aa6434a354f067357487946ea92a1670" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/8dc1286dd0d4dc219f043b7e2199e47b8cb52f48" target="_blank">⟜</a>)</li>
+
+<li>Implementato l’indicatore di stato delle dimensioni per tutti gli strumenti. (<a href="https://github.com/1j01/jspaint/commit/3500496b0801a52e05d5ae69f6f98bb09e477e86" target="_blank">⟜</a>)</li>
+
+<li>Risolte le etichette di larghezza/altezza mancanti nella finestra <b>Immagine > Attributi</b>. (<a href="https://github.com/1j01/jspaint/commit/af94876a4ffef95c2d00c0022d89a452034793b7" target="_blank">⟜</a>)</li>
+
+<li>Risolto il problema del nome file predefinito durante il salvataggio di uno sfondo con <b>File > Imposta come sfondo (Affiancato/Centrato)</b>. (<a href="https://github.com/1j01/jspaint/commit/8f89d874a77cc8cf00e4731e3979ceaac070aad7" target="_blank">⟜</a>)</li>
+
+<li>Risolto il problema del nome file predefinito durante il salvataggio della selezione con <b>Modifica > Copia in</b>, e un errore correlato nell’app Electron. (<a href="https://github.com/1j01/jspaint/commit/fc59a369fd306bedc31611e6729f4fc2ae9e2cc0" target="_blank">⟜</a>)</li>
+
+<li>Risolto il problema dell’ignoramento del formato file selezionato durante il salvataggio di una tavolozza con <b>Colori > Salva colori</b> nell’app Electron. (<a href="https://github.com/1j01/jspaint/commit/2f8f4e7c51a0c1b2d2d26828855d888e8ed641f9" target="_blank">⟜</a>)</li>
+
+<li>Risolto un problema relativo alla gestione degli errori per l’accesso agli appunti. (<a href="https://github.com/1j01/jspaint/commit/193404199b384532a945f382a56fa2deca679950" target="_blank">⟜</a>)</li>
+
+<li>Corrette le scorciatoie <kbd>Maiusc+Inserisci</kbd>, <kbd>Ctrl+Inserisci</kbd> e <kbd>Ctrl+Canc</kbd>. (<a href="https://github.com/1j01/jspaint/commit/e3ef424d61e0621e36adeeaa37070d07cf7f5d29" target="_blank">⟜</a>)</li>
+
+<li>Migliorate le finestre di dialogo degli errori per i problemi di caricamento su Imgur. (<a href="https://github.com/1j01/jspaint/commit/cbfc9cad47b3aa3c6a8acc6ce525b2b426608dca" target="_blank">⟜</a>)</li>
+
+<li>Aggiunta una <a href="https://jspaint.app/privacy" target="_blank">politica sulla riservatezza</a> (<b>tl;dr</b>: JS Paint non tenta di tracciarti, a differenza della maggior parte di Internet). (<a href="https://github.com/1j01/jspaint/commit/9d2d4040c0b20532e3819aa662e39b9fd8f3f543" target="_blank">⟜</a>)</li>
 </ul>
+
 <h2>Cambiamenti dietro le quinte</h2>
+
 <ul>
-<li>Aggiornato<a href="https://os-gui.js.org/" target="_blank">OS-GUI.js</a>da ~0.6.0 a 0.7.3<ul>
-<li>Ha utilizzato la nuova GUI del sistema operativo<code>Chiavi di accesso</code>API
-							(<a href="https://github.com/1j01/jspaint/commit/e6ad042195ce70470f401c400d62575d6c09ea6f" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/52b7b7632046b578b721a84bf0ceaca6ae3e1a8d" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/a9fe9d3f8d1d1ff176b7fd91fd9463e66c08cf73" target="_blank">⟜</a></li>
-<li>Ora usando correttamente<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts" target="_blank"><code>scorciatoie da tasto aria</code></a>valori per indicare al software di lettura dello schermo le scorciatoie da tastiera
-							(<a href="https://github.com/1j01/jspaint/commit/be233d07e918703b122c415369be5679f588e0c3" target="_blank">⟜</a></li>
+<li>Aggiornato <a href="https://os-gui.js.org/" target="_blank">OS-GUI.js</a> dalla versione ~0.6.0 alla 0.7.3
+<ul>
+<li>Utilizzata la nuova API <code>Access Keys</code> della GUI del sistema operativo. (<a href="https://github.com/1j01/jspaint/commit/e6ad042195ce70470f401c400d62575d6c09ea6f" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/52b7b7632046b578b721a84bf0ceaca6ae3e1a8d" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/a9fe9d3f8d1d1ff176b7fd91fd9463e66c08cf73" target="_blank">⟜</a>)</li>
+
+<li>Ora vengono utilizzati correttamente i valori <code>aria-keyshortcuts</code> per indicare ai lettori di schermo le scorciatoie da tastiera. (<a href="https://github.com/1j01/jspaint/commit/be233d07e918703b122c415369be5679f588e0c3" target="_blank">⟜</a>)</li>
 </ul>
 </li>
-<li>Dwell Clicker è ora gestito da Tracky Mouse.
-					(<a href="https://github.com/1j01/jspaint/commit/1598f42d309ad878b762c5a411476617b16c22f2" target="_blank">⟜</a></li>
-<li>Migrato a ESLint v9 e alla sua configurazione flat e migliorata uniformità del codice.
-					(<a href="https://github.com/1j01/jspaint/compare/a140810a897afa9dd6111cffb065e5d8f71f1ed8...bddaaffd2837b9696e8e6e159f742b05391067c7" target="_blank">⟜⧟⊸</a></li>
-<li>Flusso di lavoro semplificato per il controllo della qualità del codice raggruppando diversi controlli in un unico script
-					(<code>npm esegui lint</code><a href="https://github.com/1j01/jspaint/commit/991b1cceaa12a40701d251f5dcd109d23903e614" target="_blank">⟜</a></li>
-<li>Gestione migliorata degli errori senza traccia dello stack, come<code>Errore di sintassi</code>.
-					Ora mostrerà l'URL e i numeri di riga/colonna per gli errori senza stack di chiamate.
-					(<a href="https://github.com/1j01/jspaint/commit/dafef7b1b4f2d33c32c434b1e1fe0ffbc271600d" target="_blank">⟜</a></li>
-<li>Risolto un errore che si verificava durante l'integrazione in 98.js.org a causa della ricerca di menu
-					all'interno del frame dell'app quando in realtà sono all'esterno
-					(<a href="https://github.com/1j01/jspaint/commit/421fad7dc25c4d27caa46535a2641b12e49a9b18" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/04804396e187b1bf4af9cc31ca449d18661f97ed" target="_blank">⟜</a></li>
-<li>Contrassegnato più parti di JS Paint<code>sistemaHooks</code>API come opzionale
-					(<a href="https://github.com/1j01/jspaint/commit/2fe8c35ca6500cc32584dae30f8c3d4ffe989aa3" target="_blank">⟜</a></li>
-<li>Tipi TypeScript definiti per JS Paint<code>sistemaHooks</code>API
-					(<a href="https://github.com/1j01/jspaint/commit/cb8bc8893d3c9c049916ac5873a15edc7262ac73" target="_blank">⟜</a></li>
-<li style="color: transparent;">Ho lavorato su funzionalità segrete che dovrebbero essere davvero divertenti in futuro.</li>
+
+<li>Dwell Clicker è ora gestito da Tracky Mouse. (<a href="https://github.com/1j01/jspaint/commit/1598f42d309ad878b762c5a411476617b16c22f2" target="_blank">⟜</a>)</li>
+
+<li>Migrato a ESLint v9 e alla sua configurazione flat, migliorando l’uniformità del codice. (<a href="https://github.com/1j01/jspaint/compare/a140810a897afa9dd6111cffb065e5d8f71f1ed8...bddaaffd2837b9696e8e6e159f742b05391067c7" target="_blank">⟜⧟⊸</a>)</li>
+
+<li>Semplificato il flusso di lavoro per il controllo qualità del codice raggruppando vari controlli in un unico script (<code>npm run lint</code>). (<a href="https://github.com/1j01/jspaint/commit/991b1cceaa12a40701d251f5dcd109d23903e614" target="_blank">⟜</a>)</li>
+
+<li>Migliorata la gestione degli errori senza stack trace, come <code>SyntaxError</code>. Ora vengono mostrati URL e numeri di riga/colonna anche per errori senza stack. (<a href="https://github.com/1j01/jspaint/commit/dafef7b1b4f2d33c32c434b1e1fe0ffbc271600d" target="_blank">⟜</a>)</li>
+
+<li>Risolto un errore che si verificava durante l’integrazione in 98.js.org a causa della ricerca dei menu all’interno del frame dell’app, quando in realtà si trovano all’esterno. (<a href="https://github.com/1j01/jspaint/commit/421fad7dc25c4d27caa46535a2641b12e49a9b18" target="_blank">⟜</a><a href="https://github.com/1j01/jspaint/commit/04804396e187b1bf4af9cc31ca449d18661f97ed" target="_blank">⟜</a>)</li>
+
+<li>Contrassegnate più parti dell’API <code>sistemaHooks</code> come opzionali. (<a href="https://github.com/1j01/jspaint/commit/2fe8c35ca6500cc32584dae30f8c3d4ffe989aa3" target="_blank">⟜</a>)</li>
+
+<li>Definiti i tipi TypeScript per l’API <code>sistemaHooks</code>. (<a href="https://github.com/1j01/jspaint/commit/cb8bc8893d3c9c049916ac5873a15edc7262ac73" target="_blank">⟜</a>)</li>
+
+<li style="color: transparent;">Ho lavorato su funzionalità segrete che saranno davvero divertenti in futuro.</li>
 </ul>
-<p>Buon Natale!🎄🎁</p>
+
+<p>Buon Natale! 🎄🎁</p>
 </article>
+
 <article class="news-entry" id="news-2024-bubblegum-theme">
 <h1>Tema di gomma da masticare</h1>
 <time datetime="2024-04-27">2024-04-27</time>
-<img alt="Screenshot of JS Paint with the Bubblegum theme" height="800" src="https://i.postimg.cc/6QwYrWjM/Screen-Shot-2024-04-27-at-14-57-48.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="946">
+
+<img height="800" src="https://i.postimg.cc/6QwYrWjM/Screen-Shot-2024-04-27-at-14-57-48.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="946" />
+
 <h2>Tema di gomma da masticare</h2>
-<p>Presentazione di<b>🫧Gomma da masticare</b>tema!</p>
-<p>Il software per ufficio non è mai stato così raffinato come con l'eleganza del tema Bubblegum<em><span style="
-					font-family: cursive;
-					font-style: italic;
-					transform: skewX(-10deg);
-					display: inline-block;
-					/*background: linear-gradient(to bottom, #a090c6, #efa9d3); background-clip: text; color: transparent;*/
-					color: #d39cce;
-					text-shadow: 0 1px 1px #febee8, 0 -1px 1px #a892c8;
-					">Rosa d'affari</span>combinazione di colori.</em>
-</p>
-<p>Tutte le icone di questo tema erano<strong>Generato dall'intelligenza artificiale</strong>, come esperimento.</p>
-<p>L'attuale tecnologia AI tradizionale fatica davvero a creare un set completo di icone in una volta sola,
-				e lo stile è sempre leggermente diverso da immagine a immagine,
-				quindi il processo prevedeva la generazione di molte, molte immagini,
-				di solito richiedendogli di creare un "set di icone" per farlo<em>fiduciosamente</em>ottieni alcune icone che corrispondono,
-				da aggiungere al set di icone complessivo.</p>
-<p>C'è pochissimo controllo e spesso le cose risultano instabili o eccessivamente generiche,
-				ma nel complesso ci vuole davvero poco impegno,
-				quindi è una cosa strana.</p>
-<p>Fortunatamente, sono riuscito a farla franca con alcune differenze stilistiche tra
-				le icone delle forme astratte e le icone degli strumenti più dettagliate.</p>
-<p>Ho modificato manualmente alcune icone, ma per la maggior parte sono così come sono uscite dall'intelligenza artificiale.
-				La mia preferita è l'icona del pulsante di pausa della modalità Eye Gaze (<img alt="an eye" src="images/bubblegum/eye-gaze-unpause-128x128.png" style="vertical-align: middle; width: 1em; height: 1em;"/>),
-				che ho ottenuto gratuitamente in modo casuale a causa dell'interpretazione errata del "contagocce" da parte dell'IA.
-				Adoro il modo in cui si fonde perfettamente con il pulsante.</p>
-<p>Anche gli smussi 3D sono generati dall'intelligenza artificiale, applicati con abbondante utilizzo di bordi a 9 strati.</p>
+<p>Presentazione del tema <b>🫧 Gomma da masticare</b>!</p>
+
+<p>Il software per ufficio non è mai stato così raffinato come con l’eleganza del tema Bubblegum, nella combinazione di colori <em><span style="
+    font-family: cursive;
+    font-style: italic;
+    transform: skewX(-10deg);
+    display: inline-block;
+    color: #d39cce;
+    text-shadow: 0 1px 1px #febee8, 0 -1px 1px #a892c8;
+">Rosa d'affari</span></em>.</p>
+
+<p>Tutte le icone di questo tema sono state <strong>generate dall’intelligenza artificiale</strong>, come esperimento.</p>
+
+<p>L’attuale tecnologia AI tradizionale fatica davvero a creare un set completo di icone in una sola volta, e lo stile varia sempre leggermente da immagine a immagine. Il processo ha quindi richiesto la generazione di molte, molte immagini, spesso chiedendo di creare un “set di icone” per ottenere <em>almeno alcune</em> icone coerenti da aggiungere al set complessivo.</p>
+
+<p>C’è pochissimo controllo e spesso i risultati sono instabili o troppo generici, ma nel complesso richiede pochissimo sforzo… quindi è una cosa curiosa.</p>
+
+<p>Fortunatamente, sono riuscito a far convivere alcune differenze stilistiche tra le icone delle forme astratte e quelle degli strumenti più dettagliati.</p>
+
+<p>Ho modificato manualmente alcune icone, ma la maggior parte è rimasta così com’era stata generata dall’AI. La mia preferita è l’icona del pulsante di pausa della modalità Eye Gaze (<img src="images/bubblegum/eye-gaze-unpause-128x128.png" style="vertical-align: middle; width: 1em; height: 1em;" />), ottenuta per caso a causa dell’interpretazione errata del “contagocce” da parte dell’AI. Adoro come si fonde perfettamente con il pulsante.</p>
+
+<p>Anche gli smussi 3D sono generati dall’intelligenza artificiale, applicati con abbondante uso di bordi a 9 strati.</p>
+
 <h3>Prova il nuovo tema</h3>
 <p>
-&lt;img src="aiuto/onestep.gif"&gt;Su<b>Extra</b>menu, fare clic<b>Temi</b>, Poi<b>Gomma da masticare</b></p>
-<p>Le icone non sono ottimizzate per la leggibilità a piccole dimensioni,
-				quindi assicurati di provarlo insieme a<b>Extra &gt; Modalità Sguardo</b>,
-				oppure aumenta il livello di zoom del tuo browser,
-				facendo scorrere la rotellina del mouse tenendo premuto<kbd>Ctrl</kbd>O<kbd>⌘</kbd>,
-				per l'effetto completo.</p>
+<img src="help/onestep.gif" />  
+Su <b>Extra</b>, fai clic su <b>Temi</b>, poi su <b>Gomma da masticare</b>.
+</p>
+
+<p>Le icone non sono ottimizzate per la leggibilità a piccole dimensioni, quindi assicurati di provarle insieme a <b>Extra > Modalità Sguardo</b>, oppure aumenta il livello di zoom del browser facendo scorrere la rotellina del mouse tenendo premuto <kbd>Ctrl</kbd> o <kbd>⌘</kbd>, per ottenere l’effetto completo.</p>
+
 <h2>Manutenzione</h2>
-<p>Passando ad altre notizie, ho investito molto per rendere JS Paint più gestibile.<p>Non vedrai queste modifiche direttamente nell'app,
-				ma aiutano a rendere il codice più<em>malleabile</em>,
-				come aggiungere acqua all'argilla per modellarla senza romperla.</p>
+
+<p>Passando ad altre notizie, ho investito molto per rendere JS Paint più gestibile.</p>
+
+<p>Non vedrai direttamente queste modifiche nell’app, ma rendono il codice più <em>malleabile</em>, come aggiungere acqua all’argilla per modellarla senza romperla.</p>
+
 <ul>
-<li>Convertita quasi interamente la base di codice in<strong>Moduli ES</strong></li>
-<li>Utilizzo rimanente effettuato<strong>variabili globali esplicite</strong>in ogni file.</li>
-<li>Suddividi alcuni file enormi in<strong>file più piccoli</strong></li>
-<li>Aggiunto<strong>digitare annotazioni</strong>alla base di codice, utilizzando i commenti JSDoc.
-					In questo modo gli errori possono essere individuati prima e gli editor possono fornire un migliore completamento automatico,
-					il tutto mantenendo il codice in semplice JavaScript, senza alcuna fase di compilazione.</li>
+<li>Convertita quasi interamente la base di codice in <strong>moduli ES</strong>.</li>
+<li>Utilizzate le rimanenti <strong>variabili globali esplicite</strong> in ogni file.</li>
+<li>Suddivisi alcuni file enormi in <strong>file più piccoli</strong>.</li>
+<li>Aggiunte <strong>annotazioni di tipo</strong> alla base di codice tramite commenti JSDoc, così da individuare errori prima e migliorare il completamento automatico negli editor, mantenendo comunque semplice JavaScript senza fase di compilazione.</li>
 </ul>
-<p>Queste modifiche renderanno più semplice l'aggiunta di nuove interessanti funzionalità a JS Paint in futuro.</p>
-(Dopo tutto è "JS Paint", non "TS Paint")
-			&lt;p&gt;
-				PS &lt;strong&gt;Fatto curioso&lt;/strong&gt;: ECMAScript (ES) è un sinonimo di JavaScript (JS),
-				che è un linguaggio completamente diverso da Java.
-				Più ne sai!
-				Inoltre, TypeScript (TS) è un superset di JavaScript e il compilatore TypeScript (tsc)
-				può essere utilizzato per verificare la presenza di errori di tipo nel codice JavaScript, non solo per compilare codice TypeScript.
-			&lt;/p&gt;
-			&lt;p&gt;
-				(Non è "ES Paint", ma &lt;em&gt;avrebbe potuto essere&lt;/em&gt;,
-				e poi avrei potuto progettare un logo con una "M" ruotata per trasformarlo in una "E".
-				Occasione persa??🤔)
-			&lt;/p&gt;
-</p></img></article>
+
+<p>Queste modifiche renderanno più semplice aggiungere nuove funzionalità interessanti a JS Paint in futuro.</p>
+
+<p>(Dopotutto è “JS Paint”, non “TS Paint”.)</p>
+
+<p>
+PS — <strong>Curiosità</strong>: ECMAScript (ES) è sinonimo di JavaScript (JS), che è un linguaggio completamente diverso da Java.  
+Inoltre, TypeScript (TS) è un superset di JavaScript e il compilatore TypeScript (tsc) può essere utilizzato per verificare errori di tipo anche nel codice JavaScript, non solo per compilare TypeScript.
+</p>
+
+<p>
+(Non è “ES Paint”, ma <em>avrebbe potuto esserlo</em>, e allora avrei potuto progettare un logo con una “M” ruotata per trasformarla in una “E”.  
+Occasione persa? 🤔)
+</p>
+
+</article>
+
 <article class="news-entry" id="news-2024-themes-and-save-formats">
 <h1>Temi e formati di file</h1>
 <time datetime="2024-02-22">22-02-2024</time>
-Ops, ho dimenticato un'immagine. FARE?
-&lt;img width="" Height="" style="max-width: 100%; altezza: auto; rendering delle immagini: auto;" alt="" src="" /&gt;
-<h2>Temi nuovi e aggiornati</h2>
-<p>Il tema Moderno è stato rinominato<b>Luce moderna</b>e uno nuovo<b>Oscurità moderna</b>il tema è stato aggiunto.</p>
-<div style="background: #c0c0c0; padding: 1em; padding-bottom: 0.1em; border-radius: .5em; border: 1px inset;">Modern Light prima (icone degli strumenti da Windows Vista):<br/>
-<img alt="" src="https://github.com/1j01/jspaint/blob/master/images/modern/vista-tools-spaced-like-svg.png?raw=true"/>
-<div style="line-height:50%;"><br/></div>Modern Light dopo (icone SVG personalizzate):<br/>
-TODO: PNG personalizzato ottimizzato per i pixel; SVG è progettato per allinearsi con la griglia di pixel ma non è perfetto
-&lt;img alt="" src="images/modern/modern-light-tools.png"&gt;
-<img alt="" src="https://github.com/1j01/jspaint/blob/master/images/modern/modern-light-tools.svg?raw=true"/>
-</div>
-<p>Ho progettato un set di icone personalizzato, ispirato alle icone di Windows Vista.
 
-				Ho anche personalizzato in modo significativo le icone per il tema Modern Dark,
-				per migliorare il contrasto su tutta la linea.</p>
-<div style="background: #222222; color: #aaaaaa; padding: 1em; padding-bottom: 0.1em; border-radius: .5em; border: 1px inset;">Modern Dark prima (icone degli strumenti di Windows Vista, con artefatti di alias se visualizzati su sfondo scuro
-				sfondo):<br/>
-<img alt="" src="https://github.com/1j01/jspaint/blob/master/images/modern/vista-tools-spaced-like-svg.png?raw=true"/>
-<div style="line-height:50%;"><br/></div>Modern Dark dopo (icone SVG personalizzate):<br/>
-&lt;img alt="" src="images/modern/modern-dark-tools.png"&gt;
-Per essere coerenti, usa SVG anche qui. Almeno puoi ingrandire e vedere la scalabilità.
-Anche se preferirei un bell'effetto lente d'ingrandimento come https://lenadesign.org/2021/06/30/css-javascript-image-magnifier-glass/
-Anche la buccia di cipolla / il passaggio sarebbe utile per il confronto.
-<img alt="" src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/modern/modern-dark-tools.svg?raw=true"/>
+<p>Ops, ho dimenticato un'immagine. FARE?</p>
+
+<img width="" height="" style="max-width: 100%; height: auto; image-rendering: auto;" src="" />
+
+<h2>Temi nuovi e aggiornati</h2>
+
+<p>Il tema Moderno è stato rinominato <b>Luce moderna</b> e un nuovo tema, <b>Oscurità moderna</b>, è stato aggiunto.</p>
+
+<div style="background: #c0c0c0; padding: 1em; padding-bottom: 0.1em; border-radius: .5em; border: 1px inset;">
+Modern Light prima (icone degli strumenti da Windows Vista):<br/>
+<img src="https://github.com/1j01/jspaint/blob/master/images/modern/vista-tools-spaced-like-svg.png?raw=true" />
+<div style="line-height:50%;"><br/></div>
+Modern Light dopo (icone SVG personalizzate):<br/>
+TODO: PNG personalizzato ottimizzato per i pixel; SVG è progettato per allinearsi con la griglia di pixel ma non è perfetto<br/>
+<img src="images/modern/modern-light-tools.png" />
+<img src="https://github.com/1j01/jspaint/blob/master/images/modern/modern-light-tools.svg?raw=true" />
 </div>
-<p>Quando si adattano le icone di Vista alla grafica vettoriale scalabile,
-				Ho dovuto prendere molte decisioni di progettazione sottili, ma la differenza più grande che noterai è questa
-				lo strumento Pennello corrisponde allo stile classico di un pennello a punta piatta (anche se con sfumature aggiunte),
-				dal momento che non mi piaceva davvero l'icona dello strumento Pennello di Vista.
-				Voglio dire, andiamo, è l'unica icona che lo è<em>tagliato fuori, in base alla progettazione!</em>E a me sembra proprio una macchia, almeno nella versione viola. (C'è anche una versione verde.)
-				Inoltre, un pennello largo enfatizza la distinzione dallo strumento Matita.</p>
-<p>Il tema Classico è stato rinominato<b>Luce classica</b>, e il<b>Classico scuro</b>il tema è stato
-				aggiornato.</p>
-<div style="background: #c0c0c0; padding: 1em; border-radius: .5em; border: 1px inset;">Classic Light (usando ancora le icone degli strumenti di Windows 98):<br/>
-<img alt="" src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/classic/tools.png?raw=true"/>
+
+<p>Ho progettato un set di icone personalizzato, ispirato alle icone di Windows Vista.</p>
+
+<p>Ho anche personalizzato in modo significativo le icone per il tema Modern Dark, per migliorare il contrasto complessivo.</p>
+
+<div style="background: #222222; color: #aaaaaa; padding: 1em; padding-bottom: 0.1em; border-radius: .5em; border: 1px inset;">
+Modern Dark prima (icone degli strumenti di Windows Vista, con artefatti di aliasing su sfondo scuro):<br/>
+<img src="https://github.com/1j01/jspaint/blob/master/images/modern/vista-tools-spaced-like-svg.png?raw=true" />
+<div style="line-height:50%;"><br/></div>
+Modern Dark dopo (icone SVG personalizzate):<br/>
+<img src="images/modern/modern-dark-tools.png" />
+Per coerenza, usa SVG anche qui. Almeno puoi ingrandire e vedere la scalabilità.<br/>
+Anche se preferirei un bell’effetto lente d’ingrandimento come https://lenadesign.org/2021/06/30/css-javascript-image-magnifier-glass/<br/>
+Anche la buccia di cipolla / il passaggio sarebbe utile per il confronto.<br/>
+<img src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/modern/modern-dark-tools.svg?raw=true" />
 </div>
-<div style="background: #222222; color: #aaaaaa; padding: 1em; border-radius: .5em; border: 1px inset;">Classico scuro prima:<br/>
-<img alt="" src="https://github.com/1j01/jspaint/blob/43d68cf8eee4cf8aa30e3047955c2bb8315c92f2/images/dark/tools.png?raw=true"/>
-<div style="line-height:50%;"><br/></div>Classico scuro dopo:<br/>
-<img alt="" src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/dark/tools.png?raw=true"/>
+
+<p>Quando ho adattato le icone di Vista alla grafica vettoriale scalabile, ho dovuto prendere molte decisioni di design sottili.  
+La differenza più evidente è che lo strumento Pennello ora corrisponde allo stile classico di un pennello a punta piatta (con sfumature aggiunte), perché non mi è mai piaciuta l’icona del Pennello di Vista.</p>
+
+<p>Voglio dire, è l’unica icona che è <em>tagliata</em> per design! E sembra una macchia, almeno nella versione viola (esiste anche una versione verde). Inoltre, un pennello largo enfatizza la distinzione rispetto allo strumento Matita.</p>
+
+<p>Il tema Classico è stato rinominato <b>Luce classica</b>, e il tema <b>Classico scuro</b> è stato aggiornato.</p>
+
+<div style="background: #c0c0c0; padding: 1em; border-radius: .5em; border: 1px inset;">
+Classic Light (ancora con le icone degli strumenti di Windows 98):<br/>
+<img src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/classic/tools.png?raw=true" />
 </div>
-<p>Non ero soddisfatto delle icone del tema Classic Dark, in particolare del mio uso del colore;
-				sembrava un'inversione di colore RGB economica, anche se sono sicuro di averci pensato più di così.
-				Inoltre, non ero sicuro di come ottenere un buon contrasto con la punta della matita mantenendo una coerenza
-				stile scheumorfico, poiché la grafite è scura proprio come lo sfondo.
-				Quindi ho ridisegnato la matita in modo più astratto (tutta bianca compresa la punta),
-				e ho reso le icone monocromatiche.</p>
-<p>In realtà sono un grande fan del colore nelle icone, poiché penso che aiuti a distinguerle,
-				quindi, se qualcuno vuole cimentarsi con un tema Classico scuro con icone colorate,
-				sarei interessato a vederlo!</p>
-<p>Detto questo, la monocromia ha una bella eleganza; attira meno l'attenzione,
-				e sono sicuro che alcune persone lo preferiranno sempre.</p>
+
+<div style="background: #222222; color: #aaaaaa; padding: 1em; border-radius: .5em; border: 1px inset;">
+Classico scuro prima:<br/>
+<img src="https://github.com/1j01/jspaint/blob/43d68cf8eee4cf8aa30e3047955c2bb8315c92f2/images/dark/tools.png?raw=true" />
+<div style="line-height:50%;"><br/></div>
+Classico scuro dopo:<br/>
+<img src="https://github.com/1j01/jspaint/blob/03f934eab98f450d3e527ef8e152cc5aa003fe07/images/dark/tools.png?raw=true" />
+</div>
+
+<p>Non ero soddisfatto delle icone del tema Classic Dark, soprattutto per l’uso del colore: sembrava una semplice inversione RGB, anche se sicuramente ci avevo lavorato più di così.</p>
+
+<p>Inoltre, non ero sicuro di come ottenere un buon contrasto con la punta della matita mantenendo uno stile coerente e scheumorfico, dato che la grafite è scura quanto lo sfondo.  
+Per questo ho ridisegnato la matita in modo più astratto (tutta bianca, punta compresa) e ho reso le icone monocromatiche.</p>
+
+<p>Sono un grande fan del colore nelle icone, perché aiuta a distinguerle.  
+Quindi, se qualcuno vuole cimentarsi con un tema Classic Dark con icone colorate, sarei curioso di vederlo!</p>
+
+<p>Detto questo, la monocromia ha una sua eleganza: attira meno l’attenzione e sono sicuro che alcune persone la preferiranno sempre.</p>
+
 <h2>Formati di file</h2>
-<aside style="background-color: #ffffbb; padding: .5em 1em; border-radius: .5em; border: 1px outset; font-size: smaller">
-<p>Questi cambiamenti in realtà sono in vigore dal 2021,
-					ma fino ad ora non sono riuscito a finire un post su di loro.</p>
-<p>Tuttavia, ci sono alcuni cambiamenti positivi qui, quindi vale la pena menzionarli!</p>
+
+<aside style="background-color: #ffffbb; padding: .5em 1em; border-radius: .5em; border: 1px outset; font-size: smaller;">
+<p>Questi cambiamenti sono effettivamente in vigore dal 2021, ma finora non ero riuscito a completare un post su di essi.</p>
+<p>Ci sono comunque alcune novità positive, quindi vale la pena menzionarle!</p>
 </aside>
-Per ora ho disabilitato questa funzione, poiché ho visto alcuni file da 0 byte salvati e non voglio VERAMENTE che le persone perdano il lavoro!
-			Necessita di test approfonditi/implementazione graduale.
-			Oltre a ciò, non volevo promuovere un'altra funzionalità disponibile solo in Chrome.
-			&lt;p&gt;
-				&lt;b&gt;Salva&lt;/b&gt; (&lt;kbd&gt;Ctrl+S&lt;/kbd&gt;) ora può salvare sul file aperto, nei browser Chrome, Edge e Opera.
-				Funziona utilizzando il nuovo &lt;a target="_blank"
-					href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API"&gt;Accesso al file system
-					API&lt;/a&gt;.
-				Utilizza sempre &lt;b&gt;Salva con nome&lt;/b&gt; (&lt;kbd&gt;Ctrl+Shift+S&lt;/kbd&gt;) se vuoi salvare un nuovo file.
-			&lt;/p&gt;
+
+
+<p>Per ora ho disabilitato questa funzione, poiché ho visto alcuni file da 0 byte salvati e non voglio davvero che le persone perdano il loro lavoro!  
+Richiede test approfonditi e/o un’implementazione graduale.  
+Inoltre, non volevo promuovere un’altra funzionalità disponibile solo in Chrome.</p>
+
 <p>
-<img alt="" height="50" src="images/save.gif" style="float: right;" width="50">
-<b>File &gt; Salva con nome</b>ora richiede un nome e un formato file.
-				Sono supportati PNG, GIF e BMP, inclusi BMP a colori indicizzati.</img></p>
-<p>Vedi il<a href="https://github.com/1j01/jspaint?tab=readme-ov-file#supported-file-formats" target="_blank">Formati di file supportati</a>tabella per i dettagli.</p>
-<p>
-<img alt="" height="26" src="images/idea.gif" style="float: left;" width="33">Suggerimento: utilizza PNG se non hai un motivo specifico per utilizzare un altro formato,
-				poiché ha la migliore qualità durante il salvataggio.</img></p>
-L'ho disabilitato per ora, penso perché non è chiaro se vuoi sempre caricare la tavolozza quando apri un'immagine,
-			o se dovrebbe essere presente un'interfaccia utente attorno ad esso, come un pulsante Annulla accanto alla tavolozza o un messaggio per caricare la tavolozza.
-			Anche i PNG indicizzati dovrebbero essere gestiti in modo coerente con i BMP indicizzati.
-			Il fatto è che, se salvi un'immagine con un sottoinsieme di colori da una tavolozza e poi carichi l'immagine,
-			potresti non voler caricare la tavolozza, poiché potrebbe semplicemente rimuovere i colori dalla tavolozza,
-			soprattutto se era la tavolozza predefinita.
-			Ma un suggerimento sembra fastidioso. Forse dovrebbe caricare solo la tavolozza per le immagini monocromatiche (bicolori)?
-			Non è chiaro.
-			&lt;p&gt;
-				Se apri un file BMP con una tavolozza, la tavolozza viene caricata nella casella Colori.
-				Se carichi un file BMP monocromatico, verrà caricata una sfumatura di motivi di dithering nella casella Colori.
-			&lt;/p&gt;
-<p>
-&lt;img alt="" src="help/p_monochrome.png" larghezza="14" altezza="11" style="vertical-align: middle;" /&gt;
-<b>In bianco e nero</b>modalità in<b>Immagine &gt; Attributi</b>è generalizzato per gestire due colori arbitrari
-				(anche se è ancora chiamato "Bianco e Nero" nella finestra Attributi.)</p>
-<p>Se un'immagine ha solo due colori, quando si passa alla modalità "Bianco e nero",
-				si adatta automaticamente a questi colori e riempie la casella Colori con i modelli di dithering appropriati.</p>
-<p>Se usi<b>Immagine &gt; Inverti</b>in modalità Bianco e Nero,
-				ora scambia i due colori presenti nell'immagine,
-				invece di convertire i colori nei loro opposti RGB.
-				Se l'immagine è in bianco e nero puro, queste due operazioni sono equivalenti,
-				ma ora, per esempio, a<i>verde e nero</i>l'immagine diventerà a<i>nero e verde</i>immagine,
-				piuttosto che<i>rosa e bianco</i></p>
-<p>
-<b>Colori &gt; Salva colori</b>ora richiede anche il nome e il formato del file.
-				Lo è un numero assurdo di formati di file<a href="https://github.com/1j01/jspaint?tab=readme-ov-file#color-palette-formats" target="_blank">supportato</a>.
-				Puoi anche esportare variabili CSS da utilizzare in un progetto di web design.</p>
-<p>
-<img alt="" height="26" src="images/idea.gif" style="float: left;" width="33">La tavolozza RIFF (*.pal) è compatibile con MS Paint e la tavolozza GIMP (*.gpl) è compatibile con molti
-				programmi di grafica sorgente come Inkscape e Krita.</img></p>
-<p>Puoi trovare molte tavolozze su cui utilizzare<a href="https://lospec.com/palette-list" target="_blank">Lospec</a>.
-				Scarica una tavolozza come GIMP GPL e utilizza<b>Colori &gt; Ottieni colori</b>selezionare
-				il file oppure trascina e rilascia il file su JS Paint per caricare la tavolozza.</p>
-<h2>API</h2>
-<p>Ho anche documentato una prima versione dell'API per JS Paint.</p>
-<p>Non ho ancora inserito molta progettazione nell'API; piuttosto, ho appena documentato l'interfaccia che ho ideato
-				per mio uso personale in<a href="https://98.js.org" target="_blank">98.js.org</a>.
-				In altre parole, questa è più una bozza di un'API, anche se creerò sicuramente un registro delle modifiche
-				quando decido di ripulirlo.
-				Quindi sentiti libero di iniziare a usarlo se non ti dispiace aggiornare il tuo codice man mano che l'API cambia.</p>
-<p>Se vuoi incorporare JS Paint nel tuo progetto, puoi dare un'occhiata al file<a href="https://github.com/1j01/jspaint?tab=readme-ov-file#embed-in-your-website" target="_blank">Incorpora nel tuo sito web</a>sezione del file Leggimi.Hm, potrei voler spostarlo in un file di markdown separato... ma magari mantenerlo in giro in modo che il collegamento rimanga valido.
+<b>Salva</b> (<kbd>Ctrl+S</kbd>) ora può salvare direttamente sul file aperto, nei browser Chrome, Edge e Opera.  
+Funziona tramite la nuova <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API">File System Access API</a>.  
+Usa sempre <b>Salva con nome</b> (<kbd>Ctrl+Shift+S</kbd>) se vuoi salvare un nuovo file.
 </p>
+
+<p>
+<img height="50" src="images/save.gif" style="float: right;" width="50" />
+<b>File > Salva con nome</b> ora richiede un nome e un formato file.  
+Sono supportati PNG, GIF e BMP, inclusi i BMP a colori indicizzati.
+</p>
+
+<p>Consulta la tabella dei <a href="https://github.com/1j01/jspaint?tab=readme-ov-file#supported-file-formats" target="_blank">formati di file supportati</a> per maggiori dettagli.</p>
+
+<p>
+<img height="26" src="images/idea.gif" style="float: left;" width="33" />
+Suggerimento: usa PNG se non hai un motivo specifico per scegliere un altro formato, poiché offre la migliore qualità in fase di salvataggio.
+</p>
+
+<p>Ho disabilitato temporaneamente anche questa funzione, perché non è chiaro se l’utente voglia sempre caricare la tavolozza quando apre un’immagine, oppure se serva un’interfaccia dedicata, come un pulsante Annulla accanto alla tavolozza o un messaggio di conferma.  
+Anche i PNG indicizzati dovrebbero essere gestiti in modo coerente con i BMP indicizzati.</p>
+
+<p>Il problema è che, se salvi un’immagine con un sottoinsieme di colori della tavolozza e poi la riapri, potresti non voler caricare la tavolozza, perché potrebbe rimuovere colori dalla tavolozza stessa, soprattutto se era quella predefinita.  
+Un suggerimento sarebbe fastidioso.  
+Forse dovrebbe caricare la tavolozza solo per immagini monocromatiche (bicolori)?  
+Non è chiaro.</p>
+
+<p>Se apri un file BMP con una tavolozza, questa viene caricata nella casella Colori.  
+Se apri un BMP monocromatico, verrà caricata una sfumatura di motivi di dithering nella casella Colori.</p>
+
+<p>
+<img src="help/p_monochrome.png" width="14" height="11" style="vertical-align: middle;" />
+La modalità <b>In bianco e nero</b> in <b>Immagine > Attributi</b> è stata generalizzata per gestire due colori arbitrari (anche se nella finestra si chiama ancora “Bianco e Nero”).
+</p>
+
+<p>Se un’immagine contiene solo due colori, passando alla modalità “Bianco e nero” questi verranno automaticamente adattati e la casella Colori verrà riempita con i relativi pattern di dithering.</p>
+
+<p>Se usi <b>Immagine > Inverti</b> in modalità Bianco e Nero, ora vengono scambiati i due colori presenti nell’immagine, invece di convertirli nei loro opposti RGB.  
+Se l’immagine è in bianco e nero puro, il risultato è lo stesso, ma ora — ad esempio — un’immagine <i>verde e nero</i> diventerà <i>nero e verde</i>, invece che <i>rosa e bianco</i>.</p>
+
+<p>
+<b>Colori > Salva colori</b> ora richiede anche nome e formato del file.  
+Esiste un numero sorprendente di <a href="https://github.com/1j01/jspaint?tab=readme-ov-file#color-palette-formats" target="_blank">formati di tavolozza supportati</a>.  
+Puoi anche esportare variabili CSS da usare in un progetto web.
+</p>
+
+<p>
+<img height="26" src="images/idea.gif" style="float: left;" width="33" />
+La tavolozza RIFF (*.pal) è compatibile con MS Paint, mentre la tavolozza GIMP (*.gpl) è compatibile con molti programmi di grafica come Inkscape e Krita.
+</p>
+
+<p>Puoi trovare molte tavolozze su <a href="https://lospec.com/palette-list" target="_blank">Lospec</a>.  
+Scarica una tavolozza in formato GIMP GPL e usa <b>Colori > Ottieni colori</b> per selezionare il file, oppure trascina il file direttamente su JS Paint per caricare la tavolozza.</p>
+
+<h2>API</h2>
+
+<p>Ho documentato una prima versione dell’API di JS Paint.</p>
+
+<p>Non ho ancora dedicato molta progettazione all’API; per ora ho semplicemente documentato l’interfaccia che avevo ideato per uso personale in <a href="https://98.js.org" target="_blank">98.js.org</a>. In altre parole, si tratta più di una bozza che di un’API definitiva, anche se creerò sicuramente un registro delle modifiche quando deciderò di stabilizzarla.</p>
+
+<p>Sentiti libero di iniziare a usarla, purché non ti dispiaccia aggiornare il tuo codice man mano che l’API evolve.</p>
+
+<p>Se vuoi incorporare JS Paint nel tuo progetto, puoi consultare la sezione <a href="https://github.com/1j01/jspaint?tab=readme-ov-file#embed-in-your-website" target="_blank">Incorpora nel tuo sito web</a> del file README. Potrei in futuro spostare quella sezione in un file markdown separato, ma manterrò comunque il collegamento attuale per non romperlo.</p>
+
+
+
 <h2>Home page</h2>
-<p>JS Paint ora ha una home page all'indirizzo<a href="https://jspaint.app/about" target="_blank">jspaint.app/about</a></p>
-<p>L'ho progettato come un sito web degli anni '90.
-				Sai, uno di quegli sfondi pieni di motivi sconsiderati.</p>
+<p>JS Paint ora ha una home page all’indirizzo <a href="https://jspaint.app/about" target="_blank">jspaint.app/about</a>.</p>
+
+<p>L’ho progettata come un sito web degli anni ’90.  
+Sai, uno di quegli sfondi pieni di motivi improbabili.</p>
+
 <p>
 <a href="https://jspaint.app/about" target="_blank">
-<img alt="Click to Enter" height="77" src="images/enter.gif" width="145">
-</img></a>
+<img height="77" src="images/enter.gif" width="145" />
+</a>
 </p>
 </article>
+
 <article class="news-entry" id="news-2022-open-source">
 <h1>Open Source</h1>
 <time datetime="2022-07-28">28-07-2022</time>
-&lt;img width="" Height="" style="max-width: 100%; altezza: auto; rendering delle immagini: auto;" alt="" src="" /&gt;
-<p>JS Paint è ora finalmente open source, concesso in licenza con il<a href="https://github.com/1j01/jspaint/blob/master/LICENSE.txt" target="_blank">Licenza del MIT</a></p>
-<p>Il progetto è stato<a href="https://en.wikipedia.org/wiki/Source-available_software" target="_blank">fonte disponibile</a>fin dall'inizio, poiché non ho mai sentito il bisogno di offuscare o nascondere il codice,
-				ma ora è legalmente open source.</p>
-<p>Non vedo l'ora di vedere come usi JS Paint nei tuoi progetti!</p>
-<p>Non esiste ancora un'API formale per JS Paint,
-				ma se vuoi essere all'avanguardia,
-				puoi dare un'occhiata a come<a href="https://98.js.org" target="_blank">98.js.org</a>incorpora JS Paint.
-				Aspettatevi che l'API cambi in modo significativo in futuro.</p>
-<p>Ho intenzione di rendere JS Paint open source da molto tempo.
-				Ci sono alcuni problemi legali, risorse di cui non ho il copyright,
-				ma penso che generalmente dovrebbero rientrare nel fair use.
-				E ho creato bellissime versioni SVG delle icone,
-				quindi è probabilmente possibile avere una versione di JS Paint senza risorse direttamente protette da copyright.
-				Ma alla fine ho deciso di smettere di preoccuparmene,
-				e basta già renderlo open source!</p>
+
+<img width="" height="" style="max-width: 100%; height: auto; image-rendering: auto;" src="" />
+
+<p>JS Paint è ora finalmente open source, concesso in licenza con la <a href="https://github.com/1j01/jspaint/blob/master/LICENSE.txt" target="_blank">Licenza MIT</a>.</p>
+
+<p>Il progetto è stato <a href="https://en.wikipedia.org/wiki/Source-available_software" target="_blank">source available</a> fin dall’inizio, poiché non ho mai sentito il bisogno di offuscare o nascondere il codice,  
+ma ora è ufficialmente open source.</p>
+
+<p>Non vedo l’ora di scoprire come userai JS Paint nei tuoi progetti!</p>
+
+<p>Non esiste ancora un’API formale per JS Paint, ma se vuoi essere all’avanguardia puoi dare un’occhiata a come <a href="https://98.js.org" target="_blank">98.js.org</a> incorpora JS Paint.  
+Aspettati che l’API cambi in modo significativo in futuro.</p>
+
+<p>Ho intenzione di rendere JS Paint open source da molto tempo.  
+Ci sono alcune questioni legali legate a risorse di cui non possiedo il copyright,  
+ma penso che rientrino generalmente nel fair use.  
+Ho anche creato bellissime versioni SVG delle icone, quindi è probabilmente possibile avere una versione di JS Paint senza risorse direttamente protette da copyright.</p>
+
+<p>Alla fine ho deciso di smettere di preoccuparmene e semplicemente renderlo open source!</p>
+
 <p>Spero che JS Paint ti piaccia!</p>
 </article>
+
+
 <article class="news-entry" id="news-2021-saving">
 <h1>L'aggiornamento GUIcci</h1>
 <time datetime="2021-12-08">2021-12-08</time>
-<img alt="" height="360" src="https://i.postimg.cc/tgBncKfJ/guicii-update.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="640">
-<h2>Nuove funzionalità</h2>
-<p>
-<b>Visualizza &gt; Zoom &gt; Mostra miniatura</b>per mostrare un'anteprima dell'immagine di piccole dimensioni, ottima per la pixel art.
-				Apporta modifiche fini e precise, mantenendo tutto in prospettiva.</p>
-<p>
-<b>Zoom con le dita:</b>Se disponi di un touchscreen, utilizza due dita per ingrandire e rimpicciolire e per eseguire la panoramica.</p>
-<p>
-<b>Alt+Rotellina del mouse</b>per ingrandire e rimpicciolire rapidamente sul desktop.
-				A differenza dello strumento Lente di ingrandimento, questo consente di eseguire lo zoom mentre si effettua (o si sposta) una selezione, per aggiungerla
-				precisione.</p>
-<p>Aggiunto<b>Visualizza &gt; Schermo intero</b>per attivare la modalità a schermo intero. Questo è utile per usare JS Paint sul tuo telefono.</p>
-<p>IL<b>Strumento di testo</b>ora espande automaticamente la casella di testo durante la digitazione.
-				Durante il ridimensionamento, ora esiste una dimensione minima basata sul testo nella casella di testo.
-				Visualizza in anteprima esattamente la dimensione che otterrà durante il ridimensionamento.</p>
-<p>
-<b>Attracco:</b>Se trascini la casella Colori o Strumenti in una finestra,
-				ora puoi agganciarlo nuovamente quando trascini la barra del titolo.
-				In precedenza per agganciarlo dovevi fare doppio clic sulla barra del titolo o trascinarlo lungo il bordo della finestra.</p>
-<img alt="Area that you have to click to drag a toolbar out into a window (in green)" height="380" src="https://i.postimg.cc/7LB18Gcg/toolbar-drag-out-area.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="480">
-<p>
-<b>Menù</b>sono ora completamente accessibili tramite tastiera (e lettore di schermo).
-				In particolare, puoi trattenere<kbd>Alt</kbd>e premere il tasto di accesso di un pulsante del menu per aprire il menu,
-				e poi (senza<kbd>Alt</kbd>) premere il tasto di accesso di una voce di menu per selezionarla.
-				La chiave di accesso di un elemento è la lettera sottolineata o la prima lettera del testo dell'elemento se non è presente
-				sottolineare.</p>
-<p>
-<b>Dettagli dell'errore</b>sono ora nascosti per impostazione predefinita nelle finestre di dialogo di errore.
-				I dettagli possono essere più schiaccianti che utili in molti casi,
-				ma se ne hai bisogno puoi espandere i dettagli.</p>
-<img alt="Example error message box saying 'File not found', with details collapsed." height="145" src="https://i.postimg.cc/ZR1qpVGw/file-not-found.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="408"/>
-<p>
-<b>File &gt; Esci</b>ora esce sul desktop web ufficiale,<a href="https://98.js.org" target="_blank"><img alt="" height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABKklEQVR42qWTMW7DMAxFKYC+RC/hQR065xSdOyRDr9CxV8gQDzlK5g7RkLmn6CwCCimSchIoWkrAgESTj5+kHeCfFnpORCyPPiLqxgYP9gC/ZyKYEIG+CPAbn0JCr6okizmgvmdIF8BZxUhNgVdv8k3FvCdIu/u228VBnkiUGTZBzgyb1CcASBqdlhAMUEx6aAokWc8KqGCGzB+0lmMTyI0cBUmSV28zMRXzT4bECiI/l+NUZ/J0Cz0TACx6Tiwej9jfQkvIufZ8eVM1tM+1uiTHyP5P7H9IccvtxGCVSg0W6ZDUdz6cYbe8DgAHKKf3P9j8bnhQ0rSJY0DcOm2gwCFSugKqozT51V704xoDQItFWMeTFp+ZbQEGtm4o3/hsoLa1IaC3ocf/4QotsZxI//135gAAAABJRU5ErkJggg==" width="16"/>98.js.org</a>,
-				una ricostruzione di Windows 98, piena di giochi e applicazioni.</p>
-<img alt="The 98.js desktop featuring desktop icons, a taskbar, and various application windows." class="inset-deep" src="https://i.postimg.cc/SKHrYpx3/98-js-org-screenshot.png" style="max-width: 100%; height: auto; image-rendering: auto;"/>
-<p>Questo progetto è nato da JS Paint e ora l'ho implementato
-				Registratore di suoni, Blocco note, Calcolatrice e persino Esplora risorse,
-				ad un elevato livello di dettaglio.</p>
-<p>Include anche progetti di altre persone, altre ricreazioni di vecchi programmi,
-				piace<a href="https://webamp.org/" target="_blank">Webamp</a>,
-				una meticolosa ricreazione di Winamp,
-				e<a href="https://github.com/rjanjic/js-solitaire" target="_blank">Solitario JS</a>,
-				un clone del solitario (l'ho ottimizzato per la precisione, aggiungendo le immagini sul retro delle carte, ecc.)</p>
-<h2>Pixel perfetto</h2>
-<p>Tutti gli elementi dell'interfaccia ora hanno uno stile tematico,
-				alimentato da<a href="https://os-gui.js.org" target="_blank">OS-GUI.js</a>E<a href="https://jdan.github.io/98.css/" target="_blank">98.css</a></p>
-<p>L'intera interfaccia ora è perfettamente precisa rispetto a Windows 98.
 
-				(Ok, ci sono alcune cose che sono un pixel fuori posto, ma sul serio,
-				Ho allineato uno screenshot e l'ho ottenuto essenzialmente perfetto.)</p>
-<p>Layout migliorato di<b>Visualizza &gt; Zoom &gt; Zoom personalizzato</b>finestra, corrispondente al disegno in MS Paint.</p>
-<p>Aggiunta imbottitura a tutte le finestre di dialogo in modo che non si sentano più anguste.</p>
-<p>Le finestre di messaggio ora includono icone di avviso o di errore e riproducono un suono quando vengono visualizzate.</p>
-<p>Migliorato<b>Visualizza &gt; Visualizza bitmap</b>: ora utilizza il colore di sfondo dello sfondo del tema,
-				se l'immagine è più piccola della finestra.
-				Ora si chiude con un clic o premendo un tasto e non ti consente di modificare l'immagine (il che era strano).</p>
-<p>La finestra della Guida ora può essere ridotta a icona nella parte inferiore dello schermo, anche se non è presente la barra delle applicazioni.
-				Funziona come Windows 98 se il processo di gestione della barra delle applicazioni si blocca.</p>
+<img height="360" src="https://i.postimg.cc/tgBncKfJ/guicii-update.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="640" />
+
+<h2>Nuove funzionalità</h2>
+
+<p>
+<b>Visualizza > Zoom > Mostra miniatura</b> mostra un’anteprima dell’immagine in piccolo formato, ottima per la pixel art.  
+Permette di apportare modifiche fini e precise mantenendo una visione d’insieme.
+</p>
+
+<p>
+<b>Zoom con le dita:</b> se disponi di un touchscreen, usa due dita per ingrandire, rimpicciolire e spostarti.
+</p>
+
+<p>
+<b>Alt + Rotellina del mouse</b> consente di ingrandire e rimpicciolire rapidamente sul desktop.  
+A differenza dello strumento Lente di ingrandimento, permette di zoomare mentre effettui (o sposti) una selezione, per una maggiore precisione.
+</p>
+
+<p>
+Aggiunto <b>Visualizza > Schermo intero</b> per attivare la modalità a schermo intero.  
+È utile soprattutto quando usi JS Paint sul telefono.
+</p>
+
+<p>
+Il <b>Testo</b> ora espande automaticamente la casella durante la digitazione.  
+Durante il ridimensionamento, esiste una dimensione minima basata sul contenuto della casella.  
+L’anteprima mostra esattamente la dimensione finale mentre ridimensioni.
+</p>
+
+<p>
+<b>Attracco:</b> se trascini la casella Colori o Strumenti in una finestra, ora puoi riagganciarla trascinando la barra del titolo.  
+In precedenza, per agganciarla dovevi fare doppio clic sulla barra del titolo o trascinarla lungo il bordo della finestra.
+</p>
+
+<img height="380" src="https://i.postimg.cc/7LB18Gcg/toolbar-drag-out-area.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="480" />
+
+<p>
+I <b>menu</b> sono ora completamente accessibili tramite tastiera (e lettori di schermo).  
+Puoi tenere premuto <kbd>Alt</kbd> e premere il tasto di accesso di un menu per aprirlo,  
+poi (senza <kbd>Alt</kbd>) premere il tasto di accesso di una voce per selezionarla.  
+La chiave di accesso è la lettera sottolineata o, se assente, la prima lettera del testo.
+</p>
+
+<p>
+I <b>dettagli dell’errore</b> sono ora nascosti per impostazione predefinita nelle finestre di dialogo.  
+Possono essere più confusi che utili, ma puoi espanderli quando necessario.
+</p>
+
+<img height="145" src="https://i.postimg.cc/ZR1qpVGw/file-not-found.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="408" />
+
+<p>
+<b>File > Esci</b> ora porta al desktop web ufficiale <a href="https://98.js.org" target="_blank"><img height="16" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABKklEQVR42qWTMW7DMAxFKYC+RC/hQR065xSdOyRDr9CxV8gQDzlK5g7RkLmn6CwCCimSchIoWkrAgESTj5+kHeCfFnpORCyPPiLqxgYP9gC/ZyKYEIG+CPAbn0JCr6okizmgvmdIF8BZxUhNgVdv8k3FvCdIu/u228VBnkiUGTZBzgyb1CcASBqdlhAMUEx6aAokWc8KqGCGzB+0lmMTyI0cBUmSV28zMRXzT4bECiI/l+NUZ/J0Cz0TACx6Tiwej9jfQkvIufZ8eVM1tM+1uiTHyP5P7H9IccvtxGCVSg0W6ZDUdz6cYbe8DgAHKKf3P9j8bnhQ0rSJY0DcOm2gwCFSugKqozT51V704xoDQItFWMeTFp+ZbQEGtm4o3/hsoLa1IaC3ocf/4QotsZxI//135gAAAABJRU5ErkJggg==" width="16" />98.js.org</a>,  
+una ricostruzione di Windows 98 piena di giochi e applicazioni.
+</p>
+
+<img class="inset-deep" src="https://i.postimg.cc/SKHrYpx3/98-js-org-screenshot.png" style="max-width: 100%; height: auto; image-rendering: auto;" />
+
+<p>
+Questo progetto è nato da JS Paint e ora include Registratore di suoni, Blocco note, Calcolatrice e persino Esplora risorse,  
+tutti ricreati con grande accuratezza.
+</p>
+
+<p>
+Include anche progetti di altre persone, come ricreazioni di vecchi programmi:  
+<a href="https://webamp.org/" target="_blank">Webamp</a>, una meticolosa ricreazione di Winamp,  
+e <a href="https://github.com/rjanjic/js-solitaire" target="_blank">Solitario JS</a>, un clone del solitario (che ho ottimizzato aggiungendo retro delle carte e altro).
+</p>
+
+<h2>Pixel perfetto</h2>
+
+<p>
+Tutti gli elementi dell’interfaccia ora hanno uno stile tematico, alimentato da  
+<a href="https://os-gui.js.org" target="_blank">OS-GUI.js</a> e <a href="https://jdan.github.io/98.css/" target="_blank">98.css</a>.
+</p>
+
+<p>
+L’interfaccia è ora praticamente identica a quella di Windows 98.  
+(Ok, qualche pixel è fuori posto… ma ho allineato uno screenshot e il risultato è essenzialmente perfetto.)
+</p>
+
+<p>
+Migliorato il layout della finestra <b>Visualizza > Zoom > Zoom personalizzato</b>, ora corrispondente al design di MS Paint.
+</p>
+
+<p>Aggiunta imbottitura a tutte le finestre di dialogo, così non risultano più anguste.</p>
+
+<p>Le finestre di messaggio ora includono icone di avviso o errore e riproducono un suono quando vengono mostrate.</p>
+
+<p>
+Migliorato <b>Visualizza > Visualizza bitmap</b>: ora usa il colore di sfondo del tema se l’immagine è più piccola della finestra.  
+Si chiude con un clic o un tasto e non permette più di modificare l’immagine (cosa che risultava strana).
+</p>
+
+<p>
+La finestra della Guida ora può essere ridotta a icona nella parte inferiore dello schermo, anche senza barra delle applicazioni.  
+Funziona come Windows 98 quando il processo della taskbar si blocca.
+</p>
+
 <h2>Correzioni</h2>
+
 <p>
-<b>Pulsanti del menu</b>sono più facili da aprire su un touch screen. A volte dovevi toccare due volte prima del menu
-				aperto.</p>
-<p>Fisso<b>spazzola quadrata grande</b>continuità (prima lasciava dei vuoti, a causa di un'implementazione semi-implementata
-				ottimizzazione).</p>
-<p>IL<b>selezione e caselle di testo</b>non "esplodono" più se li ridimensioni a una dimensione minima.
-				Ora sono limitati quando trascini un bordo oltre il bordo opposto.</p>
-<p>Risolto un bug per il quale le selezioni sottili verticalmente erano difficili o impossibili da trascinare (nonostante mostrassero un file
-				trascinare il cursore).
-				(La regione trascinabile è stata spostata all'esterno della casella di selezione.)
-				Risolto un bug simile per cui le anteprime degli strumenti venivano sfalsate se l'altezza della tela era molto piccola.</p>
-<p>Le maniglie di ridimensionamento non si riducono più quando l'oggetto da ridimensionare è molto piccolo.
-				Anche la regione trascinabile per le maniglie non diventa più piccola, tranne nelle dimensioni in cui è necessario.
-				Ora è notevolmente più intelligente di Windows 10 riguardo alla posizione da cui trascinare le maniglie.</p>
-<p>In<b>Immagine &gt; Capovolgi/Ruota</b>, ora puoi fare clic sul campo di immissione dei gradi personalizzati prima di selezionare il file
-				Opzione "Ruota per angolo".</p>
-<p>L'anteprima della lente di ingrandimento e le anteprime di altri strumenti ora sono nascoste durante il trascinamento della casella Colori o Strumenti.
-				Sembrava confuso quando l'anteprima della lente d'ingrandimento veniva mostrata contemporaneamente a
-				il contorno dell'anteprima per trascinare/ancorare una finestra degli strumenti.</p>
-<p>Per le lingue che leggono<b>da destra a sinistra</b>, la vista Cronologia (<b>Modifica &gt; Cronologia</b>) ora utilizza a
-				disposizione da destra a sinistra,
-				inoltre, la casella dei colori e la casella degli strumenti non invertono più il layout quando vengono trascinate in una finestra o agganciate
-				riportarli a un lato dell'applicazione.</p>
-<p>Utilizzano la visualizzazione della cronologia e i messaggi di errore<b>testo più localizzato</b></p>
-<p>Fisso<b>tagliare le icone</b>nei pulsanti nella barra degli strumenti della finestra della guida nel tema Moderno.</p>
-<p>Tutte le finestre ora hanno un controllo con focus predefinito e viene ricordato l'ultimo controllo con focus nella finestra
-				per quando rimetti a fuoco la finestra.</p>
+I <b>pulsanti del menu</b> sono più facili da aprire su touchscreen: prima servivano due tocchi.
+</p>
+
 <p>
-<b>File &gt; Nuovo</b>E<b>File &gt; Apri</b>ora crea una nuova sessione di salvataggio automatico,
-				invece di utilizzare la sessione corrente.</p>
+Corretta la continuità della <b>spazzola quadrata grande</b>, che lasciava vuoti a causa di un’ottimizzazione incompleta.
+</p>
+
+<p>
+Le <b>selezioni e caselle di testo</b> non “esplodono” più se ridimensionate troppo: ora sono limitate correttamente.
+</p>
+
+<p>
+Risolto un bug che rendeva difficili o impossibili da trascinare le selezioni molto sottili verticalmente.  
+La regione trascinabile è stata spostata all’esterno della selezione.  
+Risolto anche un bug simile che sfalsava le anteprime degli strumenti con tele molto basse.
+</p>
+
+<p>
+Le maniglie di ridimensionamento non si rimpiccioliscono più quando l’oggetto è molto piccolo.  
+Anche la regione trascinabile resta utilizzabile, tranne nei casi strettamente necessari.  
+Ora è molto più intelligente di Windows 10 nel determinare da dove trascinare.
+</p>
+
+<p>
+In <b>Immagine > Capovolgi/Ruota</b>, ora puoi cliccare il campo dei gradi personalizzati prima di selezionare “Ruota per angolo”.
+</p>
+
+<p>
+L’anteprima della lente di ingrandimento e altre anteprime degli strumenti ora sono nascoste durante il trascinamento della casella Colori o Strumenti,  
+evitando sovrapposizioni confuse.
+</p>
+
+<p>
+Per le lingue che leggono <b>da destra a sinistra</b>, la vista Cronologia (<b>Modifica > Cronologia</b>) ora usa un layout RTL.  
+Inoltre, la casella Colori e la casella Strumenti non invertono più il layout quando vengono trascinate o riagganciate.
+</p>
+
+<p>
+La vista Cronologia e i messaggi di errore ora usano <b>testo più localizzato</b>.
+</p>
+
+<p>
+Corretti i problemi con le <b>icone tagliate</b> nei pulsanti della finestra della Guida nel tema Moderno.
+</p>
+
+<p>
+Tutte le finestre ora hanno un controllo con focus predefinito e ricordano l’ultimo controllo attivo quando tornano in primo piano.
+</p>
+
+<p>
+<b>File > Nuovo</b> e <b>File > Apri</b> ora creano una nuova sessione di salvataggio automatico, invece di riutilizzare quella corrente.
+</p>
+
 <h2>Tema invernale</h2>
-<p>Aggiornato il tema invernale con pulsanti degli strumenti in stile calendario dell'avvento,
-				che rivelano pixel art festivi (migliorati) per ogni strumento quando li selezioni.</p>
-<p>Ciò significa che il tema invernale è più utilizzabile,
-				poiché non oscura le funzioni di tutti gli strumenti con pixel art.</p>
-<p>Inoltre, se non ti sembra abbastanza un calendario dell'avvento,
-				puoi trattenere<kbd>Spostare</kbd>per selezionare più strumenti contemporaneamente.</p>
-<p>Forse potresti realizzare un disegno utilizzando un solo strumento per i 16 giorni che precedono il Natale,
-				ovviamente con l'eccezione degli strumenti Scegli colore e Lente d'ingrandimento.</p>
-<p>I fiocchi di neve nei menu indicano quale lettera puoi premere per selezionare quella voce.</p>
-<p>Per disattivare il tema Inverno, fai clic sul Grinch nella parte inferiore dello schermo,
-				che poi ti farà un sorriso cattivo e ti ruberà il Natale.
-				Puoi riaverlo con<b>Extra &gt; Tema &gt; Inverno</b></p>
-<img alt="Winter theme screenshot with candy canes and a text box saying Enjoy!" class="inset-deep" height="380" src="https://i.postimg.cc/SxFtjy8z/winter-theme-enjoy.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="440">
-</img></img></img></article>
+
+<p>
+Aggiornato il tema invernale con pulsanti degli strumenti in stile calendario dell’avvento,  
+che rivelano pixel art festiva (migliorata) per ogni strumento selezionato.
+</p>
+
+<p>
+Questo rende il tema più utilizzabile, poiché non oscura più le funzioni degli strumenti.
+</p>
+
+<p>
+Se vuoi un’esperienza ancora più “calendario dell’avvento”, puoi tenere premuto <kbd>Shift</kbd> per selezionare più strumenti contemporaneamente.
+</p>
+
+<p>
+Potresti persino realizzare un disegno usando un solo strumento al giorno per i 16 giorni prima di Natale,  
+escludendo ovviamente Scegli colore e Lente d’ingrandimento.
+</p>
+
+<p>
+I fiocchi di neve nei menu indicano quale lettera premere per selezionare una voce.
+</p>
+
+<p>
+Per disattivare il tema Inverno, fai clic sul Grinch nella parte inferiore dello schermo:  
+ti farà un sorriso malvagio e “ti ruberà il Natale”.  
+Puoi riattivarlo con <b>Extra > Tema > Inverno</b>.
+</p>
+
+<img class="inset-deep" height="380" src="https://i.postimg.cc/SxFtjy8z/winter-theme-enjoy.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="440" />
+
+</article>
+
+
 <article class="news-entry" id="news-2020-accessibility-update">
 <h1>L'aggiornamento sull'accessibilità</h1>
 <time datetime="2020-12-20">20-12-2020</time>
-<img alt="Hello in several languages, eye gaze guiding a cursor, and a sea lion barking into a microphone." height="399" src="https://i.postimg.cc/j29yrZbm/untitled-23.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="965">
+
+<img height="399" src="https://i.postimg.cc/j29yrZbm/untitled-23.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="965" />
+
 <h2>Supporto multilingue</h2>
+
 <p>JS Paint è ora ampiamente localizzato in 26 lingue.</p>
-<p>Potresti chiedere come faccio a rilasciare così tante lingue al rilascio iniziale del supporto multilingue?
-				Ebbene, questo progetto ha l'opportunità alquanto unica di riutilizzare le localizzazioni di un programma esistente,
-				poiché è principalmente un remake di MS Paint.</p>
-<p>Ho scaricato e installato<a href="https://postimg.cc/4Y1V24wN" target="_blank">26 versioni di Windows
-					98 nelle macchine virtuali</a>,
-				ed estratto il testo da mspaint.exe in ognuno di essi,
-				utilizzando una serie di script a cui ho scritto per aiutarmi ad automatizzare il processo.</p>
-<p>Per cambiare la lingua, vai a<b>Extra &gt; Lingua</b>.
-				La tua lingua preferita potrebbe già essere rilevata, se specificata nelle impostazioni del sistema o del browser.</p>
-<img alt="26 languages, right off the bat!" height="720" src="https://i.postimg.cc/G2bH92fp/language-menu.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="1280">
-<p>Per l'arabo è supportato il layout da destra a sinistra!</p>
-<p>Mi sono cimentato con la calligrafia araba...</p>
-<img alt="Calligraphy where the shapes of the tools in Paint make up Arabic words for them." height="800" src="https://i.postimg.cc/NFX2TTp1/untitled-45.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="1141">
-<p>Se vuoi contribuire con le traduzioni,<a href="https://github.com/1j01/jspaint/issues/80" target="_blank">mettiti in contatto!</a>Devo svolgere del lavoro tecnico per impostare le traduzioni della community su una piattaforma pubblica,
-				ma sono felice che le persone abbiano già espresso interesse ad aiutare a tradurre!
-				(Voglio anche semplificare la lingua in varie parti dell'interfaccia utente prima di chiedere alle persone di tradurre
-				loro.)</p>
+
+<p>Potresti chiederti come sia possibile rilasciare così tante lingue già al debutto del supporto multilingue.  
+Questo progetto ha un’opportunità piuttosto unica: può riutilizzare le localizzazioni di un programma esistente, poiché è principalmente un remake di MS Paint.</p>
+
+<p>Ho scaricato e installato <a href="https://postimg.cc/4Y1V24wN" target="_blank">26 versioni di Windows 98 in macchine virtuali</a> ed estratto il testo da mspaint.exe in ognuna di esse, utilizzando una serie di script che ho scritto per automatizzare il processo.</p>
+
+<p>Per cambiare lingua, vai su <b>Extra > Lingua</b>.  
+La tua lingua preferita potrebbe essere rilevata automaticamente se impostata nel sistema o nel browser.</p>
+
+<img height="720" src="https://i.postimg.cc/G2bH92fp/language-menu.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="1280" />
+
+<p>Per l’arabo è supportato il layout da destra a sinistra!</p>
+
+<p>Mi sono anche cimentato con la calligrafia araba...</p>
+
+<img height="800" src="https://i.postimg.cc/NFX2TTp1/untitled-45.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="1141" />
+
+<p>Se vuoi contribuire alle traduzioni, <a href="https://github.com/1j01/jspaint/issues/80" target="_blank">mettiti in contatto!</a>  
+Devo ancora svolgere del lavoro tecnico per impostare le traduzioni della community su una piattaforma pubblica, ma sono felice che molte persone abbiano già mostrato interesse.  
+(Voglio anche semplificare alcune parti dell’interfaccia prima di chiedere ulteriori traduzioni.)</p>
+
 <h2>Modalità sguardo</h2>
-<img alt="You can use eye gaze or head movements to control the cursor." height="360" src="https://i.postimg.cc/2yC137gc/20.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="511"/>
+
+<img height="360" src="https://i.postimg.cc/2yC137gc/20.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="511" />
+
 <p>La modalità Eye Gaze ti consente di controllare JS Paint senza usare le mani.</p>
-<p>È destinato all'uso con un eye tracker, un head tracker o altri scenari di input grossolani.</p>
-<p>Non hai bisogno di un dispositivo eye tracker da mille dollari per giocare con questo, solo una webcam e alcuni gratuiti
-				software.</p>
-<p>raccomando<a href="https://eviacam.crea-si.com/" target="_blank">Abilita ViaCam</a>, che è<em>non</em>un rilevatore dello sguardo,
-				ma piuttosto un rilevatore generale del movimento video che puoi impostare per monitorare il movimento della testa (o del tuo
-				busto o mano o qualsiasi altra cosa).</p>
-<p>Il tracciamento oculare tramite webcam ha molta strada da fare, ma è anche piuttosto sorprendente di per sé.
-				Tentativo<a href="https://sourceforge.net/projects/gazepointer/" target="_blank">GazPointer</a></p>
-<p>Il monitoraggio dello sguardo richiede una calibrazione significativa e, se la calibrazione è disattivata,
-				è difficile da usare perché non puoi guardare dove vuoi guardare per interagire con le cose.
-				Questo è il motivo per cui consiglio l'head tracking (se questa è un'opzione per te),
-				perché così potrai guardarti intorno liberamente e controllare il cursore<em>indipendentemente</em>,
-				quindi se viene spostato, puoi semplicemente inclinare leggermente la testa.</p>
-<p>La modalità Eye Gaze è pensata principalmente per le persone con disabilità motorie come la SLA o la paralisi cerebrale.
-				ma può anche essere semplicemente una sorta di esperienza magica.
-				Può anche essere frustrante e richiede un po' di pratica per padroneggiarlo.</p>
-<p>Un buon punto di partenza è colorare la grafica utilizzando solo lo strumento Riempimento (<img alt="" height="11" src="help/p_paint.gif" width="15"/></p>
+
+<p>È pensata per l’uso con un eye tracker, un head tracker o altri metodi di input non convenzionali.</p>
+
+<p>Non hai bisogno di un eye tracker costoso per provarla: basta una webcam e alcuni software gratuiti.</p>
+
+<p>Consiglio <a href="https://eviacam.crea-si.com/" target="_blank">Enable Viacam</a>, che <em>non</em> è un rilevatore dello sguardo, ma un rilevatore generale del movimento video che puoi configurare per monitorare i movimenti della testa (o del busto, della mano, ecc.).</p>
+
+<p>Il tracciamento oculare tramite webcam ha ancora molta strada da fare, ma è comunque sorprendente.  
+Prova <a href="https://sourceforge.net/projects/gazepointer/" target="_blank">GazePointer</a>.</p>
+
+<p>Il tracciamento dello sguardo richiede una calibrazione accurata e, se questa è imprecisa, l’esperienza diventa difficile perché non puoi guardare liberamente dove vuoi.  
+Per questo consiglio l’head tracking (se possibile): puoi guardarti intorno liberamente e controllare il cursore <em>indipendentemente</em>.  
+Se il puntatore si sposta, basta inclinare leggermente la testa.</p>
+
+<p>La modalità Eye Gaze è pensata principalmente per persone con disabilità motorie come SLA o paralisi cerebrale,  
+ma può anche essere un’esperienza affascinante per chiunque.  
+Richiede comunque un po’ di pratica.</p>
+
+<p>Un buon punto di partenza è colorare immagini usando solo lo strumento Riempimento (<img height="11" src="help/p_paint.gif" width="15" />).</p>
+
 <ul>
-<li>
-<a href="https://duckduckgo.com/?t=canonical&amp;q=coloring+pages&amp;atb=v232-1&amp;iax=images&amp;ia=images" target="_blank">Trova
-						pagine da colorare online</a>,
-					e copiali e incollali in JS Paint.</li>
-<li>Puoi convertirli in bianco e nero<b>Immagine &gt; Attributi</b>, quindi tornare a
-					Colori.
-					(Questo lo fa funzionare meglio con lo strumento Riempimento.)</li>
-<li>Abilita la modalità sguardo con<b>Extra &gt; Modalità Sguardo</b>e nota che inizierà a fare clic dove
-					ti alzi.
-					Puoi disattivare questa sosta facendo clic con l'icona a forma di occhio nella parte inferiore dello schermo.</li>
-<li>Fai in modo che l'immagine riempia lo schermo<b>Visualizza &gt; Zoom &gt; Zoom sulla finestra</b></li>
+<li><a href="https://duckduckgo.com/?t=canonical&amp;q=coloring+pages&amp;atb=v232-1&amp;iax=images&amp;ia=images" target="_blank">Trova pagine da colorare online</a> e incollale in JS Paint.</li>
+<li>Convertile in bianco e nero con <b>Immagine > Attributi</b>, poi torna ai Colori.  
+(Questo migliora il comportamento dello strumento Riempimento.)</li>
+<li>Abilita la modalità sguardo con <b>Extra > Modalità Sguardo</b>.  
+Inizierà a fare clic dove ti fermi.  
+Puoi disattivare il clic prolungato usando l’icona a forma di occhio in basso.</li>
+<li>Fai riempire l’immagine allo schermo con <b>Visualizza > Zoom > Zoom sulla finestra</b>.</li>
 </ul>
-<p>
-<span class="new">Bonus:</span>Da quando ho implementato una casella di colore verticale per la modalità Eye Gaze,
-				Ho deciso di renderlo disponibile come opzione separata. Accedi con<b>Extra &gt; Casella colore verticale</b></p>
+
+<p><span class="new">Bonus:</span> da quando ho implementato una casella Colori verticale per la modalità Eye Gaze, l’ho resa disponibile come opzione separata.  
+Attivala con <b>Extra > Casella colore verticale</b>.</p>
+
 <h2>Riconoscimento vocale</h2>
-<img alt='The sea lion says "Art! Art! Art!" into a microphone.' height="275" src="https://i.postimg.cc/BnQ8cpY2/Art-Art-Art.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="549">
-<p>Usando solo la tua voce, puoi cambiare strumenti e colori, eseguire la panoramica della vista, fare clic sui pulsanti sullo schermo
-				nome e utilizzare la maggior parte delle voci di menu.
-				Puoi anche dire "disegna un gatto con un cappello da festa" per fare in modo che JS Paint provi a disegnare un gatto con un cappello da festa.</p>
-<p>Questa funzionalità si abbina bene alla modalità Eye Gaze per un'esperienza più completa a mani libere.</p>
-<p>La funzione è disponibile solo su Chrome e comprende solo l'inglese.
-				Tieni presente che Chrome invia la tua voce ai server di Google.</p>
-<p>Accedi con<b>Extra &gt; Riconoscimento vocale</b>. Se questa opzione è disattivata, il tuo browser non lo è
-				supportato.</p>
-<p>JS Paint mostrerà ciò che pensa tu abbia detto nella barra di stato nella parte inferiore dello schermo.</p>
-<p>Esistono molti sinonimi di comandi e spesso puoi fare cose con frasi molto brevi come "Curva"
-				per passare allo strumento Curva.
-				Se non riconosce la tua voce per comandi brevi come "Curva" o "Taglia", potresti provare più a lungo
-				frasi come "Strumento curva" o "Taglia selezione",
-				poiché questo aiuta a distinguere il suono come parlato, piuttosto che come tosse, ad esempio.</p>
+
+<img alt='The sea lion says "Art! Art! Art!" into a microphone.' height="275" src="https://i.postimg.cc/BnQ8cpY2/Art-Art-Art.png" style="max-width: 100%; height: auto; image-rendering: auto;" width="549" />
+
+<p>Usando solo la voce puoi cambiare strumenti e colori, spostare la vista, fare clic sui pulsanti sullo schermo e utilizzare la maggior parte delle voci di menu.  
+Puoi anche dire “disegna un gatto con un cappello da festa” per far tentare a JS Paint di disegnarlo.</p>
+
+<p>Questa funzione si abbina molto bene alla modalità Eye Gaze per un’esperienza completamente a mani libere.</p>
+
+<p>La funzione è disponibile solo su Chrome e supporta solo l’inglese.  
+Tieni presente che Chrome invia la tua voce ai server di Google.</p>
+
+<p>Attivala con <b>Extra > Riconoscimento vocale</b>.  
+Se l’opzione è disattivata, il tuo browser non la supporta.</p>
+
+<p>JS Paint mostrerà ciò che pensa tu abbia detto nella barra di stato in basso.</p>
+
+<p>Esistono molti sinonimi per i comandi e spesso puoi usare frasi molto brevi come “Curva” per selezionare lo strumento Curva.  
+Se non riconosce comandi brevi come “Curva” o “Taglia”, prova frasi più lunghe come “Strumento curva” o “Taglia selezione”,  
+che aiutano a distinguere la voce da rumori o colpi di tosse.</p>
+
 <h2>Finestra di dialogo Modifica colori</h2>
-<p>Ho anche implementato la finestra di dialogo Modifica colori. In precedenza questo utilizzava il selettore colori del sistema nativo e
-				non ha funzionato per alcune persone.</p>
-<p>Accedi con<b>Colori &gt; Modifica colori</b>oppure fare doppio clic su un colore nella tavolozza per modificarlo.</p>
+
+<p>Ho implementato anche la finestra di dialogo Modifica colori.  
+In precedenza veniva usato il selettore colori nativo del sistema, che per alcune persone non funzionava correttamente.</p>
+
+<p>Accedi con <b>Colori > Modifica colori</b> oppure fai doppio clic su un colore nella tavolozza.</p>
+
 <figure>
-<img alt="" height="350" src="https://i.postimg.cc/cLNgWH0r/Peek-2020-12-04-00-31.gif" style="max-width: 100%; height: auto; image-rendering: auto;" width="496"/>
-<figcaption>Un'animazione che si trasforma tra JS Paint e la finestra di dialogo di selezione dei colori di MS Paint. È carino
-					vicino, diverso dal carattere.</figcaption>
+<img height="350" src="https://i.postimg.cc/cLNgWH0r/Peek-2020-12-04-00-31.gif" style="max-width: 100%; height: auto; image-rendering: auto;" width="496" />
+<figcaption>Un’animazione che mostra la trasformazione tra JS Paint e la finestra di selezione colori di MS Paint. È sorprendentemente simile, a parte il font.</figcaption>
 </figure>
-<p>In questa finestra di dialogo sono supportate le scorciatoie da tastiera e l'ho creata per i dispositivi mobili con schermi piccoli
-				considera l'aggiunta di colori personalizzati come una schermata separata.</p>
+
+<p>La finestra supporta le scorciatoie da tastiera ed è stata progettata pensando anche ai dispositivi mobili con schermi piccoli.  
+L’aggiunta dei colori personalizzati è gestita come schermata separata.</p>
+
 <h2>Conclusione</h2>
-<p>JS Paint dovrebbe essere molto più accessibile ora. E futuristico.<p>
-<p>Naturalmente c'è sempre di più che si potrebbe fare.
-				La modalità Sguardo oculare potrebbe utilizzare lo smussamento del tratto di pennello e il riconoscimento vocale potrebbe utilizzare il generale artificiale
-				Intelligenza.</p>
-<p>Mi piacerebbe vedere le persone usare JS Paint, in particolare la modalità Eye Gaze e il riconoscimento vocale,
-				quindi se registri un video sull'utilizzo di JS Paint, per favore<a href="https://docs.google.com/forms/d/e/1FAIpQLSdGgS6TS4wBV89v8NoYHenh1eI8jYBfgwYBdPx-OaCEG5EW7g/viewform?usp=sf_link" target="_blank">inviare
-					comunicamelo attraverso questo modulo.</a>Questo mi fa capire cosa è veramente importante per le persone e cosa crea confusione,
-				e mi dà la motivazione per lavorare su nuove funzionalità.</p>
-</p></p></img></img></img></img></article>
+
+<p>JS Paint ora è molto più accessibile. E anche un po’ futuristico.</p>
+
+<p>Naturalmente c’è sempre altro da migliorare:  
+la modalità Eye Gaze potrebbe beneficiare di uno smussamento del tratto del pennello,  
+e il riconoscimento vocale potrebbe un giorno sfruttare un’intelligenza artificiale più avanzata.</p>
+
+<p>Mi piacerebbe vedere le persone usare JS Paint, in particolare la modalità Eye Gaze e il riconoscimento vocale.  
+Se registri un video mentre lo utilizzi, per favore <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGgS6TS4wBV89v8NoYHenh1eI8jYBfgwYBdPx-OaCEG5EW7g/viewform?usp=sf_link" target="_blank">inviamelo tramite questo modulo</a>.  
+Questo mi aiuta a capire cosa è davvero importante per gli utenti, cosa crea confusione e mi dà motivazione per lavorare su nuove funzionalità.</p>
+
+</article>
+
+
 <article class="news-entry" id="news-2019-winter-update">
 <h1>Aggiornamento invernale</h1>
 <time datetime="2019-12-20">20-12-2019</time>
-<img alt="" height="334" src="https://i.postimg.cc/63Wc6vpG/2019-winter-update-candy-cane.gif" style="max-width: 100%; height: auto; image-rendering: auto;" width="563"/>
+
+<img height="334" src="https://i.postimg.cc/63Wc6vpG/2019-winter-update-candy-cane.gif" style="max-width: 100%; height: auto; image-rendering: auto;" width="563" />
+
 <h2>Tema invernale</h2>
-<p>È disponibile una nuova skin dell'interfaccia utente, sotto<b>Extra &gt; Temi &gt; Inverno</b>, caratterizzato da inverno e vacanze
-				icone, caratteri festivi e una tavolozza con colori stagionali e motivi alla menta piperita.</p>
-<img alt="" height="16" src="images/winter/tools.png" width="256"/>
+
+<p>È disponibile una nuova skin dell’interfaccia utente, sotto <b>Extra > Temi > Inverno</b>, caratterizzata da icone invernali e festive, caratteri decorativi e una tavolozza con colori stagionali e motivi alla menta piperita.</p>
+
+<img height="16" src="images/winter/tools.png" width="256" />
+
 <p>Buon Natale e felice Hanukkah!</p>
+
 <h2>Storia migliore</h2>
-<b class="new">Nuovo:</b>Salta a qualsiasi punto della cronologia del documento, avanti o indietro, con<b>Modifica
-				&gt; Storia</b>O<kbd>Ctrl+Maiusc+Y</kbd><ul>
-<li>Fare clic su Testo nella visualizzazione cronologia per tornare alla modifica del testo.</li>
-<li>È possibile tornare a quando esisteva una selezione.</li>
-<li>Nota: questi stati vengono saltati con i normali Annulla e Ripeti, quindi è necessario utilizzare la Cronologia
-					finestra.</li>
-<li>Cronologia ramificazioni: se annulli e poi apporti modifiche, puoi tornare a tutto.
-					Gli stati futuri vengono preservati.</li>
+
+<b class="new">Nuovo:</b> salta a qualsiasi punto della cronologia del documento, avanti o indietro, con <b>Modifica > Storia</b> o <kbd>Ctrl+Maiusc+Y</kbd>.
+
+<ul>
+<li>Fai clic su “Testo” nella visualizzazione della cronologia per tornare alla modifica del testo.</li>
+<li>Puoi tornare anche a quando esisteva una selezione.</li>
+<li>Nota: questi stati vengono saltati dai normali Annulla e Ripeti, quindi devi usare la finestra Cronologia.</li>
+<li>Cronologia ramificata: se annulli e poi apporti modifiche, puoi comunque tornare a tutto. Gli stati futuri vengono preservati.</li>
 </ul>
-<b class="bad">Avvertimento:</b>La cronologia non viene salvata con il salvataggio automatico. La cronologia dei documenti andrà persa se tu
-			aggiorna la pagina, o chiudi la scheda, o se la scheda si blocca, o se chiudi o riavvii il browser, o
-			probabilmente se sei solo su un telefono e il browser mobile perde il focus.<h2>Supporto mobile migliorato</h2>
-<p>
-<b class="new">Nuovo:</b>Utilizzare due dita per eseguire la panoramica della vista.</p>
-<p>Recentemente ho reso più semplice afferrare le maniglie per ridimensionare le cose.
-				Con questo, combinato con la panoramica multitouch,
-				JS Paint è molto più utilizzabile su un telefono.</p>
-<p>
-<b class="bad">Avvertimento:</b>È lento su alcuni dispositivi e parti dell'interfaccia sono ancora troppo piccole
-				toccare.</p>
+
+<b class="bad">Avvertimento:</b> la cronologia non viene salvata con il salvataggio automatico.  
+Andrà persa se aggiorni la pagina, chiudi la scheda, se la scheda si blocca, se chiudi o riavvii il browser, o probabilmente se sei su un telefono e il browser perde il focus.
+
+<h2>Supporto mobile migliorato</h2>
+
+<p><b class="new">Nuovo:</b> usa due dita per eseguire la panoramica della vista.</p>
+
+<p>Ho recentemente reso più semplice afferrare le maniglie per ridimensionare gli elementi.  
+In combinazione con la panoramica multitouch, JS Paint è ora molto più utilizzabile su un telefono.</p>
+
+<p><b class="bad">Avvertimento:</b> su alcuni dispositivi può essere lento e alcune parti dell’interfaccia sono ancora troppo piccole da toccare comodamente.</p>
+
 </article>
+
+
 <article class="news-entry" id="news-2019-polygon-text-and-select">
 <h1>Poligono, Testo e Seleziona</h1>
 <time datetime="2019-12-04">2019-12-04</time>
-<p>Le maniglie ora sono molto più facili da trascinare, con target di clic estesi, simili a Paint di Windows 7.
-				Ora non è irragionevole utilizzarlo con un touch screen!
-				Questo vale per le selezioni, le caselle di testo e le maniglie principali della tela.</p>
-<p>Ridimensionare le cose mentre si ingrandisce lo è<a href="https://github.com/1j01/jspaint/issues/13#issuecomment-562247085" target="_blank">finalmente risolto</a></p>
-<p>Lo strumento Testo ora visualizza perfettamente l'anteprima dei pixel che verranno posizionati sulla tela.
-				Ciò che vedi è ciò che ottieni!
-				Inoltre mantiene tutti i comportamenti di modifica del browser, come il controllo ortografico,
-				utilizzando una strategia di sovrapposizione contorta ma elegante.
-				(Ho realizzato questo prototipo<a href="https://jsfiddle.net/1j01/wnac09u3/" target="_blank">Qui</a>E<a href="https://jsfiddle.net/1j01/qkvfjn1r/" target="_blank">Qui</a>se sei interessato.)</p>
-<p>Con l'opzione di solo riempimento selezionata, lo strumento Poligono ora visualizza l'anteprima con linee invertite, come MS Paint
-				lo fa.
-				(Quando finisci il poligono, il confine della forma corrisponde esattamente all'anteprima,
-				perché in realtà<em>fa</em>disegna un tratto, proprio dello stesso colore del riempimento.)</p>
+
+<p>Le maniglie ora sono molto più facili da trascinare, grazie a target di clic estesi, simili a quelli di Paint su Windows 7.  
+Ora non è più irragionevole usarlo con un touch screen!  
+Questo vale per selezioni, caselle di testo e maniglie principali della tela.</p>
+
+<p>Ridimensionare gli oggetti mentre si è ingranditi è <a href="https://github.com/1j01/jspaint/issues/13#issuecomment-562247085" target="_blank">finalmente risolto</a>.</p>
+
+<p>Lo strumento Testo ora mostra perfettamente l’anteprima dei pixel che verranno posizionati sulla tela.  
+Ciò che vedi è ciò che ottieni!  
+Inoltre mantiene tutti i comportamenti di modifica del browser, come il controllo ortografico, utilizzando una strategia di sovrapposizione complessa ma elegante.  
+(Ho realizzato questo prototipo <a href="https://jsfiddle.net/1j01/wnac09u3/" target="_blank">qui</a> e <a href="https://jsfiddle.net/1j01/qkvfjn1r/" target="_blank">qui</a>, se sei curioso.)</p>
+
+<p>Con l’opzione “solo riempimento” attiva, lo strumento Poligono ora mostra l’anteprima con linee invertite, come fa MS Paint.  
+Quando completi il poligono, il bordo della forma corrisponde esattamente all’anteprima, perché in realtà <em>disegna</em> un tratto dello stesso colore del riempimento.</p>
+
 </article>
+
+
 <article class="news-entry" id="news-2019-zoom-viewport">
 <h1>Zoom al mouse</h1>
 <time datetime="2019-10-26">26-10-2019</time>
-<p>
-<b class="new">Nuovo:</b>La lente d'ingrandimento ora ti consente di eseguire lo zoom su una posizione specifica,
-				mostrando un'anteprima della nuova finestra.</p>
-<p>Inoltre, quando si esegue lo zoom indietro con la lente d'ingrandimento,
-				o modificando lo zoom dalla barra degli strumenti o dai menu,
-				l'angolo in alto a sinistra della finestra è ora mantenuto ancorato.</p>
-<p>Inoltre, incollare una selezione ora andrà in alto a sinistra nella finestra,
-				invece dell'intero documento.</p>
+
+<p><b class="new">Nuovo:</b> la lente d’ingrandimento ora permette di eseguire lo zoom su una posizione specifica, mostrando un’anteprima della nuova area visibile.</p>
+
+<p>Inoltre, quando si esegue lo zoom indietro con la lente d’ingrandimento, o modificando lo zoom dalla barra degli strumenti o dai menu, l’angolo in alto a sinistra della finestra rimane ora ancorato.</p>
+
+<p>In più, incollare una selezione ora la posiziona nell’angolo in alto a sinistra della finestra, invece che dell’intero documento.</p>
+
 </article>
+
+
 <article class="news-entry" id="news-2019-grid-zoom-cursors">
 <h1>La griglia, lo zoom personalizzato e i cursori dinamici</h1>
 <time datetime="2019-10-09">2019-10-09</time>
+
 <p>
-<b class="new">Nuovo:</b>La griglia. Zoom a 4x+ e utilizza<b>Visualizza &gt; Zoom &gt; Mostra griglia</b>O<kbd>CTRL+G</kbd>abilitare.
-				Funziona anche con lo zoom del browser per fornire griglie nitide anche se si ingrandisce con il browser.</p>
+<b class="new">Nuovo:</b> la griglia.  
+Quando sei a uno zoom di 4x o superiore, usa <b>Visualizza > Zoom > Mostra griglia</b> o <kbd>Ctrl+G</kbd> per abilitarla.  
+Funziona anche con lo zoom del browser, mantenendo la griglia nitida anche quando ingrandisci tramite il browser.
+</p>
+
 <p>
-<b class="new">Nuovo:</b> <b>Visualizza &gt; Zoom &gt; Zoom personalizzato</b>,
-				inclusa un'opzione di zoom numerico effettivamente personalizzata, a differenza di MS Paint.</p>
+<b class="new">Nuovo:</b> <b>Visualizza > Zoom > Zoom personalizzato</b>,  
+che include un’opzione di zoom numerico realmente personalizzato, a differenza di MS Paint.
+</p>
+
 <p>
-<b class="new">Nuovo:</b>Cursori dinamici per pennello e gomma,
-				quindi ora hai un'anteprima di esattamente dove verrà disegnato lo strumento.</p>
-<p>Inoltre, nel caso in cui il tuo browser cancelli le tele per liberare memoria,
-				dovresti avere maggiori probabilità di poter annullare l'operazione per tornare a uno stato utile.</p>
+<b class="new">Nuovo:</b> cursori dinamici per pennello e gomma,  
+così ora hai un’anteprima precisa di dove verrà applicato lo strumento.
+</p>
+
+<p>
+Inoltre, nel caso in cui il browser cancelli le tele per liberare memoria,  
+ora è più probabile che tu possa comunque annullare l’operazione e tornare a uno stato utile.
+</p>
+
 </article>
+
+
 <article class="news-entry" id="news-2019-async-clipboard">
 <h1>Supporto completo per gli appunti</h1>
 <time datetime="2019-09-21">2019-09-21</time>
-<p>JS Paint ora ti consente di copiare dati di immagini reali negli Appunti, sia con scorciatoie da tastiera che da
-				Modifica menù.
-				Questa funzionalità è disponibile in Chrome 76+. Altri browser non lo supportano ancora, a partire da settembre 2019.</p>
-<p>Inoltre: incolla l'URL di un'immagine e JS Paint caricherà e incollerà l'immagine.
-				(Questa è un'alternativa a<b>File &gt; Carica da URL</b>, che sostituisce il documento.)</p>
+
+<p>
+JS Paint ora consente di copiare dati di immagini reali negli Appunti, sia tramite scorciatoie da tastiera che dal menu  
+<b>Modifica</b>.  
+Questa funzionalità è disponibile in Chrome 76+. Gli altri browser non la supportano ancora (a settembre 2019).
+</p>
+
+<p>
+Inoltre, incollando l’URL di un’immagine, JS Paint caricherà e incollerà automaticamente l’immagine.  
+(Questa è un’alternativa a <b>File > Carica da URL</b>, che invece sostituisce il documento.)
+</p>
+
 </article>
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		<style type="text/css">
 			#news {
@@ -926,12 +1111,12 @@ L'ho disabilitato per ora, penso perché non è chiaro se vuoi sempre caricare l
 	<script src="lib/UPNG.js"></script>
 	<script src="lib/UTIF.js"></script>
 	<script src="lib/bmp.js"></script>
-	<script src="lib/pdf.js/build/pdf.js"></script>
+	<!-- <script src="lib/pdf.js/build/pdf.js"></script> -->
 	<script src="lib/anypalette-0.6.0.js"></script>
 	<script src="lib/FileSaver.js"></script>
 	<script src="lib/font-detective.js"></script>
 	<script src="lib/libtess.min.js"></script>
-	<script src="lib/tracky-mouse/core/tracky-mouse.js"></script>
+	<!-- <script src="lib/tracky-mouse/core/tracky-mouse.js"></script> -->
 	<script src="lib/os-gui/parse-theme.js"></script>
 	<script src="lib/os-gui/$Window.js"></script>
 	<script src="lib/os-gui/MenuBar.js"></script>
@@ -984,7 +1169,7 @@ L'ho disabilitato per ora, penso perché non è chiaro se vuoi sempre caricare l
 	<script type="module" src="src/vaporwave-fun.js"></script>
 
 	<noscript>
-		<h1><img src="images/icons/32x32.png" width="32" height="32" alt="" /> JS Paint</h1>
+		<h1><img src="images/icons/32x32.png" width="32" height="32" /> JS Paint</h1>
 
 		<p>Questa applicazione richiede JavaScript per essere eseguita.</p>
 
