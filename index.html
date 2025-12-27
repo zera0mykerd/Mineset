@@ -2597,4 +2597,499 @@ Validazione input
 
 
 </BODY>
+
+
+
+
+<!--
+<script type="text/javascript">
+/* ===================================
+   MOTORE DI NAVIGAZIONE SUPREMO DI MK
+   =================================== */
+   
+//Release 
+(function () {
+
+  const HTML_ORIGINALE = document.documentElement.outerHTML;
+
+  function forzaAggiornamentoTitle() {
+    const t = document.querySelector("title");
+    if (t) document.title = t.textContent;
+  }
+
+  function forzaFavicon() {
+    const head = document.head;
+    if (!head) return;
+
+    Array.from(head.querySelectorAll("link")).forEach(l => {
+      if (/\bicon\b/i.test(l.rel)) l.remove();
+    });
+
+    const icons = document.querySelectorAll(
+      'link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"], link[rel="apple-touch-icon-precomposed"]'
+    );
+    icons.forEach(orig => {
+      const link = document.createElement("link");
+      for (const attr of orig.attributes) {
+        link.setAttribute(attr.name, attr.value);
+      }
+      head.appendChild(link);
+    });
+
+    const t = document.title;
+    document.title = t + " ";
+    document.title = t;
+  }
+
+  function disabilitaPaginaReale() {
+    document.querySelectorAll("script").forEach(s => s.remove());
+    document.querySelectorAll("style").forEach(s => s.remove());
+    document.querySelectorAll("link").forEach(l => l.remove());
+
+    let highestId = setTimeout(() => {}, 0);
+    for (let i = 0; i <= highestId; i++) {
+      clearTimeout(i);
+      clearInterval(i);
+    }
+
+    const scriptsRimasti = document.querySelectorAll("script").length;
+    const stylesRimasti = document.querySelectorAll("style").length;
+    const linksRimasti = document.querySelectorAll("link").length;
+
+    return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;
+  }
+
+  // Scroll universale e forzato
+  function scrollElemento(secondHash) {
+    if (!secondHash) {
+      if (window.scrollY !== 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const targetEl = document.getElementById(secondHash);
+    if (!targetEl) {
+      if (window.scrollY !== 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const rect = targetEl.getBoundingClientRect();
+    const isInView = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+
+    if (!isInView) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function caricaPaginaVirtuale(nome, secondHash = null, push = true) {
+    const tpl = document.getElementById("virtual-" + nome);
+    if (!tpl) return;
+
+    if (push) {
+      history.pushState({ virtuale: nome }, "", "#" + nome + (secondHash ? "#" + secondHash : ""));
+    }
+
+    const flag = "virtual-refresh-" + nome;
+    if (!sessionStorage.getItem(flag)) {
+      sessionStorage.setItem(flag, "1");
+      location.reload();
+      return;
+    }
+    sessionStorage.removeItem(flag);
+
+    const disabilitato = disabilitaPaginaReale();
+    if (!disabilitato) {
+      console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");
+    }
+
+    const oldBody = document.body;
+    const oldHead = document.head;
+
+    document.open();
+    document.write(tpl.innerHTML);
+    document.close();
+
+    oldBody && oldBody.remove();
+    oldHead && oldHead.remove();
+
+    // Aggiornamento immediato
+    forzaAggiornamentoTitle();
+    forzaFavicon();
+    scrollElemento(secondHash);
+  }
+
+  function ripristinaPaginaPrincipale() {
+    location.reload();
+  }
+
+  // Click sui link SPA
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[data-virtual]");
+    if (!link) return;
+    e.preventDefault();
+
+    const hash = link.getAttribute("href") || "";
+    const parts = hash.replace(/^#/,'').split('#').filter(Boolean);
+    const nomePagina = link.dataset.virtual;
+    const secondHash = parts[1] || null;
+
+    caricaPaginaVirtuale(nomePagina, secondHash, true);
+  });
+
+  // Back/forward
+  window.addEventListener("popstate", function (e) {
+    if (e.state && e.state.virtuale) {
+      const href = window.location.href;
+      const hashIndex = href.indexOf('#');
+      const hashString = hashIndex !== -1 ? href.slice(hashIndex+1) : '';
+      const parts = hashString.split('#').filter(Boolean);
+
+      const nomePagina = parts[0] || e.state.virtuale;
+      const secondHash = parts[1] || null;
+
+      caricaPaginaVirtuale(nomePagina, secondHash, false);
+    } else {
+      ripristinaPaginaPrincipale();
+    }
+  });
+
+  // Caricamento pagina da hash all'apertura
+  window.addEventListener("DOMContentLoaded", function () {
+    const href = window.location.href;
+    const hashIndex = href.indexOf('#');
+    if (hashIndex === -1) return;
+
+    const hashString = href.slice(hashIndex + 1);
+    const parts = hashString.split('#').filter(Boolean);
+
+    const nomePagina = parts[0];
+    const secondHash = parts[1] || null;
+
+    const link = document.querySelector(`a[data-virtual="${nomePagina}"]`);
+    if (link) caricaPaginaVirtuale(nomePagina, secondHash, false);
+  });
+
+})();
+
+
+// Stable code
+/*
+(function () {
+
+  const HTML_ORIGINALE = document.documentElement.outerHTML;
+
+  function forzaAggiornamentoTitle() {
+    const t = document.querySelector("title");
+    if (t) document.title = t.textContent;
+  }
+
+  function forzaFavicon() {
+    const head = document.head;
+    if (!head) return;
+
+    Array.from(head.querySelectorAll("link")).forEach(l => {
+      if (/\bicon\b/i.test(l.rel)) l.remove();
+    });
+
+    const icons = document.querySelectorAll(
+      'link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"], link[rel="apple-touch-icon-precomposed"]'
+    );
+
+    icons.forEach(orig => {
+      const link = document.createElement("link");
+      for (const attr of orig.attributes) {
+        link.setAttribute(attr.name, attr.value);
+      }
+      head.appendChild(link);
+    });
+
+    const t = document.title;
+    document.title = t + " ";
+    document.title = t;
+  }
+
+  function disabilitaPaginaReale() {
+    document.querySelectorAll("script").forEach(s => s.remove());
+    document.querySelectorAll("style").forEach(s => s.remove());
+    document.querySelectorAll("link").forEach(l => l.remove());
+
+    let highestId = setTimeout(() => {}, 0);
+    for (let i = 0; i <= highestId; i++) {
+      clearTimeout(i);
+      clearInterval(i);
+    }
+
+    const scriptsRimasti = document.querySelectorAll("script").length;
+    const stylesRimasti = document.querySelectorAll("style").length;
+    const linksRimasti = document.querySelectorAll("link").length;
+
+    return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;
+  }
+
+  function scrollElemento(secondHash) {
+    if (!secondHash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const targetEl = document.getElementById(secondHash);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function caricaPaginaVirtuale(nome, secondHash = null, push = true) {
+    const tpl = document.getElementById("virtual-" + nome);
+    if (!tpl) return;
+
+    if (push) {
+      history.pushState({ virtuale: nome }, "", "#" + nome + (secondHash ? "#" + secondHash : ""));
+    }
+
+    const flag = "virtual-refresh-" + nome;
+    if (!sessionStorage.getItem(flag)) {
+      sessionStorage.setItem(flag, "1");
+      location.reload();
+      return;
+    }
+    sessionStorage.removeItem(flag);
+
+    const disabilitato = disabilitaPaginaReale();
+    if (!disabilitato) {
+      console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");
+    }
+
+    const oldBody = document.body;
+    const oldHead = document.head;
+
+    document.open();
+    document.write(tpl.innerHTML);
+    document.close();
+
+    oldBody && oldBody.remove();
+    oldHead && oldHead.remove();
+
+    const onReady = () => {
+      forzaAggiornamentoTitle();
+      forzaFavicon();
+      scrollElemento(secondHash);
+    };
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      onReady();
+    } else {
+      document.addEventListener("DOMContentLoaded", onReady);
+    }
+  }
+
+  function ripristinaPaginaPrincipale() {
+    location.reload();
+  }
+
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[data-virtual]");
+    if (!link) return;
+    e.preventDefault();
+
+    const hash = link.getAttribute("href") || "";
+    const parts = hash.replace(/^#/, "").split('#').filter(Boolean);
+    const nomePagina = parts[0];
+    const secondHash = parts[1] || null;
+
+    caricaPaginaVirtuale(nomePagina, secondHash, true);
+  });
+
+  window.addEventListener("popstate", function (e) {
+    if (e.state && e.state.virtuale) {
+      const hash = window.location.hash || "";
+      const parts = hash.replace(/^#/, "").split('#').filter(Boolean);
+      const nomePagina = parts[0];
+      const secondHash = parts[1] || null;
+
+      caricaPaginaVirtuale(nomePagina, secondHash, false);
+    } else {
+      ripristinaPaginaPrincipale();
+    }
+  });
+
+  window.addEventListener("DOMContentLoaded", function () {
+    if (location.hash) {
+      const parts = location.hash.replace(/^#/, "").split('#').filter(Boolean);
+      const nomePagina = parts[0];
+      const secondHash = parts[1] || null;
+
+      const link = document.querySelector(`a[data-virtual="${nomePagina}"]`);
+      if (link) caricaPaginaVirtuale(nomePagina, secondHash, false);
+    }
+  });
+
+})();
+*/
+
+
+ //Beta code
+ 
+/*
+
+(function () {
+
+  const HTML_ORIGINALE = document.documentElement.outerHTML;
+
+  function forzaAggiornamentoTitle() {
+    const t = document.querySelector("title");
+    if (t) document.title = t.textContent;
+  }
+
+  function forzaFavicon() {
+    const head = document.head;
+    if (!head) return;
+
+    // 1️⃣ rimuove QUALSIASI favicon esistente (stato precedente)
+    Array.from(head.querySelectorAll("link")).forEach(l => {
+      if (/\bicon\b/i.test(l.rel)) l.remove();
+    });
+
+    // 2️⃣ prende le favicon DEFINITE NELLA PAGINA VIRTUALE APPENA SCRITTA
+    const icons = document.querySelectorAll(
+      'link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"], link[rel="apple-touch-icon-precomposed"]'
+    );
+
+    icons.forEach(orig => {
+      const link = document.createElement("link");
+
+      // copia ESATTA degli attributi
+      for (const attr of orig.attributes) {
+        link.setAttribute(attr.name, attr.value);
+      }
+
+      head.appendChild(link);
+    });
+
+    // 3️⃣ trigger di refresh favicon context (unico affidabile)
+    const t = document.title;
+    document.title = t + " ";
+    document.title = t;
+  }
+
+  function disabilitaPaginaReale() {
+    document.querySelectorAll("script").forEach(s => s.remove());
+    document.querySelectorAll("style").forEach(s => s.remove());
+    document.querySelectorAll("link").forEach(l => l.remove());
+
+    let highestId = setTimeout(() => {}, 0);
+    for (let i = 0; i <= highestId; i++) {
+      clearTimeout(i);
+      clearInterval(i);
+    }
+
+    const scriptsRimasti = document.querySelectorAll("script").length;
+    const stylesRimasti = document.querySelectorAll("style").length;
+    const linksRimasti = document.querySelectorAll("link").length;
+
+    return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;
+  }
+
+  function caricaPaginaVirtuale(nome, push = true) {
+    const tpl = document.getElementById("virtual-" + nome);
+    if (!tpl) return;
+
+    if (push) {
+      history.pushState({ virtuale: nome }, "", "#" + nome);
+    }
+
+    const flag = "virtual-refresh-" + nome;
+    if (!sessionStorage.getItem(flag)) {
+      sessionStorage.setItem(flag, "1");
+      location.reload();
+      return;
+    }
+
+    sessionStorage.removeItem(flag);
+
+    const disabilitato = disabilitaPaginaReale();
+    if (!disabilitato) {
+      console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");
+    }
+
+    const oldBody = document.body;
+    const oldHead = document.head;
+
+    document.open();
+    document.write(tpl.innerHTML);
+    document.close();
+
+    oldBody && oldBody.remove();
+    oldHead && oldHead.remove();
+
+    const onReady = () => {
+      forzaAggiornamentoTitle();
+      forzaFavicon();
+    };
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      onReady();
+    } else {
+      document.addEventListener("DOMContentLoaded", onReady);
+    }
+  }
+
+  function ripristinaPaginaPrincipale() {
+    location.reload();
+  }
+
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[data-virtual]");
+    if (!link) return;
+    e.preventDefault();
+    caricaPaginaVirtuale(link.dataset.virtual, true);
+  });
+
+  window.addEventListener("popstate", function (e) {
+    if (e.state && e.state.virtuale) {
+      caricaPaginaVirtuale(e.state.virtuale, false);
+    } else {
+      ripristinaPaginaPrincipale();
+    }
+  });
+
+  window.addEventListener("DOMContentLoaded", function () {
+    if (location.hash) {
+      const hashNome = location.hash.replace(/^#/, "");
+      const link = document.querySelector(`a[data-virtual="${hashNome}"]`);
+      if (link) link.click();
+    }
+  });
+
+})();
+
+*/
+
+   
+   /*
+   
+   //Alpha code 
+   
+  (function () { const HTML_ORIGINALE = document.documentElement.outerHTML; function forzaAggiornamentoTitle() { const t = document.querySelector("title"); if (t) document.title = t.textContent; } function disabilitaPaginaReale() { document.querySelectorAll("script").forEach(s => s.remove()); document.querySelectorAll("style").forEach(s => s.remove()); document.querySelectorAll("link").forEach(l => l.remove()); let highestId = setTimeout(() => {}, 0); for (let i = 0; i <= highestId; i++) { clearTimeout(i); clearInterval(i); } const scriptsRimasti = document.querySelectorAll("script").length; const stylesRimasti = document.querySelectorAll("style").length; const linksRimasti = document.querySelectorAll("link").length; return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0; } function caricaPaginaVirtuale(nome, push = true) { const tpl = document.getElementById("virtual-" + nome); if (!tpl) return; if (push) { history.pushState({ virtuale: nome }, "", "#" + nome); } const flag = "virtual-refresh-" + nome; if (!sessionStorage.getItem(flag)) { sessionStorage.setItem(flag, "1"); location.reload(); return; } sessionStorage.removeItem(flag); const disabilitato = disabilitaPaginaReale(); if (!disabilitato) { console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate."); } const oldBody = document.body; const oldHead = document.head; document.open(); document.write(tpl.innerHTML); document.close(); oldBody && oldBody.remove(); oldHead && oldHead.remove(); if (document.readyState === "complete" || document.readyState === "interactive") { forzaAggiornamentoTitle(); } else { document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle); } } function ripristinaPaginaPrincipale() { location.reload(); } document.addEventListener("click", function (e) { const link = e.target.closest("a[data-virtual]"); if (!link) return; e.preventDefault(); caricaPaginaVirtuale(link.dataset.virtual, true); }); window.addEventListener("popstate", function (e) { if (e.state && e.state.virtuale) { caricaPaginaVirtuale(e.state.virtuale, false); } else { ripristinaPaginaPrincipale(); } }); window.addEventListener("DOMContentLoaded", function () { if (location.hash) { const hashNome = location.hash.replace(/^#/, ""); const link = document.querySelector(`a[data-virtual="${hashNome}"]`); if (link) { link.click(); } } }); })();
+     */
+	 
+	 //TRASH CODE
+	 
+	 /*       (function () {     const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);     const HTML_ORIGINALE = document.documentElement.outerHTML;        function forzaAggiornamentoTitle() {       const t = document.querySelector("title");       if (t) document.title = t.textContent;     }        function disabilitaPaginaReale() {       document.querySelectorAll("script").forEach(s => s.remove());       document.querySelectorAll("style").forEach(s => s.remove());       document.querySelectorAll("link").forEach(l => l.remove());       let highestId = setTimeout(() => {}, 0);       for (let i = 0; i <= highestId; i++) {         clearTimeout(i);         clearInterval(i);       }       const scriptsRimasti = document.querySelectorAll("script").length;       const stylesRimasti = document.querySelectorAll("style").length;       const linksRimasti = document.querySelectorAll("link").length;       return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;     }        function caricaPaginaVirtuale(nome, push = true) {       const tpl = document.getElementById("virtual-" + nome);           FIX MATRIOSKA & BACK BUTTON:        Se il template non viene trovato (es. siamo tornati indietro ma il DOM era stato sovrascritto dalla pagina figlia),        o se non esiste, forziamo un reload per ripristinare la struttura originale e recuperare i template.       if (!tpl) {         if (window.virtualActive || location.hash) {           location.reload();         }         return;       }          if (push) {         history.pushState({ virtuale: nome }, "", "#" + nome);       }           FIX MATRIOSKA RECURSION:        Se siamo già in modalità virtuale (virtualActive è true), saltiamo la pulizia e il refresh forzato.        Questo permette di caricare pagine secondarie (figlie) istantaneamente.       if (!window.virtualActive) {         const flag = "virtual-refresh-" + nome;         if (!sessionStorage.getItem(flag)) {           sessionStorage.setItem(flag, "1");           location.reload();           return;         }         sessionStorage.removeItem(flag);            const disabilitato = disabilitaPaginaReale();         if (!disabilitato) {           console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");         }       }           Impostiamo il flag globale per indicare che siamo dentro la "Matrix"       window.virtualActive = true;           RENDERING LOGIC:        Se siamo su Desktop MA siamo in una navigazione annidata (PandaSecondaria),         usiamo la logica DOMParser (come su mobile) invece di document.write.        document.write distruggerebbe gli event listener necessari per continuare la navigazione ricorsiva.       if (!IS_MOBILE && !document.documentElement.getAttribute('data-virtual-recursion')) {         const oldBody = document.body;         const oldHead = document.head;         document.open();         document.write(tpl.innerHTML);         document.close();         oldBody && oldBody.remove();         oldHead && oldHead.remove();                   Marchiamo il DOM per sapere che siamo in modalità virtuale per le future navigazioni         document.documentElement.setAttribute('data-virtual-recursion', 'true');            if (document.readyState === "complete" || document.readyState === "interactive") {           forzaAggiornamentoTitle();         } else {           document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle);         }         return;       }           Logica Mobile / Desktop Ricorsiva (Matrioska)       try {         const parser = new DOMParser();         const doc = parser.parseFromString(tpl.innerHTML, "text/html");                   Manteniamo il flag di recursione se presente o lo impostiamo         document.documentElement.setAttribute('data-virtual-recursion', 'true');            if (doc.head) {           document.head.innerHTML = doc.head.innerHTML;         }         if (doc.body) {           document.body.innerHTML = doc.body.innerHTML;         }         forzaAggiornamentoTitle();       } catch (err) {         console.error("Errore caricamento pagina virtuale (Matrioska/Mobile):", err);       }     }        function ripristinaPaginaPrincipale() {       location.reload();     }        document.addEventListener("click", function (e) {       const link = e.target.closest("a[data-virtual]");       if (!link) return;       e.preventDefault();       caricaPaginaVirtuale(link.dataset.virtual, true);     });        window.addEventListener("popstate", function (e) {       if (e.state && e.state.virtuale) {         caricaPaginaVirtuale(e.state.virtuale, false);       } else {         ripristinaPaginaPrincipale();       }     });        window.addEventListener("DOMContentLoaded", function () {       if (location.hash) {         const hashNome = location.hash.replace(/^#/, "");          Piccolo delay per assicurare che il DOM sia pronto in casi limite         setTimeout(() => {             const link = document.querySelector(`a[data-virtual="${hashNome}"]`);              Se non c'è il link ma c'è il template (es. accesso diretto via URL), proviamo a caricare             if (link) {               link.click();             } else if (document.getElementById("virtual-" + hashNome)) {               caricaPaginaVirtuale(hashNome, false);  false perché l'hash è già nell'URL             }         }, 0);       }     });   })();         */
+    /*  (function () {     const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);     const HTML_ORIGINALE = document.documentElement.outerHTML;     function forzaAggiornamentoTitle() {       const t = document.querySelector("title");       if (t) document.title = t.textContent;     }     function disabilitaPaginaReale() {       document.querySelectorAll("script").forEach(s => s.remove());       document.querySelectorAll("style").forEach(s => s.remove());       document.querySelectorAll("link").forEach(l => l.remove());       let highestId = setTimeout(() => {}, 0);       for (let i = 0; i <= highestId; i++) {         clearTimeout(i);         clearInterval(i);       }       const scriptsRimasti = document.querySelectorAll("script").length;       const stylesRimasti = document.querySelectorAll("style").length;       const linksRimasti = document.querySelectorAll("link").length;       return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;     }     function caricaPaginaVirtuale(nome, push = true) {       const tpl = document.getElementById("virtual-" + nome);       if (!tpl) return;       if (push) {         history.pushState({ virtuale: nome }, "", "#" + nome);       }       const flag = "virtual-refresh-" + nome;       if (!sessionStorage.getItem(flag)) {         sessionStorage.setItem(flag, "1");         location.reload();         return;       }       sessionStorage.removeItem(flag);       const disabilitato = disabilitaPaginaReale();       if (!disabilitato) {         console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");       }       if (!IS_MOBILE) {         const oldBody = document.body;         const oldHead = document.head;         document.open();         document.write(tpl.innerHTML);         document.close();         oldBody && oldBody.remove();         oldHead && oldHead.remove();         if (document.readyState === "complete" || document.readyState === "interactive") {           forzaAggiornamentoTitle();         } else {           document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle);         }         return;       }       try {         const parser = new DOMParser();         const doc = parser.parseFromString(tpl.innerHTML, "text/html");         if (doc.head) {           document.head.innerHTML = doc.head.innerHTML;         }         if (doc.body) {           document.body.innerHTML = doc.body.innerHTML;         }         forzaAggiornamentoTitle();       } catch (err) {         console.error("Errore caricamento pagina virtuale mobile:", err);       }     }     function ripristinaPaginaPrincipale() {       location.reload();     }     document.addEventListener("click", function (e) {       const link = e.target.closest("a[data-virtual]");       if (!link) return;       e.preventDefault();       caricaPaginaVirtuale(link.dataset.virtual, true);     });     window.addEventListener("popstate", function (e) {       if (e.state && e.state.virtuale) {         caricaPaginaVirtuale(e.state.virtuale, false);       } else {         ripristinaPaginaPrincipale();       }     });     window.addEventListener("DOMContentLoaded", function () {       if (location.hash) {         const hashNome = location.hash.replace(/^#/, "");         const link = document.querySelector(`a[data-virtual="${hashNome}"]`);         if (link) {           link.click();         }       }     });   })();   */      
+
+/*   (function () {     const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);     const HTML_ORIGINALE = document.documentElement.outerHTML;     const stackVirtuali = []; // matrioska: livelli di pagine virtuali        // 🔥 Nuova gestione ricarica singola per pagina     function deveRicaricare(nome) {       const last = sessionStorage.getItem("last-virtual");       if (last !== nome) {         sessionStorage.setItem("last-virtual", nome);         return true; // prima apertura → ricarica       }       return false; // già aperta → non ricaricare     }        function forzaAggiornamentoTitle(container) {       const t = container ? container.querySelector("title") : document.querySelector("title");       if (t) document.title = t.textContent;     }        function disabilitaPaginaReale() {       document.querySelectorAll("script").forEach(s => s.remove());       document.querySelectorAll("style").forEach(s => s.remove());       document.querySelectorAll("link").forEach(l => l.remove());       let highestId = setTimeout(() => {}, 0);       for (let i = 0; i <= highestId; i++) {         clearTimeout(i);         clearInterval(i);       }       const scriptsRimasti = document.querySelectorAll("script").length;       const stylesRimasti = document.querySelectorAll("style").length;       const linksRimasti = document.querySelectorAll("link").length;       return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;     }        function caricaPaginaVirtuale(nome, push = true) {       const tpl = document.getElementById("virtual-" + nome);       if (!tpl) return;          // Aggiornamento matrioska e history       if (push) {         stackVirtuali.push(nome);         history.pushState({ stack: [...stackVirtuali] }, "", "#" + stackVirtuali.join("/"));       }          // 🔥 Ricarica solo la prima volta che apro quella pagina       if (deveRicaricare(nome)) {         location.reload();         return;       }          const disabilitato = disabilitaPaginaReale();       if (!disabilitato) {         console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");       }          // Creazione contenitore matrioska       const container = document.createElement("div");       container.className = "virtual-container";       container.dataset.virtualName = nome;          if (!IS_MOBILE) {         const oldBody = document.body;         const oldHead = document.head;            document.open();         document.write(tpl.innerHTML);         document.close();            if (oldBody && !oldBody.classList.contains("virtual-container")) oldBody.remove();         if (oldHead && !oldHead.classList.contains("virtual-container")) oldHead.remove();            if (document.readyState === "complete" || document.readyState === "interactive") {           forzaAggiornamentoTitle();         } else {           document.addEventListener("DOMContentLoaded", () => forzaAggiornamentoTitle());         }         return;       }          // Mobile: inserimento nel body senza ricaricare tutto       try {         const parser = new DOMParser();         const doc = parser.parseFromString(tpl.innerHTML, "text/html");            const root = document.body.querySelector(".virtual-container") || document.body;            if (doc.head) root.insertAdjacentHTML("beforebegin", `<div class="virtual-container-head">${doc.head.innerHTML}</div>`);         if (doc.body) {           const bodyContainer = document.createElement("div");           bodyContainer.className = "virtual-container-body";           bodyContainer.innerHTML = doc.body.innerHTML;           root.appendChild(bodyContainer);         }            forzaAggiornamentoTitle(root);       } catch (err) {         console.error("Errore caricamento pagina virtuale mobile:", err);       }     }        function ripristinaPaginaPrincipale() {       location.reload();     }        // EVENT DELEGATION: cattura anche link aggiunti dinamicamente     document.body.addEventListener("click", function (e) {       const link = e.target.closest("a[data-virtual]");       if (!link) return;       e.preventDefault(); // impedisce che il browser navighi solo a #       caricaPaginaVirtuale(link.dataset.virtual, true);     });        window.addEventListener("popstate", function (e) {       if (e.state && e.state.stack) {         const livello = e.state.stack.length;         const virtuali = document.querySelectorAll(".virtual-container, .virtual-container-body, .virtual-container-head");         for (let i = virtuali.length - 1; i >= livello; i--) {           virtuali[i].remove();         }         stackVirtuali.length = livello;         const ultimo = document.querySelector(".virtual-container:last-child, .virtual-container-body:last-child, .virtual-container-head:last-child");         forzaAggiornamentoTitle(ultimo);       } else {         ripristinaPaginaPrincipale();       }     });        window.addEventListener("DOMContentLoaded", function () {       if (location.hash) {         const hashStack = location.hash.replace(/^#/, "").split("/");         hashStack.forEach(nome => {           const link = document.querySelector(`a[data-virtual="${nome}"]`);           if (link) link.click();         });       }     });   })();   */      
+/*         (function () {     const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);     const HTML_ORIGINALE = document.documentElement.outerHTML;     const stackVirtuali = []; // matrioska: livelli di pagine virtuali        // 🔥 Nuova gestione ricarica singola per pagina     function deveRicaricare(nome) {       const last = sessionStorage.getItem("last-virtual");       if (last !== nome) {         sessionStorage.setItem("last-virtual", nome);         return true; // prima apertura → ricarica       }       return false; // già aperta → non ricaricare     }        function forzaAggiornamentoTitle(container) {       const t = container ? container.querySelector("title") : document.querySelector("title");       if (t) document.title = t.textContent;     }        function disabilitaPaginaReale() {       document.querySelectorAll("script").forEach(s => s.remove());       document.querySelectorAll("style").forEach(s => s.remove());       document.querySelectorAll("link").forEach(l => l.remove());       let highestId = setTimeout(() => {}, 0);       for (let i = 0; i <= highestId; i++) {         clearTimeout(i);         clearInterval(i);       }       const scriptsRimasti = document.querySelectorAll("script").length;       const stylesRimasti = document.querySelectorAll("style").length;       const linksRimasti = document.querySelectorAll("link").length;       return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;     }        function caricaPaginaVirtuale(nome, push = true) {       const tpl = document.getElementById("virtual-" + nome);       if (!tpl) return;          // Aggiornamento matrioska e history       if (push) {         stackVirtuali.push(nome);         history.pushState({ stack: [...stackVirtuali] }, "", "#" + stackVirtuali.join("/"));       }          // 🔥 Ricarica solo la prima volta che apro quella pagina       if (deveRicaricare(nome)) {         location.reload();         return;       }          const disabilitato = disabilitaPaginaReale();       if (!disabilitato) {         console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");       }          // Creazione contenitore matrioska       const container = document.createElement("div");       container.className = "virtual-container";       container.dataset.virtualName = nome;          if (!IS_MOBILE) {         const oldBody = document.body;         const oldHead = document.head;            document.open();         document.write(tpl.innerHTML);         document.close();            if (oldBody && !oldBody.classList.contains("virtual-container")) oldBody.remove();         if (oldHead && !oldHead.classList.contains("virtual-container")) oldHead.remove();            if (document.readyState === "complete" || document.readyState === "interactive") {           forzaAggiornamentoTitle();         } else {           document.addEventListener("DOMContentLoaded", () => forzaAggiornamentoTitle());         }         return;       }          // Mobile: inserimento nel body senza ricaricare tutto       try {         const parser = new DOMParser();         const doc = parser.parseFromString(tpl.innerHTML, "text/html");            const root = document.body.querySelector(".virtual-container") || document.body;            if (doc.head) root.insertAdjacentHTML("beforebegin", `<div class="virtual-container-head">${doc.head.innerHTML}</div>`);         if (doc.body) {           const bodyContainer = document.createElement("div");           bodyContainer.className = "virtual-container-body";           bodyContainer.innerHTML = doc.body.innerHTML;           root.appendChild(bodyContainer);         }            forzaAggiornamentoTitle(root);       } catch (err) {         console.error("Errore caricamento pagina virtuale mobile:", err);       }     }        function ripristinaPaginaPrincipale() {       location.reload();     }        // EVENT DELEGATION: cattura anche link aggiunti dinamicamente     document.body.addEventListener("click", function (e) {       const link = e.target.closest("a[data-virtual]");       if (!link) return;       e.preventDefault(); // impedisce che il browser navighi solo a #       caricaPaginaVirtuale(link.dataset.virtual, true);     });        window.addEventListener("popstate", function (e) {       if (e.state && e.state.stack) {         const livello = e.state.stack.length;         const virtuali = document.querySelectorAll(".virtual-container, .virtual-container-body, .virtual-container-head");         for (let i = virtuali.length - 1; i >= livello; i--) {           virtuali[i].remove();         }         stackVirtuali.length = livello;         const ultimo = document.querySelector(".virtual-container:last-child, .virtual-container-body:last-child, .virtual-container-head:last-child");         forzaAggiornamentoTitle(ultimo);       } else {         ripristinaPaginaPrincipale();       }     });        window.addEventListener("DOMContentLoaded", function () {       if (location.hash) {         const hashStack = location.hash.replace(/^#/, "").split("/");         hashStack.forEach(nome => {           const link = document.querySelector(`a[data-virtual="${nome}"]`);           if (link) link.click();         });       }     });   })();         */   
+
+   /* (function () { const HTML_ORIGINALE = document.documentElement.outerHTML; function forzaAggiornamentoTitle() { const t = document.querySelector("title"); if (t) document.title = t.textContent; } function disabilitaPaginaReale() { document.querySelectorAll("script").forEach(s => s.remove()); document.querySelectorAll("style").forEach(s => s.remove()); document.querySelectorAll("link").forEach(l => l.remove()); let highestId = setTimeout(() => {}, 0); for (let i = 0; i <= highestId; i++) { clearTimeout(i); clearInterval(i); } const scriptsRimasti = document.querySelectorAll("script").length; const stylesRimasti = document.querySelectorAll("style").length; const linksRimasti = document.querySelectorAll("link").length; return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0; } function caricaPaginaVirtuale(nome, push = true) { const tpl = document.getElementById("virtual-" + nome); if (!tpl) return; if (push) { history.pushState({ virtuale: nome }, "", "#" + nome); } const disabilitato = disabilitaPaginaReale(); if (!disabilitato) { console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate."); } document.open(); document.write(tpl.innerHTML); document.close(); if (document.readyState === "complete" || document.readyState === "interactive") { forzaAggiornamentoTitle(); } else { document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle); } } function ripristinaPaginaPrincipale() { location.reload(); } document.addEventListener("click", function (e) { const link = e.target.closest("a[data-virtual]"); if (!link) return; e.preventDefault(); caricaPaginaVirtuale(link.dataset.virtual, true); }); window.addEventListener("popstate", function (e) { if (e.state && e.state.virtuale) { caricaPaginaVirtuale(e.state.virtuale, false); } else { ripristinaPaginaPrincipale(); } }); window.addEventListener("DOMContentLoaded", function () { if (location.hash) { const hashNome = location.hash.replace(/^#/, ""); const link = document.querySelector(`a[data-virtual="${hashNome}"]`); if (link) { link.click(); } } }); })(); */
+/*(function () { const HTML_ORIGINALE = document.documentElement.outerHTML; function forzaAggiornamentoTitle() { const t = document.querySelector("title"); if (t) document.title = t.textContent; } function caricaPaginaVirtuale(nome, push = true) { const tpl = document.getElementById("virtual-" + nome); if (!tpl) return; if (push) { history.pushState({ virtuale: nome }, "", "#" + nome); } document.open(); document.write(tpl.innerHTML); document.close(); if (document.readyState === "complete" || document.readyState === "interactive") { forzaAggiornamentoTitle(); } else { document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle); } } function ripristinaPaginaPrincipale() { location.replace(location.pathname); } document.addEventListener("click", function (e) { const link = e.target.closest("a[data-virtual]"); if (!link) return; e.preventDefault(); caricaPaginaVirtuale(link.dataset.virtual, true); }); window.addEventListener("popstate", function (e) { if (e.state && e.state.virtuale) { caricaPaginaVirtuale(e.state.virtuale, false); } else { ripristinaPaginaPrincipale(); } }); })();*/ /*(function () { const HTML_ORIGINALE = document.documentElement.outerHTML; function caricaPaginaVirtuale(nome) { const tpl = document.getElementById("virtual-" + nome); if (!tpl) return; history.pushState({ virtuale: nome }, "", "#" + nome); document.open(); document.write(tpl.innerHTML); document.close(); } function ripristinaPaginaPrincipale() { document.open(); document.write(HTML_ORIGINALE); document.close(); } document.addEventListener("click", function (e) { const link = e.target.closest("a[data-virtual]"); if (!link) return; e.preventDefault(); caricaPaginaVirtuale(link.dataset.virtual); }); window.addEventListener("popstate", function (e) { if (e.state && e.state.virtuale) { caricaPaginaVirtuale(e.state.virtuale); } else { ripristinaPaginaPrincipale(); } }); })();*/
+
+// (function () { const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent); function forzaAggiornamentoTitle() { const t = document.querySelector("title"); if (t) document.title = t.textContent; } function disabilitaPaginaReale() { document.querySelectorAll("script").forEach(s => s.remove()); document.querySelectorAll("style").forEach(s => s.remove()); document.querySelectorAll("link").forEach(l => l.remove()); let highestId = setTimeout(() => {}, 0); for (let i = 0; i <= highestId; i++) { clearTimeout(i); clearInterval(i); } return document.querySelectorAll("script").length === 0 && document.querySelectorAll("style").length === 0 && document.querySelectorAll("link").length === 0; } function caricaPaginaVirtuale(nome, push = true, stack = []) { const tpl = document.getElementById("virtual-" + nome); if (!tpl) return; stack.push(nome); const flag = "virtual-refresh-" + stack.join("|"); if (!sessionStorage.getItem(flag)) { sessionStorage.setItem(flag, "1"); location.reload(); return; } sessionStorage.removeItem(flag); if (push) { history.pushState({ virtuale: stack }, "", "#" + stack.join("|")); } const disabilitato = disabilitaPaginaReale(); if (!disabilitato) console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate."); if (!IS_MOBILE) { const oldBody = document.body; const oldHead = document.head; document.open(); document.write(tpl.innerHTML); document.close(); oldBody && oldBody.remove(); oldHead && oldHead.remove(); if (document.readyState === "complete" || document.readyState === "interactive") { forzaAggiornamentoTitle(); } else { document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle); } return; } try { const parser = new DOMParser(); const doc = parser.parseFromString(tpl.innerHTML, "text/html"); if (doc.head) document.head.innerHTML = doc.head.innerHTML; if (doc.body) document.body.innerHTML = doc.body.innerHTML; forzaAggiornamentoTitle(); } catch (err) { console.error("Errore caricamento pagina virtuale mobile:", err); } } function ripristinaPaginaPrincipale() { location.reload(); } document.addEventListener("click", function (e) { const link = e.target.closest("a[data-virtual]"); if (!link) return; e.preventDefault(); const stackCorrente = (history.state && history.state.virtuale) ? [...history.state.virtuale] : []; caricaPaginaVirtuale(link.dataset.virtual, true, stackCorrente); }); window.addEventListener("popstate", function (e) { if (e.state && e.state.virtuale && e.state.virtuale.length > 0) { const stack = [...e.state.virtuale]; const ultimo = stack.pop(); caricaPaginaVirtuale(ultimo, false, stack); } else { ripristinaPaginaPrincipale(); } }); window.addEventListener("DOMContentLoaded", function () { if (location.hash) { const stack = location.hash.replace(/^#/, "").split("|"); if (stack.length > 0) { const primo = stack.shift(); caricaPaginaVirtuale(primo, false, stack); } } }); })();
+
+/*     (function () {       const IS_MOBILE = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);       const HTML_ORIGINALE = document.documentElement.outerHTML;            function forzaAggiornamentoTitle() {         const t = document.querySelector("title");         if (t) document.title = t.textContent;       }            function disabilitaPaginaReale() {         document.querySelectorAll("script").forEach(s => s.remove());         document.querySelectorAll("style").forEach(s => s.remove());         document.querySelectorAll("link").forEach(l => l.remove());         // Cancelliamo eventuali timeout residui         let highestId = setTimeout(() => {}, 0);         for (let i = 0; i <= highestId; i++) {           clearTimeout(i);           clearInterval(i);         }         const scriptsRimasti = document.querySelectorAll("script").length;         const stylesRimasti = document.querySelectorAll("style").length;         const linksRimasti = document.querySelectorAll("link").length;         return scriptsRimasti === 0 && stylesRimasti === 0 && linksRimasti === 0;       }            function caricaPaginaVirtuale(nome, push = true) {         const tpl = document.getElementById("virtual-" + nome);              // FIX MATRIOSKA & BACK BUTTON:         // Se il template non esiste (es. navigazione indietro corrotta), ricarichiamo tutto.         if (!tpl) {           if (window.virtualActive || location.hash) {             location.reload();           }           return;         }              // GESTIONE HISTORY         if (push) {           history.pushState({ virtuale: nome }, "", "#" + nome);         } else {           history.replaceState({ virtuale: nome }, "", "#" + nome);         }              // LOGICA DI REFRESH (Ricarica una volta)         if (!window.virtualActive) {           const flag = "virtual-refresh-" + nome;           if (!sessionStorage.getItem(flag)) {             sessionStorage.setItem(flag, "1");             location.reload();             return;           }           sessionStorage.removeItem(flag);                const disabilitato = disabilitaPaginaReale();           if (!disabilitato) {             console.warn("Attenzione: non tutte le risorse della pagina reale sono state disattivate.");           }         }              window.virtualActive = true;              // RENDERING LOGIC (Desktop vs Mobile/Matrioska)         if (!IS_MOBILE && !document.documentElement.getAttribute('data-virtual-recursion')) {           const oldBody = document.body;           const oldHead = document.head;           document.open();           document.write(tpl.innerHTML);           document.close();           oldBody && oldBody.remove();           oldHead && oldHead.remove();                      document.documentElement.setAttribute('data-virtual-recursion', 'true');                if (document.readyState === "complete" || document.readyState === "interactive") {             forzaAggiornamentoTitle();           } else {             document.addEventListener("DOMContentLoaded", forzaAggiornamentoTitle);           }           return;         }              // Logica Mobile / Desktop Ricorsiva (Matrioska)         try {           const parser = new DOMParser();           const doc = parser.parseFromString(tpl.innerHTML, "text/html");                      document.documentElement.setAttribute('data-virtual-recursion', 'true');                if (doc.head) {             document.head.innerHTML = doc.head.innerHTML;           }           if (doc.body) {             // MODIFICA: copia tutti gli attributi del <body> del template             const newBody = doc.body;             const oldBody = document.body;                  // Copia attributi             for (let attr of newBody.attributes) {               oldBody.setAttribute(attr.name, attr.value);             }                  // Sostituisci solo il contenuto interno             oldBody.innerHTML = newBody.innerHTML;           }           forzaAggiornamentoTitle();         } catch (err) {           console.error("Errore caricamento pagina virtuale (Matrioska/Mobile):", err);         }       }            function ripristinaPaginaPrincipale() {         location.reload();       }            // Intercettazione click sui link       document.addEventListener("click", function (e) {         const link = e.target.closest("a[data-virtual]");         if (!link) return;         e.preventDefault();         caricaPaginaVirtuale(link.dataset.virtual, true);       });            // Gestione tasto Indietro/Avanti       window.addEventListener("popstate", function (e) {         if (e.state && e.state.virtuale) {           caricaPaginaVirtuale(e.state.virtuale, false);         } else {           ripristinaPaginaPrincipale();         }       });            // GESTIONE ACCESSO DIRETTO TRAMITE URL (Load Iniziale)       window.addEventListener("DOMContentLoaded", function () {         if (location.hash) {           const hashNome = location.hash.replace(/^#/, "");                      setTimeout(() => {               const link = document.querySelector(`a[data-virtual="${hashNome}"]`);                              if (link) {                 link.click();               }                else if (document.getElementById("virtual-" + hashNome)) {                 caricaPaginaVirtuale(hashNome, false);                }           }, 0);         }       });     })();     */               
+
+</script>
+-->
+
+
+
 </html>
